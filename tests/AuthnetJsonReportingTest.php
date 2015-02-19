@@ -1,6 +1,17 @@
 <?php
 
-class AuthnetJsonReportingTest extends PHPUnit_Framework_TestCase
+/*
+ * This file is part of the AuthnetJSON package.
+ *
+ * (c) John Conde <stymiee@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+namespace JohnConde\Authnet;
+
+class AuthnetJsonReportingTest extends \PHPUnit_Framework_TestCase
 {
     private $login;
     private $transactionKey;
@@ -10,7 +21,7 @@ class AuthnetJsonReportingTest extends PHPUnit_Framework_TestCase
     {
         $this->login          = 'test';
         $this->transactionKey = 'test';
-        $this->server         = \JohnConde\Authnet\AuthnetApiFactory::USE_UNIT_TEST_SERVER;
+        $this->server         = AuthnetApiFactory::USE_UNIT_TEST_SERVER;
     }
 
     public function testGetUnsettledTransactionListRequestSuccess()
@@ -74,7 +85,7 @@ class AuthnetJsonReportingTest extends PHPUnit_Framework_TestCase
            }
         }';
 
-        $authnet = \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server, $responseJson);
+        $authnet = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server, $responseJson);
         $authnet->getUnsettledTransactionListRequest();
 
         $this->assertEquals('Ok', $authnet->messages->resultCode);
@@ -156,7 +167,7 @@ class AuthnetJsonReportingTest extends PHPUnit_Framework_TestCase
            }
         }';
 
-        $authnet = \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server, $responseJson);
+        $authnet = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server, $responseJson);
         $authnet->getTransactionListRequest($request);
 
         $this->assertEquals('Ok', $authnet->messages->resultCode);
@@ -317,7 +328,7 @@ class AuthnetJsonReportingTest extends PHPUnit_Framework_TestCase
            }
         }';
 
-        $authnet = \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server, $responseJson);
+        $authnet = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server, $responseJson);
         $authnet->getSettledBatchListRequest($request);
 
         $this->assertEquals('Ok', $authnet->messages->resultCode);
@@ -363,7 +374,7 @@ class AuthnetJsonReportingTest extends PHPUnit_Framework_TestCase
            }
         }';
 
-        $authnet = \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server, $responseJson);
+        $authnet = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server, $responseJson);
         $authnet->getSettledBatchListRequest($request);
 
         $this->assertEquals('Ok', $authnet->messages->resultCode);
@@ -422,7 +433,7 @@ class AuthnetJsonReportingTest extends PHPUnit_Framework_TestCase
            }
         }';
 
-        $authnet = \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server, $responseJson);
+        $authnet = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server, $responseJson);
         $authnet->getBatchStatisticsRequest($request);
 
         $this->assertEquals('Ok', $authnet->messages->resultCode);
@@ -476,7 +487,7 @@ class AuthnetJsonReportingTest extends PHPUnit_Framework_TestCase
            }
         }';
 
-        $authnet = \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server, $responseJson);
+        $authnet = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server, $responseJson);
         $authnet->getBatchStatisticsRequest($request);
 
         $this->assertEquals('Ok', $authnet->messages->resultCode);
@@ -556,7 +567,7 @@ class AuthnetJsonReportingTest extends PHPUnit_Framework_TestCase
            }
         }';
 
-        $authnet = \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server, $responseJson);
+        $authnet = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server, $responseJson);
         $authnet->getBatchStatisticsRequest($request);
 
         $this->assertEquals('Ok', $authnet->messages->resultCode);

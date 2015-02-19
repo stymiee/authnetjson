@@ -1,6 +1,17 @@
 <?php
 
-class AuthnetJsonCimTest extends PHPUnit_Framework_TestCase
+/*
+ * This file is part of the AuthnetJSON package.
+ *
+ * (c) John Conde <stymiee@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+namespace JohnConde\Authnet;
+
+class AuthnetJsonCimTest extends \PHPUnit_Framework_TestCase
 {
     private $login;
     private $transactionKey;
@@ -10,7 +21,7 @@ class AuthnetJsonCimTest extends PHPUnit_Framework_TestCase
     {
         $this->login          = 'test';
         $this->transactionKey = 'test';
-        $this->server         = \JohnConde\Authnet\AuthnetApiFactory::USE_UNIT_TEST_SERVER;
+        $this->server         = AuthnetApiFactory::USE_UNIT_TEST_SERVER;
     }
 
     public function testCreateCustomerProfileRequestSuccess()
@@ -70,7 +81,7 @@ class AuthnetJsonCimTest extends PHPUnit_Framework_TestCase
            }
         }';
 
-        $authnet = \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server, $responseJson);
+        $authnet = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server, $responseJson);
         $authnet->createCustomerProfileRequest($request);
 
         $this->assertEquals('Ok', $authnet->messages->resultCode);
@@ -137,7 +148,7 @@ class AuthnetJsonCimTest extends PHPUnit_Framework_TestCase
            }
         }';
 
-        $authnet = \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server, $responseJson);
+        $authnet = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server, $responseJson);
         $authnet->createCustomerProfileRequest($request);
 
         $this->assertEquals('Error', $authnet->messages->resultCode);

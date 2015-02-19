@@ -1,6 +1,17 @@
 <?php
 
-class AuthnetJsonArbTest extends PHPUnit_Framework_TestCase
+/*
+ * This file is part of the AuthnetJSON package.
+ *
+ * (c) John Conde <stymiee@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+namespace JohnConde\Authnet;
+
+class AuthnetJsonArbTest extends \PHPUnit_Framework_TestCase
 {
     private $login;
     private $transactionKey;
@@ -10,7 +21,7 @@ class AuthnetJsonArbTest extends PHPUnit_Framework_TestCase
     {
         $this->login          = 'test';
         $this->transactionKey = 'test';
-        $this->server         = \JohnConde\Authnet\AuthnetApiFactory::USE_UNIT_TEST_SERVER;
+        $this->server         = AuthnetApiFactory::USE_UNIT_TEST_SERVER;
     }
 
     public function testARBCreateSubscriptionRequestSuccess()
@@ -56,7 +67,7 @@ class AuthnetJsonArbTest extends PHPUnit_Framework_TestCase
            }
         }';
 
-        $authnet = \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server, $responseJson);
+        $authnet = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server, $responseJson);
         $authnet->createTransactionRequest($request);
 
         $this->assertEquals('Ok', $authnet->messages->resultCode);
@@ -108,7 +119,7 @@ class AuthnetJsonArbTest extends PHPUnit_Framework_TestCase
            }
         }';
 
-        $authnet = \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server, $responseJson);
+        $authnet = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server, $responseJson);
         $authnet->createTransactionRequest($request);
 
         $this->assertEquals('Error', $authnet->messages->resultCode);
@@ -159,7 +170,7 @@ class AuthnetJsonArbTest extends PHPUnit_Framework_TestCase
            }
         }';
 
-        $authnet = \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server, $responseJson);
+        $authnet = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server, $responseJson);
         $authnet->createTransactionRequest($request);
 
         $this->assertEquals('Error', $authnet->messages->resultCode);
@@ -192,7 +203,7 @@ class AuthnetJsonArbTest extends PHPUnit_Framework_TestCase
            }
         }';
 
-        $authnet = \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server, $responseJson);
+        $authnet = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server, $responseJson);
         $authnet->ARBGetSubscriptionStatusRequest($request);
 
         $this->assertEquals('Ok', $authnet->messages->resultCode);
@@ -227,7 +238,7 @@ class AuthnetJsonArbTest extends PHPUnit_Framework_TestCase
            }
         }';
 
-        $authnet = \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server, $responseJson);
+        $authnet = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server, $responseJson);
         $authnet->ARBGetSubscriptionStatusRequest($request);
 
         $this->assertEquals('Ok', $authnet->messages->resultCode);
@@ -257,7 +268,7 @@ class AuthnetJsonArbTest extends PHPUnit_Framework_TestCase
            }
         }';
 
-        $authnet = \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server, $responseJson);
+        $authnet = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server, $responseJson);
         $authnet->ARBGetSubscriptionStatusRequest($request);
 
         $this->assertEquals('Ok', $authnet->messages->resultCode);
@@ -285,7 +296,7 @@ class AuthnetJsonArbTest extends PHPUnit_Framework_TestCase
            }
         }';
 
-        $authnet = \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server, $responseJson);
+        $authnet = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server, $responseJson);
         $authnet->ARBGetSubscriptionStatusRequest($request);
 
         $this->assertEquals('Ok', $authnet->messages->resultCode);
@@ -321,7 +332,7 @@ class AuthnetJsonArbTest extends PHPUnit_Framework_TestCase
            }
         }';
 
-        $authnet = \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server, $responseJson);
+        $authnet = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server, $responseJson);
         $authnet->ARBGetSubscriptionStatusRequest($request);
 
         $this->assertEquals('Ok', $authnet->messages->resultCode);
@@ -357,7 +368,7 @@ class AuthnetJsonArbTest extends PHPUnit_Framework_TestCase
            }
         }';
 
-        $authnet = \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server, $responseJson);
+        $authnet = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server, $responseJson);
         $authnet->ARBGetSubscriptionStatusRequest($request);
 
         $this->assertEquals('Error', $authnet->messages->resultCode);

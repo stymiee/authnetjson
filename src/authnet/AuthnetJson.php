@@ -1,36 +1,25 @@
 <?php
 
-/*************************************************************************************************
-
-This class allows for easy use of any Authorize.Net JSON based APIs. More information
-about these APIs can be found at http://developer.authorize.net/api/.
-
-PHP version 5
-
-LICENSE: This program is free software: you can redistribute it and/or modify
-it under the terms of the MIT License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU Lesser General Public License for more details.
-
-You should have received a copy of the GNU Lesser General Public License
-along with this program.  If not, see http://www.gnu.org/licenses/.
-
-@package    AuthnetJson
-@author     John Conde <authnet@johnconde.net>
-@copyright  2015 John Conde
-@license    MIT License
-@version    1.0
-@link       http://www.johnconde.net/
-
-**************************************************************************************************/
-
+/*
+ * This file is part of the AuthnetJSON package.
+ *
+ * (c) John Conde <stymiee@gmail.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+ 
 namespace JohnConde\Authnet;
 
+/**
+ *
+ *
+ * @package    AuthnetJSON
+ * @author     John Conde <stymiee@gmail.com>
+ * @copyright  John Conde <stymiee@gmail.com>
+ * @license    http://www.opensource.org/licenses/BSD-3-Clause  The BSD 3-Clause License
+ * @link       https://github.com/stymiee/Authorize.Net-JSON
+ */
 class AuthnetJson
 {
     private $login;
