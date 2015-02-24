@@ -12,12 +12,12 @@
 namespace JohnConde\Authnet;
 
 /**
- *
+ * Exception that is throw when when client code attempts to set a parameter directly (i.e. using __set())
  *
  * @package    AuthnetJSON
  * @author     John Conde <stymiee@gmail.com>
  * @copyright  John Conde <stymiee@gmail.com>
- * @license    http://www.opensource.org/licenses/BSD-3-Clause  The BSD 3-Clause License
+ * @license    http://www.apache.org/licenses/LICENSE-2.0.html Apache License, Version 2.0
  * @link       https://github.com/stymiee/Authorize.Net-JSON
  */
 class AuthnetCannotSetParamsException Extends \Exception {}

@@ -12,16 +12,22 @@
 namespace JohnConde\Authnet;
 
 /**
- *
+ * Wrapper for cURL
  *
  * @package    AuthnetJSON
  * @author     John Conde <stymiee@gmail.com>
  * @copyright  John Conde <stymiee@gmail.com>
- * @license    http://www.opensource.org/licenses/BSD-3-Clause  The BSD 3-Clause License
+ * @license    http://www.apache.org/licenses/LICENSE-2.0.html Apache License, Version 2.0
  * @link       https://github.com/stymiee/Authorize.Net-JSON
  */
 class CurlWrapper Implements ProcessorInterface
 {
+    /**
+     * @param   string  $url    The URL to connect to process a transaction
+     * @param   string  $json   A JSON response to be sent as payload
+     * @return  string          A JSON response string
+     * @throws  \JohnConde\Authnet\AuthnetCurlException
+     */
     public function process($url, $json)
     {
         $ch = curl_init();
@@ -31,8 +37,7 @@ class CurlWrapper Implements ProcessorInterface
         curl_setopt($ch, CURLOPT_HEADER, 0);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $json);
         curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
-        curl_setopt($ch, CURLOPT_CAINFO, SSL_CERT_DIR);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
 
         if(($response = curl_exec($ch)) !== false) {
             curl_close($ch);
@@ -42,11 +47,18 @@ class CurlWrapper Implements ProcessorInterface
         throw new AuthnetCurlException('Connection error: ' . curl_error($ch) . ' (' . curl_errno($ch) . ')');
     }
 
+    /**
+     * @param   string  $json   Sets a JSON string as a response to be returned to the
+     *                          AuthnetJson class (ignored)
+     */
     public function setResponse($json)
     {
-
+        // empty by design
     }
 
+    /**
+     * @return string   Returns the name of this class
+     */
     public function getName()
     {
         return __CLASS__;
