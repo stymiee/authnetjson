@@ -20,7 +20,7 @@ namespace JohnConde\Authnet;
  * @license    http://www.apache.org/licenses/LICENSE-2.0.html Apache License, Version 2.0
  * @link       https://github.com/stymiee/Authorize.Net-JSON
  */
-class CurlWrapper Implements ProcessorInterface
+class CurlWrapper
 {
     /**
      * @param   string  $url    The URL to connect to process a transaction
@@ -45,22 +45,5 @@ class CurlWrapper Implements ProcessorInterface
             return $response;
         }
         throw new AuthnetCurlException('Connection error: ' . curl_error($ch) . ' (' . curl_errno($ch) . ')');
-    }
-
-    /**
-     * @param   string  $json   Sets a JSON string as a response to be returned to the
-     *                          AuthnetJson class (ignored)
-     */
-    public function setResponse($json)
-    {
-        // empty by design
-    }
-
-    /**
-     * @return string   Returns the name of this class
-     */
-    public function getName()
-    {
-        return __CLASS__;
     }
 } 

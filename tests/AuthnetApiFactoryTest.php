@@ -23,20 +23,12 @@ class AuthnetApiFactoryTest extends \PHPUnit_Framework_TestCase
         $this->transactionKey = 'test';
     }
 
-    public function testUnitTestWrapperResponse()
-    {
-        $server  = AuthnetApiFactory::USE_UNIT_TEST_SERVER;
-        $authnet = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $server);
-
-        $this->assertEquals('JohnConde\Authnet\UnitTestWrapper', $authnet->identifyProcessorWrapper());
-    }
-
     public function testCurlWrapperProductionResponse()
     {
         $server  = AuthnetApiFactory::USE_PRODUCTION_SERVER;
         $authnet = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $server);
 
-        $this->assertEquals('JohnConde\Authnet\CurlWrapper', $authnet->identifyProcessorWrapper());
+        $this->assertInstanceOf('JohnConde\Authnet\CurlWrapper', new CurlWrapper());
     }
 
     public function testCurlWrapperDevelopmentResponse()
@@ -44,6 +36,6 @@ class AuthnetApiFactoryTest extends \PHPUnit_Framework_TestCase
         $server  = AuthnetApiFactory::USE_DEVELOPMENT_SERVER;
         $authnet = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $server);
 
-        $this->assertEquals('JohnConde\Authnet\CurlWrapper', $authnet->identifyProcessorWrapper());
+        $this->assertInstanceOf('JohnConde\Authnet\CurlWrapper', new CurlWrapper());
     }
 }

@@ -16,12 +16,17 @@ class AuthnetJsonCimTest extends \PHPUnit_Framework_TestCase
     private $login;
     private $transactionKey;
     private $server;
+    private $http;
 
     protected function setUp()
     {
         $this->login          = 'test';
         $this->transactionKey = 'test';
-        $this->server         = AuthnetApiFactory::USE_UNIT_TEST_SERVER;
+        $this->server         = AuthnetApiFactory::USE_DEVELOPMENT_SERVER;
+
+        $this->http = $this->getMockBuilder('\JohnConde\Authnet\CurlWrapper')
+            ->disableOriginalConstructor()
+            ->getMock();
     }
 
     public function testCreateCustomerProfileRequestSuccess()
@@ -81,7 +86,12 @@ class AuthnetJsonCimTest extends \PHPUnit_Framework_TestCase
            }
         }';
 
-        $authnet = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server, $responseJson);
+        $this->http->expects($this->once())
+            ->method('process')
+            ->will($this->returnValue($responseJson));
+
+        $authnet = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server);
+        $authnet->setProcessHandler($this->http);
         $authnet->createCustomerProfileRequest($request);
 
         $this->assertEquals('Ok', $authnet->messages->resultCode);
@@ -148,7 +158,12 @@ class AuthnetJsonCimTest extends \PHPUnit_Framework_TestCase
            }
         }';
 
-        $authnet = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server, $responseJson);
+        $this->http->expects($this->once())
+            ->method('process')
+            ->will($this->returnValue($responseJson));
+
+        $authnet = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server);
+        $authnet->setProcessHandler($this->http);
         $authnet->createCustomerProfileRequest($request);
 
         $this->assertEquals('Error', $authnet->messages->resultCode);

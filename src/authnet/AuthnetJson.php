@@ -162,9 +162,9 @@ class AuthnetJson
     }
 
     /**
-     * @param   object  $processor  Instance of \JohnConde\Authnet\ProcessorInterface
+     * @param   object  $processor
      */
-    public function setProcessHandler(ProcessorInterface $processor)
+    public function setProcessHandler($processor)
     {
         $this->processor = $processor;
     }
