@@ -1,15 +1,23 @@
 <?php
 
-defined('ROOT_DIR') || define('ROOT_DIR', __DIR__);
-
-spl_autoload_register(function ($class) {
-    $class = explode('\\', $class);
-    $class = end($class);
-    $dirs = array('authnet', 'exceptions', 'interfaces');
-    foreach($dirs as $dir) {
-        $file = ROOT_DIR . DIRECTORY_SEPARATOR . $dir . DIRECTORY_SEPARATOR . $class . '.php';
-        if (file_exists($file)) {
-            require $file;
+spl_autoload_register(
+    function($class) {
+        static $classes = null;
+        if ($classes === null) {
+            $classes = array(
+                'johnconde\\authnet\\authnetapifactory'                  => '/authnet/AuthnetApiFactory.php',
+                'johnconde\\authnet\\authnetjson'                        => '/authnet/AuthnetJson.php',
+                'johnconde\\authnet\\curlwrapper'                        => '/authnet/CurlWrapper.php',
+                'johnconde\\authnet\\authnetcannotsetparamsexception'    => '/exceptions/AuthnetCannotSetParamsException.php',
+                'johnconde\\authnet\\authnetcurlexception'               => '/exceptions/AuthnetCurlException.php',
+                'johnconde\\authnet\\authnetexception'                   => '/exceptions/AuthnetException.php',
+                'johnconde\\authnet\\authnetinvalidcredentialsexception' => '/exceptions/AuthnetInvalidCredentialsException.php',
+                'johnconde\\authnet\\authnetinvalidserverexception'      => '/exceptions/AuthnetInvalidServerException.php'
+            );
+        }
+        $cn = strtolower($class);
+        if (isset($classes[$cn])) {
+            require(__DIR__ . $classes[$cn]);
         }
     }
-});
+);
