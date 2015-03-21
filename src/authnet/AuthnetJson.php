@@ -18,7 +18,7 @@ namespace JohnConde\Authnet;
  * @author     John Conde <stymiee@gmail.com>
  * @copyright  John Conde <stymiee@gmail.com>
  * @license    http://www.apache.org/licenses/LICENSE-2.0.html Apache License, Version 2.0
- * @link       https://github.com/stymiee/Authorize.Net-JSON
+ * @link       https://github.com/stymiee/authnetjson
  */
 class AuthnetJson
 {
@@ -150,7 +150,7 @@ class AuthnetJson
      */
     public function isSuccessful()
     {
-        return $this->messages->resultCode === 'Ok';
+        return strtolower($this->messages->resultCode) === 'ok';
     }
 
     /**
@@ -158,7 +158,7 @@ class AuthnetJson
      */
     public function isError()
     {
-        return $this->messages->resultCode === 'Error';
+        return strtolower($this->messages->resultCode) === 'error';
     }
 
     /**
@@ -167,13 +167,5 @@ class AuthnetJson
     public function setProcessHandler($processor)
     {
         $this->processor = $processor;
-    }
-
-    /**
-     * @return  string  The name of the processor wrapper class
-     */
-    public function identifyProcessorWrapper()
-    {
-        return $this->processor->getName();
     }
 }
