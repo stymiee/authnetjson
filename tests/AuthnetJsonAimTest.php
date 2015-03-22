@@ -32,7 +32,7 @@ class AuthnetJsonAimTest extends \PHPUnit_Framework_TestCase
     public function testCreateTransactionRequestAuthCaptureSuccess()
     {
         $request = array(
-            'refId' => rand(1000000, 100000000),
+            'refId' => '94564789',
             'transactionRequest' => array(
                 'transactionType' => 'authCaptureTransaction',
                 'amount' => 5,
@@ -213,7 +213,7 @@ class AuthnetJsonAimTest extends \PHPUnit_Framework_TestCase
     public function testCreateTransactionRequestAuthOnlySuccess()
     {
         $request = array(
-            'refId' => rand(1000000, 100000000),
+            'refId' => '65376587',
             'transactionRequest' => array(
                 'transactionType' => 'authOnlyTransaction',
                 'amount' => 5,
@@ -383,7 +383,7 @@ class AuthnetJsonAimTest extends \PHPUnit_Framework_TestCase
     public function testCreateTransactionRequestAuthOnlyError()
     {
         $request = array(
-            'refId' => rand(1000000, 100000000),
+            'refId' => '14290435',
             'transactionRequest' => array(
                 'transactionType' => 'authCaptureTransaction',
                 'amount' => 5,
@@ -560,5 +560,467 @@ class AuthnetJsonAimTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('14290435', $authnet->refId);
         $this->assertEquals('E00027', $authnet->messages->message[0]->code);
         $this->assertEquals('The transaction was unsuccessful.', $authnet->messages->message[0]->text);
+    }
+
+
+    public function testCreateTransactionRequestCaptureOnly()
+    {
+        $request = array(
+            'refId' => '99120820',
+            'transactionRequest' => array(
+                'transactionType' => 'captureOnlyTransaction',
+                'amount' => 5,
+                'payment' => array(
+                    'creditCard' => array(
+                        'cardNumber' => '5424000000000015',
+                        'expirationDate' => '122016'
+                    )
+                ),
+                'authCode' => '123456'
+            ),
+        );
+        $responseJson = '{
+           "transactionResponse":{
+              "responseCode":"1",
+              "authCode":"123456",
+              "avsResultCode":"P",
+              "cvvResultCode":"",
+              "cavvResultCode":"",
+              "transId":"2230581248",
+              "refTransID":"",
+              "transHash":"6636DE0003D951E48B05DC0AAB0FD633",
+              "testRequest":"0",
+              "accountNumber":"XXXX0015",
+              "accountType":"MasterCard",
+              "messages":[
+                 {
+                    "code":"1",
+                    "description":"This transaction has been approved."
+                 }
+              ]
+           },
+           "refId":"99120820",
+           "messages":{
+              "resultCode":"Ok",
+              "message":[
+                 {
+                    "code":"I00001",
+                    "text":"Successful."
+                 }
+              ]
+           }
+        }';
+
+        $this->http->expects($this->once())
+            ->method('process')
+            ->will($this->returnValue($responseJson));
+
+        $authnet = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server);
+        $authnet->setProcessHandler($this->http);
+        $authnet->createTransactionRequest($request);
+
+        $this->assertEquals('Ok', $authnet->messages->resultCode);
+        $this->assertTrue($authnet->isSuccessful());
+        $this->assertFalse($authnet->isError());
+    }
+
+    public function testCreateTransactionRequestPriorAuthCapture()
+    {
+        $request = array(
+            'refId' => '34913421',
+            'transactionRequest' => array(
+                'transactionType' => 'priorAuthCaptureTransaction',
+                'refTransId' => '2230581333'
+            ),
+        );
+        $responseJson = '{
+           "transactionResponse":{
+              "responseCode":"1",
+              "authCode":"1VT65S",
+              "avsResultCode":"P",
+              "cvvResultCode":"",
+              "cavvResultCode":"",
+              "transId":"2230581333",
+              "refTransID":"2230581333",
+              "transHash":"414220CECDB539F68435A4830246BDA5",
+              "testRequest":"0",
+              "accountNumber":"XXXX0015",
+              "accountType":"MasterCard",
+              "messages":[
+                 {
+                    "code":"1",
+                    "description":"This transaction has been approved."
+                 }
+              ]
+           },
+           "refId":"34913421",
+           "messages":{
+              "resultCode":"Ok",
+              "message":[
+                 {
+                    "code":"I00001",
+                    "text":"Successful."
+                 }
+              ]
+           }
+        }';
+
+        $this->http->expects($this->once())
+            ->method('process')
+            ->will($this->returnValue($responseJson));
+
+        $authnet = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server);
+        $authnet->setProcessHandler($this->http);
+        $authnet->createTransactionRequest($request);
+
+        $this->assertEquals('Ok', $authnet->messages->resultCode);
+        $this->assertTrue($authnet->isSuccessful());
+        $this->assertFalse($authnet->isError());
+        $this->assertEquals('1VT65S', $authnet->transactionResponse->authCode);
+        $this->assertEquals('2230581333', $authnet->transactionResponse->transId);
+        $this->assertEquals('1', $authnet->transactionResponse->responseCode);
+        $this->assertEquals('P', $authnet->transactionResponse->avsResultCode);
+        $this->assertEquals('', $authnet->transactionResponse->cvvResultCode);
+        $this->assertEquals('', $authnet->transactionResponse->cavvResultCode);
+        $this->assertEquals('414220CECDB539F68435A4830246BDA5', $authnet->transactionResponse->transHash);
+        $this->assertEquals('0', $authnet->transactionResponse->testRequest);
+        $this->assertEquals('XXXX0015', $authnet->transactionResponse->accountNumber);
+        $this->assertEquals('MasterCard', $authnet->transactionResponse->accountType);
+        $this->assertEquals('1', $authnet->transactionResponse->messages[0]->code);
+        $this->assertEquals('34913421', $authnet->refId);
+        $this->assertEquals('I00001', $authnet->messages->message[0]->code);
+        $this->assertEquals('Successful.', $authnet->messages->message[0]->text);
+    }
+
+    public function testCreateTransactionRequestPriorAuthCaptureError()
+    {
+        $request = array(
+            'refId' => '14254181',
+            'transactionRequest' => array(
+                'transactionType' => 'priorAuthCaptureTransaction',
+                'refTransId' => '2165665234'
+            ),
+        );
+        $responseJson = '{
+           "transactionResponse":{
+              "responseCode":"3",
+              "authCode":"",
+              "avsResultCode":"P",
+              "cvvResultCode":"",
+              "cavvResultCode":"",
+              "transId":"0",
+              "refTransID":"2165665234",
+              "transHash":"06D737C28ECD531129DC59EF0548D7FA",
+              "testRequest":"0",
+              "accountNumber":"",
+              "accountType":"MasterCard",
+              "errors":[
+                 {
+                    "errorCode":"16",
+                    "errorText":"The transaction cannot be found."
+                 }
+              ]
+           },
+           "refId":"14254181",
+           "messages":{
+              "resultCode":"Error",
+              "message":[
+                 {
+                    "code":"E00027",
+                    "text":"The transaction was unsuccessful."
+                 }
+              ]
+           }
+        }';
+
+        $this->http->expects($this->once())
+            ->method('process')
+            ->will($this->returnValue($responseJson));
+
+        $authnet = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server);
+        $authnet->setProcessHandler($this->http);
+        $authnet->createTransactionRequest($request);
+
+        $this->assertEquals('Error', $authnet->messages->resultCode);
+        $this->assertFalse($authnet->isSuccessful());
+        $this->assertTrue($authnet->isError());
+        $this->assertEquals('', $authnet->transactionResponse->authCode);
+        $this->assertEquals('2165665234', $authnet->transactionResponse->refTransID);
+        $this->assertEquals('3', $authnet->transactionResponse->responseCode);
+        $this->assertEquals('P', $authnet->transactionResponse->avsResultCode);
+        $this->assertEquals('', $authnet->transactionResponse->cvvResultCode);
+        $this->assertEquals('', $authnet->transactionResponse->cavvResultCode);
+        $this->assertEquals('06D737C28ECD531129DC59EF0548D7FA', $authnet->transactionResponse->transHash);
+        $this->assertEquals('0', $authnet->transactionResponse->testRequest);
+        $this->assertEquals('', $authnet->transactionResponse->accountNumber);
+        $this->assertEquals('MasterCard', $authnet->transactionResponse->accountType);
+        $this->assertEquals('16', $authnet->transactionResponse->errors[0]->errorCode);
+        $this->assertEquals('The transaction cannot be found.', $authnet->transactionResponse->errors[0]->errorText);
+        $this->assertEquals('14254181', $authnet->refId);
+        $this->assertEquals('E00027', $authnet->messages->message[0]->code);
+        $this->assertEquals('The transaction was unsuccessful.', $authnet->messages->message[0]->text);
+    }
+
+    public function testCreateTransactionRequestRefund()
+    {
+        $request = array(
+            'refId' => '95063294',
+            'transactionRequest' => array(
+                'transactionType' => 'refundTransaction',
+                'amount' => 5,
+                'payment' => array(
+                    'creditCard' => array(
+                        'cardNumber' => '4111111111111111',
+                        'expirationDate' => '122016',
+                    )
+                ),
+                'authCode' => '2165668159'
+            ),
+        );
+        $responseJson = '{
+           "transactionResponse":{
+              "responseCode":"1",
+              "authCode":"",
+              "avsResultCode":"P",
+              "cvvResultCode":"",
+              "cavvResultCode":"",
+              "transId":"2230581367",
+              "refTransID":"",
+              "transHash":"E659A47D6DCC71D618533E17A80E818A",
+              "testRequest":"0",
+              "accountNumber":"XXXX1111",
+              "accountType":"Visa",
+              "messages":[
+                 {
+                    "code":"1",
+                    "description":"This transaction has been approved."
+                 }
+              ]
+           },
+           "refId":"95063294",
+           "messages":{
+              "resultCode":"Ok",
+              "message":[
+                 {
+                    "code":"I00001",
+                    "text":"Successful."
+                 }
+              ]
+           }
+        }';
+
+        $this->http->expects($this->once())
+            ->method('process')
+            ->will($this->returnValue($responseJson));
+
+        $authnet = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server);
+        $authnet->setProcessHandler($this->http);
+        $authnet->createTransactionRequest($request);
+
+        $this->assertEquals('Ok', $authnet->messages->resultCode);
+        $this->assertTrue($authnet->isSuccessful());
+        $this->assertFalse($authnet->isError());
+        $this->assertEquals('', $authnet->transactionResponse->authCode);
+        $this->assertEquals('2230581367', $authnet->transactionResponse->transId);
+        $this->assertEquals('', $authnet->transactionResponse->refTransID);
+        $this->assertEquals('1', $authnet->transactionResponse->responseCode);
+        $this->assertEquals('P', $authnet->transactionResponse->avsResultCode);
+        $this->assertEquals('', $authnet->transactionResponse->cvvResultCode);
+        $this->assertEquals('', $authnet->transactionResponse->cavvResultCode);
+        $this->assertEquals('E659A47D6DCC71D618533E17A80E818A', $authnet->transactionResponse->transHash);
+        $this->assertEquals('0', $authnet->transactionResponse->testRequest);
+        $this->assertEquals('XXXX1111', $authnet->transactionResponse->accountNumber);
+        $this->assertEquals('Visa', $authnet->transactionResponse->accountType);
+        $this->assertEquals('1', $authnet->transactionResponse->messages[0]->code);
+        $this->assertEquals('This transaction has been approved.', $authnet->transactionResponse->messages[0]->description);
+        $this->assertEquals('95063294', $authnet->refId);
+        $this->assertEquals('I00001', $authnet->messages->message[0]->code);
+        $this->assertEquals('Successful.', $authnet->messages->message[0]->text);
+    }
+
+    public function testCreateTransactionRequestVoid()
+    {
+        $request = array(
+            'refId' => '35481415',
+            'transactionRequest' => array(
+                'transactionType' => 'voidTransaction',
+                'refTransId' => '2230581408'
+            ),
+        );
+        $responseJson = '{
+           "transactionResponse":{
+              "responseCode":"1",
+              "authCode":"QCG7TB",
+              "avsResultCode":"P",
+              "cvvResultCode":"",
+              "cavvResultCode":"",
+              "transId":"2230581408",
+              "refTransID":"2230581408",
+              "transHash":"39C62AE0EC82B749CC6D3324BE263CC6",
+              "testRequest":"0",
+              "accountNumber":"XXXX1111",
+              "accountType":"Visa",
+              "messages":[
+                 {
+                    "code":"1",
+                    "description":"This transaction has been approved."
+                 }
+              ]
+           },
+           "refId":"35481415",
+           "messages":{
+              "resultCode":"Ok",
+              "message":[
+                 {
+                    "code":"I00001",
+                    "text":"Successful."
+                 }
+              ]
+           }
+        }';
+
+        $this->http->expects($this->once())
+            ->method('process')
+            ->will($this->returnValue($responseJson));
+
+        $authnet = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server);
+        $authnet->setProcessHandler($this->http);
+        $authnet->createTransactionRequest($request);
+
+        $this->assertEquals('Ok', $authnet->messages->resultCode);
+        $this->assertTrue($authnet->isSuccessful());
+        $this->assertFalse($authnet->isError());
+        $this->assertEquals('QCG7TB', $authnet->transactionResponse->authCode);
+        $this->assertEquals('2230581408', $authnet->transactionResponse->transId);
+        $this->assertEquals('2230581408', $authnet->transactionResponse->refTransID);
+        $this->assertEquals('1', $authnet->transactionResponse->responseCode);
+        $this->assertEquals('P', $authnet->transactionResponse->avsResultCode);
+        $this->assertEquals('', $authnet->transactionResponse->cvvResultCode);
+        $this->assertEquals('', $authnet->transactionResponse->cavvResultCode);
+        $this->assertEquals('39C62AE0EC82B749CC6D3324BE263CC6', $authnet->transactionResponse->transHash);
+        $this->assertEquals('0', $authnet->transactionResponse->testRequest);
+        $this->assertEquals('XXXX1111', $authnet->transactionResponse->accountNumber);
+        $this->assertEquals('Visa', $authnet->transactionResponse->accountType);
+        $this->assertEquals('1', $authnet->transactionResponse->messages[0]->code);
+        $this->assertEquals('This transaction has been approved.', $authnet->transactionResponse->messages[0]->description);
+        $this->assertEquals('35481415', $authnet->refId);
+        $this->assertEquals('I00001', $authnet->messages->message[0]->code);
+        $this->assertEquals('Successful.', $authnet->messages->message[0]->text);
+    }
+
+    public function testCreateTransactionRequestVoidError()
+    {
+        $request = array(
+            'refId' => '23039947',
+            'transactionRequest' => array(
+                'transactionType' => 'voidTransaction',
+                'refTransId' => '2165665483'
+            ),
+        );
+        $responseJson = '{
+           "transactionResponse":{
+              "responseCode":"3",
+              "authCode":"",
+              "avsResultCode":"P",
+              "cvvResultCode":"",
+              "cavvResultCode":"",
+              "transId":"0",
+              "refTransID":"2165665483",
+              "transHash":"06D737C28ECD531129DC59EF0548D7FA",
+              "testRequest":"0",
+              "accountNumber":"",
+              "accountType":"MasterCard",
+              "errors":[
+                 {
+                    "errorCode":"16",
+                    "errorText":"The transaction cannot be found."
+                 }
+              ]
+           },
+           "refId":"23039947",
+           "messages":{
+              "resultCode":"Error",
+              "message":[
+                 {
+                    "code":"E00027",
+                    "text":"The transaction was unsuccessful."
+                 }
+              ]
+           }
+        }';
+
+        $this->http->expects($this->once())
+            ->method('process')
+            ->will($this->returnValue($responseJson));
+
+        $authnet = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server);
+        $authnet->setProcessHandler($this->http);
+        $authnet->createTransactionRequest($request);
+
+        $this->assertEquals('Error', $authnet->messages->resultCode);
+        $this->assertFalse($authnet->isSuccessful());
+        $this->assertTrue($authnet->isError());
+        $this->assertEquals('', $authnet->transactionResponse->authCode);
+        $this->assertEquals('0', $authnet->transactionResponse->transId);
+        $this->assertEquals('2165665483', $authnet->transactionResponse->refTransID);
+        $this->assertEquals('3', $authnet->transactionResponse->responseCode);
+        $this->assertEquals('P', $authnet->transactionResponse->avsResultCode);
+        $this->assertEquals('', $authnet->transactionResponse->cvvResultCode);
+        $this->assertEquals('', $authnet->transactionResponse->cavvResultCode);
+        $this->assertEquals('06D737C28ECD531129DC59EF0548D7FA', $authnet->transactionResponse->transHash);
+        $this->assertEquals('0', $authnet->transactionResponse->testRequest);
+        $this->assertEquals('', $authnet->transactionResponse->accountNumber);
+        $this->assertEquals('MasterCard', $authnet->transactionResponse->accountType);
+        $this->assertEquals('16', $authnet->transactionResponse->errors[0]->errorCode);
+        $this->assertEquals('The transaction cannot be found.', $authnet->transactionResponse->errors[0]->errorText);
+        $this->assertEquals('23039947', $authnet->refId);
+        $this->assertEquals('E00027', $authnet->messages->message[0]->code);
+        $this->assertEquals('The transaction was unsuccessful.', $authnet->messages->message[0]->text);
+    }
+
+    public function testSendCustomerTransactionReceiptRequest()
+    {
+        $request = array(
+            'refId' => "2241729",
+            'transId' => '2165665581',
+            'customerEmail' => 'user@example.com',
+            'emailSettings' => array(
+                'setting' => array(
+                    'settingName' => 'headerEmailReceipt',
+                    'settingValue' => 'some HEADER stuff'
+                ),
+                'setting' => array(
+                    'settingName' => 'footerEmailReceipt',
+                    'settingValue' => 'some FOOTER stuff'
+                ),
+            ),
+        );
+        $responseJson = '{
+           "refId":"2241729",
+           "messages":{
+              "resultCode":"Ok",
+              "message":[
+                 {
+                    "code":"I00001",
+                    "text":"Successful."
+                 }
+              ]
+           }
+        }';
+
+        $this->http->expects($this->once())
+            ->method('process')
+            ->will($this->returnValue($responseJson));
+
+        $authnet = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server);
+        $authnet->setProcessHandler($this->http);
+        $authnet->createTransactionRequest($request);
+
+        $this->assertEquals('Ok', $authnet->messages->resultCode);
+        $this->assertTrue($authnet->isSuccessful());
+        $this->assertFalse($authnet->isError());
+        $this->assertEquals('2241729', $authnet->refId);
+        $this->assertEquals('I00001', $authnet->messages->message[0]->code);
+        $this->assertEquals('Successful.', $authnet->messages->message[0]->text);
     }
 }
