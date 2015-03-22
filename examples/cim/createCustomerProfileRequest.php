@@ -89,7 +89,7 @@ SAMPLE RESPONSE
     $json = AuthnetApiFactory::getJsonApiHandler(AUTHNET_LOGIN, AUTHNET_TRANSKEY, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
     $json->createCustomerProfileRequest(array(
             'profile' => array(
-			'merchantCustomerId' => '12345',
+			'merchantCustomerId' => '123456',
 			'email' => 'user@example.com',
 			'paymentProfiles' => array(
 				'billTo' => array(
