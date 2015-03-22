@@ -21,6 +21,8 @@ Using this libraryusually consists of three steps:
 2. Make the API call passing any required parameters as an array
 3. Check for the results and use them appropriately
 
+Simple usage:
+
     $json = AuthnetApiFactory::getJsonApiHandler(AUTHNET_LOGIN, AUTHNET_TRANSKEY);
     $json->getTransactionDetailsRequest(array(
         'transId' => '2162566217'
@@ -260,6 +262,8 @@ To assist with debugging the `__toString()` method has been overridden to output
 - The API endpoint the request was sent to
 - The request JSON
 - The response JSON
+
+Basic Usage:
 
     $json = AuthnetApiFactory::getJsonApiHandler(AUTHNET_LOGIN, AUTHNET_TRANSKEY);
     $json->getUnsettledTransactionListRequest();  
