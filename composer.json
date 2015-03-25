@@ -4,7 +4,7 @@
     "description": "Abstract library for the Authorize.Net JSON APIs",
     "keywords": ["authnetjson","Authorize.Net","JSON"],
     "homepage": "http://github.com/stymiee/authnetjson",
-    "license": "Apache",
+    "license": "Apache-2.0",
     "authors": [
         {
             "name": "John Conde",
