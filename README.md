@@ -2,9 +2,12 @@
 
 Library that abstracts [Authorize.Net](http://www.authorize.net/)'s [JSON APIs](http://developer.authorize.net/api/reference/).
 
+**The JSON API is currently in BETA and requires contacting Authorize.Net to enable it in their production environment.**
+
 ## Installation
 
-Simply add a dependency on `stymiee/authnetjson` to your project's `composer.json` file if you use [Composer](http://getcomposer.org/) to manage the dependencies of your project.
+Simply add a dependency on `stymiee/authnetjson` to your project's `composer.json` file if you use [Composer](http://getcomposer.org/)
+to manage the dependencies of your project.
 
 Here is a minimal example of a `composer.json` file that just defines a dependency on Authnet-Json:
 
@@ -35,13 +38,17 @@ The format of the array to be passed during the API call follows the structure o
 
 ## Using the Authorize.Net Development Server
 
-Authorize.Net provides a development environment for developers to test their integration against. To use this server (as opposed to their production endpoint) set the optional third parameter of `AuthnetApiFactory::getJsonApiHandler()` to be `1` or use the built in class constant `AuthnetApiFactory::USE_DEVELOPMENT_SERVER`:
+Authorize.Net provides a development environment for developers to test their integration against. To use this server
+(as opposed to their production endpoint) set the optional third parameter of `AuthnetApiFactory::getJsonApiHandler()` to be `1` or use the built in class constant `AuthnetApiFactory::USE_DEVELOPMENT_SERVER`:
 
     $json = AuthnetApiFactory::getJsonApiHandler(AUTHNET_LOGIN, AUTHNET_TRANSKEY, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
     
 ## Usage Examples
 
-To help make how this library is used easier to understand example API calls are provioded in the `example` directory. Examples for all of the current APIs calls are represented. You *may* need to make adjustments to get some to work as they may be dependant on valid values created from other API calls (i.e. a void will not work without a valid transaction ID).
+To help make how this library is used easier to understand example API calls are provioded in the `example` directory.
+Examples for all of the current APIs calls are represented. You *may* need to make adjustments to get some to work as
+they may be dependant on valid values created from other API calls (i.e. a void will not work without a valid
+transaction ID).
 
 #### Authorize and Capture
 
@@ -255,7 +262,8 @@ To help make how this library is used easier to understand example API calls are
     
 ## Debugging
 
-To assist with debugging the `__toString()` method has been overridden to output important elements pertaining to the usage of this library. Simple `echo` your AuthnetJson object to see:
+To assist with debugging the `__toString()` method has been overridden to output important elements pertaining to the
+usage of this library. Simple `echo` your AuthnetJson object to see:
 
 - The API Login ID used
 - The API transaction Key used
@@ -268,3 +276,11 @@ Basic Usage:
     $json = AuthnetApiFactory::getJsonApiHandler(AUTHNET_LOGIN, AUTHNET_TRANSKEY);
     $json->getUnsettledTransactionListRequest();  
     echo $json;
+
+## Support
+
+If you require assistance using this library I can be found at Stack Overflow. Be sure to tag any questions pertaining
+to the usage of this class with **PHP** and **Authorize.Net**. Make sure you follow their [guide for asking a good question](http://stackoverflow.com/help/how-to-ask)
+as poorly asked questions will be closed and I will not be able to assist you.
+
+**Do not use Stack Overflow to report bugs.** Bugs may be reported [here](https://github.com/stymiee/authnetjson/issues/new).
