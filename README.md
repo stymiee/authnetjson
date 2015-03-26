@@ -18,11 +18,13 @@ Here is a minimal example of a `composer.json` file that just defines a dependen
     }
     
 ## Basic Usage
-Using this libraryusually consists of three steps:
+Using this library usually consists of three steps:
 
 1. Initiate the library with the login credentials for the Authorize.Net account
 2. Make the API call passing any required parameters as an array
 3. Check for the results and use them appropriately
+
+*NOTE: If you are viewing any of the examples in a browser you will need to fill your Authorize.Net credentials in `config.inc.php` before usage*
 
 Simple usage:
 
