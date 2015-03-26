@@ -8,8 +8,8 @@ SAMPLE REQUEST
 {
    "createCustomerPaymentProfileRequest":{
       "merchantAuthentication":{
-         "name":"cnpdev4289",
-         "transactionKey":"SR2P8g4jdEn7vFLQ"
+         "name":"",
+         "transactionKey":""
       },
       "customerProfileId":"30582495",
       "paymentProfile":{

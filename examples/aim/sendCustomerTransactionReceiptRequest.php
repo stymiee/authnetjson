@@ -8,8 +8,8 @@ SAMPLE REQUEST
 {
    "sendCustomerTransactionReceiptRequest":{
       "merchantAuthentication":{
-         "name":"cnpdev4289",
-         "transactionKey":"SR2P8g4jdEn7vFLQ"
+         "name":"",
+         "transactionKey":""
       },
       "refId":2241729,
       "transId":"2165665581",

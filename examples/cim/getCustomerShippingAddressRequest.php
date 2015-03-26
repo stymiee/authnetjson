@@ -8,8 +8,8 @@ SAMPLE REQUEST
 {
    "getCustomerShippingAddressRequest":{
       "merchantAuthentication":{
-         "name":"cnpdev4289",
-         "transactionKey":"SR2P8g4jdEn7vFLQ"
+         "name":"",
+         "transactionKey":""
       },
       "customerProfileId":"31390172",
       "customerAddressId":"29366174"

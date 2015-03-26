@@ -18,8 +18,8 @@ SAMPLE XML FOR API CALL
 {  
    "createTransactionRequest":{  
       "merchantAuthentication":{  
-         "name":"cnpdev4289",
-         "transactionKey":"SR2P8g4jdEn7vFLQ"
+         "name":"",
+         "transactionKey":""
       },
       "refId":14290435,
       "transactionRequest":{  

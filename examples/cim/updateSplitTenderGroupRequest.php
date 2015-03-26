@@ -8,8 +8,8 @@ SAMPLE REQUEST
 {
    "updateSplitTenderGroupRequest":{
       "merchantAuthentication":{
-         "name":"cnpdev4289",
-         "transactionKey":"SR2P8g4jdEn7vFLQ"
+         "name":"",
+         "transactionKey":""
       },
       "splitTenderId":"123456",
       "splitTenderStatus":"voided"

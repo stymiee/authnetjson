@@ -18,8 +18,8 @@ SAMPLE REQUEST
 {  
    "getTransactionListRequest":{  
       "merchantAuthentication":{  
-         "name":"cnpdev4289",
-         "transactionKey":"SR2P8g4jdEn7vFLQ"
+         "name":"",
+         "transactionKey":""
       },
       "batchId":"1221577"
    }

@@ -18,8 +18,8 @@ SAMPLE REQUEST
 {  
    "ARBGetSubscriptionStatusRequest":{  
       "merchantAuthentication":{  
-         "name":"cnpdev4289",
-         "transactionKey":"SR2P8g4jdEn7vFLQ"
+         "name":"",
+         "transactionKey":""
       },
       "refId":"Sample",
       "subscriptionId":"1207505"

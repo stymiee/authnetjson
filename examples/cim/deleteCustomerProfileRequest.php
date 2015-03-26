@@ -8,8 +8,8 @@ SAMPLE REQUEST
 {
    "deleteCustomerProfileRequest":{
       "merchantAuthentication":{
-         "name":"cnpdev4289",
-         "transactionKey":"SR2P8g4jdEn7vFLQ"
+         "name":"",
+         "transactionKey":""
       },
       "customerProfileId":"31390172"
    }

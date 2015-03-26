@@ -18,8 +18,8 @@ SAMPLE XML FOR API CALL
 {  
    "getTransactionDetailsRequest":{  
       "merchantAuthentication":{  
-         "name":"cnpdev4289",
-         "transactionKey":"SR2P8g4jdEn7vFLQ"
+         "name":"",
+         "transactionKey":""
       },
       "transId":"2162566217"
    }

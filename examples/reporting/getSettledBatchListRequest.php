@@ -18,8 +18,8 @@ SAMPLE REQUEST
 {  
    "getSettledBatchListRequest":{  
       "merchantAuthentication":{  
-         "name":"cnpdev4289",
-         "transactionKey":"SR2P8g4jdEn7vFLQ"
+         "name":"",
+         "transactionKey":""
       },
       "includeStatistics":"true",
       "firstSettlementDate":"2015-01-01T08:15:30",
