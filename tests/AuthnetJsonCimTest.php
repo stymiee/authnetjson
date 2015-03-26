@@ -1414,4 +1414,406 @@ class AuthnetJsonCimTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Successful.', $authnet->messages->message[0]->text);
         $this->assertEquals('1,1,1,This transaction has been approved.,5Q8DGW,Y,2230582939,none,Test transaction for ValidateCustomerPaymentProfile.,0.00,CC,auth_only,12345,John,Smith,,123 Main Street,Townsville,NJ,12345,,800-555-1234,,user@example.com,John,Smith,,123 Main Street,Townsville,NJ,12345,,0.00,0.00,0.00,FALSE,none,6160655F3F4DF72144DCE15C0AEE15B1,,2,,,,,,,,,,,XXXX1111,Visa,,,,,,,,,,,,,,,,,29366174', $authnet->directResponse);
     }
+
+
+    public function testGetCustomerPaymentProfileRequest()
+    {
+        $request = array(
+            'customerProfileId' => '31390172',
+            'customerPaymentProfileId' => '28393490'
+        );
+        $responseJson = '{
+           "paymentProfile":{
+              "customerPaymentProfileId":"28393490",
+              "payment":{
+                 "creditCard":{
+                    "cardNumber":"XXXX1111",
+                    "expirationDate":"XXXX"
+                 }
+              },
+              "customerTypeSpecified":false,
+              "billTo":{
+                 "phoneNumber":"800-555-1234",
+                 "firstName":"John",
+                 "lastName":"Smith",
+                 "address":"123 Main Street",
+                 "city":"Townsville",
+                 "state":"NJ",
+                 "zip":"12345"
+              }
+           },
+           "messages":{
+              "resultCode":"Ok",
+              "message":[
+                 {
+                    "code":"I00001",
+                    "text":"Successful."
+                 }
+              ]
+           }
+        }';
+
+        $this->http->expects($this->once())
+            ->method('process')
+            ->will($this->returnValue($responseJson));
+
+        $authnet = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server);
+        $authnet->setProcessHandler($this->http);
+        $authnet->getCustomerPaymentProfileRequest($request);
+
+        $this->assertEquals('Ok', $authnet->messages->resultCode);
+        $this->assertTrue($authnet->isSuccessful());
+        $this->assertFalse($authnet->isError());
+        $this->assertEquals('I00001', $authnet->messages->message[0]->code);
+        $this->assertEquals('Successful.', $authnet->messages->message[0]->text);
+        $this->assertEquals('28393490', $authnet->paymentProfile->customerPaymentProfileId);
+        $this->assertEquals('XXXX1111', $authnet->paymentProfile->payment->creditCard->cardNumber);
+        $this->assertEquals('XXXX', $authnet->paymentProfile->payment->creditCard->expirationDate);
+        $this->assertFalse($authnet->paymentProfile->customerTypeSpecified);
+        $this->assertEquals('800-555-1234', $authnet->paymentProfile->billTo->phoneNumber);
+        $this->assertEquals('John', $authnet->paymentProfile->billTo->firstName);
+        $this->assertEquals('Smith', $authnet->paymentProfile->billTo->lastName);
+        $this->assertEquals('123 Main Street', $authnet->paymentProfile->billTo->address);
+        $this->assertEquals('Townsville', $authnet->paymentProfile->billTo->city);
+        $this->assertEquals('NJ', $authnet->paymentProfile->billTo->state);
+        $this->assertEquals('12345', $authnet->paymentProfile->billTo->zip);
+    }
+
+
+    public function testGetCustomerProfileIdsRequest()
+    {
+        $responseJson = '{
+           "ids":[
+              "20320494",
+              "20320495",
+              "20320496",
+              "20320497",
+              "20320499",
+              "20382791",
+              "20522161",
+              "20522247",
+              "20522344",
+              "20522529",
+              "20529466",
+              "20532466",
+              "20533743",
+              "20533892",
+              "20631798",
+              "21176851",
+              "21267776",
+              "21267786",
+              "21268552",
+              "21268866",
+              "21323330",
+              "21387453",
+              "21452273",
+              "21503525",
+              "21507048",
+              "21520223",
+              "21533869",
+              "21630064",
+              "21631076",
+              "21644324",
+              "21755205",
+              "21783775",
+              "22820980",
+              "22853636",
+              "22912790",
+              "22913090",
+              "23896146",
+              "23942782",
+              "24353242",
+              "24415694",
+              "24431080",
+              "24873651",
+              "24874921",
+              "24875645",
+              "25139838",
+              "25286149",
+              "25287624",
+              "25697926",
+              "25933750",
+              "26564070",
+              "26564773",
+              "26583007",
+              "26585538",
+              "26585555",
+              "26585578",
+              "26586275",
+              "26648484",
+              "26648913",
+              "27389717",
+              "27667711",
+              "27713150",
+              "27984649",
+              "27984720",
+              "27984879",
+              "28012856",
+              "28023333",
+              "28023355",
+              "28023366",
+              "28023374",
+              "28421203",
+              "28421294",
+              "28440218",
+              "28440239",
+              "28440287",
+              "28440368",
+              "28473202",
+              "28473492",
+              "28474805",
+              "28596453",
+              "28705962",
+              "28722134",
+              "28774792",
+              "28907593",
+              "30582495",
+              "30582501",
+              "31390172"
+           ],
+           "messages":{
+              "resultCode":"Ok",
+              "message":[
+                 {
+                    "code":"I00001",
+                    "text":"Successful."
+                 }
+              ]
+           }
+        }';
+
+        $this->http->expects($this->once())
+            ->method('process')
+            ->will($this->returnValue($responseJson));
+
+        $authnet = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server);
+        $authnet->setProcessHandler($this->http);
+        $authnet->getCustomerProfileIdsRequest();
+
+        $this->assertEquals('Ok', $authnet->messages->resultCode);
+        $this->assertTrue($authnet->isSuccessful());
+        $this->assertFalse($authnet->isError());
+        $this->assertEquals('I00001', $authnet->messages->message[0]->code);
+        $this->assertEquals('Successful.', $authnet->messages->message[0]->text);
+        $this->assertTrue(is_array($authnet->ids));
+        $this->assertEquals('20320494', $authnet->ids[0]);
+    }
+
+
+    public function testGetCustomerProfileRequest()
+    {
+        $request = array(
+            'customerProfileId' => '31390172'
+        );
+        $responseJson = '{
+           "profile":{
+              "paymentProfiles":[
+                 {
+                    "customerPaymentProfileId":"28393490",
+                    "payment":{
+                       "creditCard":{
+                          "cardNumber":"XXXX1111",
+                          "expirationDate":"XXXX"
+                       }
+                    },
+                    "customerTypeSpecified":false,
+                    "billTo":{
+                       "phoneNumber":"800-555-1234",
+                       "firstName":"John",
+                       "lastName":"Smith",
+                       "address":"123 Main Street",
+                       "city":"Townsville",
+                       "state":"NJ",
+                       "zip":"12345"
+                    }
+                 }
+              ],
+              "shipToList":[
+                 {
+                    "customerAddressId":"29366174",
+                    "phoneNumber":"800-555-1234",
+                    "firstName":"John",
+                    "lastName":"Smith",
+                    "address":"123 Main Street",
+                    "city":"Townsville",
+                    "state":"NJ",
+                    "zip":"12345"
+                 },
+                 {
+                    "customerAddressId":"29870028",
+                    "phoneNumber":"800-555-1234",
+                    "faxNumber":"800-555-1234",
+                    "firstName":"John",
+                    "lastName":"Doe",
+                    "company":"",
+                    "address":"123 Main St.",
+                    "city":"Bellevue",
+                    "state":"WA",
+                    "zip":"98004",
+                    "country":"USA"
+                 }
+              ],
+              "customerProfileId":"31390172",
+              "merchantCustomerId":"12345",
+              "email":"user@example.com"
+           },
+           "messages":{
+              "resultCode":"Ok",
+              "message":[
+                 {
+                    "code":"I00001",
+                    "text":"Successful."
+                 }
+              ]
+           }
+        }';
+
+        $this->http->expects($this->once())
+            ->method('process')
+            ->will($this->returnValue($responseJson));
+
+        $authnet = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server);
+        $authnet->setProcessHandler($this->http);
+        $authnet->getCustomerProfileRequest($request);
+
+        $this->assertEquals('Ok', $authnet->messages->resultCode);
+        $this->assertTrue($authnet->isSuccessful());
+        $this->assertFalse($authnet->isError());
+        $this->assertEquals('I00001', $authnet->messages->message[0]->code);
+        $this->assertEquals('Successful.', $authnet->messages->message[0]->text);
+        $this->assertEquals('28393490', $authnet->profile->paymentProfiles[0]->customerPaymentProfileId);
+        $this->assertEquals('XXXX1111', $authnet->profile->paymentProfiles[0]->payment->creditCard->cardNumber);
+        $this->assertEquals('XXXX', $authnet->profile->paymentProfiles[0]->payment->creditCard->expirationDate);
+        $this->assertFalse($authnet->profile->paymentProfiles[0]->customerTypeSpecified);
+        $this->assertEquals('800-555-1234', $authnet->profile->paymentProfiles[0]->billTo->phoneNumber);
+        $this->assertEquals('John', $authnet->profile->paymentProfiles[0]->billTo->firstName);
+        $this->assertEquals('Smith', $authnet->profile->paymentProfiles[0]->billTo->lastName);
+        $this->assertEquals('123 Main Street', $authnet->profile->paymentProfiles[0]->billTo->address);
+        $this->assertEquals('Townsville', $authnet->profile->paymentProfiles[0]->billTo->city);
+        $this->assertEquals('NJ', $authnet->profile->paymentProfiles[0]->billTo->state);
+        $this->assertEquals('12345', $authnet->profile->paymentProfiles[0]->billTo->zip);
+        $this->assertEquals('29366174', $authnet->profile->shipToList[0]->customerAddressId);
+        $this->assertEquals('800-555-1234', $authnet->profile->shipToList[0]->phoneNumber);
+        $this->assertEquals('John', $authnet->profile->shipToList[0]->firstName);
+        $this->assertEquals('Smith', $authnet->profile->shipToList[0]->lastName);
+        $this->assertEquals('123 Main Street', $authnet->profile->shipToList[0]->address);
+        $this->assertEquals('Townsville', $authnet->profile->shipToList[0]->city);
+        $this->assertEquals('NJ', $authnet->profile->shipToList[0]->state);
+        $this->assertEquals('12345', $authnet->profile->shipToList[0]->zip);
+        $this->assertEquals('29870028', $authnet->profile->shipToList[1]->customerAddressId);
+        $this->assertEquals('800-555-1234', $authnet->profile->shipToList[1]->phoneNumber);
+        $this->assertEquals('800-555-1234', $authnet->profile->shipToList[1]->faxNumber);
+        $this->assertEquals('John', $authnet->profile->shipToList[1]->firstName);
+        $this->assertEquals('Doe', $authnet->profile->shipToList[1]->lastName);
+        $this->assertEquals('', $authnet->profile->shipToList[1]->company);
+        $this->assertEquals('123 Main St.', $authnet->profile->shipToList[1]->address);
+        $this->assertEquals('Bellevue', $authnet->profile->shipToList[1]->city);
+        $this->assertEquals('WA', $authnet->profile->shipToList[1]->state);
+        $this->assertEquals('98004', $authnet->profile->shipToList[1]->zip);
+        $this->assertEquals('USA', $authnet->profile->shipToList[1]->country);
+        $this->assertEquals('31390172', $authnet->profile->customerProfileId);
+        $this->assertEquals('12345', $authnet->profile->merchantCustomerId);
+        $this->assertEquals('user@example.com', $authnet->profile->email);
+    }
+
+
+    public function testGetCustomerShippingAddressRequest()
+    {
+        $request = array(
+            'customerProfileId' => '31390172',
+            'customerAddressId' => '29366174'
+        );
+        $responseJson = '{
+           "address":{
+              "customerAddressId":"29366174",
+              "phoneNumber":"800-555-1234",
+              "firstName":"John",
+              "lastName":"Smith",
+              "address":"123 Main Street",
+              "city":"Townsville",
+              "state":"NJ",
+              "zip":"12345"
+           },
+           "messages":{
+              "resultCode":"Ok",
+              "message":[
+                 {
+                    "code":"I00001",
+                    "text":"Successful."
+                 }
+              ]
+           }
+        }';
+
+        $this->http->expects($this->once())
+            ->method('process')
+            ->will($this->returnValue($responseJson));
+
+        $authnet = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server);
+        $authnet->setProcessHandler($this->http);
+        $authnet->getCustomerShippingAddressRequest($request);
+
+        $this->assertEquals('Ok', $authnet->messages->resultCode);
+        $this->assertTrue($authnet->isSuccessful());
+        $this->assertFalse($authnet->isError());
+        $this->assertEquals('I00001', $authnet->messages->message[0]->code);
+        $this->assertEquals('Successful.', $authnet->messages->message[0]->text);
+        $this->assertEquals('29366174', $authnet->address->customerAddressId);
+        $this->assertEquals('800-555-1234', $authnet->address->phoneNumber);
+        $this->assertEquals('John', $authnet->address->firstName);
+        $this->assertEquals('Smith', $authnet->address->lastName);
+        $this->assertEquals('123 Main Street', $authnet->address->address);
+        $this->assertEquals('Townsville', $authnet->address->city);
+        $this->assertEquals('NJ', $authnet->address->state);
+        $this->assertEquals('12345', $authnet->address->zip);
+    }
+
+
+    public function testGetHostedProfilePageRequest()
+    {
+        $request = array(
+            'customerProfileId' => '31390172',
+            'hostedProfileSettings' => array(
+                'setting' => array(
+                    'settingName' => 'hostedProfileReturnUrl',
+                    'settingValue' => 'https://blah.com/blah/',
+                ),
+                'setting' => array(
+                    'settingName' => 'hostedProfileReturnUrlText',
+                    'settingValue' => 'Continue to blah.',
+                ),
+                'setting' => array(
+                    'settingName' => 'hostedProfilePageBorderVisible',
+                    'settingValue' => 'true',
+                )
+            )
+        );
+        $responseJson = '{
+           "token":"Mvwo9mTx2vS332eCFY3rFzh/x1x64henm7rppLYQxd2cOzNpw+bfp1ZTVKvu98XSIvL9VIEB65mCFtzchN/pFKBdBA0daBukS27pWYxZuo6QpBUpz2p6zLENX8qH9wCcAw6EJr0MZkNttPW6b+Iw9eKfcBtJayq6kdNm9m1ywANHsg9xME4qUccBXnY2cCf3kLaaLNJhhiNxJmcboKNlDn5HtIQ/wcRnxB4YbqddTN8=",
+           "messages":{
+              "resultCode":"Ok",
+              "message":[
+                 {
+                    "code":"I00001",
+                    "text":"Successful."
+                 }
+              ]
+           }
+        }';
+
+        $this->http->expects($this->once())
+            ->method('process')
+            ->will($this->returnValue($responseJson));
+
+        $authnet = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server);
+        $authnet->setProcessHandler($this->http);
+        $authnet->getHostedProfilePageRequest($request);
+
+        $this->assertEquals('Ok', $authnet->messages->resultCode);
+        $this->assertTrue($authnet->isSuccessful());
+        $this->assertFalse($authnet->isError());
+        $this->assertEquals('I00001', $authnet->messages->message[0]->code);
+        $this->assertEquals('Successful.', $authnet->messages->message[0]->text);
+        $this->assertEquals('Mvwo9mTx2vS332eCFY3rFzh/x1x64henm7rppLYQxd2cOzNpw+bfp1ZTVKvu98XSIvL9VIEB65mCFtzchN/pFKBdBA0daBukS27pWYxZuo6QpBUpz2p6zLENX8qH9wCcAw6EJr0MZkNttPW6b+Iw9eKfcBtJayq6kdNm9m1ywANHsg9xME4qUccBXnY2cCf3kLaaLNJhhiNxJmcboKNlDn5HtIQ/wcRnxB4YbqddTN8=', $authnet->token);
+    }
 }
