@@ -13,7 +13,7 @@
 
 Use the Transaction Details XML API to get a list of unsettled transactions
 
-SAMPLE XML FOR API CALL
+SAMPLE REQUEST
 --------------------------------------------------------------------------------------------------
 {  
    "getUnsettledTransactionListRequest":{  
@@ -24,7 +24,7 @@ SAMPLE XML FOR API CALL
    }
 }
 
-SAMPLE XML RESPONSE
+SAMPLE RESPONSE
 --------------------------------------------------------------------------------------------------
 {
    "transactions":[  

@@ -11,7 +11,7 @@
  
 /*************************************************************************************************
 
-Use the ARB API to create get a subscription's status
+Use the ARB API to get a subscription's status
 
 SAMPLE REQUEST
 --------------------------------------------------------------------------------------------------

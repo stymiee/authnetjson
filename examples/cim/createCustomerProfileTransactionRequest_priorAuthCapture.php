@@ -1,7 +1,7 @@
 <?php
 /*************************************************************************************************
 
-Use the CIM JSON API to process a Prior Authization Capture
+Use the CIM JSON API to process a Prior Authorization Capture transaction
 
 SAMPLE REQUEST
 --------------------------------------------------------------------------------------------------

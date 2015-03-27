@@ -13,7 +13,7 @@
 
 Use the Transaction Details XML API to get the details of a transaction
 
-SAMPLE XML FOR API CALL
+SAMPLE REQUEST
 --------------------------------------------------------------------------------------------------
 {  
    "getTransactionDetailsRequest":{  
@@ -25,7 +25,7 @@ SAMPLE XML FOR API CALL
    }
 }
 
-SAMPLE XML RESPONSE
+SAMPLE RESPONSE
 --------------------------------------------------------------------------------------------------
 {  
    "transaction":{  

@@ -1,7 +1,7 @@
 <?php
 /*************************************************************************************************
 
-Use the CIM JSON API to process an Authorization Only
+Use the CIM JSON API to process an Authorization Only transaction
 
 SAMPLE REQUEST
 --------------------------------------------------------------------------------------------------

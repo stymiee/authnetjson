@@ -13,7 +13,7 @@
 
 Use the AIM JSON API to process an Authorization Only transaction
 
-SAMPLE XML FOR API CALL
+SAMPLE REQUEST
 --------------------------------------------------------------------------------------------------
 {  
    "createTransactionRequest":{  
@@ -102,7 +102,7 @@ SAMPLE XML FOR API CALL
    }
 }
 
-SAMPLE XML RESPONSE
+SAMPLE RESPONSE
 --------------------------------------------------------------------------------------------------
 {  
    "transactionResponse":{  

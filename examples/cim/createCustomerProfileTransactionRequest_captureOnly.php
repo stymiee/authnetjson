@@ -1,7 +1,7 @@
 <?php
 /*************************************************************************************************
 
-Use the CIM JSON API to process a Capture Only
+Use the CIM JSON API to process a Capture Only transaction
 
 SAMPLE REQUEST
 --------------------------------------------------------------------------------------------------
