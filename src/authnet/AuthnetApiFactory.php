@@ -38,6 +38,7 @@ class AuthnetApiFactory
      * @param   string      $transaction_key                Authorize.Net API Transaction Key
      * @param   integer     $server                         ID of which server to use (optional)
      * @return  object      \JohnConde\Authnet\AuthnetJson
+     * @throws  \JohnConde\Authnet\AuthnetInvalidCredentialsException
      */
     public static function getJsonApiHandler($login, $transaction_key, $server = self::USE_PRODUCTION_SERVER)
     {
@@ -58,6 +59,7 @@ class AuthnetApiFactory
     /**
      * @param   integer     $server     ID of which server to use
      * @return  string                  The URL endpoint the request is to be sent to
+     * @throws  \JohnConde\Authnet\AuthnetInvalidServerException
      */
     private static function getWebServiceURL($server)
     {
