@@ -8,11 +8,11 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
- 
+
 namespace JohnConde\Authnet;
 
 /**
- * Exception that is throw when cURL experiences an unexpected error
+ * Exception that is throw when invalid JSON is returned by the API
  *
  * @package    AuthnetJSON
  * @author     John Conde <authnet@johnconde.net>
@@ -20,4 +20,4 @@ namespace JohnConde\Authnet;
  * @license    http://www.apache.org/licenses/LICENSE-2.0.html Apache License, Version 2.0
  * @link       https://github.com/stymiee/authnetjson
  */
-class AuthnetCurlException Extends \Exception {}
+class AuthnetInvalidJsonException Extends \Exception {}
