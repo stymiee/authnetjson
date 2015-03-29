@@ -63,17 +63,14 @@ class AuthnetApiFactory
      */
     private static function getWebServiceURL($server)
     {
-        switch ($server) {
-            case static::USE_PRODUCTION_SERVER :
-                $url = 'https://api.authorize.net/xml/v1/request.api';
-            break;
-
-            case static::USE_DEVELOPMENT_SERVER :
-                $url = 'https://apitest.authorize.net/xml/v1/request.api';
-            break;
-
-            default :
-                throw new AuthnetInvalidServerException('You did not provide a valid server.');
+        if ($server === static::USE_PRODUCTION_SERVER) {
+            $url = 'https://api.authorize.net/xml/v1/request.api';
+        }
+        else if ($server === static::USE_DEVELOPMENT_SERVER) {
+            $url = 'https://apitest.authorize.net/xml/v1/request.api';
+        }
+        else {
+            throw new AuthnetInvalidServerException('You did not provide a valid server.');
         }
         return $url;
     }
