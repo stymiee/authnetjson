@@ -15,7 +15,6 @@ class AuthnetApiFactoryTest extends \PHPUnit_Framework_TestCase
 {
     private $login;
     private $transactionKey;
-    private $server;
 
     protected function setUp()
     {
@@ -23,6 +22,43 @@ class AuthnetApiFactoryTest extends \PHPUnit_Framework_TestCase
         $this->transactionKey = 'test';
     }
 
+    /**
+     * @covers            \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
+     * @covers            \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
+     * @expectedException \JohnConde\Authnet\AuthnetInvalidCredentialsException
+     */
+    public function testExceptionIsRaisedForInvalidCredentialsLogin()
+    {
+        $server  = AuthnetApiFactory::USE_DEVELOPMENT_SERVER;
+        $authnet = AuthnetApiFactory::getJsonApiHandler(null, $this->transactionKey, $server);
+    }
+
+    /**
+     * @covers            \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
+     * @covers            \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
+     * @expectedException \JohnConde\Authnet\AuthnetInvalidCredentialsException
+     */
+    public function testExceptionIsRaisedForInvalidCredentialsTransactionKey()
+    {
+        $server  = AuthnetApiFactory::USE_DEVELOPMENT_SERVER;
+        $authnet = AuthnetApiFactory::getJsonApiHandler($this->login, null, $server);
+    }
+
+    /**
+     * @covers            \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
+     * @covers            \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
+     * @expectedException \JohnConde\Authnet\AuthnetInvalidServerException
+     */
+    public function testExceptionIsRaisedForAuthnetInvalidServer()
+    {
+        $authnet = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, null);
+    }
+
+    /**
+     * @covers            \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
+     * @covers            \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
+     * @covers            \JohnConde\Authnet\AuthnetApiFactory::CurlWrapper
+     */
     public function testCurlWrapperProductionResponse()
     {
         $server  = AuthnetApiFactory::USE_PRODUCTION_SERVER;
@@ -31,6 +67,11 @@ class AuthnetApiFactoryTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('JohnConde\Authnet\CurlWrapper', new CurlWrapper());
     }
 
+    /**
+     * @covers            \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
+     * @covers            \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
+     * @covers            \JohnConde\Authnet\AuthnetApiFactory::CurlWrapper
+     */
     public function testCurlWrapperDevelopmentResponse()
     {
         $server  = AuthnetApiFactory::USE_DEVELOPMENT_SERVER;
