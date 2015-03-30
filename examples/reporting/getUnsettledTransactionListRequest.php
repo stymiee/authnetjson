@@ -11,7 +11,7 @@
  
 /*************************************************************************************************
 
-Use the Transaction Details XML API to get a list of unsettled transactions
+Use the Transaction Details API to get a list of unsettled transactions
 
 SAMPLE REQUEST
 --------------------------------------------------------------------------------------------------

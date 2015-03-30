@@ -11,7 +11,7 @@
  
 /*************************************************************************************************
 
-Use the Transaction Details XML API to get the details of a transaction
+Use the Transaction Details API to get the details of a transaction
 
 SAMPLE REQUEST
 --------------------------------------------------------------------------------------------------
