@@ -25,6 +25,7 @@ class AuthnetApiFactoryTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers            \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
      * @covers            \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
+     * @uses              \JohnConde\Authnet\AuthnetJson
      * @expectedException \JohnConde\Authnet\AuthnetInvalidCredentialsException
      */
     public function testExceptionIsRaisedForInvalidCredentialsLogin()
@@ -36,6 +37,7 @@ class AuthnetApiFactoryTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers            \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
      * @covers            \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
+     * @uses              \JohnConde\Authnet\AuthnetJson
      * @expectedException \JohnConde\Authnet\AuthnetInvalidCredentialsException
      */
     public function testExceptionIsRaisedForInvalidCredentialsTransactionKey()
@@ -58,6 +60,7 @@ class AuthnetApiFactoryTest extends \PHPUnit_Framework_TestCase
      * @covers            \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
      * @covers            \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
      * @covers            \JohnConde\Authnet\AuthnetApiFactory::CurlWrapper
+     * @uses              \JohnConde\Authnet\AuthnetJson
      */
     public function testCurlWrapperProductionResponse()
     {
@@ -71,6 +74,7 @@ class AuthnetApiFactoryTest extends \PHPUnit_Framework_TestCase
      * @covers            \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
      * @covers            \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
      * @covers            \JohnConde\Authnet\AuthnetApiFactory::CurlWrapper
+     * @uses              \JohnConde\Authnet\AuthnetJson
      */
     public function testCurlWrapperDevelopmentResponse()
     {
