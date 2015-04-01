@@ -176,8 +176,8 @@ class AuthnetJson
     private function process()
     {
         $this->response_json = $this->processor->process($this->url, $this->request_json);
-        if(($this->response = json_decode(preg_replace('/[\x00-\x1F\x80-\xFF]/', '', $this->response_json))) === false) {
-            throw new AuthnetInvalidJsonException('Invalid JSONM returned by the API');
+        if(($this->response = json_decode(preg_replace('/[\x00-\x1F\x80-\xFF]/', '', $this->response_json))) === null) {
+            throw new AuthnetInvalidJsonException('Invalid JSON returned by the API');
         }
     }
 
