@@ -12,6 +12,7 @@ spl_autoload_register(
                 'johnconde\\authnet\\authnetcurlexception'               => '/exceptions/AuthnetCurlException.php',
                 'johnconde\\authnet\\authnetexception'                   => '/exceptions/AuthnetException.php',
                 'johnconde\\authnet\\authnetinvalidcredentialsexception' => '/exceptions/AuthnetInvalidCredentialsException.php',
+                'johnconde\\authnet\\authnetinvalidjsonexception'        => '/exceptions/AuthnetInvalidJsonException.php',
                 'johnconde\\authnet\\authnetinvalidserverexception'      => '/exceptions/AuthnetInvalidServerException.php'
             );
         }
