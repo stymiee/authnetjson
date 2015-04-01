@@ -1,4 +1,9 @@
-# Authnet-JSON
+[![Latest Stable Version](https://poser.pugx.org/stymiee/authnetjson/v/stable.svg)](https://packagist.org/packages/stymiee/authnetjson)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/stymiee/authnetjson/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/stymiee/authnetjson/?branch=master)
+[![Build Status](https://scrutinizer-ci.com/g/stymiee/authnetjson/badges/build.png?b=master)](https://scrutinizer-ci.com/g/stymiee/authnetjson/build-status/master)
+[![Reference Status](https://www.versioneye.com/php/stymiee:authnetjson/reference_badge.svg?style=flat)](https://www.versioneye.com/php/stymiee:authnetjson/references)
+
+# AuthnetJSON
 
 Library that abstracts [Authorize.Net](http://www.authorize.net/)'s [JSON APIs](http://developer.authorize.net/api/reference/).
 
