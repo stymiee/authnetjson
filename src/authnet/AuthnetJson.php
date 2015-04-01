@@ -19,6 +19,7 @@ namespace JohnConde\Authnet;
  * @copyright   John Conde <stymiee@gmail.com>
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html Apache License, Version 2.0
  * @link        https://github.com/stymiee/authnetjson
+ * @see         https://developer.authorize.net/api/reference/
  *
  * @method      null createTransactionRequest(array $array)                                 process a payment
  * @method      null sendCustomerTransactionReceiptRequest(array $array)                    get a list of unsettled transactions
