@@ -286,8 +286,10 @@ Basic Usage:
 
 ## Support
 
-If you require assistance using this library I can be found at Stack Overflow. Be sure to tag any questions pertaining
-to the usage of this class with **PHP** and **Authorize.Net**. Make sure you follow their [guide for asking a good question](http://stackoverflow.com/help/how-to-ask)
-as poorly asked questions will be closed and I will not be able to assist you.
+If you require assistance using this library I can be found at Stack Overflow. Be sure when you
+[ask a question](http://stackoverflow.com/questions/ask?tags=php,authorize.net,authnetjson) pertaining to the usage of
+this class with **PHP** and **Authorize.Net**. Make sure you follow their
+[guide for asking a good question](http://stackoverflow.com/help/how-to-ask) as poorly asked questions will be closed
+and I will not be able to assist you.
 
 **Do not use Stack Overflow to report bugs.** Bugs may be reported [here](https://github.com/stymiee/authnetjson/issues/new).
