@@ -29,6 +29,11 @@ class AuthnetJsonAimTest extends \PHPUnit_Framework_TestCase
             ->getMock();
     }
 
+    /**
+     * @covers            \JohnConde\Authnet\AuthnetJson::process()
+     * @uses              \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
+     * @uses              \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
+     */
     public function testCreateTransactionRequestAuthCaptureSuccess()
     {
         $request = array(
@@ -210,6 +215,11 @@ class AuthnetJsonAimTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Successful.', $authnet->messages->message[0]->text);
     }
 
+    /**
+     * @covers            \JohnConde\Authnet\AuthnetJson::process()
+     * @uses              \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
+     * @uses              \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
+     */
     public function testCreateTransactionRequestAuthOnlySuccess()
     {
         $request = array(
@@ -380,6 +390,11 @@ class AuthnetJsonAimTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Successful.', $authnet->messages->message[0]->text);
     }
 
+    /**
+     * @covers            \JohnConde\Authnet\AuthnetJson::process()
+     * @uses              \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
+     * @uses              \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
+     */
     public function testCreateTransactionRequestAuthOnlyError()
     {
         $request = array(
@@ -563,6 +578,11 @@ class AuthnetJsonAimTest extends \PHPUnit_Framework_TestCase
     }
 
 
+    /**
+     * @covers            \JohnConde\Authnet\AuthnetJson::process()
+     * @uses              \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
+     * @uses              \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
+     */
     public function testCreateTransactionRequestCaptureOnly()
     {
         $request = array(
@@ -624,6 +644,11 @@ class AuthnetJsonAimTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($authnet->isError());
     }
 
+    /**
+     * @covers            \JohnConde\Authnet\AuthnetJson::process()
+     * @uses              \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
+     * @uses              \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
+     */
     public function testCreateTransactionRequestPriorAuthCapture()
     {
         $request = array(
@@ -692,6 +717,11 @@ class AuthnetJsonAimTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Successful.', $authnet->messages->message[0]->text);
     }
 
+    /**
+     * @covers            \JohnConde\Authnet\AuthnetJson::process()
+     * @uses              \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
+     * @uses              \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
+     */
     public function testCreateTransactionRequestPriorAuthCaptureError()
     {
         $request = array(
@@ -761,6 +791,11 @@ class AuthnetJsonAimTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('The transaction was unsuccessful.', $authnet->messages->message[0]->text);
     }
 
+    /**
+     * @covers            \JohnConde\Authnet\AuthnetJson::process()
+     * @uses              \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
+     * @uses              \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
+     */
     public function testCreateTransactionRequestRefund()
     {
         $request = array(
@@ -838,6 +873,11 @@ class AuthnetJsonAimTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Successful.', $authnet->messages->message[0]->text);
     }
 
+    /**
+     * @covers            \JohnConde\Authnet\AuthnetJson::process()
+     * @uses              \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
+     * @uses              \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
+     */
     public function testCreateTransactionRequestVoid()
     {
         $request = array(
@@ -908,6 +948,11 @@ class AuthnetJsonAimTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Successful.', $authnet->messages->message[0]->text);
     }
 
+    /**
+     * @covers            \JohnConde\Authnet\AuthnetJson::process()
+     * @uses              \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
+     * @uses              \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
+     */
     public function testCreateTransactionRequestVoidError()
     {
         $request = array(
@@ -978,6 +1023,11 @@ class AuthnetJsonAimTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('The transaction was unsuccessful.', $authnet->messages->message[0]->text);
     }
 
+    /**
+     * @covers            \JohnConde\Authnet\AuthnetJson::process()
+     * @uses              \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
+     * @uses              \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
+     */
     public function testSendCustomerTransactionReceiptRequest()
     {
         $request = array(

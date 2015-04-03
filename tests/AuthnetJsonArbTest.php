@@ -29,6 +29,11 @@ class AuthnetJsonArbTest extends \PHPUnit_Framework_TestCase
             ->getMock();
     }
 
+    /**
+     * @covers            \JohnConde\Authnet\AuthnetJson::process()
+     * @uses              \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
+     * @uses              \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
+     */
     public function testARBCreateSubscriptionRequestSuccess()
     {
         $request = array(
@@ -87,6 +92,11 @@ class AuthnetJsonArbTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Successful.', $authnet->messages->message[0]->text);
     }
 
+    /**
+     * @covers            \JohnConde\Authnet\AuthnetJson::process()
+     * @uses              \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
+     * @uses              \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
+     */
     public function testARBCreateSubscriptionRequestDuplicateRequestError()
     {
         $request = array(
@@ -143,6 +153,11 @@ class AuthnetJsonArbTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('You have submitted a duplicate of Subscription 2341621. A duplicate subscription will not be created.', $authnet->messages->message[0]->text);
     }
 
+    /**
+     * @covers            \JohnConde\Authnet\AuthnetJson::process()
+     * @uses              \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
+     * @uses              \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
+     */
     public function testARBCreateSubscriptionRequestInvalidStartDateError()
     {
         $request = array(
@@ -199,6 +214,11 @@ class AuthnetJsonArbTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Start Date must not occur before the submission date.', $authnet->messages->message[0]->text);
     }
 
+    /**
+     * @covers            \JohnConde\Authnet\AuthnetJson::process()
+     * @uses              \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
+     * @uses              \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
+     */
     public function testARBGetSubscriptionStatusRequestActive()
     {
         $request = array(
@@ -239,6 +259,11 @@ class AuthnetJsonArbTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($authnet->statusSpecified);
     }
 
+    /**
+     * @covers            \JohnConde\Authnet\AuthnetJson::process()
+     * @uses              \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
+     * @uses              \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
+     */
     public function testARBGetSubscriptionStatusRequestCancelled()
     {
         $request = array(
@@ -279,6 +304,11 @@ class AuthnetJsonArbTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($authnet->statusSpecified);
     }
 
+    /**
+     * @covers            \JohnConde\Authnet\AuthnetJson::process()
+     * @uses              \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
+     * @uses              \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
+     */
     public function testARBCancelSubscriptionRequestSuccess()
     {
         $request = array(
@@ -312,6 +342,11 @@ class AuthnetJsonArbTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Successful.', $authnet->messages->message[0]->text);
     }
 
+    /**
+     * @covers            \JohnConde\Authnet\AuthnetJson::process()
+     * @uses              \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
+     * @uses              \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
+     */
     public function testARBCancelSubscriptionRequestAlreadyCancelled()
     {
         $request = array(
@@ -345,6 +380,11 @@ class AuthnetJsonArbTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('The subscription has already been canceled.', $authnet->messages->message[0]->text);
     }
 
+    /**
+     * @covers            \JohnConde\Authnet\AuthnetJson::process()
+     * @uses              \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
+     * @uses              \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
+     */
     public function testARBUpdateSubscriptionRequestSuccess()
     {
         $request = array(
@@ -386,6 +426,11 @@ class AuthnetJsonArbTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Successful.', $authnet->messages->message[0]->text);
     }
 
+    /**
+     * @covers            \JohnConde\Authnet\AuthnetJson::process()
+     * @uses              \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
+     * @uses              \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
+     */
     public function testARBUpdateSubscriptionRequestError()
     {
         $request = array(
