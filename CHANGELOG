@@ -1,5 +1,9 @@
 CHANGE LOG
 
+2015-04- - Version 1.0.2
+--------------------------------------------
+Fixed bug where AuthnetInvalidJsonException would not be thrown when invalid JSON was returned
+
 2015-03-30 - Version 1.0.1
 --------------------------------------------
 Fixed bug where setting the third parameter AuthnetApiFactory::getJsonApiHandler to NULL would default to production server
