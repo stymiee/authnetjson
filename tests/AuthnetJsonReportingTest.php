@@ -29,6 +29,11 @@ class AuthnetJsonReportingTest extends \PHPUnit_Framework_TestCase
             ->getMock();
     }
 
+     /**
+     * @covers            \JohnConde\Authnet\AuthnetJson::process()
+     * @uses              \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
+     * @uses              \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
+     */
     public function testGetUnsettledTransactionListRequestSuccess()
     {
         $responseJson = '{
@@ -143,6 +148,11 @@ class AuthnetJsonReportingTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($response->transactions[2]->hasReturnedItemsSpecified);
     }
 
+     /**
+     * @covers            \JohnConde\Authnet\AuthnetJson::process()
+     * @uses              \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
+     * @uses              \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
+     */
     public function testGetTransactionListRequestSuccess()
     {
         $requestJson = array(
@@ -204,6 +214,11 @@ class AuthnetJsonReportingTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($response->transactions[0]->hasReturnedItemsSpecified);
     }
 
+     /**
+     * @covers            \JohnConde\Authnet\AuthnetJson::process()
+     * @uses              \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
+     * @uses              \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
+     */
     public function testGetSettledBatchListRequestSuccess()
     {
         $requestJson = array(
@@ -375,6 +390,11 @@ class AuthnetJsonReportingTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Card Not Present', $response->batchList[1]->product);
     }
 
+     /**
+     * @covers            \JohnConde\Authnet\AuthnetJson::process()
+     * @uses              \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
+     * @uses              \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
+     */
     public function testGetSettledBatchListRequestNoRecords()
     {
         $requestJson = array(
@@ -407,6 +427,11 @@ class AuthnetJsonReportingTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('No records found.', $response->messages->message[0]->text);
     }
 
+     /**
+     * @covers            \JohnConde\Authnet\AuthnetJson::process()
+     * @uses              \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
+     * @uses              \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
+     */
     public function testGetBatchStatisticsRequestSuccess()
     {
         $requestJson = array(
@@ -500,6 +525,11 @@ class AuthnetJsonReportingTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($response->batch->statistics[0]->refundReturnedItemsCountSpecified);
     }
 
+     /**
+     * @covers            \JohnConde\Authnet\AuthnetJson::process()
+     * @uses              \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
+     * @uses              \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
+     */
     public function testGetBatchStatisticsRequestNoRecords()
     {
         $requestJson = array(
@@ -530,6 +560,11 @@ class AuthnetJsonReportingTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('No records found.', $response->messages->message[0]->text);
     }
 
+     /**
+     * @covers            \JohnConde\Authnet\AuthnetJson::process()
+     * @uses              \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
+     * @uses              \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
+     */
     public function testGetTransactionDetailsRequestSuccess()
     {
         $requestJson = array(
