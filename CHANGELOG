@@ -1,6 +1,10 @@
 CHANGE LOG
 
-2015-04- - Version 1.0.2
+2015-04-29 - Version 2.0.0
+--------------------------------------------
+Requests now return response objects
+
+2015-04-18 - Version 1.0.2
 --------------------------------------------
 Fixed bug where AuthnetInvalidJsonException would not be thrown when invalid JSON was returned
 
