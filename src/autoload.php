@@ -6,7 +6,8 @@ spl_autoload_register(
         if ($classes === null) {
             $classes = array(
                 'johnconde\\authnet\\authnetapifactory'                  => '/authnet/AuthnetApiFactory.php',
-                'johnconde\\authnet\\authnetjson'                        => '/authnet/AuthnetJson.php',
+                'johnconde\\authnet\\authnetjsonrequest'                 => '/authnet/AuthnetJsonRequest.php',
+                'johnconde\\authnet\\authnetjsonresponse'                => '/authnet/AuthnetJsonResponse.php',
                 'johnconde\\authnet\\curlwrapper'                        => '/authnet/CurlWrapper.php',
                 'johnconde\\authnet\\authnetcannotsetparamsexception'    => '/exceptions/AuthnetCannotSetParamsException.php',
                 'johnconde\\authnet\\authnetcurlexception'               => '/exceptions/AuthnetCurlException.php',
