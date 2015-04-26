@@ -7,6 +7,10 @@
     defined('AUTHNET_LOGIN')    || define('AUTHNET_LOGIN', '');
     defined('AUTHNET_TRANSKEY') || define('AUTHNET_TRANSKEY', '');
 
+    if (version_compare(PHP_VERSION, '5.3.0') < 0) {
+        throw new \Exception('AuthnetJson requires PHP 5.3 or greater');
+    }
+
     if (!function_exists('curl_init')) {
         throw new \Exception('cURL PHP extension not installed');
     }
