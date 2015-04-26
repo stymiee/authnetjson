@@ -31,7 +31,7 @@ class AuthnetApiFactoryTest extends \PHPUnit_Framework_TestCase
     public function testExceptionIsRaisedForInvalidCredentialsLogin()
     {
         $server  = AuthnetApiFactory::USE_DEVELOPMENT_SERVER;
-        $authnet = AuthnetApiFactory::getJsonApiHandler(null, $this->transactionKey, $server);
+        $request = AuthnetApiFactory::getJsonApiHandler(null, $this->transactionKey, $server);
     }
 
     /**
@@ -43,7 +43,7 @@ class AuthnetApiFactoryTest extends \PHPUnit_Framework_TestCase
     public function testExceptionIsRaisedForInvalidCredentialsTransactionKey()
     {
         $server  = AuthnetApiFactory::USE_DEVELOPMENT_SERVER;
-        $authnet = AuthnetApiFactory::getJsonApiHandler($this->login, null, $server);
+        $request = AuthnetApiFactory::getJsonApiHandler($this->login, null, $server);
     }
 
     /**
@@ -65,7 +65,7 @@ class AuthnetApiFactoryTest extends \PHPUnit_Framework_TestCase
     public function testCurlWrapperProductionResponse()
     {
         $server  = AuthnetApiFactory::USE_PRODUCTION_SERVER;
-        $authnet = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $server);
+        $request = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $server);
 
         $this->assertInstanceOf('JohnConde\Authnet\CurlWrapper', new CurlWrapper());
     }
@@ -79,7 +79,7 @@ class AuthnetApiFactoryTest extends \PHPUnit_Framework_TestCase
     public function testCurlWrapperDevelopmentResponse()
     {
         $server  = AuthnetApiFactory::USE_DEVELOPMENT_SERVER;
-        $authnet = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $server);
+        $request = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $server);
 
         $this->assertInstanceOf('JohnConde\Authnet\CurlWrapper', new CurlWrapper());
     }

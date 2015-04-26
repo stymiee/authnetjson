@@ -37,7 +37,7 @@ class AuthnetJsonCimTest extends \PHPUnit_Framework_TestCase
      */
     public function testCreateCustomerProfileRequestSuccess()
     {
-        $request = array(
+        $requestJson = array(
             'profile' => array(
                 'merchantCustomerId' => '12345',
                 'email' => 'user@example.com',
@@ -96,18 +96,18 @@ class AuthnetJsonCimTest extends \PHPUnit_Framework_TestCase
             ->method('process')
             ->will($this->returnValue($responseJson));
 
-        $authnet = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server);
-        $authnet->setProcessHandler($this->http);
-        $authnet->createCustomerProfileRequest($request);
+        $request = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server);
+        $request->setProcessHandler($this->http);
+        $response = $request->createCustomerProfileRequest($requestJson);
 
-        $this->assertTrue($authnet->isSuccessful());
-        $this->assertFalse($authnet->isError());
-        $this->assertEquals('Ok', $authnet->messages->resultCode);
-        $this->assertEquals('31390172', $authnet->customerProfileId);
-        $this->assertEquals('28393490', $authnet->customerPaymentProfileIdList[0]);
-        $this->assertEquals('29366174', $authnet->customerShippingAddressIdList[0]);
-        $this->assertEquals('I00001', $authnet->messages->message[0]->code);
-        $this->assertEquals('Successful.', $authnet->messages->message[0]->text);
+        $this->assertTrue($response->isSuccessful());
+        $this->assertFalse($response->isError());
+        $this->assertEquals('Ok', $response->messages->resultCode);
+        $this->assertEquals('31390172', $response->customerProfileId);
+        $this->assertEquals('28393490', $response->customerPaymentProfileIdList[0]);
+        $this->assertEquals('29366174', $response->customerShippingAddressIdList[0]);
+        $this->assertEquals('I00001', $response->messages->message[0]->code);
+        $this->assertEquals('Successful.', $response->messages->message[0]->text);
     }
 
 
@@ -118,7 +118,7 @@ class AuthnetJsonCimTest extends \PHPUnit_Framework_TestCase
      */
     public function testCreateCustomerProfileRequestDuplicateRecordError()
     {
-        $request = array(
+        $requestJson = array(
             'profile' => array(
                 'merchantCustomerId' => '12345',
                 'email' => 'user@example.com',
@@ -176,15 +176,15 @@ class AuthnetJsonCimTest extends \PHPUnit_Framework_TestCase
             ->method('process')
             ->will($this->returnValue($responseJson));
 
-        $authnet = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server);
-        $authnet->setProcessHandler($this->http);
-        $authnet->createCustomerProfileRequest($request);
+        $request = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server);
+        $request->setProcessHandler($this->http);
+        $response = $request->createCustomerProfileRequest($requestJson);
 
-        $this->assertFalse($authnet->isSuccessful());
-        $this->assertTrue($authnet->isError());
-        $this->assertEquals('Error', $authnet->messages->resultCode);
-        $this->assertEquals('E00039', $authnet->messages->message[0]->code);
-        $this->assertEquals('A duplicate record with ID 20382791 already exists.', $authnet->messages->message[0]->text);
+        $this->assertFalse($response->isSuccessful());
+        $this->assertTrue($response->isError());
+        $this->assertEquals('Error', $response->messages->resultCode);
+        $this->assertEquals('E00039', $response->messages->message[0]->code);
+        $this->assertEquals('A duplicate record with ID 20382791 already exists.', $response->messages->message[0]->text);
     }
 
 
@@ -195,7 +195,7 @@ class AuthnetJsonCimTest extends \PHPUnit_Framework_TestCase
      */
     public function testCreateCustomerPaymentProfileRequest()
     {
-        $request = array(
+        $requestJson = array(
             'customerProfileId' => '30582495',
             'paymentProfile' => array(
                 'billTo' => array(
@@ -237,16 +237,16 @@ class AuthnetJsonCimTest extends \PHPUnit_Framework_TestCase
             ->method('process')
             ->will($this->returnValue($responseJson));
 
-        $authnet = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server);
-        $authnet->setProcessHandler($this->http);
-        $authnet->createCustomerPaymentProfileRequest($request);
+        $request = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server);
+        $request->setProcessHandler($this->http);
+        $response = $request->createCustomerPaymentProfileRequest($requestJson);
 
-        $this->assertEquals('Ok', $authnet->messages->resultCode);
-        $this->assertTrue($authnet->isSuccessful());
-        $this->assertFalse($authnet->isError());
-        $this->assertEquals('I00001', $authnet->messages->message[0]->code);
-        $this->assertEquals('Successful.', $authnet->messages->message[0]->text);
-        $this->assertEquals('28821903', $authnet->customerPaymentProfileId);
+        $this->assertEquals('Ok', $response->messages->resultCode);
+        $this->assertTrue($response->isSuccessful());
+        $this->assertFalse($response->isError());
+        $this->assertEquals('I00001', $response->messages->message[0]->code);
+        $this->assertEquals('Successful.', $response->messages->message[0]->text);
+        $this->assertEquals('28821903', $response->customerPaymentProfileId);
     }
 
 
@@ -257,7 +257,7 @@ class AuthnetJsonCimTest extends \PHPUnit_Framework_TestCase
      */
     public function testCreateCustomerProfileTransactionAuthCaptureRequest()
     {
-        $request = array(
+        $requestJson = array(
             'transaction' => array(
                 'profileTransAuthCapture' => array(
                     'amount' => '10.95',
@@ -319,16 +319,16 @@ class AuthnetJsonCimTest extends \PHPUnit_Framework_TestCase
             ->method('process')
             ->will($this->returnValue($responseJson));
 
-        $authnet = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server);
-        $authnet->setProcessHandler($this->http);
-        $authnet->createCustomerProfileTransactionRequest($request);
+        $request = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server);
+        $request->setProcessHandler($this->http);
+        $response = $request->createCustomerProfileTransactionRequest($requestJson);
 
-        $this->assertEquals('Ok', $authnet->messages->resultCode);
-        $this->assertTrue($authnet->isSuccessful());
-        $this->assertFalse($authnet->isError());
-        $this->assertEquals('I00001', $authnet->messages->message[0]->code);
-        $this->assertEquals('Successful.', $authnet->messages->message[0]->text);
-        $this->assertEquals('1,1,1,This transaction has been approved.,902R0T,Y,2230582306,INV000001,description of transaction,10.95,CC,auth_capture,12345,John,Smith,,123 Main Street,Townsville,NJ,12345,,800-555-1234,,user@example.com,John,Smith,,123 Main Street,Townsville,NJ,12345,,1.00,,2.00,FALSE,PONUM000001,D3B20D6194B0E86C03A18987300E781C,P,2,,,,,,,,,,,XXXX1111,Visa,,,,,,,,,,,,,,,,,29366174', $authnet->directResponse);
+        $this->assertEquals('Ok', $response->messages->resultCode);
+        $this->assertTrue($response->isSuccessful());
+        $this->assertFalse($response->isError());
+        $this->assertEquals('I00001', $response->messages->message[0]->code);
+        $this->assertEquals('Successful.', $response->messages->message[0]->text);
+        $this->assertEquals('1,1,1,This transaction has been approved.,902R0T,Y,2230582306,INV000001,description of transaction,10.95,CC,auth_capture,12345,John,Smith,,123 Main Street,Townsville,NJ,12345,,800-555-1234,,user@example.com,John,Smith,,123 Main Street,Townsville,NJ,12345,,1.00,,2.00,FALSE,PONUM000001,D3B20D6194B0E86C03A18987300E781C,P,2,,,,,,,,,,,XXXX1111,Visa,,,,,,,,,,,,,,,,,29366174', $response->directResponse);
     }
 
 
@@ -339,7 +339,7 @@ class AuthnetJsonCimTest extends \PHPUnit_Framework_TestCase
      */
     public function testCreateCustomerProfileTransactionRequestAuthCaptureError()
     {
-        $request = array (
+        $requestJson = array (
             'createCustomerProfileTransactionRequest' => array (
                 'merchantAuthentication' => array (
                     'name' => 'cnpdev4289',
@@ -406,15 +406,15 @@ class AuthnetJsonCimTest extends \PHPUnit_Framework_TestCase
             ->method('process')
             ->will($this->returnValue($responseJson));
 
-        $authnet = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server);
-        $authnet->setProcessHandler($this->http);
-        $authnet->createCustomerProfileTransactionRequest($request);
+        $request = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server);
+        $request->setProcessHandler($this->http);
+        $response = $request->createCustomerProfileTransactionRequest($requestJson);
 
-        $this->assertFalse($authnet->isSuccessful());
-        $this->assertTrue($authnet->isError());
-        $this->assertEquals('Error', $authnet->messages->resultCode);
-        $this->assertEquals('E00040', $authnet->messages->message[0]->code);
-        $this->assertEquals('Customer Profile ID or Customer Payment Profile ID not found.', $authnet->messages->message[0]->text);
+        $this->assertFalse($response->isSuccessful());
+        $this->assertTrue($response->isError());
+        $this->assertEquals('Error', $response->messages->resultCode);
+        $this->assertEquals('E00040', $response->messages->message[0]->code);
+        $this->assertEquals('Customer Profile ID or Customer Payment Profile ID not found.', $response->messages->message[0]->text);
     }
 
 
@@ -425,7 +425,7 @@ class AuthnetJsonCimTest extends \PHPUnit_Framework_TestCase
      */
     public function testCreateCustomerProfileTransactionRequestAuthOnly()
     {
-        $request = array(
+        $requestJson = array(
             'transaction' => array(
                 'profileTransAuthOnly' => array(
                     'amount' => '10.95',
@@ -487,16 +487,16 @@ class AuthnetJsonCimTest extends \PHPUnit_Framework_TestCase
             ->method('process')
             ->will($this->returnValue($responseJson));
 
-        $authnet = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server);
-        $authnet->setProcessHandler($this->http);
-        $authnet->createCustomerProfileTransactionRequest($request);
+        $request = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server);
+        $request->setProcessHandler($this->http);
+        $response = $request->createCustomerProfileTransactionRequest($requestJson);
 
-        $this->assertEquals('Ok', $authnet->messages->resultCode);
-        $this->assertTrue($authnet->isSuccessful());
-        $this->assertFalse($authnet->isError());
-        $this->assertEquals('I00001', $authnet->messages->message[0]->code);
-        $this->assertEquals('Successful.', $authnet->messages->message[0]->text);
-        $this->assertEquals('1,1,1,This transaction has been approved.,KF2IM6,Y,2230582323,INV000001,description of transaction,10.95,CC,auth_only,12345,John,Smith,,123 Main Street,Townsville,NJ,12345,,800-555-1234,,user@example.com,John,Smith,,123 Main Street,Townsville,NJ,12345,,1.00,,2.00,FALSE,PONUM000001,15D36F54160C246186DA774FE261646B,P,2,,,,,,,,,,,XXXX1111,Visa,,,,,,,,,,,,,,,,,29366174', $authnet->directResponse);
+        $this->assertEquals('Ok', $response->messages->resultCode);
+        $this->assertTrue($response->isSuccessful());
+        $this->assertFalse($response->isError());
+        $this->assertEquals('I00001', $response->messages->message[0]->code);
+        $this->assertEquals('Successful.', $response->messages->message[0]->text);
+        $this->assertEquals('1,1,1,This transaction has been approved.,KF2IM6,Y,2230582323,INV000001,description of transaction,10.95,CC,auth_only,12345,John,Smith,,123 Main Street,Townsville,NJ,12345,,800-555-1234,,user@example.com,John,Smith,,123 Main Street,Townsville,NJ,12345,,1.00,,2.00,FALSE,PONUM000001,15D36F54160C246186DA774FE261646B,P,2,,,,,,,,,,,XXXX1111,Visa,,,,,,,,,,,,,,,,,29366174', $response->directResponse);
     }
 
 
@@ -507,7 +507,7 @@ class AuthnetJsonCimTest extends \PHPUnit_Framework_TestCase
      */
     public function testCreateCustomerProfileTransactionRequestCaptureOnly()
     {
-        $request = array(
+        $requestJson = array(
             'transaction' => array(
                 'profileTransCaptureOnly' => array(
                     'amount' => '10.95',
@@ -570,16 +570,16 @@ class AuthnetJsonCimTest extends \PHPUnit_Framework_TestCase
             ->method('process')
             ->will($this->returnValue($responseJson));
 
-        $authnet = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server);
-        $authnet->setProcessHandler($this->http);
-        $authnet->createCustomerProfileTransactionRequest($request);
+        $request = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server);
+        $request->setProcessHandler($this->http);
+        $response = $request->createCustomerProfileTransactionRequest($requestJson);
 
-        $this->assertEquals('Ok', $authnet->messages->resultCode);
-        $this->assertTrue($authnet->isSuccessful());
-        $this->assertFalse($authnet->isError());
-        $this->assertEquals('I00001', $authnet->messages->message[0]->code);
-        $this->assertEquals('Successful.', $authnet->messages->message[0]->text);
-        $this->assertEquals('1,1,1,This transaction has been approved.,000000,P,2230582335,INV000001,description of transaction,10.95,CC,capture_only,12345,John,Smith,,123 Main Street,Townsville,NJ,12345,,800-555-1234,,user@example.com,John,Smith,,123 Main Street,Townsville,NJ,12345,,1.00,,2.00,FALSE,PONUM000001,0DAC5007786DEA5A5EB02C0C56A68F87,,,,,,,,,,,,,XXXX1111,Visa,,,,,,,,,,,,,,,,,29366174', $authnet->directResponse);
+        $this->assertEquals('Ok', $response->messages->resultCode);
+        $this->assertTrue($response->isSuccessful());
+        $this->assertFalse($response->isError());
+        $this->assertEquals('I00001', $response->messages->message[0]->code);
+        $this->assertEquals('Successful.', $response->messages->message[0]->text);
+        $this->assertEquals('1,1,1,This transaction has been approved.,000000,P,2230582335,INV000001,description of transaction,10.95,CC,capture_only,12345,John,Smith,,123 Main Street,Townsville,NJ,12345,,800-555-1234,,user@example.com,John,Smith,,123 Main Street,Townsville,NJ,12345,,1.00,,2.00,FALSE,PONUM000001,0DAC5007786DEA5A5EB02C0C56A68F87,,,,,,,,,,,,,XXXX1111,Visa,,,,,,,,,,,,,,,,,29366174', $response->directResponse);
     }
 
 
@@ -590,7 +590,7 @@ class AuthnetJsonCimTest extends \PHPUnit_Framework_TestCase
      */
     public function testCreateCustomerProfileTransactionRequestPriorAuthCapture()
     {
-        $request = array(
+        $requestJson = array(
             'transaction' => array(
                 'profileTransPriorAuthCapture' => array(
                     'amount' => '10.95',
@@ -645,16 +645,16 @@ class AuthnetJsonCimTest extends \PHPUnit_Framework_TestCase
             ->method('process')
             ->will($this->returnValue($responseJson));
 
-        $authnet = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server);
-        $authnet->setProcessHandler($this->http);
-        $authnet->createCustomerProfileTransactionRequest($request);
+        $request = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server);
+        $request->setProcessHandler($this->http);
+        $response = $request->createCustomerProfileTransactionRequest($requestJson);
 
-        $this->assertEquals('Ok', $authnet->messages->resultCode);
-        $this->assertTrue($authnet->isSuccessful());
-        $this->assertFalse($authnet->isError());
-        $this->assertEquals('I00001', $authnet->messages->message[0]->code);
-        $this->assertEquals('Successful.', $authnet->messages->message[0]->text);
-        $this->assertEquals('1,1,1,This transaction has been approved.,S9WA0V,P,2230582347,INV000001,,10.95,CC,prior_auth_capture,12345,,,,,,,12345,,,,,,,,,,,,,1.00,,2.00,,,66E86622C893D1DBBC47D1B314CB57E2,,,,,,,,,,,,,XXXX1111,Visa,,,,,,,,,,,,,,,,,29366174', $authnet->directResponse);
+        $this->assertEquals('Ok', $response->messages->resultCode);
+        $this->assertTrue($response->isSuccessful());
+        $this->assertFalse($response->isError());
+        $this->assertEquals('I00001', $response->messages->message[0]->code);
+        $this->assertEquals('Successful.', $response->messages->message[0]->text);
+        $this->assertEquals('1,1,1,This transaction has been approved.,S9WA0V,P,2230582347,INV000001,,10.95,CC,prior_auth_capture,12345,,,,,,,12345,,,,,,,,,,,,,1.00,,2.00,,,66E86622C893D1DBBC47D1B314CB57E2,,,,,,,,,,,,,XXXX1111,Visa,,,,,,,,,,,,,,,,,29366174', $response->directResponse);
     }
 
 
@@ -665,7 +665,7 @@ class AuthnetJsonCimTest extends \PHPUnit_Framework_TestCase
      */
     public function testCreateCustomerProfileTransactionRequestPriorAuthCaptureError()
     {
-        $request = array (
+        $requestJson = array (
             'createCustomerProfileTransactionRequest' => array (
                 'merchantAuthentication' => array (
                     'name' => 'cnpdev4289',
@@ -726,15 +726,15 @@ class AuthnetJsonCimTest extends \PHPUnit_Framework_TestCase
             ->method('process')
             ->will($this->returnValue($responseJson));
 
-        $authnet = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server);
-        $authnet->setProcessHandler($this->http);
-        $authnet->createCustomerProfileTransactionRequest($request);
+        $request = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server);
+        $request->setProcessHandler($this->http);
+        $response = $request->createCustomerProfileTransactionRequest($requestJson);
 
-        $this->assertEquals('Error', $authnet->messages->resultCode);
-        $this->assertFalse($authnet->isSuccessful());
-        $this->assertTrue($authnet->isError());
-        $this->assertEquals('E00027', $authnet->messages->message[0]->code);
-        $this->assertEquals('The transaction cannot be found.', $authnet->messages->message[0]->text);
+        $this->assertEquals('Error', $response->messages->resultCode);
+        $this->assertFalse($response->isSuccessful());
+        $this->assertTrue($response->isError());
+        $this->assertEquals('E00027', $response->messages->message[0]->code);
+        $this->assertEquals('The transaction cannot be found.', $response->messages->message[0]->text);
     }
 
 
@@ -745,7 +745,7 @@ class AuthnetJsonCimTest extends \PHPUnit_Framework_TestCase
      */
     public function testCreateCustomerProfileTransactionRequestRefund()
     {
-        $request = array(
+        $requestJson = array(
             'transaction' => array(
                 'profileTransRefund' => array(
                     'amount' => '10.95',
@@ -806,16 +806,16 @@ class AuthnetJsonCimTest extends \PHPUnit_Framework_TestCase
             ->method('process')
             ->will($this->returnValue($responseJson));
 
-        $authnet = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server);
-        $authnet->setProcessHandler($this->http);
-        $authnet->createCustomerProfileTransactionRequest($request);
+        $request = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server);
+        $request->setProcessHandler($this->http);
+        $response = $request->createCustomerProfileTransactionRequest($requestJson);
 
-        $this->assertEquals('Ok', $authnet->messages->resultCode);
-        $this->assertTrue($authnet->isSuccessful());
-        $this->assertFalse($authnet->isError());
-        $this->assertEquals('I00001', $authnet->messages->message[0]->code);
-        $this->assertEquals('Successful.', $authnet->messages->message[0]->text);
-        $this->assertEquals('1,1,1,This transaction has been approved.,,P,2230582363,INV000001,description of transaction,10.95,CC,credit,12345,John,Smith,,123 Main Street,Townsville,NJ,12345,,800-555-1234,,user@example.com,John,Smith,,123 Main Street,Townsville,NJ,12345,,1.00,,2.00,,PONUM000001,5E1CD1DFC373ACF8F084F5D220945BA0,,,,,,,,,,,,,XXXX1111,Visa,,,,,,,,,,,,,,,,,29366174', $authnet->directResponse);
+        $this->assertEquals('Ok', $response->messages->resultCode);
+        $this->assertTrue($response->isSuccessful());
+        $this->assertFalse($response->isError());
+        $this->assertEquals('I00001', $response->messages->message[0]->code);
+        $this->assertEquals('Successful.', $response->messages->message[0]->text);
+        $this->assertEquals('1,1,1,This transaction has been approved.,,P,2230582363,INV000001,description of transaction,10.95,CC,credit,12345,John,Smith,,123 Main Street,Townsville,NJ,12345,,800-555-1234,,user@example.com,John,Smith,,123 Main Street,Townsville,NJ,12345,,1.00,,2.00,,PONUM000001,5E1CD1DFC373ACF8F084F5D220945BA0,,,,,,,,,,,,,XXXX1111,Visa,,,,,,,,,,,,,,,,,29366174', $response->directResponse);
     }
 
 
@@ -826,7 +826,7 @@ class AuthnetJsonCimTest extends \PHPUnit_Framework_TestCase
      */
     public function testCreateCustomerProfileTransactionRequestRefundError()
     {
-        $request = array (
+        $requestJson = array (
             'createCustomerProfileTransactionRequest' => array (
                 'merchantAuthentication' => array (
                     'name' => 'cnpdev4289',
@@ -893,15 +893,15 @@ class AuthnetJsonCimTest extends \PHPUnit_Framework_TestCase
             ->method('process')
             ->will($this->returnValue($responseJson));
 
-        $authnet = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server);
-        $authnet->setProcessHandler($this->http);
-        $authnet->createCustomerProfileTransactionRequest($request);
+        $request = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server);
+        $request->setProcessHandler($this->http);
+        $response = $request->createCustomerProfileTransactionRequest($requestJson);
 
-        $this->assertEquals('Error', $authnet->messages->resultCode);
-        $this->assertFalse($authnet->isSuccessful());
-        $this->assertTrue($authnet->isError());
-        $this->assertEquals('E00027', $authnet->messages->message[0]->code);
-        $this->assertEquals('The referenced transaction does not meet the criteria for issuing a credit.', $authnet->messages->message[0]->text);
+        $this->assertEquals('Error', $response->messages->resultCode);
+        $this->assertFalse($response->isSuccessful());
+        $this->assertTrue($response->isError());
+        $this->assertEquals('E00027', $response->messages->message[0]->code);
+        $this->assertEquals('The referenced transaction does not meet the criteria for issuing a credit.', $response->messages->message[0]->text);
     }
 
 
@@ -912,7 +912,7 @@ class AuthnetJsonCimTest extends \PHPUnit_Framework_TestCase
      */
     public function testCreateCustomerProfileTransactionRequestVoid()
     {
-        $request = array(
+        $requestJson = array(
             'transaction' => array(
                 'profileTransVoid' => array(
                     'customerProfileId' => '31390172',
@@ -940,16 +940,16 @@ class AuthnetJsonCimTest extends \PHPUnit_Framework_TestCase
             ->method('process')
             ->will($this->returnValue($responseJson));
 
-        $authnet = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server);
-        $authnet->setProcessHandler($this->http);
-        $authnet->createCustomerProfileTransactionRequest($request);
+        $request = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server);
+        $request->setProcessHandler($this->http);
+        $response = $request->createCustomerProfileTransactionRequest($requestJson);
 
-        $this->assertEquals('Ok', $authnet->messages->resultCode);
-        $this->assertTrue($authnet->isSuccessful());
-        $this->assertFalse($authnet->isError());
-        $this->assertEquals('I00001', $authnet->messages->message[0]->code);
-        $this->assertEquals('Successful.', $authnet->messages->message[0]->text);
-        $this->assertEquals('1,1,1,This transaction has been approved.,OWW0UU,P,2230582868,INV000001,,0.00,CC,void,12345,,,,,,,12345,,,,,,,,,,,,,,,,,,0C7394DFC38A5BDC5737A354CE67B421,,,,,,,,,,,,,XXXX1111,Visa,,,,,,,,,,,,,,,,,29366174', $authnet->directResponse);
+        $this->assertEquals('Ok', $response->messages->resultCode);
+        $this->assertTrue($response->isSuccessful());
+        $this->assertFalse($response->isError());
+        $this->assertEquals('I00001', $response->messages->message[0]->code);
+        $this->assertEquals('Successful.', $response->messages->message[0]->text);
+        $this->assertEquals('1,1,1,This transaction has been approved.,OWW0UU,P,2230582868,INV000001,,0.00,CC,void,12345,,,,,,,12345,,,,,,,,,,,,,,,,,,0C7394DFC38A5BDC5737A354CE67B421,,,,,,,,,,,,,XXXX1111,Visa,,,,,,,,,,,,,,,,,29366174', $response->directResponse);
     }
 
 
@@ -960,7 +960,7 @@ class AuthnetJsonCimTest extends \PHPUnit_Framework_TestCase
      */
     public function testCreateCustomerShippingAddressRequest()
     {
-        $request = array(
+        $requestJson = array(
             'customerProfileId' => '31390172',
             'address' => array(
                 'firstName' => 'John',
@@ -992,16 +992,16 @@ class AuthnetJsonCimTest extends \PHPUnit_Framework_TestCase
             ->method('process')
             ->will($this->returnValue($responseJson));
 
-        $authnet = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server);
-        $authnet->setProcessHandler($this->http);
-        $authnet->createCustomerShippingAddressRequest($request);
+        $request = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server);
+        $request->setProcessHandler($this->http);
+        $response = $request->createCustomerShippingAddressRequest($requestJson);
 
-        $this->assertEquals('Ok', $authnet->messages->resultCode);
-        $this->assertTrue($authnet->isSuccessful());
-        $this->assertFalse($authnet->isError());
-        $this->assertEquals('I00001', $authnet->messages->message[0]->code);
-        $this->assertEquals('Successful.', $authnet->messages->message[0]->text);
-        $this->assertEquals('29870028', $authnet->customerAddressId);
+        $this->assertEquals('Ok', $response->messages->resultCode);
+        $this->assertTrue($response->isSuccessful());
+        $this->assertFalse($response->isError());
+        $this->assertEquals('I00001', $response->messages->message[0]->code);
+        $this->assertEquals('Successful.', $response->messages->message[0]->text);
+        $this->assertEquals('29870028', $response->customerAddressId);
     }
 
 
@@ -1012,7 +1012,7 @@ class AuthnetJsonCimTest extends \PHPUnit_Framework_TestCase
      */
     public function testUpdateCustomerProfileRequest()
     {
-        $request = array(
+        $requestJson = array(
             'profile' => array(
                 'merchantCustomerId' => '12345',
                 'description' => 'some description',
@@ -1036,15 +1036,15 @@ class AuthnetJsonCimTest extends \PHPUnit_Framework_TestCase
             ->method('process')
             ->will($this->returnValue($responseJson));
 
-        $authnet = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server);
-        $authnet->setProcessHandler($this->http);
-        $authnet->updateCustomerProfileRequest($request);
+        $request = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server);
+        $request->setProcessHandler($this->http);
+        $response = $request->updateCustomerProfileRequest($requestJson);
 
-        $this->assertEquals('Ok', $authnet->messages->resultCode);
-        $this->assertTrue($authnet->isSuccessful());
-        $this->assertFalse($authnet->isError());
-        $this->assertEquals('I00001', $authnet->messages->message[0]->code);
-        $this->assertEquals('Successful.', $authnet->messages->message[0]->text);
+        $this->assertEquals('Ok', $response->messages->resultCode);
+        $this->assertTrue($response->isSuccessful());
+        $this->assertFalse($response->isError());
+        $this->assertEquals('I00001', $response->messages->message[0]->code);
+        $this->assertEquals('Successful.', $response->messages->message[0]->text);
     }
 
 
@@ -1055,7 +1055,7 @@ class AuthnetJsonCimTest extends \PHPUnit_Framework_TestCase
      */
     public function testUpdateCustomerProfileRequestError()
     {
-        $request = array (
+        $requestJson = array (
             'updateCustomerPaymentProfileRequest' => array (
                 'merchantAuthentication' => array (
                     'name' => 'cnpdev4289',
@@ -1101,15 +1101,15 @@ class AuthnetJsonCimTest extends \PHPUnit_Framework_TestCase
             ->method('process')
             ->will($this->returnValue($responseJson));
 
-        $authnet = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server);
-        $authnet->setProcessHandler($this->http);
-        $authnet->updateCustomerProfileRequest($request);
+        $request = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server);
+        $request->setProcessHandler($this->http);
+        $response = $request->updateCustomerProfileRequest($requestJson);
 
-        $this->assertEquals('Error', $authnet->messages->resultCode);
-        $this->assertFalse($authnet->isSuccessful());
-        $this->assertTrue($authnet->isError());
-        $this->assertEquals('E00040', $authnet->messages->message[0]->code);
-        $this->assertEquals('The record cannot be found.', $authnet->messages->message[0]->text);
+        $this->assertEquals('Error', $response->messages->resultCode);
+        $this->assertFalse($response->isSuccessful());
+        $this->assertTrue($response->isError());
+        $this->assertEquals('E00040', $response->messages->message[0]->code);
+        $this->assertEquals('The record cannot be found.', $response->messages->message[0]->text);
     }
 
 
@@ -1120,7 +1120,7 @@ class AuthnetJsonCimTest extends \PHPUnit_Framework_TestCase
      */
     public function testUpdateCustomerPaymentProfileRequest()
     {
-        $request = array(
+        $requestJson = array(
             'customerProfileId' => '31390172',
             'paymentProfile' => array(
                 'billTo' => array(
@@ -1160,15 +1160,15 @@ class AuthnetJsonCimTest extends \PHPUnit_Framework_TestCase
             ->method('process')
             ->will($this->returnValue($responseJson));
 
-        $authnet = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server);
-        $authnet->setProcessHandler($this->http);
-        $authnet->updateCustomerPaymentProfileRequest($request);
+        $request = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server);
+        $request->setProcessHandler($this->http);
+        $response = $request->updateCustomerPaymentProfileRequest($requestJson);
 
-        $this->assertEquals('Ok', $authnet->messages->resultCode);
-        $this->assertTrue($authnet->isSuccessful());
-        $this->assertFalse($authnet->isError());
-        $this->assertEquals('I00001', $authnet->messages->message[0]->code);
-        $this->assertEquals('Successful.', $authnet->messages->message[0]->text);
+        $this->assertEquals('Ok', $response->messages->resultCode);
+        $this->assertTrue($response->isSuccessful());
+        $this->assertFalse($response->isError());
+        $this->assertEquals('I00001', $response->messages->message[0]->code);
+        $this->assertEquals('Successful.', $response->messages->message[0]->text);
     }
 
 
@@ -1179,7 +1179,7 @@ class AuthnetJsonCimTest extends \PHPUnit_Framework_TestCase
      */
     public function testUpdateCustomerShippingAddressRequest()
     {
-        $request = array(
+        $requestJson = array(
             'customerProfileId' => '31390172',
             'address' => array(
                 'firstName' => 'John',
@@ -1211,15 +1211,15 @@ class AuthnetJsonCimTest extends \PHPUnit_Framework_TestCase
             ->method('process')
             ->will($this->returnValue($responseJson));
 
-        $authnet = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server);
-        $authnet->setProcessHandler($this->http);
-        $authnet->updateCustomerShippingAddressRequest($request);
+        $request = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server);
+        $request->setProcessHandler($this->http);
+        $response = $request->updateCustomerShippingAddressRequest($requestJson);
 
-        $this->assertEquals('Ok', $authnet->messages->resultCode);
-        $this->assertTrue($authnet->isSuccessful());
-        $this->assertFalse($authnet->isError());
-        $this->assertEquals('I00001', $authnet->messages->message[0]->code);
-        $this->assertEquals('Successful.', $authnet->messages->message[0]->text);
+        $this->assertEquals('Ok', $response->messages->resultCode);
+        $this->assertTrue($response->isSuccessful());
+        $this->assertFalse($response->isError());
+        $this->assertEquals('I00001', $response->messages->message[0]->code);
+        $this->assertEquals('Successful.', $response->messages->message[0]->text);
     }
 
 
@@ -1230,7 +1230,7 @@ class AuthnetJsonCimTest extends \PHPUnit_Framework_TestCase
      */
     public function testUpdateCustomerShippingAddressRequestError()
     {
-        $request = array (
+        $requestJson = array (
             'updateCustomerShippingAddressRequest' => array (
                 'merchantAuthentication' => array (
                     'name' => 'cnpdev4289',
@@ -1268,15 +1268,15 @@ class AuthnetJsonCimTest extends \PHPUnit_Framework_TestCase
             ->method('process')
             ->will($this->returnValue($responseJson));
 
-        $authnet = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server);
-        $authnet->setProcessHandler($this->http);
-        $authnet->updateCustomerShippingAddressRequest($request);
+        $request = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server);
+        $request->setProcessHandler($this->http);
+        $response = $request->updateCustomerShippingAddressRequest($requestJson);
 
-        $this->assertEquals('Error', $authnet->messages->resultCode);
-        $this->assertFalse($authnet->isSuccessful());
-        $this->assertTrue($authnet->isError());
-        $this->assertEquals('E00040', $authnet->messages->message[0]->code);
-        $this->assertEquals('Cannot find the specified shipping address.', $authnet->messages->message[0]->text);
+        $this->assertEquals('Error', $response->messages->resultCode);
+        $this->assertFalse($response->isSuccessful());
+        $this->assertTrue($response->isError());
+        $this->assertEquals('E00040', $response->messages->message[0]->code);
+        $this->assertEquals('Cannot find the specified shipping address.', $response->messages->message[0]->text);
     }
 
 
@@ -1300,7 +1300,7 @@ class AuthnetJsonCimTest extends \PHPUnit_Framework_TestCase
      */
     public function testUpdateSplitTenderGroupRequestError()
     {
-        $request = array (
+        $requestJson = array (
             'updateSplitTenderGroupRequest' => array (
                 'merchantAuthentication' => array (
                     'name' => 'cnpdev4289',
@@ -1326,15 +1326,15 @@ class AuthnetJsonCimTest extends \PHPUnit_Framework_TestCase
             ->method('process')
             ->will($this->returnValue($responseJson));
 
-        $authnet = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server);
-        $authnet->setProcessHandler($this->http);
-        $authnet->updateSplitTenderGroupRequest($request);
+        $request = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server);
+        $request->setProcessHandler($this->http);
+        $response = $request->updateSplitTenderGroupRequest($requestJson);
 
-        $this->assertEquals('Error', $authnet->messages->resultCode);
-        $this->assertFalse($authnet->isSuccessful());
-        $this->assertTrue($authnet->isError());
-        $this->assertEquals('E00027', $authnet->messages->message[0]->code);
-        $this->assertEquals('The specified SplitTenderID is invalid.', $authnet->messages->message[0]->text);
+        $this->assertEquals('Error', $response->messages->resultCode);
+        $this->assertFalse($response->isSuccessful());
+        $this->assertTrue($response->isError());
+        $this->assertEquals('E00027', $response->messages->message[0]->code);
+        $this->assertEquals('The specified SplitTenderID is invalid.', $response->messages->message[0]->text);
     }
 
 
@@ -1345,7 +1345,7 @@ class AuthnetJsonCimTest extends \PHPUnit_Framework_TestCase
      */
     public function testDeleteCustomerProfileRequest()
     {
-        $request = array(
+        $requestJson = array(
             'customerProfileId' => '31390172'
         );
         $responseJson = '{
@@ -1364,15 +1364,15 @@ class AuthnetJsonCimTest extends \PHPUnit_Framework_TestCase
             ->method('process')
             ->will($this->returnValue($responseJson));
 
-        $authnet = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server);
-        $authnet->setProcessHandler($this->http);
-        $authnet->deleteCustomerProfileRequest($request);
+        $request = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server);
+        $request->setProcessHandler($this->http);
+        $response = $request->deleteCustomerProfileRequest($requestJson);
 
-        $this->assertEquals('Ok', $authnet->messages->resultCode);
-        $this->assertTrue($authnet->isSuccessful());
-        $this->assertFalse($authnet->isError());
-        $this->assertEquals('I00001', $authnet->messages->message[0]->code);
-        $this->assertEquals('Successful.', $authnet->messages->message[0]->text);
+        $this->assertEquals('Ok', $response->messages->resultCode);
+        $this->assertTrue($response->isSuccessful());
+        $this->assertFalse($response->isError());
+        $this->assertEquals('I00001', $response->messages->message[0]->code);
+        $this->assertEquals('Successful.', $response->messages->message[0]->text);
     }
 
 
@@ -1383,7 +1383,7 @@ class AuthnetJsonCimTest extends \PHPUnit_Framework_TestCase
      */
     public function testDeleteCustomerProfileRequestError()
     {
-        $request = array (
+        $requestJson = array (
             'deleteCustomerProfileRequest' => array (
                 'merchantAuthentication' => array (
                     'name' => 'cnpdev4289',
@@ -1408,15 +1408,15 @@ class AuthnetJsonCimTest extends \PHPUnit_Framework_TestCase
             ->method('process')
             ->will($this->returnValue($responseJson));
 
-        $authnet = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server);
-        $authnet->setProcessHandler($this->http);
-        $authnet->deleteCustomerProfileRequest($request);
+        $request = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server);
+        $request->setProcessHandler($this->http);
+        $response = $request->deleteCustomerProfileRequest($requestJson);
 
-        $this->assertEquals('Error', $authnet->messages->resultCode);
-        $this->assertFalse($authnet->isSuccessful());
-        $this->assertTrue($authnet->isError());
-        $this->assertEquals('E00040', $authnet->messages->message[0]->code);
-        $this->assertEquals('The record cannot be found.', $authnet->messages->message[0]->text);
+        $this->assertEquals('Error', $response->messages->resultCode);
+        $this->assertFalse($response->isSuccessful());
+        $this->assertTrue($response->isError());
+        $this->assertEquals('E00040', $response->messages->message[0]->code);
+        $this->assertEquals('The record cannot be found.', $response->messages->message[0]->text);
     }
 
 
@@ -1427,7 +1427,7 @@ class AuthnetJsonCimTest extends \PHPUnit_Framework_TestCase
      */
     public function testDeleteCustomerPaymentProfileRequest()
     {
-        $request = array(
+        $requestJson = array(
             'customerProfileId' => '31390172',
             'customerPaymentProfileId' => '28393490'
         );
@@ -1447,15 +1447,15 @@ class AuthnetJsonCimTest extends \PHPUnit_Framework_TestCase
             ->method('process')
             ->will($this->returnValue($responseJson));
 
-        $authnet = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server);
-        $authnet->setProcessHandler($this->http);
-        $authnet->deleteCustomerPaymentProfileRequest($request);
+        $request = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server);
+        $request->setProcessHandler($this->http);
+        $response = $request->deleteCustomerPaymentProfileRequest($requestJson);
 
-        $this->assertEquals('Ok', $authnet->messages->resultCode);
-        $this->assertTrue($authnet->isSuccessful());
-        $this->assertFalse($authnet->isError());
-        $this->assertEquals('I00001', $authnet->messages->message[0]->code);
-        $this->assertEquals('Successful.', $authnet->messages->message[0]->text);
+        $this->assertEquals('Ok', $response->messages->resultCode);
+        $this->assertTrue($response->isSuccessful());
+        $this->assertFalse($response->isError());
+        $this->assertEquals('I00001', $response->messages->message[0]->code);
+        $this->assertEquals('Successful.', $response->messages->message[0]->text);
     }
 
 
@@ -1466,7 +1466,7 @@ class AuthnetJsonCimTest extends \PHPUnit_Framework_TestCase
      */
     public function testDeleteCustomerShippingAddressRequest()
     {
-        $request = array(
+        $requestJson = array(
             'customerProfileId' => '31390172',
             'customerAddressId' => '29366174'
         );
@@ -1486,15 +1486,15 @@ class AuthnetJsonCimTest extends \PHPUnit_Framework_TestCase
             ->method('process')
             ->will($this->returnValue($responseJson));
 
-        $authnet = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server);
-        $authnet->setProcessHandler($this->http);
-        $authnet->deleteCustomerShippingAddressRequest($request);
+        $request = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server);
+        $request->setProcessHandler($this->http);
+        $response = $request->deleteCustomerShippingAddressRequest($requestJson);
 
-        $this->assertEquals('Ok', $authnet->messages->resultCode);
-        $this->assertTrue($authnet->isSuccessful());
-        $this->assertFalse($authnet->isError());
-        $this->assertEquals('I00001', $authnet->messages->message[0]->code);
-        $this->assertEquals('Successful.', $authnet->messages->message[0]->text);
+        $this->assertEquals('Ok', $response->messages->resultCode);
+        $this->assertTrue($response->isSuccessful());
+        $this->assertFalse($response->isError());
+        $this->assertEquals('I00001', $response->messages->message[0]->code);
+        $this->assertEquals('Successful.', $response->messages->message[0]->text);
     }
 
 
@@ -1505,7 +1505,7 @@ class AuthnetJsonCimTest extends \PHPUnit_Framework_TestCase
      */
     public function testValidateCustomerPaymentProfileRequest()
     {
-        $request = array(
+        $requestJson = array(
             'customerProfileId' => '31390172',
             'customerPaymentProfileId' => '28393490',
             'customerShippingAddressId' => '29366174',
@@ -1528,16 +1528,16 @@ class AuthnetJsonCimTest extends \PHPUnit_Framework_TestCase
             ->method('process')
             ->will($this->returnValue($responseJson));
 
-        $authnet = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server);
-        $authnet->setProcessHandler($this->http);
-        $authnet->validateCustomerPaymentProfileRequest($request);
+        $request = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server);
+        $request->setProcessHandler($this->http);
+        $response = $request->validateCustomerPaymentProfileRequest($requestJson);
 
-        $this->assertEquals('Ok', $authnet->messages->resultCode);
-        $this->assertTrue($authnet->isSuccessful());
-        $this->assertFalse($authnet->isError());
-        $this->assertEquals('I00001', $authnet->messages->message[0]->code);
-        $this->assertEquals('Successful.', $authnet->messages->message[0]->text);
-        $this->assertEquals('1,1,1,This transaction has been approved.,5Q8DGW,Y,2230582939,none,Test transaction for ValidateCustomerPaymentProfile.,0.00,CC,auth_only,12345,John,Smith,,123 Main Street,Townsville,NJ,12345,,800-555-1234,,user@example.com,John,Smith,,123 Main Street,Townsville,NJ,12345,,0.00,0.00,0.00,FALSE,none,6160655F3F4DF72144DCE15C0AEE15B1,,2,,,,,,,,,,,XXXX1111,Visa,,,,,,,,,,,,,,,,,29366174', $authnet->directResponse);
+        $this->assertEquals('Ok', $response->messages->resultCode);
+        $this->assertTrue($response->isSuccessful());
+        $this->assertFalse($response->isError());
+        $this->assertEquals('I00001', $response->messages->message[0]->code);
+        $this->assertEquals('Successful.', $response->messages->message[0]->text);
+        $this->assertEquals('1,1,1,This transaction has been approved.,5Q8DGW,Y,2230582939,none,Test transaction for ValidateCustomerPaymentProfile.,0.00,CC,auth_only,12345,John,Smith,,123 Main Street,Townsville,NJ,12345,,800-555-1234,,user@example.com,John,Smith,,123 Main Street,Townsville,NJ,12345,,0.00,0.00,0.00,FALSE,none,6160655F3F4DF72144DCE15C0AEE15B1,,2,,,,,,,,,,,XXXX1111,Visa,,,,,,,,,,,,,,,,,29366174', $response->directResponse);
     }
 
 
@@ -1548,7 +1548,7 @@ class AuthnetJsonCimTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetCustomerPaymentProfileRequest()
     {
-        $request = array(
+        $requestJson = array(
             'customerProfileId' => '31390172',
             'customerPaymentProfileId' => '28393490'
         );
@@ -1587,26 +1587,26 @@ class AuthnetJsonCimTest extends \PHPUnit_Framework_TestCase
             ->method('process')
             ->will($this->returnValue($responseJson));
 
-        $authnet = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server);
-        $authnet->setProcessHandler($this->http);
-        $authnet->getCustomerPaymentProfileRequest($request);
+        $request = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server);
+        $request->setProcessHandler($this->http);
+        $response = $request->getCustomerPaymentProfileRequest($requestJson);
 
-        $this->assertEquals('Ok', $authnet->messages->resultCode);
-        $this->assertTrue($authnet->isSuccessful());
-        $this->assertFalse($authnet->isError());
-        $this->assertEquals('I00001', $authnet->messages->message[0]->code);
-        $this->assertEquals('Successful.', $authnet->messages->message[0]->text);
-        $this->assertEquals('28393490', $authnet->paymentProfile->customerPaymentProfileId);
-        $this->assertEquals('XXXX1111', $authnet->paymentProfile->payment->creditCard->cardNumber);
-        $this->assertEquals('XXXX', $authnet->paymentProfile->payment->creditCard->expirationDate);
-        $this->assertFalse($authnet->paymentProfile->customerTypeSpecified);
-        $this->assertEquals('800-555-1234', $authnet->paymentProfile->billTo->phoneNumber);
-        $this->assertEquals('John', $authnet->paymentProfile->billTo->firstName);
-        $this->assertEquals('Smith', $authnet->paymentProfile->billTo->lastName);
-        $this->assertEquals('123 Main Street', $authnet->paymentProfile->billTo->address);
-        $this->assertEquals('Townsville', $authnet->paymentProfile->billTo->city);
-        $this->assertEquals('NJ', $authnet->paymentProfile->billTo->state);
-        $this->assertEquals('12345', $authnet->paymentProfile->billTo->zip);
+        $this->assertEquals('Ok', $response->messages->resultCode);
+        $this->assertTrue($response->isSuccessful());
+        $this->assertFalse($response->isError());
+        $this->assertEquals('I00001', $response->messages->message[0]->code);
+        $this->assertEquals('Successful.', $response->messages->message[0]->text);
+        $this->assertEquals('28393490', $response->paymentProfile->customerPaymentProfileId);
+        $this->assertEquals('XXXX1111', $response->paymentProfile->payment->creditCard->cardNumber);
+        $this->assertEquals('XXXX', $response->paymentProfile->payment->creditCard->expirationDate);
+        $this->assertFalse($response->paymentProfile->customerTypeSpecified);
+        $this->assertEquals('800-555-1234', $response->paymentProfile->billTo->phoneNumber);
+        $this->assertEquals('John', $response->paymentProfile->billTo->firstName);
+        $this->assertEquals('Smith', $response->paymentProfile->billTo->lastName);
+        $this->assertEquals('123 Main Street', $response->paymentProfile->billTo->address);
+        $this->assertEquals('Townsville', $response->paymentProfile->billTo->city);
+        $this->assertEquals('NJ', $response->paymentProfile->billTo->state);
+        $this->assertEquals('12345', $response->paymentProfile->billTo->zip);
     }
 
 
@@ -1721,17 +1721,17 @@ class AuthnetJsonCimTest extends \PHPUnit_Framework_TestCase
             ->method('process')
             ->will($this->returnValue($responseJson));
 
-        $authnet = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server);
-        $authnet->setProcessHandler($this->http);
-        $authnet->getCustomerProfileIdsRequest();
+        $request = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server);
+        $request->setProcessHandler($this->http);
+        $response = $request->getCustomerProfileIdsRequest();
 
-        $this->assertEquals('Ok', $authnet->messages->resultCode);
-        $this->assertTrue($authnet->isSuccessful());
-        $this->assertFalse($authnet->isError());
-        $this->assertEquals('I00001', $authnet->messages->message[0]->code);
-        $this->assertEquals('Successful.', $authnet->messages->message[0]->text);
-        $this->assertTrue(is_array($authnet->ids));
-        $this->assertEquals('20320494', $authnet->ids[0]);
+        $this->assertEquals('Ok', $response->messages->resultCode);
+        $this->assertTrue($response->isSuccessful());
+        $this->assertFalse($response->isError());
+        $this->assertEquals('I00001', $response->messages->message[0]->code);
+        $this->assertEquals('Successful.', $response->messages->message[0]->text);
+        $this->assertTrue(is_array($response->ids));
+        $this->assertEquals('20320494', $response->ids[0]);
     }
 
 
@@ -1742,7 +1742,7 @@ class AuthnetJsonCimTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetCustomerProfileRequest()
     {
-        $request = array(
+        $requestJson = array(
             'customerProfileId' => '31390172'
         );
         $responseJson = '{
@@ -1812,48 +1812,48 @@ class AuthnetJsonCimTest extends \PHPUnit_Framework_TestCase
             ->method('process')
             ->will($this->returnValue($responseJson));
 
-        $authnet = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server);
-        $authnet->setProcessHandler($this->http);
-        $authnet->getCustomerProfileRequest($request);
+        $request = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server);
+        $request->setProcessHandler($this->http);
+        $response = $request->getCustomerProfileRequest($requestJson);
 
-        $this->assertEquals('Ok', $authnet->messages->resultCode);
-        $this->assertTrue($authnet->isSuccessful());
-        $this->assertFalse($authnet->isError());
-        $this->assertEquals('I00001', $authnet->messages->message[0]->code);
-        $this->assertEquals('Successful.', $authnet->messages->message[0]->text);
-        $this->assertEquals('28393490', $authnet->profile->paymentProfiles[0]->customerPaymentProfileId);
-        $this->assertEquals('XXXX1111', $authnet->profile->paymentProfiles[0]->payment->creditCard->cardNumber);
-        $this->assertEquals('XXXX', $authnet->profile->paymentProfiles[0]->payment->creditCard->expirationDate);
-        $this->assertFalse($authnet->profile->paymentProfiles[0]->customerTypeSpecified);
-        $this->assertEquals('800-555-1234', $authnet->profile->paymentProfiles[0]->billTo->phoneNumber);
-        $this->assertEquals('John', $authnet->profile->paymentProfiles[0]->billTo->firstName);
-        $this->assertEquals('Smith', $authnet->profile->paymentProfiles[0]->billTo->lastName);
-        $this->assertEquals('123 Main Street', $authnet->profile->paymentProfiles[0]->billTo->address);
-        $this->assertEquals('Townsville', $authnet->profile->paymentProfiles[0]->billTo->city);
-        $this->assertEquals('NJ', $authnet->profile->paymentProfiles[0]->billTo->state);
-        $this->assertEquals('12345', $authnet->profile->paymentProfiles[0]->billTo->zip);
-        $this->assertEquals('29366174', $authnet->profile->shipToList[0]->customerAddressId);
-        $this->assertEquals('800-555-1234', $authnet->profile->shipToList[0]->phoneNumber);
-        $this->assertEquals('John', $authnet->profile->shipToList[0]->firstName);
-        $this->assertEquals('Smith', $authnet->profile->shipToList[0]->lastName);
-        $this->assertEquals('123 Main Street', $authnet->profile->shipToList[0]->address);
-        $this->assertEquals('Townsville', $authnet->profile->shipToList[0]->city);
-        $this->assertEquals('NJ', $authnet->profile->shipToList[0]->state);
-        $this->assertEquals('12345', $authnet->profile->shipToList[0]->zip);
-        $this->assertEquals('29870028', $authnet->profile->shipToList[1]->customerAddressId);
-        $this->assertEquals('800-555-1234', $authnet->profile->shipToList[1]->phoneNumber);
-        $this->assertEquals('800-555-1234', $authnet->profile->shipToList[1]->faxNumber);
-        $this->assertEquals('John', $authnet->profile->shipToList[1]->firstName);
-        $this->assertEquals('Doe', $authnet->profile->shipToList[1]->lastName);
-        $this->assertEquals('', $authnet->profile->shipToList[1]->company);
-        $this->assertEquals('123 Main St.', $authnet->profile->shipToList[1]->address);
-        $this->assertEquals('Bellevue', $authnet->profile->shipToList[1]->city);
-        $this->assertEquals('WA', $authnet->profile->shipToList[1]->state);
-        $this->assertEquals('98004', $authnet->profile->shipToList[1]->zip);
-        $this->assertEquals('USA', $authnet->profile->shipToList[1]->country);
-        $this->assertEquals('31390172', $authnet->profile->customerProfileId);
-        $this->assertEquals('12345', $authnet->profile->merchantCustomerId);
-        $this->assertEquals('user@example.com', $authnet->profile->email);
+        $this->assertEquals('Ok', $response->messages->resultCode);
+        $this->assertTrue($response->isSuccessful());
+        $this->assertFalse($response->isError());
+        $this->assertEquals('I00001', $response->messages->message[0]->code);
+        $this->assertEquals('Successful.', $response->messages->message[0]->text);
+        $this->assertEquals('28393490', $response->profile->paymentProfiles[0]->customerPaymentProfileId);
+        $this->assertEquals('XXXX1111', $response->profile->paymentProfiles[0]->payment->creditCard->cardNumber);
+        $this->assertEquals('XXXX', $response->profile->paymentProfiles[0]->payment->creditCard->expirationDate);
+        $this->assertFalse($response->profile->paymentProfiles[0]->customerTypeSpecified);
+        $this->assertEquals('800-555-1234', $response->profile->paymentProfiles[0]->billTo->phoneNumber);
+        $this->assertEquals('John', $response->profile->paymentProfiles[0]->billTo->firstName);
+        $this->assertEquals('Smith', $response->profile->paymentProfiles[0]->billTo->lastName);
+        $this->assertEquals('123 Main Street', $response->profile->paymentProfiles[0]->billTo->address);
+        $this->assertEquals('Townsville', $response->profile->paymentProfiles[0]->billTo->city);
+        $this->assertEquals('NJ', $response->profile->paymentProfiles[0]->billTo->state);
+        $this->assertEquals('12345', $response->profile->paymentProfiles[0]->billTo->zip);
+        $this->assertEquals('29366174', $response->profile->shipToList[0]->customerAddressId);
+        $this->assertEquals('800-555-1234', $response->profile->shipToList[0]->phoneNumber);
+        $this->assertEquals('John', $response->profile->shipToList[0]->firstName);
+        $this->assertEquals('Smith', $response->profile->shipToList[0]->lastName);
+        $this->assertEquals('123 Main Street', $response->profile->shipToList[0]->address);
+        $this->assertEquals('Townsville', $response->profile->shipToList[0]->city);
+        $this->assertEquals('NJ', $response->profile->shipToList[0]->state);
+        $this->assertEquals('12345', $response->profile->shipToList[0]->zip);
+        $this->assertEquals('29870028', $response->profile->shipToList[1]->customerAddressId);
+        $this->assertEquals('800-555-1234', $response->profile->shipToList[1]->phoneNumber);
+        $this->assertEquals('800-555-1234', $response->profile->shipToList[1]->faxNumber);
+        $this->assertEquals('John', $response->profile->shipToList[1]->firstName);
+        $this->assertEquals('Doe', $response->profile->shipToList[1]->lastName);
+        $this->assertEquals('', $response->profile->shipToList[1]->company);
+        $this->assertEquals('123 Main St.', $response->profile->shipToList[1]->address);
+        $this->assertEquals('Bellevue', $response->profile->shipToList[1]->city);
+        $this->assertEquals('WA', $response->profile->shipToList[1]->state);
+        $this->assertEquals('98004', $response->profile->shipToList[1]->zip);
+        $this->assertEquals('USA', $response->profile->shipToList[1]->country);
+        $this->assertEquals('31390172', $response->profile->customerProfileId);
+        $this->assertEquals('12345', $response->profile->merchantCustomerId);
+        $this->assertEquals('user@example.com', $response->profile->email);
     }
 
 
@@ -1864,7 +1864,7 @@ class AuthnetJsonCimTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetCustomerShippingAddressRequest()
     {
-        $request = array(
+        $requestJson = array(
             'customerProfileId' => '31390172',
             'customerAddressId' => '29366174'
         );
@@ -1894,23 +1894,23 @@ class AuthnetJsonCimTest extends \PHPUnit_Framework_TestCase
             ->method('process')
             ->will($this->returnValue($responseJson));
 
-        $authnet = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server);
-        $authnet->setProcessHandler($this->http);
-        $authnet->getCustomerShippingAddressRequest($request);
+        $request = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server);
+        $request->setProcessHandler($this->http);
+        $response = $request->getCustomerShippingAddressRequest($requestJson);
 
-        $this->assertEquals('Ok', $authnet->messages->resultCode);
-        $this->assertTrue($authnet->isSuccessful());
-        $this->assertFalse($authnet->isError());
-        $this->assertEquals('I00001', $authnet->messages->message[0]->code);
-        $this->assertEquals('Successful.', $authnet->messages->message[0]->text);
-        $this->assertEquals('29366174', $authnet->address->customerAddressId);
-        $this->assertEquals('800-555-1234', $authnet->address->phoneNumber);
-        $this->assertEquals('John', $authnet->address->firstName);
-        $this->assertEquals('Smith', $authnet->address->lastName);
-        $this->assertEquals('123 Main Street', $authnet->address->address);
-        $this->assertEquals('Townsville', $authnet->address->city);
-        $this->assertEquals('NJ', $authnet->address->state);
-        $this->assertEquals('12345', $authnet->address->zip);
+        $this->assertEquals('Ok', $response->messages->resultCode);
+        $this->assertTrue($response->isSuccessful());
+        $this->assertFalse($response->isError());
+        $this->assertEquals('I00001', $response->messages->message[0]->code);
+        $this->assertEquals('Successful.', $response->messages->message[0]->text);
+        $this->assertEquals('29366174', $response->address->customerAddressId);
+        $this->assertEquals('800-555-1234', $response->address->phoneNumber);
+        $this->assertEquals('John', $response->address->firstName);
+        $this->assertEquals('Smith', $response->address->lastName);
+        $this->assertEquals('123 Main Street', $response->address->address);
+        $this->assertEquals('Townsville', $response->address->city);
+        $this->assertEquals('NJ', $response->address->state);
+        $this->assertEquals('12345', $response->address->zip);
     }
 
 
@@ -1921,7 +1921,7 @@ class AuthnetJsonCimTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetHostedProfilePageRequest()
     {
-        $request = array(
+        $requestJson = array(
             'customerProfileId' => '31390172',
             'hostedProfileSettings' => array(
                 'setting' => array(
@@ -1955,15 +1955,15 @@ class AuthnetJsonCimTest extends \PHPUnit_Framework_TestCase
             ->method('process')
             ->will($this->returnValue($responseJson));
 
-        $authnet = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server);
-        $authnet->setProcessHandler($this->http);
-        $authnet->getHostedProfilePageRequest($request);
+        $request = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server);
+        $request->setProcessHandler($this->http);
+        $response = $request->getHostedProfilePageRequest($requestJson);
 
-        $this->assertEquals('Ok', $authnet->messages->resultCode);
-        $this->assertTrue($authnet->isSuccessful());
-        $this->assertFalse($authnet->isError());
-        $this->assertEquals('I00001', $authnet->messages->message[0]->code);
-        $this->assertEquals('Successful.', $authnet->messages->message[0]->text);
-        $this->assertEquals('Mvwo9mTx2vS332eCFY3rFzh/x1x64henm7rppLYQxd2cOzNpw+bfp1ZTVKvu98XSIvL9VIEB65mCFtzchN/pFKBdBA0daBukS27pWYxZuo6QpBUpz2p6zLENX8qH9wCcAw6EJr0MZkNttPW6b+Iw9eKfcBtJayq6kdNm9m1ywANHsg9xME4qUccBXnY2cCf3kLaaLNJhhiNxJmcboKNlDn5HtIQ/wcRnxB4YbqddTN8=', $authnet->token);
+        $this->assertEquals('Ok', $response->messages->resultCode);
+        $this->assertTrue($response->isSuccessful());
+        $this->assertFalse($response->isError());
+        $this->assertEquals('I00001', $response->messages->message[0]->code);
+        $this->assertEquals('Successful.', $response->messages->message[0]->text);
+        $this->assertEquals('Mvwo9mTx2vS332eCFY3rFzh/x1x64henm7rppLYQxd2cOzNpw+bfp1ZTVKvu98XSIvL9VIEB65mCFtzchN/pFKBdBA0daBukS27pWYxZuo6QpBUpz2p6zLENX8qH9wCcAw6EJr0MZkNttPW6b+Iw9eKfcBtJayq6kdNm9m1ywANHsg9xME4qUccBXnY2cCf3kLaaLNJhhiNxJmcboKNlDn5HtIQ/wcRnxB4YbqddTN8=', $response->token);
     }
 }

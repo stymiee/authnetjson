@@ -36,7 +36,7 @@ class AuthnetJsonArbTest extends \PHPUnit_Framework_TestCase
      */
     public function testARBCreateSubscriptionRequestSuccess()
     {
-        $request = array(
+        $requestJson = array(
             'refId' => 'Sample',
             'subscription' => array(
                 'name' => 'Sample subscription',
@@ -81,15 +81,15 @@ class AuthnetJsonArbTest extends \PHPUnit_Framework_TestCase
             ->method('process')
             ->will($this->returnValue($responseJson));
 
-        $authnet = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server);
-        $authnet->setProcessHandler($this->http);
-        $authnet->createTransactionRequest($request);
+        $request = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server);
+        $request->setProcessHandler($this->http);
+        $response = $request->createTransactionRequest($requestJson);
 
-        $this->assertEquals('Ok', $authnet->messages->resultCode);
-        $this->assertEquals('2341621', $authnet->subscriptionId);
-        $this->assertEquals('Sample', $authnet->refId);
-        $this->assertEquals('I00001', $authnet->messages->message[0]->code);
-        $this->assertEquals('Successful.', $authnet->messages->message[0]->text);
+        $this->assertEquals('Ok', $response->messages->resultCode);
+        $this->assertEquals('2341621', $response->subscriptionId);
+        $this->assertEquals('Sample', $response->refId);
+        $this->assertEquals('I00001', $response->messages->message[0]->code);
+        $this->assertEquals('Successful.', $response->messages->message[0]->text);
     }
 
     /**
@@ -99,7 +99,7 @@ class AuthnetJsonArbTest extends \PHPUnit_Framework_TestCase
      */
     public function testARBCreateSubscriptionRequestDuplicateRequestError()
     {
-        $request = array(
+        $requestJson = array(
             'refId' => 'Sample',
             'subscription' => array(
                 'name' => 'Sample subscription',
@@ -143,14 +143,14 @@ class AuthnetJsonArbTest extends \PHPUnit_Framework_TestCase
             ->method('process')
             ->will($this->returnValue($responseJson));
 
-        $authnet = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server);
-        $authnet->setProcessHandler($this->http);
-        $authnet->createTransactionRequest($request);
+        $request = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server);
+        $request->setProcessHandler($this->http);
+        $response = $request->createTransactionRequest($requestJson);
 
-        $this->assertEquals('Error', $authnet->messages->resultCode);
-        $this->assertEquals('Sample', $authnet->refId);
-        $this->assertEquals('E00012', $authnet->messages->message[0]->code);
-        $this->assertEquals('You have submitted a duplicate of Subscription 2341621. A duplicate subscription will not be created.', $authnet->messages->message[0]->text);
+        $this->assertEquals('Error', $response->messages->resultCode);
+        $this->assertEquals('Sample', $response->refId);
+        $this->assertEquals('E00012', $response->messages->message[0]->code);
+        $this->assertEquals('You have submitted a duplicate of Subscription 2341621. A duplicate subscription will not be created.', $response->messages->message[0]->text);
     }
 
     /**
@@ -160,7 +160,7 @@ class AuthnetJsonArbTest extends \PHPUnit_Framework_TestCase
      */
     public function testARBCreateSubscriptionRequestInvalidStartDateError()
     {
-        $request = array(
+        $requestJson = array(
             'refId' => 'Sample',
             'subscription' => array(
                 'name' => 'Sample subscription',
@@ -204,14 +204,14 @@ class AuthnetJsonArbTest extends \PHPUnit_Framework_TestCase
             ->method('process')
             ->will($this->returnValue($responseJson));
 
-        $authnet = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server);
-        $authnet->setProcessHandler($this->http);
-        $authnet->createTransactionRequest($request);
+        $request = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server);
+        $request->setProcessHandler($this->http);
+        $response = $request->createTransactionRequest($requestJson);
 
-        $this->assertEquals('Error', $authnet->messages->resultCode);
-        $this->assertEquals('Sample', $authnet->refId);
-        $this->assertEquals('E00017', $authnet->messages->message[0]->code);
-        $this->assertEquals('Start Date must not occur before the submission date.', $authnet->messages->message[0]->text);
+        $this->assertEquals('Error', $response->messages->resultCode);
+        $this->assertEquals('Sample', $response->refId);
+        $this->assertEquals('E00017', $response->messages->message[0]->code);
+        $this->assertEquals('Start Date must not occur before the submission date.', $response->messages->message[0]->text);
     }
 
     /**
@@ -221,7 +221,7 @@ class AuthnetJsonArbTest extends \PHPUnit_Framework_TestCase
      */
     public function testARBGetSubscriptionStatusRequestActive()
     {
-        $request = array(
+        $requestJson = array(
             'refId' => 'Sample',
             'subscriptionId' => '1207505'
         );
@@ -247,16 +247,16 @@ class AuthnetJsonArbTest extends \PHPUnit_Framework_TestCase
             ->method('process')
             ->will($this->returnValue($responseJson));
 
-        $authnet = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server);
-        $authnet->setProcessHandler($this->http);
-        $authnet->ARBGetSubscriptionStatusRequest($request);
+        $request = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server);
+        $request->setProcessHandler($this->http);
+        $response = $request->ARBGetSubscriptionStatusRequest($requestJson);
 
-        $this->assertEquals('Ok', $authnet->messages->resultCode);
-        $this->assertEquals('Sample', $authnet->refId);
-        $this->assertEquals('I00001', $authnet->messages->message[0]->code);
-        $this->assertEquals('Successful.', $authnet->messages->message[0]->text);
-        $this->assertEquals('active', $authnet->status);
-        $this->assertTrue($authnet->statusSpecified);
+        $this->assertEquals('Ok', $response->messages->resultCode);
+        $this->assertEquals('Sample', $response->refId);
+        $this->assertEquals('I00001', $response->messages->message[0]->code);
+        $this->assertEquals('Successful.', $response->messages->message[0]->text);
+        $this->assertEquals('active', $response->status);
+        $this->assertTrue($response->statusSpecified);
     }
 
     /**
@@ -266,7 +266,7 @@ class AuthnetJsonArbTest extends \PHPUnit_Framework_TestCase
      */
     public function testARBGetSubscriptionStatusRequestCancelled()
     {
-        $request = array(
+        $requestJson = array(
             'refId' => 'Sample',
             'subscriptionId' => '1207505'
         );
@@ -292,16 +292,16 @@ class AuthnetJsonArbTest extends \PHPUnit_Framework_TestCase
             ->method('process')
             ->will($this->returnValue($responseJson));
 
-        $authnet = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server);
-        $authnet->setProcessHandler($this->http);
-        $authnet->ARBGetSubscriptionStatusRequest($request);
+        $request = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server);
+        $request->setProcessHandler($this->http);
+        $response = $request->ARBGetSubscriptionStatusRequest($requestJson);
 
-        $this->assertEquals('Ok', $authnet->messages->resultCode);
-        $this->assertEquals('Sample', $authnet->refId);
-        $this->assertEquals('I00001', $authnet->messages->message[0]->code);
-        $this->assertEquals('Successful.', $authnet->messages->message[0]->text);
-        $this->assertEquals('canceled', $authnet->status);
-        $this->assertTrue($authnet->statusSpecified);
+        $this->assertEquals('Ok', $response->messages->resultCode);
+        $this->assertEquals('Sample', $response->refId);
+        $this->assertEquals('I00001', $response->messages->message[0]->code);
+        $this->assertEquals('Successful.', $response->messages->message[0]->text);
+        $this->assertEquals('canceled', $response->status);
+        $this->assertTrue($response->statusSpecified);
     }
 
     /**
@@ -311,7 +311,7 @@ class AuthnetJsonArbTest extends \PHPUnit_Framework_TestCase
      */
     public function testARBCancelSubscriptionRequestSuccess()
     {
-        $request = array(
+        $requestJson = array(
             'refId' => 'Sample',
             'subscriptionId' => '1207505'
         );
@@ -332,14 +332,14 @@ class AuthnetJsonArbTest extends \PHPUnit_Framework_TestCase
             ->method('process')
             ->will($this->returnValue($responseJson));
 
-        $authnet = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server);
-        $authnet->setProcessHandler($this->http);
-        $authnet->ARBGetSubscriptionStatusRequest($request);
+        $request = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server);
+        $request->setProcessHandler($this->http);
+        $response = $request->ARBGetSubscriptionStatusRequest($requestJson);
 
-        $this->assertEquals('Ok', $authnet->messages->resultCode);
-        $this->assertEquals('Sample', $authnet->refId);
-        $this->assertEquals('I00001', $authnet->messages->message[0]->code);
-        $this->assertEquals('Successful.', $authnet->messages->message[0]->text);
+        $this->assertEquals('Ok', $response->messages->resultCode);
+        $this->assertEquals('Sample', $response->refId);
+        $this->assertEquals('I00001', $response->messages->message[0]->code);
+        $this->assertEquals('Successful.', $response->messages->message[0]->text);
     }
 
     /**
@@ -349,7 +349,7 @@ class AuthnetJsonArbTest extends \PHPUnit_Framework_TestCase
      */
     public function testARBCancelSubscriptionRequestAlreadyCancelled()
     {
-        $request = array(
+        $requestJson = array(
             'refId' => 'Sample',
             'subscriptionId' => '1207505'
         );
@@ -370,14 +370,14 @@ class AuthnetJsonArbTest extends \PHPUnit_Framework_TestCase
             ->method('process')
             ->will($this->returnValue($responseJson));
 
-        $authnet = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server);
-        $authnet->setProcessHandler($this->http);
-        $authnet->ARBGetSubscriptionStatusRequest($request);
+        $request = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server);
+        $request->setProcessHandler($this->http);
+        $response = $request->ARBGetSubscriptionStatusRequest($requestJson);
 
-        $this->assertEquals('Ok', $authnet->messages->resultCode);
-        $this->assertEquals('Sample', $authnet->refId);
-        $this->assertEquals('I00002', $authnet->messages->message[0]->code);
-        $this->assertEquals('The subscription has already been canceled.', $authnet->messages->message[0]->text);
+        $this->assertEquals('Ok', $response->messages->resultCode);
+        $this->assertEquals('Sample', $response->refId);
+        $this->assertEquals('I00002', $response->messages->message[0]->code);
+        $this->assertEquals('The subscription has already been canceled.', $response->messages->message[0]->text);
     }
 
     /**
@@ -387,7 +387,7 @@ class AuthnetJsonArbTest extends \PHPUnit_Framework_TestCase
      */
     public function testARBUpdateSubscriptionRequestSuccess()
     {
-        $request = array(
+        $requestJson = array(
             'refId' => 'Sample',
             'subscriptionId' => '2342682',
             'subscription' => array(
@@ -416,14 +416,14 @@ class AuthnetJsonArbTest extends \PHPUnit_Framework_TestCase
             ->method('process')
             ->will($this->returnValue($responseJson));
 
-        $authnet = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server);
-        $authnet->setProcessHandler($this->http);
-        $authnet->ARBGetSubscriptionStatusRequest($request);
+        $request = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server);
+        $request->setProcessHandler($this->http);
+        $response = $request->ARBGetSubscriptionStatusRequest($requestJson);
 
-        $this->assertEquals('Ok', $authnet->messages->resultCode);
-        $this->assertEquals('Sample', $authnet->refId);
-        $this->assertEquals('I00001', $authnet->messages->message[0]->code);
-        $this->assertEquals('Successful.', $authnet->messages->message[0]->text);
+        $this->assertEquals('Ok', $response->messages->resultCode);
+        $this->assertEquals('Sample', $response->refId);
+        $this->assertEquals('I00001', $response->messages->message[0]->code);
+        $this->assertEquals('Successful.', $response->messages->message[0]->text);
     }
 
     /**
@@ -433,7 +433,7 @@ class AuthnetJsonArbTest extends \PHPUnit_Framework_TestCase
      */
     public function testARBUpdateSubscriptionRequestError()
     {
-        $request = array(
+        $requestJson = array(
             'refId' => 'Sample',
             'subscriptionId' => '2342682',
             'subscription' => array(
@@ -462,13 +462,13 @@ class AuthnetJsonArbTest extends \PHPUnit_Framework_TestCase
             ->method('process')
             ->will($this->returnValue($responseJson));
 
-        $authnet = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server);
-        $authnet->setProcessHandler($this->http);
-        $authnet->ARBGetSubscriptionStatusRequest($request);
+        $request = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server);
+        $request->setProcessHandler($this->http);
+        $response = $request->ARBGetSubscriptionStatusRequest($requestJson);
 
-        $this->assertEquals('Error', $authnet->messages->resultCode);
-        $this->assertEquals('Sample', $authnet->refId);
-        $this->assertEquals('E00037', $authnet->messages->message[0]->code);
-        $this->assertEquals('Subscriptions that are canceled cannot be updated.', $authnet->messages->message[0]->text);
+        $this->assertEquals('Error', $response->messages->resultCode);
+        $this->assertEquals('Sample', $response->refId);
+        $this->assertEquals('E00037', $response->messages->message[0]->code);
+        $this->assertEquals('Subscriptions that are canceled cannot be updated.', $response->messages->message[0]->text);
     }
 }

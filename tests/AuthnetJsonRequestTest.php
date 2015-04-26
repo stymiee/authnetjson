@@ -11,16 +11,16 @@
 
 namespace JohnConde\Authnet;
 
-class AuthnetJsonTest extends \PHPUnit_Framework_TestCase
+class AuthnetJsonRequestTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers            \JohnConde\Authnet\AuthnetJson::__set()
+     * @covers            \JohnConde\Authnet\AuthnetJsonRequest::__set()
      * @expectedException \JohnConde\Authnet\AuthnetCannotSetParamsException
      */
     public function testExceptionIsRaisedForCannotSetParamsException()
     {
-        $authnet = new AuthnetJson(null, null, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
-        $authnet->login = 'test';
+        $request = new AuthnetJsonRequest(null, null, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
+        $request->login = 'test';
     }
 
     /**
@@ -31,7 +31,7 @@ class AuthnetJsonTest extends \PHPUnit_Framework_TestCase
      */
     public function testExceptionIsRaisedForInvalidJsonException()
     {
-        $request = array(
+        $requestJson = array(
             'customerProfileId' => '123456789'
         );
 
@@ -42,8 +42,8 @@ class AuthnetJsonTest extends \PHPUnit_Framework_TestCase
             ->method('process')
             ->will($this->returnValue(''));
 
-        $authnet = AuthnetApiFactory::getJsonApiHandler('asdcfvgbhn', 'asdcfvgbhn', AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
-        $authnet->setProcessHandler($http);
-        $authnet->deleteCustomerProfileRequest($request);
+        $request = AuthnetApiFactory::getJsonApiHandler('asdcfvgbhn', 'asdcfvgbhn', AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
+        $request->setProcessHandler($http);
+        $request->deleteCustomerProfileRequest($requestJson);
     }
 }
