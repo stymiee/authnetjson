@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
- 
+
 namespace JohnConde\Authnet;
 
 /**
@@ -50,7 +50,7 @@ class AuthnetApiFactory
             throw new AuthnetInvalidCredentialsException('You have not configured your login credentials properly.');
         }
 
-        $object = new AuthnetJson($login, $transaction_key, $api_url);
+        $object = new AuthnetJsonRequest($login, $transaction_key, $api_url);
         $object->setProcessHandler(new CurlWrapper());
 
         return $object;

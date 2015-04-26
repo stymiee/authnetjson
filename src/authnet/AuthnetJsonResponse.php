@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
- 
+
 namespace JohnConde\Authnet;
 
 /**
@@ -55,53 +55,27 @@ namespace JohnConde\Authnet;
  * @method      null getTransactionListRequest(array $array)                                get a list of transaction in a batch
  * @method      null getUnsettledTransactionListRequest(array $array)                       get a list of unsettled transactions
  */
-class AuthnetJson
+class AuthnetJsonResponse
 {
-    /**
-     * @var     string  Authorize.Net API login ID
-     */
-    private $login;
-
-    /**
-     * @var     string  Authorize.Net API Transaction Key
-     */
-    private $transaction_key;
-
-    /**
-     * @var     string  URL endpoint for processing a transaction
-     */
-    private $url;
-
-    /**
-     * @var     string  JSON formatted API request
-     */
-    private $request_json;
-
-    /**
-     * @var     object  Wrapper object repsenting an endpoint
-     */
-    private $processor;
-
     /**
      * @var     object  SimpleXML object representing the API response
      */
     private $response;
 
     /**
-     * @var     string  JSON response
+     * @var     object  SimpleXML object representing the API response
      */
-    private $response_json;
+    private $responseJson;
 
     /**
-     * @param   string  $login              Authorize.Net API login ID
-     * @param   string  $transaction_key    Authorize.Net API Transaction Key
-     * @param   string  $api_url            URL endpoint for processing a transaction
+     * @param   string  $response   Response from Authorize.Net
      */
-	public function __construct($login, $transaction_key, $api_url)
+	public function __construct($responseJson)
 	{
-		$this->login           = $login;
-        $this->transaction_key = $transaction_key;
-        $this->url             = $api_url;
+		$this->responseJson = $responseJson;
+        if(($this->response = json_decode(preg_replace('/[\x00-\x1F\x80-\xFF]/', '', $this->responseJson))) === null) {
+            throw new AuthnetInvalidJsonException('Invalid JSON returned by the API');
+        }
 	}
 
     /**
@@ -110,23 +84,11 @@ class AuthnetJson
 	public function __toString()
 	{
 	    $output  = '';
-        $output .= '<table summary="Authorize.Net Results" id="authnet">' . "\n";
-        $output .= '<tr>' . "\n\t\t" . '<th colspan="2"><b>Class Parameters</b></th>' . "\n" . '</tr>' . "\n";
-        $output .= '<tr>' . "\n\t\t" . '<td><b>API Login ID</b></td><td>' . $this->login . '</td>' . "\n" . '</tr>' . "\n";
-        $output .= '<tr>' . "\n\t\t" . '<td><b>Transaction Key</b></td><td>' . $this->transaction_key . '</td>' . "\n" . '</tr>' . "\n";
-        $output .= '<tr>' . "\n\t\t" . '<td><b>Authnet Server URL</b></td><td>' . $this->url . '</td>' . "\n" . '</tr>' . "\n";
-        $output .= '<tr>' . "\n\t\t" . '<th colspan="2"><b>Request JSON</b></th>' . "\n" . '</tr>' . "\n";
-        if (!empty($this->request_json)) {
-            $output .= '<tr><td colspan="2"><pre>' . "\n";
-            $output .= $this->request_json . "\n";
-            $output .= '</pre></td></tr>' . "\n";
-        }
-        if (!empty($this->response_json)) {
-            $output .= '<tr>' . "\n\t\t" . '<th colspan="2"><b>Response JSON</b></th>' . "\n" . '</tr>' . "\n";
-            $output .= '<tr><td colspan="2"><pre>' . "\n";
-            $output .= preg_replace('/[\x00-\x1F\x80-\xFF]/', '', $this->response_json). "\n";
-            $output .= '</pre></td></tr>' . "\n";
-        }
+        $output .= '<table summary="Authorize.Net Response" id="authnet-response">' . "\n";
+        $output .= '<tr>' . "\n\t\t" . '<th colspan="2"><b>Response JSON</b></th>' . "\n" . '</tr>' . "\n";
+        $output .= '<tr><td colspan="2"><pre>' . "\n";
+        $output .= preg_replace('/[\x00-\x1F\x80-\xFF]/', '', $this->responseJson) . "\n";
+        $output .= '</pre></td></tr>' . "\n";
         $output .= '</table>';
 
         return $output;
@@ -139,48 +101,6 @@ class AuthnetJson
 	{
 	    return $this->response->{$var};
 	}
-
-    /**
-     * @throws  \JohnConde\Authnet\AuthnetCannotSetParamsException
-     */
-    public function __set($key, $value)
-	{
-        throw new AuthnetCannotSetParamsException('You cannot set parameters directly in ' . __CLASS__ . '.');
-	}
-
-    /**
-     * @returns null
-     */
-    public function __call($api_call, $args)
-	{
-        $authentication = array(
-            'merchantAuthentication' => array(
-                'name'           => $this->login,
-                'transactionKey' => $this->transaction_key,
-            )
-        );
-        $call = array();
-        if (count($args)) {
-            $call = $args[0];
-        }
-        $parameters = array(
-            $api_call => $authentication + $call
-        );
-        $this->request_json = json_encode($parameters);
-
-		$this->process();
-	}
-
-    /**
-     * @throws  \JohnConde\Authnet\AuthnetInvalidJsonException
-     */
-    private function process()
-    {
-        $this->response_json = $this->processor->process($this->url, $this->request_json);
-        if(($this->response = json_decode(preg_replace('/[\x00-\x1F\x80-\xFF]/', '', $this->response_json))) === null) {
-            throw new AuthnetInvalidJsonException('Invalid JSON returned by the API');
-        }
-    }
 
     /**
      * @return  bool    Whether the transaction was in an successful state
@@ -196,13 +116,5 @@ class AuthnetJson
     public function isError()
     {
         return strtolower($this->messages->resultCode) === 'error';
-    }
-
-    /**
-     * @param   object  $processor
-     */
-    public function setProcessHandler($processor)
-    {
-        $this->processor = $processor;
     }
 }
