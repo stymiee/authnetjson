@@ -87,8 +87,8 @@ SAMPLE RESPONSE
     require('../../config.inc.php');
     require('../../src/autoload.php');
 
-    $json = AuthnetApiFactory::getJsonApiHandler(AUTHNET_LOGIN, AUTHNET_TRANSKEY, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
-    $json->getCustomerProfileRequest(array(
+    $request  = AuthnetApiFactory::getJsonApiHandler(AUTHNET_LOGIN, AUTHNET_TRANSKEY, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
+    $response = $request->getCustomerProfileRequest(array(
         'customerProfileId' => '31390172'
     ));
 ?>
@@ -147,27 +147,27 @@ SAMPLE RESPONSE
         <table>
             <tr>
                 <th>Response</th>
-                <td><?php echo $json->messages->resultCode; ?></td>
+                <td><?php echo $response->messages->resultCode; ?></td>
             </tr>
             <tr>
                 <th>code</th>
-                <td><?php echo $json->messages->message[0]->code; ?></td>
+                <td><?php echo $response->messages->message[0]->code; ?></td>
             </tr>
             <tr>
                 <th>Successful?</th>
-                <td><?php echo ($json->isSuccessful()) ? 'yes' : 'no'; ?></td>
+                <td><?php echo ($response->isSuccessful()) ? 'yes' : 'no'; ?></td>
             </tr>
             <tr>
                 <th>Error?</th>
-                <td><?php echo ($json->isError()) ? 'yes' : 'no'; ?></td>
+                <td><?php echo ($response->isError()) ? 'yes' : 'no'; ?></td>
             </tr>
             <tr>
                 <th>merchantCustomerId</th>
-                <td><?php echo $json->profile->merchantCustomerId; ?></td>
+                <td><?php echo $response->profile->merchantCustomerId; ?></td>
             </tr>
             <tr>
                 <th>email</th>
-                <td><?php echo $json->profile->email; ?></td>
+                <td><?php echo $response->profile->email; ?></td>
             </tr>
             <tr>
                 <th>Payment Profile IDs</th>
@@ -187,7 +187,7 @@ SAMPLE RESPONSE
             Raw Input/Output
         </h2>
 <?php
-    echo $json
+    echo $request, $response;
 ?>
     </body>
 </html>

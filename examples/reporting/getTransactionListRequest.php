@@ -63,8 +63,8 @@ SAMPLE RESPONSE
     require('../../config.inc.php');
     require('../../src/autoload.php');
 
-    $json = AuthnetApiFactory::getJsonApiHandler(AUTHNET_LOGIN, AUTHNET_TRANSKEY, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
-    $json->getTransactionListRequest(array(
+    $request  = AuthnetApiFactory::getJsonApiHandler(AUTHNET_LOGIN, AUTHNET_TRANSKEY, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
+    $response = $request->getTransactionListRequest(array(
         'batchId' => '1221577'
     ));
 ?>
@@ -123,15 +123,15 @@ SAMPLE RESPONSE
         <table>
             <tr>
                 <th>Response</th>
-                <td><?php echo $json->messages->resultCode; ?></td>
+                <td><?php echo $response->messages->resultCode; ?></td>
             </tr>
             <tr>
                 <th>Successful?</th>
-                <td><?php echo ($json->isSuccessful()) ? 'yes' : 'no'; ?></td>
+                <td><?php echo ($response->isSuccessful()) ? 'yes' : 'no'; ?></td>
             </tr>
             <tr>
                 <th>Error?</th>
-                <td><?php echo ($json->isError()) ? 'yes' : 'no'; ?></td>
+                <td><?php echo ($response->isError()) ? 'yes' : 'no'; ?></td>
             </tr>
             <?php foreach ($json->transactions as $transaction) : ?>
             <tr>
@@ -154,7 +154,7 @@ SAMPLE RESPONSE
             Raw Input/Output
         </h2>
 <?php
-    echo $json;
+    echo $request, $response;
 ?>
     </body>
 </html>

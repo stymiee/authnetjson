@@ -45,8 +45,8 @@ SAMPLE RESPONSE
     require('../../config.inc.php');
     require('../../src/autoload.php');
 
-    $json = AuthnetApiFactory::getJsonApiHandler(AUTHNET_LOGIN, AUTHNET_TRANSKEY, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
-    $json->sendCustomerTransactionReceiptRequest(array(
+    $request  = AuthnetApiFactory::getJsonApiHandler(AUTHNET_LOGIN, AUTHNET_TRANSKEY, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
+    $response = $request->sendCustomerTransactionReceiptRequest(array(
         'refId' => rand(1000000, 100000000),
         'transId' => '2165665581',
         'customerEmail' => 'user@example.com',
@@ -117,14 +117,14 @@ SAMPLE RESPONSE
         <table>
             <tr>
                 <th>Response</th>
-                <td><?php echo $json->messages->resultCode; ?></td>
+                <td><?php echo $response->messages->resultCode; ?></td>
             </tr>
         </table>
         <h2>
             Raw Input/Output
         </h2>
 <?php
-    echo $json;
+    echo $request, $response;
 ?>
     </body>
 </html>

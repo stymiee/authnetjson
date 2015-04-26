@@ -47,8 +47,8 @@ SAMPLE RESPONSE
     require('../../config.inc.php');
     require('../../src/autoload.php');
 
-    $json = AuthnetApiFactory::getJsonApiHandler(AUTHNET_LOGIN, AUTHNET_TRANSKEY, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
-    $json->getCustomerShippingAddressRequest(array(
+    $request  = AuthnetApiFactory::getJsonApiHandler(AUTHNET_LOGIN, AUTHNET_TRANSKEY, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
+    $response = $request->getCustomerShippingAddressRequest(array(
         'customerProfileId' => '31390172',
         'customerAddressId' => '29366174'
     ));
@@ -108,58 +108,58 @@ SAMPLE RESPONSE
         <table>
             <tr>
                 <th>Response</th>
-                <td><?php echo $json->messages->resultCode; ?></td>
+                <td><?php echo $response->messages->resultCode; ?></td>
             </tr>
             <tr>
                 <th>code</th>
-                <td><?php echo $json->messages->message[0]->code; ?></td>
+                <td><?php echo $response->messages->message[0]->code; ?></td>
             </tr>
             <tr>
                 <th>Successful?</th>
-                <td><?php echo ($json->isSuccessful()) ? 'yes' : 'no'; ?></td>
+                <td><?php echo ($response->isSuccessful()) ? 'yes' : 'no'; ?></td>
             </tr>
             <tr>
                 <th>Error?</th>
-                <td><?php echo ($json->isError()) ? 'yes' : 'no'; ?></td>
+                <td><?php echo ($response->isError()) ? 'yes' : 'no'; ?></td>
             </tr>
             <tr>
                 <th>firstName</th>
-                <td><?php echo $json->address->firstName; ?></td>
+                <td><?php echo $response->address->firstName; ?></td>
             </tr>
             <tr>
                 <th>lastName</th>
-                <td><?php echo $json->address->lastName; ?></td>
+                <td><?php echo $response->address->lastName; ?></td>
             </tr>
             <tr>
                 <th>address</th>
-                <td><?php echo $json->address->address; ?></td>
+                <td><?php echo $response->address->address; ?></td>
             </tr>
             <tr>
                 <th>city</th>
-                <td><?php echo $json->address->city; ?></td>
+                <td><?php echo $response->address->city; ?></td>
             </tr>
             <tr>
                 <th>state</th>
-                <td><?php echo $json->address->state; ?></td>
+                <td><?php echo $response->address->state; ?></td>
             </tr>
             <tr>
                 <th>zip</th>
-                <td><?php echo $json->address->zip; ?></td>
+                <td><?php echo $response->address->zip; ?></td>
             </tr>
             <tr>
                 <th>phoneNumber</th>
-                <td><?php echo $json->address->phoneNumber; ?></td>
+                <td><?php echo $response->address->phoneNumber; ?></td>
             </tr>
             <tr>
                 <th>customerAddressId</th>
-                <td><?php echo $json->address->customerAddressId; ?></td>
+                <td><?php echo $response->address->customerAddressId; ?></td>
             </tr>
         </table>
         <h2>
             Raw Input/Output
         </h2>
 <?php
-    echo $json
+    echo $request, $response;
 ?>
     </body>
 </html>

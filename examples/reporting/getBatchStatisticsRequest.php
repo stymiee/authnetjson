@@ -80,8 +80,8 @@ SAMPLE RESPONSE
     require('../../config.inc.php');
     require('../../src/autoload.php');
 
-    $json = AuthnetApiFactory::getJsonApiHandler(AUTHNET_LOGIN, AUTHNET_TRANSKEY, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
-    $json->getBatchStatisticsRequest(array(
+    $request  = AuthnetApiFactory::getJsonApiHandler(AUTHNET_LOGIN, AUTHNET_TRANSKEY, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
+    $response = $request->getBatchStatisticsRequest(array(
         'batchId' => '1221577'
     ));
 ?>
@@ -140,32 +140,32 @@ SAMPLE RESPONSE
         <table>
             <tr>
                 <th>Response</th>
-                <td><?php echo $json->messages->resultCode; ?></td>
+                <td><?php echo $response->messages->resultCode; ?></td>
             </tr>
             <tr>
                 <th>Successful?</th>
-                <td><?php echo ($json->isSuccessful()) ? 'yes' : 'no'; ?></td>
+                <td><?php echo ($response->isSuccessful()) ? 'yes' : 'no'; ?></td>
             </tr>
             <tr>
                 <th>Error?</th>
-                <td><?php echo ($json->isError()) ? 'yes' : 'no'; ?></td>
+                <td><?php echo ($response->isError()) ? 'yes' : 'no'; ?></td>
             </tr>
             <tr>
                 <th>Batch</th>
                 <td>
-                    batchId: <?php echo $json->batch->batchId; ?><br>
-                    settlementTimeUTC: <?php echo $json->batch->settlementTimeUTC; ?><br>
-                    settlementTimeLocal: <?php echo $json->batch->settlementTimeLocal; ?><br>
-                    settlementState: <?php echo $json->batch->settlementState; ?><br>
-                    paymentMethod: <?php echo $json->batch->paymentMethod; ?><br>
-                    accountType: <?php echo $json->batch->statistics[0]->accountType; ?><br>
-                    chargeAmount: <?php echo $json->batch->statistics[0]->chargeAmount; ?><br>
-                    chargeCount: <?php echo $json->batch->statistics[0]->chargeCount; ?><br>
-                    refundAmount: <?php echo $json->batch->statistics[0]->refundAmount; ?><br>
-                    refundCount: <?php echo $json->batch->statistics[0]->refundCount; ?><br>
-                    voidCount: <?php echo $json->batch->statistics[0]->voidCount; ?><br>
-                    declineCount: <?php echo $json->batch->statistics[0]->declineCount; ?><br>
-                    errorCount: <?php echo $json->batch->statistics[0]->errorCount; ?>
+                    batchId: <?php echo $response->batch->batchId; ?><br>
+                    settlementTimeUTC: <?php echo $response->batch->settlementTimeUTC; ?><br>
+                    settlementTimeLocal: <?php echo $response->batch->settlementTimeLocal; ?><br>
+                    settlementState: <?php echo $response->batch->settlementState; ?><br>
+                    paymentMethod: <?php echo $response->batch->paymentMethod; ?><br>
+                    accountType: <?php echo $response->batch->statistics[0]->accountType; ?><br>
+                    chargeAmount: <?php echo $response->batch->statistics[0]->chargeAmount; ?><br>
+                    chargeCount: <?php echo $response->batch->statistics[0]->chargeCount; ?><br>
+                    refundAmount: <?php echo $response->batch->statistics[0]->refundAmount; ?><br>
+                    refundCount: <?php echo $response->batch->statistics[0]->refundCount; ?><br>
+                    voidCount: <?php echo $response->batch->statistics[0]->voidCount; ?><br>
+                    declineCount: <?php echo $response->batch->statistics[0]->declineCount; ?><br>
+                    errorCount: <?php echo $response->batch->statistics[0]->errorCount; ?>
                 </td>
             </tr>
         </table>
@@ -173,7 +173,7 @@ SAMPLE RESPONSE
             Raw Input/Output
         </h2>
 <?php
-    echo $json;
+    echo $request, $response;
 ?>
     </body>
 </html>

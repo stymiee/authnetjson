@@ -101,8 +101,8 @@ SAMPLE RESPONSE
     require('../../config.inc.php');
     require('../../src/autoload.php');
 
-    $json = AuthnetApiFactory::getJsonApiHandler(AUTHNET_LOGIN, AUTHNET_TRANSKEY, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
-    $json->getTransactionDetailsRequest(array(
+    $request  = AuthnetApiFactory::getJsonApiHandler(AUTHNET_LOGIN, AUTHNET_TRANSKEY, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
+    $response = $request->getTransactionDetailsRequest(array(
         'transId' => '2162566217'
     ));
 ?>
@@ -161,25 +161,25 @@ SAMPLE RESPONSE
         <table>
             <tr>
                 <th>Response</th>
-                <td><?php echo $json->messages->resultCode; ?></td>
+                <td><?php echo $response->messages->resultCode; ?></td>
             </tr>
             <tr>
                 <th>Successful?</th>
-                <td><?php echo ($json->isSuccessful()) ? 'yes' : 'no'; ?></td>
+                <td><?php echo ($response->isSuccessful()) ? 'yes' : 'no'; ?></td>
             </tr>
             <tr>
                 <th>Error?</th>
-                <td><?php echo ($json->isError()) ? 'yes' : 'no'; ?></td>
+                <td><?php echo ($response->isError()) ? 'yes' : 'no'; ?></td>
             </tr>
             <tr>
                 <th>Transaction</th>
                 <td>
-                    <b>ID</b>: <?php echo $json->transaction->transId; ?><br>
-                    <b>Type</b>: <?php echo $json->transaction->transactionType; ?><br>
-                    <b>Status</b>: <?php echo $json->transaction->transactionStatus; ?><br>
-                    <b>Authorization Code</b>: <?php echo $json->transaction->authCode; ?><br>
-                    <b>AVS Response</b>: <?php echo $json->transaction->AVSResponse; ?><br>
-                    <b>Batch Id</b>: <?php echo $json->transaction->batch->batchId; ?>
+                    <b>ID</b>: <?php echo $response->transaction->transId; ?><br>
+                    <b>Type</b>: <?php echo $response->transaction->transactionType; ?><br>
+                    <b>Status</b>: <?php echo $response->transaction->transactionStatus; ?><br>
+                    <b>Authorization Code</b>: <?php echo $response->transaction->authCode; ?><br>
+                    <b>AVS Response</b>: <?php echo $response->transaction->AVSResponse; ?><br>
+                    <b>Batch Id</b>: <?php echo $response->transaction->batch->batchId; ?>
                 </td>
             </tr>
         </table>
@@ -187,7 +187,7 @@ SAMPLE RESPONSE
             Raw Input/Output
         </h2>
 <?php
-    echo $json;
+    echo $request, $response;
 ?>
     </body>
 </html>

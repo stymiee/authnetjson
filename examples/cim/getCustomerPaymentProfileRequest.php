@@ -56,8 +56,8 @@ SAMPLE RESPONSE
     require('../../config.inc.php');
     require('../../src/autoload.php');
 
-    $json = AuthnetApiFactory::getJsonApiHandler(AUTHNET_LOGIN, AUTHNET_TRANSKEY, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
-    $json->getCustomerPaymentProfileRequest(array(
+    $request  = AuthnetApiFactory::getJsonApiHandler(AUTHNET_LOGIN, AUTHNET_TRANSKEY, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
+    $response = $request->getCustomerPaymentProfileRequest(array(
         'customerProfileId' => '31390172',
         'customerPaymentProfileId' => '28393490'
     ));
@@ -117,66 +117,66 @@ SAMPLE RESPONSE
         <table>
             <tr>
                 <th>Response</th>
-                <td><?php echo $json->messages->resultCode; ?></td>
+                <td><?php echo $response->messages->resultCode; ?></td>
             </tr>
             <tr>
                 <th>code</th>
-                <td><?php echo $json->messages->message[0]->code; ?></td>
+                <td><?php echo $response->messages->message[0]->code; ?></td>
             </tr>
             <tr>
                 <th>Successful?</th>
-                <td><?php echo ($json->isSuccessful()) ? 'yes' : 'no'; ?></td>
+                <td><?php echo ($response->isSuccessful()) ? 'yes' : 'no'; ?></td>
             </tr>
             <tr>
                 <th>Error?</th>
-                <td><?php echo ($json->isError()) ? 'yes' : 'no'; ?></td>
+                <td><?php echo ($response->isError()) ? 'yes' : 'no'; ?></td>
             </tr>
             <tr>
                 <th>firstName</th>
-                <td><?php echo $json->paymentProfile->billTo->firstName; ?></td>
+                <td><?php echo $response->paymentProfile->billTo->firstName; ?></td>
             </tr>
             <tr>
                 <th>lastName</th>
-                <td><?php echo $json->paymentProfile->billTo->lastName; ?></td>
+                <td><?php echo $response->paymentProfile->billTo->lastName; ?></td>
             </tr>
             <tr>
                 <th>address</th>
-                <td><?php echo $json->paymentProfile->billTo->address; ?></td>
+                <td><?php echo $response->paymentProfile->billTo->address; ?></td>
             </tr>
             <tr>
                 <th>city</th>
-                <td><?php echo $json->paymentProfile->billTo->city; ?></td>
+                <td><?php echo $response->paymentProfile->billTo->city; ?></td>
             </tr>
             <tr>
                 <th>state</th>
-                <td><?php echo $json->paymentProfile->billTo->state; ?></td>
+                <td><?php echo $response->paymentProfile->billTo->state; ?></td>
             </tr>
             <tr>
                 <th>zip</th>
-                <td><?php echo $json->paymentProfile->billTo->zip; ?></td>
+                <td><?php echo $response->paymentProfile->billTo->zip; ?></td>
             </tr>
             <tr>
                 <th>phoneNumber</th>
-                <td><?php echo $json->paymentProfile->billTo->phoneNumber; ?></td>
+                <td><?php echo $response->paymentProfile->billTo->phoneNumber; ?></td>
             </tr>
             <tr>
                 <th>customerPaymentProfileId</th>
-                <td><?php echo $json->paymentProfile->customerPaymentProfileId; ?></td>
+                <td><?php echo $response->paymentProfile->customerPaymentProfileId; ?></td>
             </tr>
             <tr>
                 <th>cardNumber</th>
-                <td><?php echo $json->paymentProfile->payment->creditCard->cardNumber; ?></td>
+                <td><?php echo $response->paymentProfile->payment->creditCard->cardNumber; ?></td>
             </tr>
             <tr>
                 <th>expirationDate</th>
-                <td><?php echo $json->paymentProfile->payment->creditCard->expirationDate; ?></td>
+                <td><?php echo $response->paymentProfile->payment->creditCard->expirationDate; ?></td>
             </tr>
         </table>
         <h2>
             Raw Input/Output
         </h2>
 <?php
-    echo $json
+    echo $request, $response;
 ?>
     </body>
 </html>

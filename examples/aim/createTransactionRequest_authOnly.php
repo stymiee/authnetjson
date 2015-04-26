@@ -149,8 +149,8 @@ SAMPLE RESPONSE
     require('../../config.inc.php');
     require('../../src/autoload.php');
 
-    $json = AuthnetApiFactory::getJsonApiHandler(AUTHNET_LOGIN, AUTHNET_TRANSKEY, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
-    $json->createTransactionRequest(array(
+    $request  = AuthnetApiFactory::getJsonApiHandler(AUTHNET_LOGIN, AUTHNET_TRANSKEY, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
+    $response = $request->createTransactionRequest(array(
         'refId' => rand(1000000, 100000000),
         'transactionRequest' => array(
             'transactionType' => 'authOnlyTransaction',
@@ -306,37 +306,37 @@ SAMPLE RESPONSE
         <table>
             <tr>
                 <th>Response</th>
-                <td><?php echo $json->messages->resultCode; ?></td>
+                <td><?php echo $response->messages->resultCode; ?></td>
             </tr>
             <tr>
                 <th>Successful?</th>
-                <td><?php echo ($json->isSuccessful()) ? 'yes' : 'no'; ?></td>
+                <td><?php echo ($response->isSuccessful()) ? 'yes' : 'no'; ?></td>
             </tr>
             <tr>
                 <th>Error?</th>
-                <td><?php echo ($json->isError()) ? 'yes' : 'no'; ?></td>
+                <td><?php echo ($response->isError()) ? 'yes' : 'no'; ?></td>
             </tr>
-            <?php if ($json->isSuccessful()) : ?>
+            <?php if ($response->isSuccessful()) : ?>
             <tr>
                 <th>Description</th>
-                <td><?php echo $json->transactionResponse->messages[0]->description; ?></td>
+                <td><?php echo $response->transactionResponse->messages[0]->description; ?></td>
             </tr>
             <tr>
                 <th>authCode</th>
-                <td><?php echo $json->transactionResponse->authCode; ?></td>
+                <td><?php echo $response->transactionResponse->authCode; ?></td>
             </tr>
             <tr>
                 <th>transId</th>
-                <td><?php echo $json->transactionResponse->transId; ?></td>
+                <td><?php echo $response->transactionResponse->transId; ?></td>
             </tr>
-            <?php elseif ($json->isError()) : ?>
+            <?php elseif ($response->isError()) : ?>
             <tr>
                 <th>Error Code</th>
-                <td><?php echo $json->transactionResponse->errors[0]->errorCode; ?></td>
+                <td><?php echo $response->transactionResponse->errors[0]->errorCode; ?></td>
             </tr>
             <tr>
                 <th>Error Message</th>
-                <td><?php echo $json->transactionResponse->errors[0]->errorText; ?></td>
+                <td><?php echo $response->transactionResponse->errors[0]->errorText; ?></td>
             </tr>
             <?php endif; ?>
         </table>
@@ -344,7 +344,7 @@ SAMPLE RESPONSE
             Raw Input/Output
         </h2>
 <?php
-    echo $json;
+    echo $request, $response;
 ?>
     </body>
 </html>

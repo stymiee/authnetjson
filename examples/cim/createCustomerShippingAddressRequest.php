@@ -49,8 +49,8 @@ SAMPLE RESPONSE
     require('../../config.inc.php');
     require('../../src/autoload.php');
 
-    $json = AuthnetApiFactory::getJsonApiHandler(AUTHNET_LOGIN, AUTHNET_TRANSKEY, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
-    $json->createCustomerShippingAddressRequest(array(
+    $request  = AuthnetApiFactory::getJsonApiHandler(AUTHNET_LOGIN, AUTHNET_TRANSKEY, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
+    $response = $request->createCustomerShippingAddressRequest(array(
         'customerProfileId' => '31390172',
         'address' => array(
             'firstName' => 'John',
@@ -121,30 +121,30 @@ SAMPLE RESPONSE
         <table>
             <tr>
                 <th>Response</th>
-                <td><?php echo $json->messages->resultCode; ?></td>
+                <td><?php echo $response->messages->resultCode; ?></td>
             </tr>
             <tr>
                 <th>code</th>
-                <td><?php echo $json->messages->message[0]->code; ?></td>
+                <td><?php echo $response->messages->message[0]->code; ?></td>
             </tr>
             <tr>
                 <th>Successful?</th>
-                <td><?php echo ($json->isSuccessful()) ? 'yes' : 'no'; ?></td>
+                <td><?php echo ($response->isSuccessful()) ? 'yes' : 'no'; ?></td>
             </tr>
             <tr>
                 <th>Error?</th>
-                <td><?php echo ($json->isError()) ? 'yes' : 'no'; ?></td>
+                <td><?php echo ($response->isError()) ? 'yes' : 'no'; ?></td>
             </tr>
             <tr>
                 <th>customerAddressId</th>
-                <td><?php echo $json->customerAddressId; ?></td>
+                <td><?php echo $response->customerAddressId; ?></td>
             </tr>
         </table>
         <h2>
             Raw Input/Output
         </h2>
 <?php
-    echo $json
+    echo $request, $response;
 ?>
     </body>
 </html>

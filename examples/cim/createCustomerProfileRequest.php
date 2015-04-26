@@ -86,8 +86,8 @@ SAMPLE RESPONSE
     require('../../config.inc.php');
     require('../../src/autoload.php');
 
-    $json = AuthnetApiFactory::getJsonApiHandler(AUTHNET_LOGIN, AUTHNET_TRANSKEY, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
-    $json->createCustomerProfileRequest(array(
+    $request  = AuthnetApiFactory::getJsonApiHandler(AUTHNET_LOGIN, AUTHNET_TRANSKEY, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
+    $response = $request->createCustomerProfileRequest(array(
             'profile' => array(
 			'merchantCustomerId' => '123456',
 			'email' => 'user@example.com',
@@ -176,36 +176,36 @@ SAMPLE RESPONSE
         <table>
             <tr>
                 <th>Response</th>
-                <td><?php echo $json->messages->resultCode; ?></td>
+                <td><?php echo $response->messages->resultCode; ?></td>
             </tr>
             <tr>
                 <th>Successful?</th>
-                <td><?php echo ($json->isSuccessful()) ? 'yes' : 'no'; ?></td>
+                <td><?php echo ($response->isSuccessful()) ? 'yes' : 'no'; ?></td>
             </tr>
             <tr>
                 <th>Error?</th>
-                <td><?php echo ($json->isError()) ? 'yes' : 'no'; ?></td>
+                <td><?php echo ($response->isError()) ? 'yes' : 'no'; ?></td>
             </tr>
             <tr>
                 <th>Code</th>
-                <td><?php echo $json->messages->message[0]->code; ?></td>
+                <td><?php echo $response->messages->message[0]->code; ?></td>
             </tr>
             <tr>
                 <th>Message</th>
-                <td><?php echo $json->messages->message[0]->text; ?></td>
+                <td><?php echo $response->messages->message[0]->text; ?></td>
             </tr>
-            <?php if ($json->isSuccessful()) : ?>
+            <?php if ($response->isSuccessful()) : ?>
             <tr>
                 <th>Customer Profile ID</th>
-                <td><?php echo $json->customerProfileId; ?></td>
+                <td><?php echo $response->customerProfileId; ?></td>
             </tr>
             <tr>
                 <th>Customer Payment Profile ID</th>
-                <td><?php echo $json->customerPaymentProfileIdList[0]; ?></td>
+                <td><?php echo $response->customerPaymentProfileIdList[0]; ?></td>
             </tr>
             <tr>
                 <th>Customer Shipping Address ID</th>
-                <td><?php echo $json->customerShippingAddressIdList[0]; ?></td>
+                <td><?php echo $response->customerShippingAddressIdList[0]; ?></td>
             </tr>
             <?php endif; ?>
         </table>
@@ -213,7 +213,7 @@ SAMPLE RESPONSE
             Raw Input/Output
         </h2>
 <?php
-    echo $json;
+    echo $request, $response;
 ?>
     </body>
 </html>
