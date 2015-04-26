@@ -18,7 +18,7 @@ Here is a minimal example of a `composer.json` file that just defines a dependen
 
     {
         "require": {
-            "stymiee/authnetjson": "1.0.*"
+            "stymiee/authnetjson": "2.0.*"
         }
     }
     
@@ -33,11 +33,11 @@ Using this library usually consists of three steps:
 
 Simple usage:
 
-    $json = AuthnetApiFactory::getJsonApiHandler(AUTHNET_LOGIN, AUTHNET_TRANSKEY);
-    $json->getTransactionDetailsRequest(array(
+    $request = AuthnetApiFactory::getJsonApiHandler(AUTHNET_LOGIN, AUTHNET_TRANSKEY);
+    $response = $request->getTransactionDetailsRequest(array(
         'transId' => '2162566217'
     ));
-    if ($json->isSuccessful()) {
+    if ($response->isSuccessful()) {
         echo $json->transaction->transactionStatus;
     }
     
@@ -59,8 +59,8 @@ transaction ID).
 
 #### Authorize and Capture
 
-    $json = AuthnetApiFactory::getJsonApiHandler(AUTHNET_LOGIN, AUTHNET_TRANSKEY);
-    $json->createTransactionRequest(array(
+    $request = AuthnetApiFactory::getJsonApiHandler(AUTHNET_LOGIN, AUTHNET_TRANSKEY);
+    $response = $request->createTransactionRequest(array(
         'refId' => rand(1000000, 100000000),
         'transactionRequest' => array(
             'transactionType' => 'authCaptureTransaction',
@@ -172,14 +172,14 @@ transaction ID).
         ),
     ));
     
-    if ($json->isSuccessful()) {
-        echo $json->transactionResponse->authCode;
+    if ($response->isSuccessful()) {
+        echo $response->transactionResponse->authCode;
     }
     
 #### Create a Customer Profile
 
-    $json = AuthnetApiFactory::getJsonApiHandler(AUTHNET_LOGIN, AUTHNET_TRANSKEY);
-    $json->createCustomerProfileRequest(array(
+    $request = AuthnetApiFactory::getJsonApiHandler(AUTHNET_LOGIN, AUTHNET_TRANSKEY);
+    $response = $request->createCustomerProfileRequest(array(
             'profile' => array(
 			'merchantCustomerId' => '12345',
 			'email' => 'user@example.com',
@@ -213,14 +213,14 @@ transaction ID).
 		'validationMode' => 'liveMode'
 	));
 
-    if ($json->isSuccessful()) {
-        echo $json->customerProfileId;
+    if ($response->isSuccessful()) {
+        echo $response->customerProfileId;
     }
     
 #### Create a Recurring Subscription
 
-    $json = AuthnetApiFactory::getJsonApiHandler(AUTHNET_LOGIN, AUTHNET_TRANSKEY);
-    $json->ARBCreateSubscriptionRequest(array(
+    $request = AuthnetApiFactory::getJsonApiHandler(AUTHNET_LOGIN, AUTHNET_TRANSKEY);
+    $response = $request->ARBCreateSubscriptionRequest(array(
         'refId' => 'Sample',
         'subscription' => array(
             'name' => 'Sample subscription',
@@ -248,21 +248,21 @@ transaction ID).
         )
     ));
     
-    if ($json->isSuccessful()) {
-        echo $json->subscriptionId;
+    if ($response->isSuccessful()) {
+        echo $response->subscriptionId;
     }
 
 #### Get a List of Settled Batches
 
-    $json = AuthnetApiFactory::getJsonApiHandler(AUTHNET_LOGIN, AUTHNET_TRANSKEY);
-    $json->getSettledBatchListRequest(array(
+    $request = AuthnetApiFactory::getJsonApiHandler(AUTHNET_LOGIN, AUTHNET_TRANSKEY);
+    $response = $request->getSettledBatchListRequest(array(
         'includeStatistics'   => 'true',
         'firstSettlementDate' => '2015-01-01T08:15:30',
         'lastSettlementDate'  => '2015-01-30T08:15:30',
     ));
     
-    if ($json->isSuccessful()) {
-        foreach ($json->batchList as $batch) {
+    if ($response->isSuccessful()) {
+        foreach ($response->batchList as $batch) {
             echo $batch->batchId;
         }
     }
@@ -280,9 +280,9 @@ usage of this library. Simple `echo` your AuthnetJson object to see:
 
 Basic Usage:
 
-    $json = AuthnetApiFactory::getJsonApiHandler(AUTHNET_LOGIN, AUTHNET_TRANSKEY);
-    $json->getUnsettledTransactionListRequest();  
-    echo $json;
+    $request = AuthnetApiFactory::getJsonApiHandler(AUTHNET_LOGIN, AUTHNET_TRANSKEY);
+    $response = $request->getUnsettledTransactionListRequest();  
+    echo $request, $response;
 
 ## Support
 
