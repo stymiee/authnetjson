@@ -21,6 +21,8 @@ namespace JohnConde\Authnet;
  * @link        https://github.com/stymiee/authnetjson
  * @see         https://developer.authorize.net/api/reference/
  *
+ * @property    string  $messages
+ *
  * @method      null createTransactionRequest(array $array)                                 process a payment
  * @method      null sendCustomerTransactionReceiptRequest(array $array)                    get a list of unsettled transactions
  * @method      null ARBCancelSubscriptionRequest(array $array)                             cancel a subscription
