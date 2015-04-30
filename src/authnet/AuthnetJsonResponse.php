@@ -70,7 +70,7 @@ class AuthnetJsonResponse
     private $responseJson;
 
     /**
-     * @param   string  $response   Response from Authorize.Net
+     * @param   string  $responseJson   Response from Authorize.Net
      */
 	public function __construct($responseJson)
 	{
