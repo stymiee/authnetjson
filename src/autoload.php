@@ -5,16 +5,18 @@ spl_autoload_register(
         static $classes = null;
         if ($classes === null) {
             $classes = array(
-                'johnconde\\authnet\\authnetapifactory'                  => '/authnet/AuthnetApiFactory.php',
-                'johnconde\\authnet\\authnetjsonrequest'                 => '/authnet/AuthnetJsonRequest.php',
-                'johnconde\\authnet\\authnetjsonresponse'                => '/authnet/AuthnetJsonResponse.php',
-                'johnconde\\authnet\\curlwrapper'                        => '/authnet/CurlWrapper.php',
-                'johnconde\\authnet\\authnetcannotsetparamsexception'    => '/exceptions/AuthnetCannotSetParamsException.php',
-                'johnconde\\authnet\\authnetcurlexception'               => '/exceptions/AuthnetCurlException.php',
-                'johnconde\\authnet\\authnetexception'                   => '/exceptions/AuthnetException.php',
-                'johnconde\\authnet\\authnetinvalidcredentialsexception' => '/exceptions/AuthnetInvalidCredentialsException.php',
-                'johnconde\\authnet\\authnetinvalidjsonexception'        => '/exceptions/AuthnetInvalidJsonException.php',
-                'johnconde\\authnet\\authnetinvalidserverexception'      => '/exceptions/AuthnetInvalidServerException.php'
+                'johnconde\\authnet\\authnetapifactory'                       => '/authnet/AuthnetApiFactory.php',
+                'johnconde\\authnet\\authnetjsonrequest'                      => '/authnet/AuthnetJsonRequest.php',
+                'johnconde\\authnet\\authnetjsonresponse'                     => '/authnet/AuthnetJsonResponse.php',
+                'johnconde\\authnet\\transactionresponse'                     => '/authnet/TransactionResponse.php',
+                'johnconde\\authnet\\curlwrapper'                             => '/authnet/CurlWrapper.php',
+                'johnconde\\authnet\\authnetcannotsetparamsexception'         => '/exceptions/AuthnetCannotSetParamsException.php',
+                'johnconde\\authnet\\authnetcurlexception'                    => '/exceptions/AuthnetCurlException.php',
+                'johnconde\\authnet\\authnetexception'                        => '/exceptions/AuthnetException.php',
+                'johnconde\\authnet\\authnetinvalidcredentialsexception'      => '/exceptions/AuthnetInvalidCredentialsException.php',
+                'johnconde\\authnet\\authnetinvalidjsonexception'             => '/exceptions/AuthnetInvalidJsonException.php',
+                'johnconde\\authnet\\authnetinvalidserverexception'           => '/exceptions/AuthnetInvalidServerException.php',
+                'johnconde\\authnet\\authnettransactionresponsecallexception' => '/exceptions/AuthnetTransactionResponseCallException.php'
             );
         }
         $cn = strtolower($class);
