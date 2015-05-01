@@ -1,5 +1,9 @@
 CHANGE LOG
 
+2015-04-29 - Version 2.1.0
+--------------------------------------------
+Transaction data returned in some CIM API calls can now be accessed easily
+
 2015-04-29 - Version 2.0.0
 --------------------------------------------
 Requests now return response objects
