@@ -70,13 +70,30 @@ class AuthnetJsonResponse
     private $responseJson;
 
     /**
+     * @var     object  \JohnConde\Authnet\TransactionResponse
+     */
+    private $transactionInfo;
+
+    /**
      * @param   string  $responseJson   Response from Authorize.Net
+     * @throws  \JohnConde\Authnet\AuthnetInvalidJsonException
      */
 	public function __construct($responseJson)
 	{
 		$this->responseJson = $responseJson;
         if(($this->response = json_decode(preg_replace('/[\x00-\x1F\x80-\xFF]/', '', $this->responseJson))) === null) {
             throw new AuthnetInvalidJsonException('Invalid JSON returned by the API');
+        }
+
+        $dr = null;
+        if (@$this->directResponse) {
+            $dr = $this->directResponse;
+        }
+        else if (@$this->validationDirectResponse) {
+            $dr = $this->validationDirectResponse;
+        }
+        if (!is_null($dr)) {
+            $this->transactionInfo = new TransactionResponse($dr);
         }
 	}
 
@@ -118,5 +135,18 @@ class AuthnetJsonResponse
     public function isError()
     {
         return strtolower($this->messages->resultCode) === 'error';
+    }
+
+    /**
+     * @param   mixed  $field  Name or key of the transaction field to be retrieved
+     * @return  string Transaction field to be retrieved
+     * @throws  \JohnConde\Authnet\AuthnetTransactionResponseCallException
+     */
+    public function getTransactionResponseField($field)
+    {
+        if ($this->transactionInfo instanceof TransactionResponse) {
+            return $this->transactionInfo->getTransactionResponseField($field);
+        }
+        throw new AuthnetTransactionResponseCallException('This API call does not have any transaction response data');
     }
 }
