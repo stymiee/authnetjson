@@ -110,9 +110,9 @@ SAMPLE RESPONSE
                         'unitPrice' => '85.00'
                     )
                 ),
-                'customerProfileId' => '31390172',
-                'customerPaymentProfileId' => '28393490',
-                'customerShippingAddressId' => '29366174',
+                'customerProfileId' => '33201103',
+                'customerPaymentProfileId' => '29821643',
+                'customerShippingAddressId' => '30904643',
                 'order' => array(
                     'invoiceNumber' => 'INV000001',
                     'description' => 'description of transaction',
@@ -194,6 +194,10 @@ SAMPLE RESPONSE
             <tr>
                 <th>Error?</th>
                 <td><?php echo ($response->isError()) ? 'yes' : 'no'; ?></td>
+            </tr>
+            <tr>
+                <th>Transaction ID</th>
+                <td><?php echo $response->getTransactionResponseField('TransactionID'); ?></td>
             </tr>
         <h2>
             Raw Input/Output
