@@ -267,6 +267,21 @@ transaction ID).
         }
     }
     
+#### Get Transaction Detail From CIM API Calls
+   
+Some CIM API calls process an AUTH_CAPTURE transaction and return data similar to AIM AUTH_CAPTURE transactions. To access 
+this information you can call `AuthnetJsonResponse::getTransactionResponseField()` using the field name or field number. 
+For example, if you are looking for the transaction ID you can use:
+
+    $response->getTransactionResponseField('TransactionID');
+    
+or
+    
+    $response->getTransactionResponseField(7);
+    
+Field name and number can be found in the [Authorize.Net AIM Guide](http://www.authorize.net/support/AIM_guide.pdf). Note 
+that the field name has all spaces removed so `TransactionID` becomes `TransactionID`.
+    
 ## Debugging
 
 To assist with debugging the `__toString()` method has been overridden to output important elements pertaining to the
