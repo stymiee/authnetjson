@@ -85,14 +85,9 @@ class AuthnetJsonResponse
             throw new AuthnetInvalidJsonException('Invalid JSON returned by the API');
         }
 
-        $dr = null;
-        if (@$this->directResponse) {
-            $dr = $this->directResponse;
-        }
-        else if (@$this->validationDirectResponse) {
-            $dr = $this->validationDirectResponse;
-        }
-        if (!is_null($dr)) {
+        $this->transactionInfo = null;
+        if (@$this->directResponse || @$this->validationDirectResponse) {
+            $dr = (@$this->directResponse) ? $this->directResponse : $this->validationDirectResponse;
             $this->transactionInfo = new TransactionResponse($dr);
         }
 	}
