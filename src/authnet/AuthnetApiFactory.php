@@ -61,7 +61,7 @@ class AuthnetApiFactory
      * @return  string                  The URL endpoint the request is to be sent to
      * @throws  \JohnConde\Authnet\AuthnetInvalidServerException
      */
-    private static function getWebServiceURL($server)
+    protected static function getWebServiceURL($server)
     {
         if ($server === static::USE_PRODUCTION_SERVER) {
             $url = 'https://api.authorize.net/xml/v1/request.api';
