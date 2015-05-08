@@ -65,7 +65,7 @@ class AuthnetJsonResponse
     private $response;
 
     /**
-     * @var     object  SimpleXML object representing the API response
+     * @var     string  JSON string that is the response sent by Authorize.Net
      */
     private $responseJson;
 
