@@ -119,7 +119,7 @@ class AuthnetJsonRequest
     /**
      * @throws  \JohnConde\Authnet\AuthnetCannotSetParamsException
      */
-    public function __set($key, $value)
+    public function __set()
 	{
         throw new AuthnetCannotSetParamsException('You cannot set parameters directly in ' . __CLASS__ . '.');
 	}
