@@ -22,6 +22,8 @@ namespace JohnConde\Authnet;
  * @see         https://developer.authorize.net/api/reference/
  *
  * @property    string  $messages
+ * @property    string  $directResponse
+ * @property    string  $validationDirectResponse
  *
  * @method      null createTransactionRequest(array $array)                                 process a payment
  * @method      null sendCustomerTransactionReceiptRequest(array $array)                    get a list of unsettled transactions
