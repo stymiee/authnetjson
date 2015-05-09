@@ -1,5 +1,9 @@
 CHANGE LOG
 
+2015-05-09 - Version 2.1.1
+--------------------------------------------
+Fixed fatal error caused by removing __set() parameters
+
 2015-05-06 - Version 2.1.0
 --------------------------------------------
 Transaction data returned in some CIM API calls can now be accessed easily
