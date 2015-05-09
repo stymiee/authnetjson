@@ -117,9 +117,11 @@ class AuthnetJsonRequest
 	}
 
     /**
+     * @param   string  $name       unused
+     * @param   mixed   $value      unused
      * @throws  \JohnConde\Authnet\AuthnetCannotSetParamsException
      */
-    public function __set()
+    public function __set($name, $value)
 	{
         throw new AuthnetCannotSetParamsException('You cannot set parameters directly in ' . __CLASS__ . '.');
 	}
