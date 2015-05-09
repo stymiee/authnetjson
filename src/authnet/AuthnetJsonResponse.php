@@ -82,8 +82,8 @@ class AuthnetJsonResponse
      */
 	public function __construct($responseJson)
 	{
-		$this->responseJson = $responseJson;
-        if(($this->response = json_decode(preg_replace('/[\x00-\x1F\x80-\xFF]/', '', $this->responseJson))) === null) {
+		$this->responseJson = preg_replace('/[\x00-\x1F\x80-\xFF]/', '', $responseJson);
+        if(($this->response = json_decode($this->responseJson)) === null) {
             throw new AuthnetInvalidJsonException('Invalid JSON returned by the API');
         }
 
@@ -103,7 +103,7 @@ class AuthnetJsonResponse
         $output .= '<table summary="Authorize.Net Response" id="authnet-response">' . "\n";
         $output .= '<tr>' . "\n\t\t" . '<th colspan="2"><b>Response JSON</b></th>' . "\n" . '</tr>' . "\n";
         $output .= '<tr><td colspan="2"><pre>' . "\n";
-        $output .= preg_replace('/[\x00-\x1F\x80-\xFF]/', '', $this->responseJson) . "\n";
+        $output .= $this->responseJson . "\n";
         $output .= '</pre></td></tr>' . "\n";
         $output .= '</table>';
 
@@ -111,7 +111,8 @@ class AuthnetJsonResponse
 	}
 
     /**
-     * @return  string  requested variable from the API call response
+     * @param   string  $var    unused
+     * @return  string          requested variable from the API call response
      */
     public function __get($var)
 	{
