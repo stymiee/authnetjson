@@ -1,5 +1,9 @@
 CHANGE LOG
 
+2015-05-29 - Version 2.2.0
+--------------------------------------------
+Added AuthnetJsonResponse::isApproved and AuthnetJsonResponse::isDeclined to easily get status of CIM transactions
+
 2015-05-09 - Version 2.1.1
 --------------------------------------------
 Fixed fatal error caused by removing __set() parameters
