@@ -157,7 +157,11 @@ SAMPLE RESPONSE
             </tr>
             <tr>
                 <th>customerProfileId</th>
-                <td><?php echo $response->customerProfileId; ?></td>
+                <td><?php echo $response->customerPaymentProfileId; ?></td>
+            </tr>
+            <tr>
+                <th>Transaction Approved?</th>
+                <td><?php echo ($response->isApproved()) ? 'yes' : 'no'; ?></td>
             </tr>
         </table>
         <h2>
