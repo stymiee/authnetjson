@@ -147,4 +147,14 @@ class AuthnetJsonResponse
         }
         throw new AuthnetTransactionResponseCallException('This API call does not have any transaction response data');
     }
+
+    public function isApproved()
+    {
+        return (int) $this->transactionInfo->getTransactionResponseField('ResponseCode') === 1;
+    }
+
+    public function isDeclined()
+    {
+        return (int) $this->transactionInfo->getTransactionResponseField('ResponseCode') === 2;
+    }
 }
