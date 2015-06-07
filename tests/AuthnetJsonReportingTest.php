@@ -29,8 +29,9 @@ class AuthnetJsonReportingTest extends \PHPUnit_Framework_TestCase
             ->getMock();
     }
 
-     /**
-     * @covers            \JohnConde\Authnet\AuthnetJson::process()
+    /**
+     * @covers            \JohnConde\Authnet\AuthnetJsonRequest::process()
+
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
      */
@@ -148,8 +149,9 @@ class AuthnetJsonReportingTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($response->transactions[2]->hasReturnedItemsSpecified);
     }
 
-     /**
-     * @covers            \JohnConde\Authnet\AuthnetJson::process()
+    /**
+     * @covers            \JohnConde\Authnet\AuthnetJsonRequest::process()
+
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
      */
@@ -214,8 +216,9 @@ class AuthnetJsonReportingTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($response->transactions[0]->hasReturnedItemsSpecified);
     }
 
-     /**
-     * @covers            \JohnConde\Authnet\AuthnetJson::process()
+    /**
+     * @covers            \JohnConde\Authnet\AuthnetJsonRequest::process()
+
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
      */
@@ -390,8 +393,9 @@ class AuthnetJsonReportingTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Card Not Present', $response->batchList[1]->product);
     }
 
-     /**
-     * @covers            \JohnConde\Authnet\AuthnetJson::process()
+    /**
+     * @covers            \JohnConde\Authnet\AuthnetJsonRequest::process()
+
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
      */
@@ -427,8 +431,9 @@ class AuthnetJsonReportingTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('No records found.', $response->messages->message[0]->text);
     }
 
-     /**
-     * @covers            \JohnConde\Authnet\AuthnetJson::process()
+    /**
+     * @covers            \JohnConde\Authnet\AuthnetJsonRequest::process()
+
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
      */
@@ -525,8 +530,9 @@ class AuthnetJsonReportingTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($response->batch->statistics[0]->refundReturnedItemsCountSpecified);
     }
 
-     /**
-     * @covers            \JohnConde\Authnet\AuthnetJson::process()
+    /**
+     * @covers            \JohnConde\Authnet\AuthnetJsonRequest::process()
+
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
      */
@@ -560,8 +566,9 @@ class AuthnetJsonReportingTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('No records found.', $response->messages->message[0]->text);
     }
 
-     /**
-     * @covers            \JohnConde\Authnet\AuthnetJson::process()
+    /**
+     * @covers            \JohnConde\Authnet\AuthnetJsonRequest::process()
+
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
      */

@@ -31,7 +31,8 @@ class AuthnetJsonCimTest extends \PHPUnit_Framework_TestCase
 
 
     /**
-     * @covers            \JohnConde\Authnet\AuthnetJson::process()
+     * @covers            \JohnConde\Authnet\AuthnetJsonRequest::process()
+
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
      */
@@ -112,7 +113,8 @@ class AuthnetJsonCimTest extends \PHPUnit_Framework_TestCase
 
 
     /**
-     * @covers            \JohnConde\Authnet\AuthnetJson::process()
+     * @covers            \JohnConde\Authnet\AuthnetJsonRequest::process()
+
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
      */
@@ -189,7 +191,8 @@ class AuthnetJsonCimTest extends \PHPUnit_Framework_TestCase
 
 
     /**
-     * @covers            \JohnConde\Authnet\AuthnetJson::process()
+     * @covers            \JohnConde\Authnet\AuthnetJsonRequest::process()
+
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
      */
@@ -251,7 +254,8 @@ class AuthnetJsonCimTest extends \PHPUnit_Framework_TestCase
 
 
     /**
-     * @covers            \JohnConde\Authnet\AuthnetJson::process()
+     * @covers            \JohnConde\Authnet\AuthnetJsonRequest::process()
+
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
      */
@@ -333,7 +337,8 @@ class AuthnetJsonCimTest extends \PHPUnit_Framework_TestCase
 
 
     /**
-     * @covers            \JohnConde\Authnet\AuthnetJson::process()
+     * @covers            \JohnConde\Authnet\AuthnetJsonRequest::process()
+
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
      */
@@ -360,20 +365,20 @@ class AuthnetJsonCimTest extends \PHPUnit_Framework_TestCase
                         ),
                         'lineItems' => array (
                             0 => array (
-                                    'itemId' => '1',
-                                    'name' => 'vase',
-                                    'description' => 'Cannes logo',
-                                    'quantity' => '18',
-                                    'unitPrice' => '45.00',
-                                ),
-                            1 => array (
-                                    'itemId' => '2',
-                                    'name' => 'desk',
-                                    'description' => 'Big Desk',
-                                    'quantity' => '10',
-                                    'unitPrice' => '85.00',
-                                ),
+                                'itemId' => '1',
+                                'name' => 'vase',
+                                'description' => 'Cannes logo',
+                                'quantity' => '18',
+                                'unitPrice' => '45.00',
                             ),
+                            1 => array (
+                                'itemId' => '2',
+                                'name' => 'desk',
+                                'description' => 'Big Desk',
+                                'quantity' => '10',
+                                'unitPrice' => '85.00',
+                            ),
+                        ),
                         'customerProfileId' => '5427896',
                         'customerPaymentProfileId' => '4796541',
                         'customerShippingAddressId' => '4907537',
@@ -385,8 +390,8 @@ class AuthnetJsonCimTest extends \PHPUnit_Framework_TestCase
                         'taxExempt' => 'false',
                         'recurringBilling' => 'false',
                         'cardCode' => '000',
-                        ),
                     ),
+                ),
                 'extraOptions' => 'x_customer_ip=100.0.0.1',
             ),
         );
@@ -419,7 +424,8 @@ class AuthnetJsonCimTest extends \PHPUnit_Framework_TestCase
 
 
     /**
-     * @covers            \JohnConde\Authnet\AuthnetJson::process()
+     * @covers            \JohnConde\Authnet\AuthnetJsonRequest::process()
+
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
      */
@@ -501,7 +507,8 @@ class AuthnetJsonCimTest extends \PHPUnit_Framework_TestCase
 
 
     /**
-     * @covers            \JohnConde\Authnet\AuthnetJson::process()
+     * @covers            \JohnConde\Authnet\AuthnetJsonRequest::process()
+
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
      */
@@ -584,7 +591,8 @@ class AuthnetJsonCimTest extends \PHPUnit_Framework_TestCase
 
 
     /**
-     * @covers            \JohnConde\Authnet\AuthnetJson::process()
+     * @covers            \JohnConde\Authnet\AuthnetJsonRequest::process()
+
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
      */
@@ -659,7 +667,8 @@ class AuthnetJsonCimTest extends \PHPUnit_Framework_TestCase
 
 
     /**
-     * @covers            \JohnConde\Authnet\AuthnetJson::process()
+     * @covers            \JohnConde\Authnet\AuthnetJsonRequest::process()
+
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
      */
@@ -698,14 +707,14 @@ class AuthnetJsonCimTest extends \PHPUnit_Framework_TestCase
                                 'description' => 'Big Desk',
                                 'quantity' => '10',
                                 'unitPrice' => '85.00',
-                                ),
                             ),
+                        ),
                         'customerProfileId' => '31390172',
                         'customerPaymentProfileId' => '28393490',
                         'customerShippingAddressId' => '29366174',
                         'transId' => '2230582306',
-                        ),
                     ),
+                ),
                 'extraOptions' => 'x_customer_ip=100.0.0.1',
             ),
         );
@@ -739,7 +748,8 @@ class AuthnetJsonCimTest extends \PHPUnit_Framework_TestCase
 
 
     /**
-     * @covers            \JohnConde\Authnet\AuthnetJson::process()
+     * @covers            \JohnConde\Authnet\AuthnetJsonRequest::process()
+
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
      */
@@ -820,7 +830,8 @@ class AuthnetJsonCimTest extends \PHPUnit_Framework_TestCase
 
 
     /**
-     * @covers            \JohnConde\Authnet\AuthnetJson::process()
+     * @covers            \JohnConde\Authnet\AuthnetJsonRequest::process()
+
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
      */
@@ -847,20 +858,20 @@ class AuthnetJsonCimTest extends \PHPUnit_Framework_TestCase
                         ),
                         'lineItems' => array (
                             0 => array (
-                                    'itemId' => '1',
-                                    'name' => 'vase',
-                                    'description' => 'Cannes logo',
-                                    'quantity' => '18',
-                                    'unitPrice' => '45.00',
-                                ),
-                            1 => array (
-                                    'itemId' => '2',
-                                    'name' => 'desk',
-                                    'description' => 'Big Desk',
-                                    'quantity' => '10',
-                                    'unitPrice' => '85.00',
-                                ),
+                                'itemId' => '1',
+                                'name' => 'vase',
+                                'description' => 'Cannes logo',
+                                'quantity' => '18',
+                                'unitPrice' => '45.00',
                             ),
+                            1 => array (
+                                'itemId' => '2',
+                                'name' => 'desk',
+                                'description' => 'Big Desk',
+                                'quantity' => '10',
+                                'unitPrice' => '85.00',
+                            ),
+                        ),
                         'customerProfileId' => '31390172',
                         'customerPaymentProfileId' => '28393490',
                         'customerShippingAddressId' => '29366174',
@@ -871,8 +882,8 @@ class AuthnetJsonCimTest extends \PHPUnit_Framework_TestCase
                             'purchaseOrderNumber' => 'PONUM000001',
                         ),
                         'transId' => '2230582347',
-                        ),
                     ),
+                ),
                 'extraOptions' => 'x_customer_ip=100.0.0.1',
             ),
         );
@@ -906,7 +917,8 @@ class AuthnetJsonCimTest extends \PHPUnit_Framework_TestCase
 
 
     /**
-     * @covers            \JohnConde\Authnet\AuthnetJson::process()
+     * @covers            \JohnConde\Authnet\AuthnetJsonRequest::process()
+
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
      */
@@ -954,7 +966,8 @@ class AuthnetJsonCimTest extends \PHPUnit_Framework_TestCase
 
 
     /**
-     * @covers            \JohnConde\Authnet\AuthnetJson::process()
+     * @covers            \JohnConde\Authnet\AuthnetJsonRequest::process()
+
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
      */
@@ -1006,7 +1019,8 @@ class AuthnetJsonCimTest extends \PHPUnit_Framework_TestCase
 
 
     /**
-     * @covers            \JohnConde\Authnet\AuthnetJson::process()
+     * @covers            \JohnConde\Authnet\AuthnetJsonRequest::process()
+
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
      */
@@ -1049,7 +1063,8 @@ class AuthnetJsonCimTest extends \PHPUnit_Framework_TestCase
 
 
     /**
-     * @covers            \JohnConde\Authnet\AuthnetJson::process()
+     * @covers            \JohnConde\Authnet\AuthnetJsonRequest::process()
+
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
      */
@@ -1114,7 +1129,8 @@ class AuthnetJsonCimTest extends \PHPUnit_Framework_TestCase
 
 
     /**
-     * @covers            \JohnConde\Authnet\AuthnetJson::process()
+     * @covers            \JohnConde\Authnet\AuthnetJsonRequest::process()
+
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
      */
@@ -1173,7 +1189,8 @@ class AuthnetJsonCimTest extends \PHPUnit_Framework_TestCase
 
 
     /**
-     * @covers            \JohnConde\Authnet\AuthnetJson::process()
+     * @covers            \JohnConde\Authnet\AuthnetJsonRequest::process()
+
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
      */
@@ -1224,7 +1241,8 @@ class AuthnetJsonCimTest extends \PHPUnit_Framework_TestCase
 
 
     /**
-     * @covers            \JohnConde\Authnet\AuthnetJson::process()
+     * @covers            \JohnConde\Authnet\AuthnetJsonRequest::process()
+
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
      */
@@ -1281,7 +1299,8 @@ class AuthnetJsonCimTest extends \PHPUnit_Framework_TestCase
 
 
     /**
-     * @covers            \JohnConde\Authnet\AuthnetJson::process()
+     * @covers            \JohnConde\Authnet\AuthnetJsonRequest::process()
+
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
      */
@@ -1294,7 +1313,8 @@ class AuthnetJsonCimTest extends \PHPUnit_Framework_TestCase
 
 
     /**
-     * @covers            \JohnConde\Authnet\AuthnetJson::process()
+     * @covers            \JohnConde\Authnet\AuthnetJsonRequest::process()
+
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
      */
@@ -1339,7 +1359,8 @@ class AuthnetJsonCimTest extends \PHPUnit_Framework_TestCase
 
 
     /**
-     * @covers            \JohnConde\Authnet\AuthnetJson::process()
+     * @covers            \JohnConde\Authnet\AuthnetJsonRequest::process()
+
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
      */
@@ -1377,7 +1398,8 @@ class AuthnetJsonCimTest extends \PHPUnit_Framework_TestCase
 
 
     /**
-     * @covers            \JohnConde\Authnet\AuthnetJson::process()
+     * @covers            \JohnConde\Authnet\AuthnetJsonRequest::process()
+
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
      */
@@ -1421,7 +1443,8 @@ class AuthnetJsonCimTest extends \PHPUnit_Framework_TestCase
 
 
     /**
-     * @covers            \JohnConde\Authnet\AuthnetJson::process()
+     * @covers            \JohnConde\Authnet\AuthnetJsonRequest::process()
+
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
      */
@@ -1460,7 +1483,8 @@ class AuthnetJsonCimTest extends \PHPUnit_Framework_TestCase
 
 
     /**
-     * @covers            \JohnConde\Authnet\AuthnetJson::process()
+     * @covers            \JohnConde\Authnet\AuthnetJsonRequest::process()
+
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
      */
@@ -1499,7 +1523,8 @@ class AuthnetJsonCimTest extends \PHPUnit_Framework_TestCase
 
 
     /**
-     * @covers            \JohnConde\Authnet\AuthnetJson::process()
+     * @covers            \JohnConde\Authnet\AuthnetJsonRequest::process()
+
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
      */
@@ -1542,7 +1567,8 @@ class AuthnetJsonCimTest extends \PHPUnit_Framework_TestCase
 
 
     /**
-     * @covers            \JohnConde\Authnet\AuthnetJson::process()
+     * @covers            \JohnConde\Authnet\AuthnetJsonRequest::process()
+
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
      */
@@ -1611,7 +1637,8 @@ class AuthnetJsonCimTest extends \PHPUnit_Framework_TestCase
 
 
     /**
-     * @covers            \JohnConde\Authnet\AuthnetJson::process()
+     * @covers            \JohnConde\Authnet\AuthnetJsonRequest::process()
+
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
      */
@@ -1736,7 +1763,8 @@ class AuthnetJsonCimTest extends \PHPUnit_Framework_TestCase
 
 
     /**
-     * @covers            \JohnConde\Authnet\AuthnetJson::process()
+     * @covers            \JohnConde\Authnet\AuthnetJsonRequest::process()
+
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
      */
@@ -1858,7 +1886,8 @@ class AuthnetJsonCimTest extends \PHPUnit_Framework_TestCase
 
 
     /**
-     * @covers            \JohnConde\Authnet\AuthnetJson::process()
+     * @covers            \JohnConde\Authnet\AuthnetJsonRequest::process()
+
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
      */
@@ -1915,7 +1944,8 @@ class AuthnetJsonCimTest extends \PHPUnit_Framework_TestCase
 
 
     /**
-     * @covers            \JohnConde\Authnet\AuthnetJson::process()
+     * @covers            \JohnConde\Authnet\AuthnetJsonRequest::process()
+
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
      */

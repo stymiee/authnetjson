@@ -24,7 +24,7 @@ class AuthnetJsonRequestTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers            \JohnConde\Authnet\AuthnetJson::process()
+     * @covers            \JohnConde\Authnet\AuthnetJsonRequest::process()
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
      * @expectedException \JohnConde\Authnet\AuthnetInvalidJsonException
