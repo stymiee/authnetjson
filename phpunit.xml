@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<phpunit 
+<phpunit
     backupGlobals="false"
     backupStaticAttributes="false"
     bootstrap="./src/autoload.php"
@@ -16,4 +16,19 @@
             <directory>./tests/</directory>
         </testsuite>
     </testsuites>
+
+    <filter>
+        <blacklist>
+            <file>./src/autoload.php</file>
+        </blacklist>
+    </filter>
+
+    <logging>
+        <log
+            type="coverage-html"
+            target="./build/coverage/report"
+            lowUpperBound="35"
+            highLowerBound="70"
+        />
+    </logging>
 </phpunit>
