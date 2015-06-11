@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
- 
+
 namespace JohnConde\Authnet;
 
 /**
@@ -23,6 +23,11 @@ namespace JohnConde\Authnet;
 class CurlWrapper
 {
     /**
+     * @var     resource  cURL resource
+     */
+    protected $ch;
+
+    /**
      * @param   string  $url    The URL to connect to process a transaction
      * @param   string  $json   A JSON response to be sent as payload
      * @return  string          A JSON response string
@@ -30,20 +35,38 @@ class CurlWrapper
      */
     public function process($url, $json)
     {
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array("Content-Type: text/json"));
-        curl_setopt($ch, CURLOPT_HEADER, 0);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $json);
-        curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
-
-        if(($response = curl_exec($ch)) !== false) {
-            curl_close($ch);
-            unset($ch);
+        $response = $this->makeRequest($url, $json);
+        if($response !== false) {
             return $response;
         }
-        throw new AuthnetCurlException('Connection error: ' . curl_error($ch) . ' (' . curl_errno($ch) . ')');
+        $error = null;
+        $errno = null;
+        if ($this->ch) {
+            $error = curl_error($this->ch);
+            $errno = curl_errno($this->ch);
+        }
+        throw new AuthnetCurlException('Connection error: ' . $error . ' (' . $errno . ')');
     }
-} 
+
+    /**
+     * @param   string  $url    The URL to connect to process a transaction
+     * @param   string  $json   A JSON response to be sent as payload
+     * @return  string          A JSON response string
+     * @codeCoverageIgnore
+     */
+    protected function makeRequest($url, $json)
+    {
+        $this->ch = curl_init();
+        curl_setopt($this->ch, CURLOPT_URL, $url);
+        curl_setopt($this->ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($this->ch, CURLOPT_HTTPHEADER, array("Content-Type: text/json"));
+        curl_setopt($this->ch, CURLOPT_HEADER, 0);
+        curl_setopt($this->ch, CURLOPT_POSTFIELDS, $json);
+        curl_setopt($this->ch, CURLOPT_POST, 1);
+        curl_setopt($this->ch, CURLOPT_SSL_VERIFYPEER, 0);
+        $response = curl_exec($this->ch);
+        curl_close($this->ch);
+
+        return $response;
+    }
+}
