@@ -26,7 +26,7 @@ class CurlWrapperTest extends \PHPUnit_Framework_TestCase
      */
     public function testCurlWrapperMakeRequest()
     {
-        $url  = 'http://www.example.com';
+        $url  = 'http://localhost';
         $json = '{}';
 
         $this->http->method('makeRequest')
@@ -44,11 +44,32 @@ class CurlWrapperTest extends \PHPUnit_Framework_TestCase
      */
     public function testCurlWrapperMakeRequestException()
     {
-        $url  = 'http://www.example.com';
+        $url  = 'http://localhost';
         $json = false;
 
         $this->http->method('makeRequest')
             ->willReturn($json);
+
+        $this->http->process($url, $json);
+    }
+
+    /**
+     * @uses              \JohnConde\Authnet\CurlWrapper::makeRequest()
+     * @covers            \JohnConde\Authnet\CurlWrapper::process()
+     * @expectedException \JohnConde\Authnet\AuthnetCurlException
+     */
+    public function testCurlWrapperMakeRequestProcessError()
+    {
+        $url  = 'http://localhost';
+        $json = false;
+
+        $this->http->method('makeRequest')
+            ->willReturn($json);
+
+        $reflectionOfCurl = new \ReflectionObject($this->http);
+        $handle = $reflectionOfCurl->getProperty('ch');
+        $handle->setAccessible(true);
+        $handle->setValue($this->http, curl_init($url));
 
         $this->http->process($url, $json);
     }
