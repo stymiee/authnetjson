@@ -16,6 +16,7 @@ class TransactionResponseTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers            \JohnConde\Authnet\TransactionResponse::__construct()
      * @covers            \JohnConde\Authnet\TransactionResponse::getTransactionResponseField()
+     * @covers            \JohnConde\Authnet\AuthnetJsonResponse::getTransactionResponseField()
      */
     public function testTransactionResponse()
     {
