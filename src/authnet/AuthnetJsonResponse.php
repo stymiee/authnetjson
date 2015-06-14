@@ -136,6 +136,34 @@ class AuthnetJsonResponse
     }
 
     /**
+     * @return bool If transaction was approved
+     */
+    public function isApproved()
+    {
+        if ($this->transactionInfo instanceof TransactionResponse) {
+            $approved = (int) $this->transactionInfo->getTransactionResponseField('ResponseCode') === 1;
+        }
+        else {
+            $approved = $this->responseCode === 1;
+        }
+        return $this->isSuccessful() && $approved;
+    }
+
+    /**
+     * @return bool If transaction was declined
+     */
+    public function isDeclined()
+    {
+        if ($this->transactionInfo instanceof TransactionResponse) {
+            $declined = (int) $this->transactionInfo->getTransactionResponseField('ResponseCode') === 2;
+        }
+        else {
+            $declined = $this->responseCode === 2;
+        }
+        return $this->isSuccessful() && $declined;
+    }
+
+    /**
      * @param   mixed  $field  Name or key of the transaction field to be retrieved
      * @return  string Transaction field to be retrieved
      * @throws  \JohnConde\Authnet\AuthnetTransactionResponseCallException
@@ -146,21 +174,5 @@ class AuthnetJsonResponse
             return $this->transactionInfo->getTransactionResponseField($field);
         }
         throw new AuthnetTransactionResponseCallException('This API call does not have any transaction response data');
-    }
-
-    /**
-     * @return bool If transaction was approved
-     */
-    public function isApproved()
-    {
-        return (int) $this->transactionInfo->getTransactionResponseField('ResponseCode') === 1;
-    }
-
-    /**
-     * @return bool If transaction was declined
-     */
-    public function isDeclined()
-    {
-        return (int) $this->transactionInfo->getTransactionResponseField('ResponseCode') === 2;
     }
 }
