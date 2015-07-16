@@ -1,5 +1,10 @@
 CHANGE LOG
 
+2015-07-15 - Version 2.3.0
+--------------------------------------------
+Updated AuthnetJsonResponse::isApproved and AuthnetJsonResponse::isDeclined to work with AIM transactions
+Got unit test coverage to 100%
+
 2015-05-29 - Version 2.2.0
 --------------------------------------------
 Added AuthnetJsonResponse::isApproved and AuthnetJsonResponse::isDeclined to easily get status of CIM transactions
