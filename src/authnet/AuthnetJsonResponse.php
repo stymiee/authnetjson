@@ -160,7 +160,7 @@ class AuthnetJsonResponse
         else {
             $declined = $this->responseCode === 2;
         }
-        return $this->isSuccessful() && $declined;
+        return $this->isSuccessful() && $declined;
     }
 
     /**
