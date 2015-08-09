@@ -34,6 +34,11 @@ class AuthnetApiFactory
     const USE_DEVELOPMENT_SERVER = 1;
 
     /**
+     * @const Indicates use of the Akamai endpoint
+     */
+    const USE_AKAMAI_SERVER = 2;
+
+    /**
      * @param   string      $login                          Authorize.Net API Login ID
      * @param   string      $transaction_key                Authorize.Net API Transaction Key
      * @param   integer     $server                         ID of which server to use (optional)
@@ -68,6 +73,9 @@ class AuthnetApiFactory
         }
         else if ($server === static::USE_DEVELOPMENT_SERVER) {
             $url = 'https://apitest.authorize.net/xml/v1/request.api';
+        }
+        else if ($server === static::USE_AKAMAI_SERVER) {
+            $url = 'https://api2.authorize.net/xml/v1/request.api';
         }
         else {
             throw new AuthnetInvalidServerException('You did not provide a valid server.');
