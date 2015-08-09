@@ -23,8 +23,46 @@ class AuthnetApiFactoryTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers            \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
      * @covers            \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
+     */
+    public function testGetWebServiceUrlProductionServer()
+    {
+        $server           = AuthnetApiFactory::USE_PRODUCTION_SERVER;
+        $reflectionMethod = new \ReflectionMethod('\JohnConde\Authnet\AuthnetApiFactory', 'getWebServiceURL');
+        $reflectionMethod->setAccessible(true);
+        $url              = $reflectionMethod->invoke(null, $server);
+
+        $this->assertEquals($url, 'https://api.authorize.net/xml/v1/request.api');
+    }
+
+    /**
+     * @covers            \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
+     */
+    public function testGetWebServiceUrlDevelopmentServer()
+    {
+        $server           = AuthnetApiFactory::USE_DEVELOPMENT_SERVER;
+        $reflectionMethod = new \ReflectionMethod('\JohnConde\Authnet\AuthnetApiFactory', 'getWebServiceURL');
+        $reflectionMethod->setAccessible(true);
+        $url              = $reflectionMethod->invoke(null, $server);
+
+        $this->assertEquals($url, 'https://apitest.authorize.net/xml/v1/request.api');
+    }
+
+    /**
+     * @covers            \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
+     */
+    public function testGetWebServiceUrlAkamaiServer()
+    {
+        $server           = AuthnetApiFactory::USE_AKAMAI_SERVER;
+        $reflectionMethod = new \ReflectionMethod('\JohnConde\Authnet\AuthnetApiFactory', 'getWebServiceURL');
+        $reflectionMethod->setAccessible(true);
+        $url              = $reflectionMethod->invoke(null, $server);
+
+        $this->assertEquals($url, 'https://api2.authorize.net/xml/v1/request.api');
+    }
+
+    /**
+     * @covers            \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
      * @uses              \JohnConde\Authnet\AuthnetJsonRequest
      * @expectedException \JohnConde\Authnet\AuthnetInvalidCredentialsException
      */
@@ -36,7 +74,6 @@ class AuthnetApiFactoryTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers            \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
-     * @covers            \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
      * @uses              \JohnConde\Authnet\AuthnetJsonRequest
      * @expectedException \JohnConde\Authnet\AuthnetInvalidCredentialsException
      */
@@ -48,7 +85,6 @@ class AuthnetApiFactoryTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers            \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
-     * @covers            \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
      * @expectedException \JohnConde\Authnet\AuthnetInvalidServerException
      */
     public function testExceptionIsRaisedForAuthnetInvalidServer()
@@ -58,7 +94,6 @@ class AuthnetApiFactoryTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers            \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
-     * @covers            \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
      * @uses              \JohnConde\Authnet\AuthnetJsonRequest
      */
     public function testCurlWrapperProductionResponse()
@@ -71,7 +106,6 @@ class AuthnetApiFactoryTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers            \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
-     * @covers            \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
      * @uses              \JohnConde\Authnet\AuthnetJsonRequest
      */
     public function testCurlWrapperDevelopmentResponse()
