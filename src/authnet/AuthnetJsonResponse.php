@@ -62,6 +62,16 @@ namespace JohnConde\Authnet;
 class AuthnetJsonResponse
 {
     /**
+     * @const Indicates the status code of an approved transaction
+     */
+    const STATUS_APPROVED = 1;
+
+    /**
+     * @const Indicates the status code of an declined transaction
+     */
+    const STATUS_DECLINED = 2;
+
+    /**
      * @var     object  SimpleXML object representing the API response
      */
     private $response;
@@ -140,13 +150,7 @@ class AuthnetJsonResponse
      */
     public function isApproved()
     {
-        if ($this->transactionInfo instanceof TransactionResponse) {
-            $approved = (int) $this->transactionInfo->getTransactionResponseField('ResponseCode') === 1;
-        }
-        else {
-            $approved = $this->responseCode === 1;
-        }
-        return $this->isSuccessful() && $approved;
+        return $this->isSuccessful() && $this->checkTransactionStatus(self::STATUS_APPROVED) ;
     }
 
     /**
@@ -154,13 +158,21 @@ class AuthnetJsonResponse
      */
     public function isDeclined()
     {
+        return $this->isSuccessful() && $this->checkTransactionStatus(self::STATUS_DECLINED) ;
+    }
+
+    /**
+     * @return bool Check to see if the ResponseCode matches the expected value
+     */
+    protected function checkTransactionStatus($status)
+    {
         if ($this->transactionInfo instanceof TransactionResponse) {
-            $declined = (int) $this->transactionInfo->getTransactionResponseField('ResponseCode') === 2;
+            $match = (int) $this->transactionInfo->getTransactionResponseField('ResponseCode') === (int) $status;
         }
         else {
-            $declined = $this->responseCode === 2;
+            $match = $this->responseCode === $status;
         }
-        return $this->isSuccessful() && $declined;
+        return $match;
     }
 
     /**
