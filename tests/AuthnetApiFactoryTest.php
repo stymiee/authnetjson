@@ -62,6 +62,18 @@ class AuthnetApiFactoryTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @covers            \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
+     * @expectedException \JohnConde\Authnet\AuthnetInvalidServerException
+     */
+    public function testGetWebServiceUrlBadServer()
+    {
+        $server           = 99;
+        $reflectionMethod = new \ReflectionMethod('\JohnConde\Authnet\AuthnetApiFactory', 'getWebServiceURL');
+        $reflectionMethod->setAccessible(true);
+        $reflectionMethod->invoke(null, $server);
+    }
+
+    /**
      * @covers            \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
      * @uses              \JohnConde\Authnet\AuthnetJsonRequest
      * @expectedException \JohnConde\Authnet\AuthnetInvalidCredentialsException
