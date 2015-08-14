@@ -18,10 +18,10 @@ Here is a minimal example of a `composer.json` file that just defines a dependen
 
     {
         "require": {
-            "stymiee/authnetjson": "2.2.*"
+            "stymiee/authnetjson": "2.4.*"
         }
     }
-    
+
 ## Basic Usage
 Using this library usually consists of three steps:
 
@@ -40,7 +40,7 @@ Simple usage:
     if ($response->isSuccessful()) {
         echo $json->transaction->transactionStatus;
     }
-    
+
 The format of the array to be passed during the API call follows the structure outlined in [Authorize.Net's Integration Guide](http://developer.authorize.net/api/reference/).
 
 ## Using the Authorize.Net Development Server
@@ -49,7 +49,7 @@ Authorize.Net provides a development environment for developers to test their in
 (as opposed to their production endpoint) set the optional third parameter of `AuthnetApiFactory::getJsonApiHandler()` to be `1` or use the built in class constant `AuthnetApiFactory::USE_DEVELOPMENT_SERVER`:
 
     $json = AuthnetApiFactory::getJsonApiHandler(AUTHNET_LOGIN, AUTHNET_TRANSKEY, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
-    
+
 ## Usage Examples
 
 To help make how this library is used easier to understand example API calls are provioded in the `example` directory.
@@ -171,11 +171,11 @@ transaction ID).
             ),
         ),
     ));
-    
+
     if ($response->isSuccessful()) {
         echo $response->transactionResponse->authCode;
     }
-    
+
 #### Create a Customer Profile
 
     $request = AuthnetApiFactory::getJsonApiHandler(AUTHNET_LOGIN, AUTHNET_TRANSKEY);
@@ -216,7 +216,7 @@ transaction ID).
     if ($response->isSuccessful()) {
         echo $response->customerProfileId;
     }
-    
+
 #### Create a Recurring Subscription
 
     $request = AuthnetApiFactory::getJsonApiHandler(AUTHNET_LOGIN, AUTHNET_TRANSKEY);
@@ -247,7 +247,7 @@ transaction ID).
             )
         )
     ));
-    
+
     if ($response->isSuccessful()) {
         echo $response->subscriptionId;
     }
@@ -260,28 +260,28 @@ transaction ID).
         'firstSettlementDate' => '2015-01-01T08:15:30',
         'lastSettlementDate'  => '2015-01-30T08:15:30',
     ));
-    
+
     if ($response->isSuccessful()) {
         foreach ($response->batchList as $batch) {
             echo $batch->batchId;
         }
     }
-    
+
 #### Get Transaction Detail From CIM API Calls
-   
-Some CIM API calls process an AUTH_CAPTURE transaction and return data similar to AIM AUTH_CAPTURE transactions. To access 
-this information you can call `AuthnetJsonResponse::getTransactionResponseField()` using the field name or field number. 
+
+Some CIM API calls process an AUTH_CAPTURE transaction and return data similar to AIM AUTH_CAPTURE transactions. To access
+this information you can call `AuthnetJsonResponse::getTransactionResponseField()` using the field name or field number.
 For example, if you are looking for the transaction ID you can use:
 
     $response->getTransactionResponseField('TransactionID');
-    
+
 or
-    
+
     $response->getTransactionResponseField(7);
-    
-Field name and number can be found in the [Authorize.Net AIM Guide](http://www.authorize.net/support/AIM_guide.pdf). Note 
+
+Field name and number can be found in the [Authorize.Net AIM Guide](http://www.authorize.net/support/AIM_guide.pdf). Note
 that the field name has all spaces removed so `TransactionID` becomes `TransactionID`.
-    
+
 ## Debugging
 
 To assist with debugging the `__toString()` method has been overridden to output important elements pertaining to the
@@ -296,7 +296,7 @@ usage of this library. Simple `echo` your AuthnetJson object to see:
 Basic Usage:
 
     $request = AuthnetApiFactory::getJsonApiHandler(AUTHNET_LOGIN, AUTHNET_TRANSKEY);
-    $response = $request->getUnsettledTransactionListRequest();  
+    $response = $request->getUnsettledTransactionListRequest();
     echo $request, $response;
 
 ## Support
