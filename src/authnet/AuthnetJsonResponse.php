@@ -90,10 +90,10 @@ class AuthnetJsonResponse
      * @param   string  $responseJson   Response from Authorize.Net
      * @throws  \JohnConde\Authnet\AuthnetInvalidJsonException
      */
-	public function __construct($responseJson)
-	{
-		$this->responseJson = preg_replace('/[\x00-\x1F\x80-\xFF]/', '', $responseJson);
-        if(($this->response = json_decode($this->responseJson)) === null) {
+    public function __construct($responseJson)
+    {
+        $this->responseJson = preg_replace('/[\x00-\x1F\x80-\xFF]/', '', $responseJson);
+        if (($this->response = json_decode($this->responseJson)) === null) {
             throw new AuthnetInvalidJsonException('Invalid JSON returned by the API');
         }
 
@@ -102,14 +102,14 @@ class AuthnetJsonResponse
             $dr = (@$this->directResponse) ? $this->directResponse : $this->validationDirectResponse;
             $this->transactionInfo = new TransactionResponse($dr);
         }
-	}
+    }
 
     /**
      * @return  string  HTML table containing debugging information
      */
-	public function __toString()
-	{
-	    $output  = '';
+    public function __toString()
+    {
+        $output  = '';
         $output .= '<table summary="Authorize.Net Response" id="authnet-response">' . "\n";
         $output .= '<tr>' . "\n\t\t" . '<th colspan="2"><b>Response JSON</b></th>' . "\n" . '</tr>' . "\n";
         $output .= '<tr><td colspan="2"><pre>' . "\n";
@@ -118,16 +118,16 @@ class AuthnetJsonResponse
         $output .= '</table>';
 
         return $output;
-	}
+    }
 
     /**
      * @param   string  $var    unused
      * @return  string          requested variable from the API call response
      */
     public function __get($var)
-	{
-	    return $this->response->{$var};
-	}
+    	{
+        return $this->response->{$var};
+    }
 
     /**
      * @return  bool    Whether the transaction was in an successful state
@@ -162,6 +162,7 @@ class AuthnetJsonResponse
     }
 
     /**
+     * @param  integer $status
      * @return bool Check to see if the ResponseCode matches the expected value
      */
     protected function checkTransactionStatus($status)
@@ -170,7 +171,7 @@ class AuthnetJsonResponse
             $match = (int) $this->transactionInfo->getTransactionResponseField('ResponseCode') === (int) $status;
         }
         else {
-            $match = $this->responseCode === $status;
+            $match = (int) $this->transactionResponse->responseCode === $status;
         }
         return $match;
     }
