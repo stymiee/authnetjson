@@ -246,7 +246,7 @@ class AuthnetJsonResponseTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers            \JohnConde\Authnet\AuthnetJsonResponse::checkTransactionStatus()
      */
-    public function testCheckTransactionStatus()
+    public function testCheckTransactionStatusCim()
     {
         $responseJson = '{
            "customerPaymentProfileId":"28821903",
@@ -266,6 +266,57 @@ class AuthnetJsonResponseTest extends \PHPUnit_Framework_TestCase
         $reflectionMethod = new \ReflectionMethod($response, 'checkTransactionStatus');
         $reflectionMethod->setAccessible(true);
         $match    = $reflectionMethod->invoke($response, AuthnetJsonResponse::STATUS_DECLINED);
+
+        $this->assertTrue($match);
+    }
+
+    /**
+     * @covers            \JohnConde\Authnet\AuthnetJsonResponse::checkTransactionStatus()
+     */
+    public function testCheckTransactionStatusAim()
+    {
+        $responseJson = '{
+           "transactionResponse":{
+              "responseCode":"1",
+              "authCode":"QWX20S",
+              "avsResultCode":"Y",
+              "cvvResultCode":"P",
+              "cavvResultCode":"2",
+              "transId":"2228446239",
+              "refTransID":"",
+              "transHash":"56B2D50D73CAB8C6EDE7A92B9BB235BD",
+              "testRequest":"0",
+              "accountNumber":"XXXX1111",
+              "accountType":"Visa",
+              "messages":[
+                 {
+                    "code":"1",
+                    "description":"This transaction has been approved."
+                 }
+              ],
+              "userFields":[
+                 {
+                    "name":"favorite_color",
+                    "value":"blue"
+                 }
+              ]
+           },
+           "refId":"94564789",
+           "messages":{
+              "resultCode":"Ok",
+              "message":[
+                 {
+                    "code":"I00001",
+                    "text":"Successful."
+                 }
+              ]
+           }
+        }';
+
+        $response = new AuthnetJsonResponse($responseJson);
+        $reflectionMethod = new \ReflectionMethod($response, 'checkTransactionStatus');
+        $reflectionMethod->setAccessible(true);
+        $match    = $reflectionMethod->invoke($response, AuthnetJsonResponse::STATUS_APPROVED);
 
         $this->assertTrue($match);
     }
