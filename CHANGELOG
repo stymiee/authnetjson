@@ -1,4 +1,10 @@
 CHANGE LOG
+
+2015-08-09 - Version 2.4.1
+--------------------------------------------
+Fixed potential bug in AuthnetJsonResponse::Fixed potential bug in checkTransactionStatus()
+Got unit test coverage back to 100%
+
 2015-08-09 - Version 2.4.0
 --------------------------------------------
 Added support for the new Akamai endpoint
