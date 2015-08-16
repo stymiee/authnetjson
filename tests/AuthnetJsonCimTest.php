@@ -1306,9 +1306,35 @@ class AuthnetJsonCimTest extends \PHPUnit_Framework_TestCase
      */
     public function testUpdateSplitTenderGroupRequest()
     {
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
+        $requestJson = array (
+            'splitTenderId' => '123456',
+            'splitTenderStatus' => 'voided'
         );
+        $responseJson = '{
+           "messages":{
+              "resultCode":"Ok",
+              "message":[
+                 {
+                    "code":"I00001",
+                    "text":"Successful."
+                 }
+              ]
+           }
+        }';
+
+        $this->http->expects($this->once())
+            ->method('process')
+            ->will($this->returnValue($responseJson));
+
+        $request = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server);
+        $request->setProcessHandler($this->http);
+        $response = $request->updateSplitTenderGroupRequest($requestJson);
+
+        $this->assertEquals('Ok', $response->messages->resultCode);
+        $this->assertTrue($response->isSuccessful());
+        $this->assertFalse($response->isError());
+        $this->assertEquals('I00001', $response->messages->message[0]->code);
+        $this->assertEquals('Successful.', $response->messages->message[0]->text);
     }
 
 
