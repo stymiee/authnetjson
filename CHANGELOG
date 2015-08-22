@@ -1,6 +1,10 @@
 CHANGE LOG
 
-2015-08-09 - Version 2.4.2
+2015-08-21 - Version 2.4.3
+--------------------------------------------
+Updated docblock comments and added phpdoc.xml to allow for better and easier to generate documentation
+
+2015-08-16 - Version 2.4.2
 --------------------------------------------
 Completed unit test for UpdateSplitTenderGroup API call
 
