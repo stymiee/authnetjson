@@ -1,6 +1,6 @@
 <?php
 
-/*
+/**
  * This file is part of the AuthnetJSON package.
  *
  * (c) John Conde <stymiee@gmail.com>
@@ -83,6 +83,9 @@ class AuthnetJsonRequest
     private $processor;
 
     /**
+     * Creates the request object by setting the Authorize.Net credentials and URL of the endpoint to be used
+     * for the API call
+     *
      * @param   string  $login              Authorize.Net API login ID
      * @param   string  $transactionKey     Authorize.Net API Transaction Key
      * @param   string  $api_url            URL endpoint for processing a transaction
@@ -95,6 +98,8 @@ class AuthnetJsonRequest
 	}
 
     /**
+     * Outputs the account credentials, endpoint URL, and request JSON in a human readable format
+     *
      * @return  string  HTML table containing debugging information
      */
 	public function __toString()
@@ -117,6 +122,8 @@ class AuthnetJsonRequest
 	}
 
     /**
+     * The __set() method should never be used as all values to ba made in the APi call must be passed as an array
+     *
      * @param   string  $name       unused
      * @param   mixed   $value      unused
      * @throws  \JohnConde\Authnet\AuthnetCannotSetParamsException
@@ -127,9 +134,14 @@ class AuthnetJsonRequest
 	}
 
     /**
+     * Magic method that dynamically creates our API call based on the name of the method in the client code and
+     * the array passed as its parameter
+     *
+     * @param   string  $api_call   name of the API call to be made
+     * @param   array   $args       the array to be passed to the API
      * @returns null
      */
-    public function __call($api_call, $args)
+    public function __call($api_call, Array $args)
 	{
         $authentication = array(
             'merchantAuthentication' => array(
@@ -151,6 +163,8 @@ class AuthnetJsonRequest
 	}
 
     /**
+     * Tells the handler to make the API call to Authorize.Net
+     *
      * @throws  \JohnConde\Authnet\AuthnetInvalidJsonException
      */
     private function process()
@@ -159,6 +173,8 @@ class AuthnetJsonRequest
     }
 
     /**
+     * Sets the handler to be used to handle our API call
+     *
      * @param   object  $processor
      */
     public function setProcessHandler($processor)

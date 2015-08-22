@@ -1,6 +1,6 @@
 <?php
 
-/*
+/**
  * This file is part of the AuthnetJSON package.
  *
  * (c) John Conde <stymiee@gmail.com>
@@ -87,6 +87,8 @@ class AuthnetJsonResponse
     private $transactionInfo;
 
     /**
+     * Creates the response object with the response json returned from the API call
+     *
      * @param   string  $responseJson   Response from Authorize.Net
      * @throws  \JohnConde\Authnet\AuthnetInvalidJsonException
      */
@@ -105,6 +107,8 @@ class AuthnetJsonResponse
     }
 
     /**
+     * Outputs the response JSON in a human readable format
+     *
      * @return  string  HTML table containing debugging information
      */
     public function __toString()
@@ -121,6 +125,8 @@ class AuthnetJsonResponse
     }
 
     /**
+     * Gets a response variable from the API response
+     *
      * @param   string  $var    unused
      * @return  string          requested variable from the API call response
      */
@@ -130,6 +136,8 @@ class AuthnetJsonResponse
     }
 
     /**
+     * Checks if the API call is not in an error state
+     *
      * @return  bool    Whether the transaction was in an successful state
      */
     public function isSuccessful()
@@ -138,6 +146,8 @@ class AuthnetJsonResponse
     }
 
     /**
+     * Checks if the API is reporting an error with the API call
+     *
      * @return  bool    Whether the transaction was in an error state
      */
     public function isError()
@@ -146,7 +156,9 @@ class AuthnetJsonResponse
     }
 
     /**
-     * @return bool If transaction was approved
+     * Checks if a transaction was approved
+     *
+     * @return bool     true if the transaction is approved
      */
     public function isApproved()
     {
@@ -154,7 +166,9 @@ class AuthnetJsonResponse
     }
 
     /**
-     * @return bool If transaction was declined
+     * Checks if a transaction was declined
+     *
+     * @return bool     true if the transaction is declined
      */
     public function isDeclined()
     {
@@ -162,6 +176,8 @@ class AuthnetJsonResponse
     }
 
     /**
+     * Check to see if the ResponseCode matches the expected value
+     *
      * @param  integer $status
      * @return bool Check to see if the ResponseCode matches the expected value
      */
@@ -177,6 +193,8 @@ class AuthnetJsonResponse
     }
 
     /**
+     * Gets the transaction response field for AIM and CIM transactions.
+     *
      * @param   mixed  $field  Name or key of the transaction field to be retrieved
      * @return  string Transaction field to be retrieved
      * @throws  \JohnConde\Authnet\AuthnetTransactionResponseCallException

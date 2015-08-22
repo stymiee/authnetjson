@@ -1,6 +1,6 @@
 <?php
 
-/*
+/**
  * This file is part of the AuthnetJSON package.
  *
  * (c) John Conde <stymiee@gmail.com>
@@ -21,6 +21,8 @@ namespace JohnConde\Authnet;
  * @license    http://www.apache.org/licenses/LICENSE-2.0.html Apache License, Version 2.0
  * @link       https://github.com/stymiee/authnetjson
  */
+
+
 class AuthnetApiFactory
 {
     /**
@@ -39,6 +41,8 @@ class AuthnetApiFactory
     const USE_AKAMAI_SERVER = 2;
 
     /**
+     * Validates the Authorize.Net credentials and returns a Request object to be used to make an API call
+     *
      * @param   string      $login                          Authorize.Net API Login ID
      * @param   string      $transaction_key                Authorize.Net API Transaction Key
      * @param   integer     $server                         ID of which server to use (optional)
@@ -62,6 +66,8 @@ class AuthnetApiFactory
     }
 
     /**
+     * Gets the API endpoint to be used for the API call
+     *
      * @param   integer     $server     ID of which server to use
      * @return  string                  The URL endpoint the request is to be sent to
      * @throws  \JohnConde\Authnet\AuthnetInvalidServerException

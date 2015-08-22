@@ -1,5 +1,6 @@
 <?php
-/*
+
+/**
  * This file is part of the AuthnetJSON package.
  *
  * (c) John Conde <stymiee@gmail.com>
@@ -78,6 +79,8 @@ class TransactionResponse {
     private $responseArray = array();
 
     /**
+     * Creates out TransactionResponse object and assigns the response variables to an array
+     *
      * @param   string  $response   Comma delimited transaction response string
      */
     public function __construct($response)
@@ -86,6 +89,10 @@ class TransactionResponse {
     }
 
     /**
+     * Gets the requested value out of the response array using the provided key. The location of that value
+     * can be accessed via it's numerical location in the array (starting at zero) or using the key for that field
+     * as defined by Authorize.Net and mapped in self::$fieldMap.
+     *
      * @param   mixed  $field  Name or key of the transaction field to be retrieved
      * @return  string Transaction field to be retrieved
      */

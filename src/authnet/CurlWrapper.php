@@ -1,6 +1,6 @@
 <?php
 
-/*
+/**
  * This file is part of the AuthnetJSON package.
  *
  * (c) John Conde <stymiee@gmail.com>
@@ -28,6 +28,8 @@ class CurlWrapper
     protected $ch;
 
     /**
+     * Makes the API request and handles any communication errors
+     *
      * @param   string  $url    The URL to connect to process a transaction
      * @param   string  $json   A JSON response to be sent as payload
      * @return  string          A JSON response string
@@ -49,6 +51,8 @@ class CurlWrapper
     }
 
     /**
+     * Uses cURL to send the request to the Authorize.Net endpoint and receive their response
+     *
      * @param   string  $url    The URL to connect to process a transaction
      * @param   string  $json   A JSON response to be sent as payload
      * @return  string          A JSON response string
