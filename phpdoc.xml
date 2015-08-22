@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<phpdoc>
+    <parser>
+        <target>build/docs</target>
+    </parser>
+    <transformer>
+        <target>build/docs</target>
+    </transformer>
+    <files>
+        <directory>src</directory>
+        <ignore>src/autoload.php</ignore>
+        <ignore>tests/*</ignore>
+    </files>
+</phpdoc>
