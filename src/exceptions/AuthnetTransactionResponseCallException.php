@@ -1,6 +1,6 @@
 <?php
 
-/*
+/**
  * This file is part of the AuthnetJSON package.
  *
  * (c) John Conde <stymiee@gmail.com>
