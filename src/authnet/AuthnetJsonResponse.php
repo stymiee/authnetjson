@@ -24,6 +24,7 @@ namespace JohnConde\Authnet;
  * @property    string  $messages
  * @property    string  $directResponse
  * @property    string  $validationDirectResponse
+ * @property    object  $transactionResponse
  *
  * @method      null createTransactionRequest(array $array)                                 process a payment
  * @method      null sendCustomerTransactionReceiptRequest(array $array)                    get a list of unsettled transactions
@@ -70,6 +71,16 @@ class AuthnetJsonResponse
      * @const Indicates the status code of an declined transaction
      */
     const STATUS_DECLINED = 2;
+
+    /**
+     * @const Indicates the status code of an transaction which has encountered an error
+     */
+    const STATUS_ERROR = 3;
+
+    /**
+     * @const Indicates the status code of a transaction held for review
+     */
+    const STATUS_HELD = 4;
 
     /**
      * @var     object  SimpleXML object representing the API response
