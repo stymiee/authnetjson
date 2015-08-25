@@ -133,7 +133,7 @@ class AuthnetJsonResponseTest extends \PHPUnit_Framework_TestCase
 
         $response = new AuthnetJsonResponse($responseJson);
 
-        $this->assertEquals('1', $response->getTransactionResponseField('ResponseCode'));
+        $this->assertEquals(AuthnetJsonResponse::STATUS_APPROVED, $response->getTransactionResponseField('ResponseCode'));
         $this->assertTrue($response->isApproved());
     }
 
@@ -159,7 +159,7 @@ class AuthnetJsonResponseTest extends \PHPUnit_Framework_TestCase
 
         $response = new AuthnetJsonResponse($responseJson);
 
-        $this->assertEquals('2', $response->getTransactionResponseField('ResponseCode'));
+        $this->assertEquals(AuthnetJsonResponse::STATUS_DECLINED, $response->getTransactionResponseField('ResponseCode'));
         $this->assertTrue($response->isDeclined());
     }
 
