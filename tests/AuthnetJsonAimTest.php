@@ -1091,6 +1091,86 @@ class AuthnetJsonAimTest extends \PHPUnit_Framework_TestCase
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
      */
+    public function testCreateTransactionRequestVisaCheckout()
+    {
+        $requestJson = array(
+            "refId" => rand(1000000, 100000000),
+            "transactionRequest" => array(
+                "transactionType" => "authCaptureTransaction",
+                "amount" => "5",
+                "payment" => array(
+                    "opaqueData" => array(
+                        "dataDescriptor" => "COMMON.VCO.ONLINE.PAYMENT",
+                        "dataValue" => "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",
+                        "dataKey" => "k5qdgh6t5BnvuBz3Xs0f+iraXB0tXO+6WewMUVTBsqYN3G16HHYwlz8To602G/pZ+Sng0mjTAy3mwhpOb/5nJktiCTpKL4wvn0exJxGt9GIAODBYz4PFbxuenmuQE9O5"
+                    ),
+                ),
+                "callId" => "4859677641513545101"
+            ),
+        );
+        $responseJson = '{
+            "transactionResponse": {
+                "responseCode": "1",
+                "authCode": "C1E3I6",
+                "avsResultCode": "Y",
+                "cvvResultCode": "S",
+                "cavvResultCode": "9",
+                "transId": "2149186775",
+                "refTransID": "",
+                "transHash": "C85B15CED28462974F1114DB07A16C39",
+                "testRequest": "0",
+                "accountNumber": "XXXX0015",
+                "accountType": "MasterCard",
+                "messages": [
+                    {
+                        "code": "1",
+                        "description": "This transaction has been approved."
+                    }
+                ]
+            },
+            "refId": "123456",
+            "messages": {
+                "resultCode": "Ok",
+                "message": [
+                    {
+                        "code": "I00001",
+                        "text": "Successful."
+                    }
+                ]
+            }
+        }';
+
+        $this->http->expects($this->once())
+            ->method('process')
+            ->will($this->returnValue($responseJson));
+
+        $request = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server);
+        $request->setProcessHandler($this->http);
+        $response = $request->createTransactionRequest($requestJson);
+
+        $this->assertEquals('Ok', $response->messages->resultCode);
+        $this->assertTrue($response->isSuccessful());
+        $this->assertFalse($response->isError());
+        $this->assertEquals('1', $response->transactionResponse->responseCode);
+        $this->assertEquals('C1E3I6', $response->transactionResponse->authCode);
+        $this->assertEquals('Y', $response->transactionResponse->avsResultCode);
+        $this->assertEquals('S', $response->transactionResponse->cvvResultCode);
+        $this->assertEquals('9', $response->transactionResponse->cavvResultCode);
+        $this->assertEquals('2149186775', $response->transactionResponse->transId);
+        $this->assertEquals('', $response->transactionResponse->refTransID);
+        $this->assertEquals('C85B15CED28462974F1114DB07A16C39', $response->transactionResponse->transHas);
+        $this->assertEquals('0', $response->transactionResponse->testRequest);
+        $this->assertEquals('XXXX0015', $response->transactionResponse->accountNumber);
+        $this->assertEquals('MasterCard', $response->transactionResponse->accountType);
+    }
+
+
+    /**
+     * @covers            \JohnConde\Authnet\AuthnetJsonRequest::process()
+
+     * @uses              \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
+     * @uses              \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
+     */
     public function testDecryptPaymentDataRequest()
     {
         $requestJson = array(
