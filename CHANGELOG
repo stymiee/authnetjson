@@ -1,8 +1,8 @@
 CHANGE LOG
 
-2015-08-21 - Version 2.4.3
+2015-08-25 - Version 2.4.4
 --------------------------------------------
-Updated docblock comments and added phpdoc.xml to allow for better and easier to generate documentation
+Added examples for Verified by Visa
 
 2015-08-16 - Version 2.4.2
 --------------------------------------------
