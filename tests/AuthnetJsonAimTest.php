@@ -1158,7 +1158,7 @@ class AuthnetJsonAimTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('9', $response->transactionResponse->cavvResultCode);
         $this->assertEquals('2149186775', $response->transactionResponse->transId);
         $this->assertEquals('', $response->transactionResponse->refTransID);
-        $this->assertEquals('C85B15CED28462974F1114DB07A16C39', $response->transactionResponse->transHas);
+        $this->assertEquals('C85B15CED28462974F1114DB07A16C39', $response->transactionResponse->transHash);
         $this->assertEquals('0', $response->transactionResponse->testRequest);
         $this->assertEquals('XXXX0015', $response->transactionResponse->accountNumber);
         $this->assertEquals('MasterCard', $response->transactionResponse->accountType);
