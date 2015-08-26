@@ -89,7 +89,7 @@ $response = $request->decryptPaymentDataRequest(array(
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title></title>
+    <title>AIM :: Decrypt Visa Checkout Data</title>
     <style type="text/css">
         table
         {
