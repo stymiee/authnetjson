@@ -83,6 +83,11 @@ class AuthnetJsonResponse
     const STATUS_HELD = 4;
 
     /**
+     * @const Indicates the status code of a transaction held for review
+     */
+    const STATUS_PAYPAL_NEED_CONSENT = 5;
+
+    /**
      * @var     object  SimpleXML object representing the API response
      */
     private $response;
