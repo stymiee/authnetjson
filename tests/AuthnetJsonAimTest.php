@@ -560,7 +560,7 @@ class AuthnetJsonAimTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Error', $response->messages->resultCode);
         $this->assertFalse($response->isSuccessful());
         $this->assertTrue($response->isError());
-        $this->assertEquals('3', $response->transactionResponse->responseCode);
+        $this->assertEquals(AuthnetJsonResponse::STATUS_ERROR, $response->transactionResponse->responseCode);
         $this->assertEquals('P', $response->transactionResponse->avsResultCode);
         $this->assertEquals('0', $response->transactionResponse->transId);
         $this->assertEquals('0', $response->transactionResponse->testRequest);
@@ -782,7 +782,7 @@ class AuthnetJsonAimTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($response->isError());
         $this->assertEquals('', $response->transactionResponse->authCode);
         $this->assertEquals('2165665234', $response->transactionResponse->refTransID);
-        $this->assertEquals('3', $response->transactionResponse->responseCode);
+        $this->assertEquals(AuthnetJsonResponse::STATUS_ERROR, $response->transactionResponse->responseCode);
         $this->assertEquals('P', $response->transactionResponse->avsResultCode);
         $this->assertEquals('', $response->transactionResponse->cvvResultCode);
         $this->assertEquals('', $response->transactionResponse->cavvResultCode);
@@ -1017,7 +1017,7 @@ class AuthnetJsonAimTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('', $response->transactionResponse->authCode);
         $this->assertEquals('0', $response->transactionResponse->transId);
         $this->assertEquals('2165665483', $response->transactionResponse->refTransID);
-        $this->assertEquals('3', $response->transactionResponse->responseCode);
+        $this->assertEquals(AuthnetJsonResponse::STATUS_ERROR, $response->transactionResponse->responseCode);
         $this->assertEquals('P', $response->transactionResponse->avsResultCode);
         $this->assertEquals('', $response->transactionResponse->cvvResultCode);
         $this->assertEquals('', $response->transactionResponse->cavvResultCode);
