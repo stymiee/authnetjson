@@ -21,7 +21,7 @@ namespace JohnConde\Authnet;
  * @link        https://github.com/stymiee/authnetjson
  * @see         https://developer.authorize.net/api/reference/
  *
- * @property    string  $messages
+ * @property    object  $messages
  * @property    string  $directResponse
  * @property    string  $validationDirectResponse
  * @property    object  $transactionResponse
@@ -98,7 +98,7 @@ class AuthnetJsonResponse
     private $responseJson;
 
     /**
-     * @var     object  \JohnConde\Authnet\TransactionResponse
+     * @var     object  TransactionResponse
      */
     private $transactionInfo;
 
@@ -147,7 +147,7 @@ class AuthnetJsonResponse
      * @return  string          requested variable from the API call response
      */
     public function __get($var)
-    	{
+    {
         return $this->response->{$var};
     }
 
@@ -221,5 +221,15 @@ class AuthnetJsonResponse
             return $this->transactionInfo->getTransactionResponseField($field);
         }
         throw new AuthnetTransactionResponseCallException('This API call does not have any transaction response data');
+    }
+
+    /**
+    * Gets the transaction response from Authorize.Net in JSON format for logging purposes
+    *
+    * @return  string transaction response from Authorize.Net in JSON format
+    */
+    public function getRawResponse()
+    {
+        return $this->responseJson;
     }
 }
