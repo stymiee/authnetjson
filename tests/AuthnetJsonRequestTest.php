@@ -263,4 +263,42 @@ class AuthnetJsonRequestTest extends \PHPUnit_Framework_TestCase
         $this->assertContains($apiLogin, $string);
         $this->assertContains($apiTransKey, $string);
     }
+
+    /**
+     * @covers            \JohnConde\Authnet\AuthnetJsonRequest::getRawRequest()
+     */
+    public function testGetRawRequest()
+    {
+        $requestJson = array(
+            'refId' => '94564789',
+            'transactionRequest' => array(
+                'transactionType' => 'authCaptureTransaction',
+                'amount' => 5,
+                'payment' => array(
+                    'creditCard' => array(
+                        'cardNumber' => '4111111111111111',
+                        'expirationDate' => '122016',
+                        'cardCode' => '999',
+                    ),
+                ),
+            ),
+        );
+
+        $apiLogin    = 'apiLogin';
+        $apiTransKey = 'apiTransKey';
+
+        $http = $this->getMockBuilder('\JohnConde\Authnet\CurlWrapper')
+            ->disableOriginalConstructor()
+            ->getMock();
+        $http->expects($this->once())
+            ->method('process')
+            ->will($this->returnValue('{}'));
+
+        $request = AuthnetApiFactory::getJsonApiHandler($apiLogin, $apiTransKey, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
+        $request->setProcessHandler($http);
+        $request->deleteCustomerProfileRequest($requestJson);
+
+        $response = '{"deleteCustomerProfileRequest":{"merchantAuthentication":{"name":"apiLogin","transactionKey":"apiTransKey"},"refId":"94564789","transactionRequest":{"transactionType":"authCaptureTransaction","amount":5,"payment":{"creditCard":{"cardNumber":"4111111111111111","expirationDate":"122016","cardCode":"999"}}}}}';
+        $this->assertSame($response, $request->getRawRequest());
+    }
 }
