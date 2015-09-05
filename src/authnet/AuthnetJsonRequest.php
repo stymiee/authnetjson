@@ -75,7 +75,7 @@ class AuthnetJsonRequest
     /**
      * @var     string  JSON formatted API request
      */
-    private $responseJson;
+    private $requestJson;
 
     /**
      * @var     object  Wrapper object repsenting an endpoint
@@ -111,9 +111,9 @@ class AuthnetJsonRequest
         $output .= '<tr>' . "\n\t\t" . '<td><b>Transaction Key</b></td><td>' . $this->transactionKey . '</td>' . "\n" . '</tr>' . "\n";
         $output .= '<tr>' . "\n\t\t" . '<td><b>Authnet Server URL</b></td><td>' . $this->url . '</td>' . "\n" . '</tr>' . "\n";
         $output .= '<tr>' . "\n\t\t" . '<th colspan="2"><b>Request JSON</b></th>' . "\n" . '</tr>' . "\n";
-        if (!empty($this->responseJson)) {
+        if (!empty($this->requestJson)) {
             $output .= '<tr><td colspan="2"><pre>' . "\n";
-            $output .= $this->responseJson . "\n";
+            $output .= $this->requestJson . "\n";
             $output .= '</pre></td></tr>' . "\n";
         }
         $output .= '</table>';
@@ -156,7 +156,7 @@ class AuthnetJsonRequest
         $parameters = array(
             $api_call => $authentication + $call
         );
-        $this->responseJson = json_encode($parameters);
+        $this->requestJson = json_encode($parameters);
 
 		$response = $this->process();
         return new AuthnetJsonResponse($response);
@@ -169,7 +169,7 @@ class AuthnetJsonRequest
      */
     private function process()
     {
-        return $this->processor->process($this->url, $this->responseJson);
+        return $this->processor->process($this->url, $this->requestJson);
     }
 
     /**
@@ -180,5 +180,15 @@ class AuthnetJsonRequest
     public function setProcessHandler($processor)
     {
         $this->processor = $processor;
+    }
+
+    /**
+     * Gets the request sent to Authorize.Net in JSON format for logging purposes
+     *
+     * @return  string transaction request sent to Authorize.Net in JSON format
+     */
+    public function getRawRequest()
+    {
+        return $this->requestJson;
     }
 }
