@@ -216,7 +216,7 @@ class AuthnetJsonResponseTest extends \PHPUnit_Framework_TestCase
 
         $response = new AuthnetJsonResponse($responseJson);
 
-        $this->assertSame(str_replace("\r\n", '', $responseJson), str_replace("\n", '', $response->getRawResponse()));
+        $this->assertSame(str_replace("\r\n", '', $responseJson), $response->getRawResponse());
     }
 
 
