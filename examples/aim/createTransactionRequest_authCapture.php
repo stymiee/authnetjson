@@ -370,11 +370,11 @@ SAMPLE RESPONSE
             <?php elseif ($response->isError()) : ?>
             <tr>
                 <th>Error Code</th>
-                <td><?php echo $response->transactionResponse->errors->errorCode; ?></td>
+                <td><?php echo $response->getErrorCode(); ?></td>
             </tr>
             <tr>
                 <th>Error Message</th>
-                <td><?php echo $response->transactionResponse->errors->errorText; ?></td>
+                <td><?php echo $response->getError(); ?></td>
             </tr>
             <?php endif; ?>
         </table>
