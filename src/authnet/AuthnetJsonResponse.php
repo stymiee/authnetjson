@@ -232,4 +232,48 @@ class AuthnetJsonResponse
     {
         return $this->responseJson;
     }
+
+    /**
+     * If an error has occurred, returns the error message
+     *
+     * @return  string Error response from Authorize.Net
+     */
+    public function getError()
+    {
+        $message = '';
+        if ($this->isError()) {
+            $message = $this->messages->message[0]->text;
+            if (@$this->transactionResponse->errors[0]->errorText) {
+                $message = $this->transactionResponse->errors[0]->errorText;
+            }
+        }
+        return $message;
+    }
+
+    /**
+     * An alias of self::getError()
+     *
+     * @return  string Error response from Authorize.Net
+     */
+    public function getErrorMessage()
+    {
+        return $this->getError();
+    }
+
+    /**
+     * If an error has occurred, returns the error message
+     *
+     * @return  string Error response from Authorize.Net
+     */
+    public function getErrorCode()
+    {
+        $code = '';
+        if ($this->isError()) {
+            $code = $this->messages->message[0]->code;
+            if (@$this->transactionResponse->errors[0]->errorCode) {
+                $code = $this->transactionResponse->errors[0]->errorCode;
+            }
+        }
+        return $code;
+    }
 }
