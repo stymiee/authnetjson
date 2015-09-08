@@ -344,4 +344,102 @@ class AuthnetJsonResponseTest extends \PHPUnit_Framework_TestCase
 
         $this->assertTrue($match);
     }
+
+    /**
+     * @covers            \JohnConde\Authnet\AuthnetJsonResponse::getError()
+     * @covers            \JohnConde\Authnet\AuthnetJsonResponse::getErrorCode()
+     */
+    public function testGetErrorMethods()
+    {
+        $responseJson = '{
+           "messages":{
+              "resultCode":"Error",
+              "message":[
+                 {
+                    "code":"E00027",
+                    "text":"The transaction was unsuccessful."
+                 }
+              ]
+           }
+        }';
+
+        $response = new AuthnetJsonResponse($responseJson);
+
+        $this->assertTrue($response->isError());
+        $this->assertEquals('E00027', $response->getErrorCode());
+        $this->assertEquals('The transaction was unsuccessful.', $response->getError());
+    }
+
+    /**
+     * @covers            \JohnConde\Authnet\AuthnetJsonResponse::getError()
+     * @covers            \JohnConde\Authnet\AuthnetJsonResponse::getErrorCode()
+     */
+    public function testGetErrorAim()
+    {
+        $responseJson = '{
+           "transactionResponse":{
+              "responseCode":"3",
+              "authCode":"",
+              "avsResultCode":"P",
+              "cvvResultCode":"",
+              "cavvResultCode":"",
+              "transId":"0",
+              "refTransID":"",
+              "transHash":"9F18DE7ABDD09076F9BADB594EFC4611",
+              "testRequest":"0",
+              "accountNumber":"XXXX0015",
+              "accountType":"MasterCard",
+              "errors":[
+                 {
+                    "errorCode":"11",
+                    "errorText":"A duplicate transaction has been submitted."
+                 }
+              ],
+              "userFields":[
+                 {
+                    "name":"favorite_color",
+                    "value":"blue"
+                 }
+              ]
+           },
+           "refId":"14290435",
+           "messages":{
+              "resultCode":"Error",
+              "message":[
+                 {
+                    "code":"E00027",
+                    "text":"The transaction was unsuccessful."
+                 }
+              ]
+           }
+        }';
+
+        $response = new AuthnetJsonResponse($responseJson);
+
+        $this->assertTrue($response->isError());
+        $this->assertEquals('11', $response->getErrorCode());
+        $this->assertEquals('A duplicate transaction has been submitted.', $response->getError());
+    }
+
+    /**
+     * @covers            \JohnConde\Authnet\AuthnetJsonResponse::getErrorMessage()
+     */
+    public function testGetErrorMessage()
+    {
+        $responseJson = '{
+           "messages":{
+              "resultCode":"Error",
+              "message":[
+                 {
+                    "code":"E00027",
+                    "text":"The transaction was unsuccessful."
+                 }
+              ]
+           }
+        }';
+
+        $response = new AuthnetJsonResponse($responseJson);
+
+        $this->assertEquals($response->getError(), $response->getErrorMessage());
+    }
 }
