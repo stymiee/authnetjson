@@ -1,5 +1,13 @@
 CHANGE LOG
 
+2015-09-11 - Version 2.5.0
+--------------------------------------------
+Exceptions extend AuthnetJson exception to allow for better error handling in client code
+Added AuthnetJsonResponse::getRawRequest to get raw JSON request sent to Authorize.Net
+Added AuthnetJsonResponse::getRawResponse to get raw JSON response returned from Authorize.Net
+Added getError(), getErrorCode(), and getErrorMessage() for easier error handling and logging
+Added support for the SIM API
+
 2015-08-25 - Version 2.4.5
 --------------------------------------------
 Added examples for PayPal Express
