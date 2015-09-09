@@ -127,4 +127,25 @@ class AuthnetApiFactoryTest extends \PHPUnit_Framework_TestCase
 
         $this->assertInstanceOf('JohnConde\Authnet\CurlWrapper', new CurlWrapper());
     }
+
+    /**
+     * @covers            \JohnConde\Authnet\AuthnetApiFactory::getSimHandler
+     */
+    public function testGetSimHandler()
+    {
+        $server = AuthnetApiFactory::USE_DEVELOPMENT_SERVER;
+        $sim    = AuthnetApiFactory::getSimHandler($this->login, $this->transactionKey, $server);
+
+        $this->assertInstanceOf('JohnConde\Authnet\AuthnetSim', $sim);
+    }
+
+    /**
+     * @covers            \JohnConde\Authnet\AuthnetApiFactory::getSimHandler
+     * @expectedException \JohnConde\Authnet\AuthnetInvalidCredentialsException
+     */
+    public function testExceptionIsRaisedForInvalidCredentialsSim()
+    {
+        $server  = AuthnetApiFactory::USE_DEVELOPMENT_SERVER;
+        $request = AuthnetApiFactory::getSimHandler(null, $this->transactionKey, $server);
+    }
 }
