@@ -12,7 +12,7 @@
 namespace JohnConde\Authnet;
 
 /**
- * Adapter for the Authorize.Net JSON API
+ * Creates a request to the Authorize.Net JSON endpoints
  *
  * @package     AuthnetJSON
  * @author      John Conde <stymiee@gmail.com>
