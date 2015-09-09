@@ -22,7 +22,6 @@ namespace JohnConde\Authnet;
  * @link       https://github.com/stymiee/authnetjson
  */
 
-
 class AuthnetApiFactory
 {
     /**
@@ -87,5 +86,27 @@ class AuthnetApiFactory
             throw new AuthnetInvalidServerException('You did not provide a valid server.');
         }
         return $url;
+    }
+
+    /**
+     * Validates the Authorize.Net credentials and returns a SIM object to be used to make a SIM API call
+     *
+     * @param   string      $login                          Authorize.Net API Login ID
+     * @param   string      $transaction_key                Authorize.Net API Transaction Key
+     * @param   integer     $server                         ID of which server to use (optional)
+     * @return  object      \JohnConde\Authnet\AuthnetSim
+     * @throws  \JohnConde\Authnet\AuthnetInvalidCredentialsException
+     */
+    public static function getSimHandler($login, $transaction_key, $server = self::USE_PRODUCTION_SERVER)
+    {
+        $login           = trim($login);
+        $transaction_key = trim($transaction_key);
+        $api_url         = static::getWebServiceURL($server);
+
+        if (empty($login) || empty($transaction_key)) {
+            throw new AuthnetInvalidCredentialsException('You have not configured your login credentials properly.');
+        }
+
+        return new AuthnetSim($login, $transaction_key, $api_url);
     }
 }
