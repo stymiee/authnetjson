@@ -18,7 +18,7 @@ Here is a minimal example of a `composer.json` file that just defines a dependen
 
     {
         "require": {
-            "stymiee/authnetjson": "2.4.*"
+            "stymiee/authnetjson": "2.5.*"
         }
     }
 
@@ -52,7 +52,7 @@ Authorize.Net provides a development environment for developers to test their in
 
 ## Usage Examples
 
-To help make how this library is used easier to understand example API calls are provioded in the `example` directory.
+To help make how this library is used easier to understand example API calls are provided in the `example` directory.
 Examples for all of the current APIs calls are represented. You *may* need to make adjustments to get some to work as
 they may be dependant on valid values created from other API calls (i.e. a void will not work without a valid
 transaction ID).
