@@ -65,7 +65,7 @@ class AuthnetApiFactory
     }
 
     /**
-     * Gets the API endpoint to be used for the API call
+     * Gets the API endpoint to be used for a JSON API call
      *
      * @param   integer     $server     ID of which server to use
      * @return  string                  The URL endpoint the request is to be sent to
@@ -101,12 +101,33 @@ class AuthnetApiFactory
     {
         $login           = trim($login);
         $transaction_key = trim($transaction_key);
-        $api_url         = static::getWebServiceURL($server);
+        $api_url         = static::getSimURL($server);
 
         if (empty($login) || empty($transaction_key)) {
             throw new AuthnetInvalidCredentialsException('You have not configured your login credentials properly.');
         }
 
         return new AuthnetSim($login, $transaction_key, $api_url);
+    }
+
+    /**
+     * Gets the API endpoint to be used for a SIM API call
+     *
+     * @param   integer     $server     ID of which server to use
+     * @return  string                  The URL endpoint the request is to be sent to
+     * @throws  \JohnConde\Authnet\AuthnetInvalidServerException
+     */
+    protected static function getSimURL($server)
+    {
+        if ($server === static::USE_PRODUCTION_SERVER) {
+            $url = 'https://secure2.authorize.net/gateway/transact.dll';
+        }
+        else if ($server === static::USE_DEVELOPMENT_SERVER) {
+            $url = 'https://test.authorize.net/gateway/transact.dll';
+        }
+        else {
+            throw new AuthnetInvalidServerException('You did not provide a valid server.');
+        }
+        return $url;
     }
 }
