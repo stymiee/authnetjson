@@ -148,4 +148,39 @@ class AuthnetApiFactoryTest extends \PHPUnit_Framework_TestCase
         $server  = AuthnetApiFactory::USE_DEVELOPMENT_SERVER;
         $request = AuthnetApiFactory::getSimHandler(null, $this->transactionKey, $server);
     }
+
+    /**
+     * @covers            \JohnConde\Authnet\AuthnetApiFactory::getSimURL
+     */
+    public function testGetSimServerTest()
+    {
+        $server           = AuthnetApiFactory::USE_DEVELOPMENT_SERVER;
+        $reflectionMethod = new \ReflectionMethod('\JohnConde\Authnet\AuthnetApiFactory', 'getSimURL');
+        $reflectionMethod->setAccessible(true);
+        $url              = $reflectionMethod->invoke(null, $server);
+
+        $this->assertEquals($url, 'https://test.authorize.net/gateway/transact.dll');
+    }
+
+    /**
+     * @covers            \JohnConde\Authnet\AuthnetApiFactory::getSimURL
+     */
+    public function testGetSimServerProduction()
+    {
+        $server           = AuthnetApiFactory::USE_PRODUCTION_SERVER;
+        $reflectionMethod = new \ReflectionMethod('\JohnConde\Authnet\AuthnetApiFactory', 'getSimURL');
+        $reflectionMethod->setAccessible(true);
+        $url              = $reflectionMethod->invoke(null, $server);
+
+        $this->assertEquals($url, 'https://secure2.authorize.net/gateway/transact.dll');
+    }
+
+    /**
+     * @covers            \JohnConde\Authnet\AuthnetApiFactory::getSimHandler
+     * @expectedException \JohnConde\Authnet\AuthnetInvalidServerException
+     */
+    public function testExceptionIsRaisedForAuthnetInvalidSimServer()
+    {
+        $authnet = AuthnetApiFactory::getSimHandler($this->login, $this->transactionKey, null);
+    }
 }
