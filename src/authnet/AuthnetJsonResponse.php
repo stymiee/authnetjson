@@ -238,7 +238,7 @@ class AuthnetJsonResponse
      *
      * @return  string Error response from Authorize.Net
      */
-    public function getError()
+    public function getErrorText()
     {
         $message = '';
         if ($this->isError()) {
@@ -251,13 +251,13 @@ class AuthnetJsonResponse
     }
 
     /**
-     * An alias of self::getError()
+     * An alias of self::getErrorText()
      *
      * @return  string Error response from Authorize.Net
      */
     public function getErrorMessage()
     {
-        return $this->getError();
+        return $this->getErrorText();
     }
 
     /**
