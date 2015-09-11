@@ -39,12 +39,12 @@ class AuthnetSim
     private $url;
 
     /**
-     * @var     string  Randomly generated number
+     * @var     integer  Randomly generated number
      */
     private $sequence;
 
     /**
-     * @var     string  Unix timestamp the request was made
+     * @var     integer  Unix timestamp the request was made
      */
     private $timestamp;
 
