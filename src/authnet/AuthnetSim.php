@@ -88,7 +88,7 @@ class AuthnetSim
     /**
      * Returns the sequence generated for a transaction
      *
-     * @return  string           Current sequence
+     * @return  integer           Current sequence
      */
     public function getSequence()
     {
@@ -98,7 +98,7 @@ class AuthnetSim
     /**
      * Returns the timestamp for a transaction
      *
-     * @return  string           Current timestamp
+     * @return  integer           Current timestamp
      */
     public function getTimestamp()
     {
