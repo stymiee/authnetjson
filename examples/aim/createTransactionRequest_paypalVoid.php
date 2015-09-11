@@ -161,7 +161,7 @@ SAMPLE RESPONSE
             </tr>
             <tr>
                 <th>Error Message</th>
-                <td><?php echo $response->getError(); ?></td>
+                <td><?php echo  $response->getErrorText(); ?></td>
             </tr>
             <?php endif; ?>
         </table>
