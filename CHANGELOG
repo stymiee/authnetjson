@@ -8,7 +8,7 @@ Added AuthnetJsonResponse::getRawResponse to get raw JSON response returned from
 Added getError(), getErrorCode(), and getErrorMessage() for easier error handling and logging
 Added support for the SIM API
 
-2015-08-25 - Version 2.4.5
+2015-08-26 - Version 2.4.5
 --------------------------------------------
 Added examples for PayPal Express
 
