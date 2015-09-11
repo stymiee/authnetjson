@@ -346,7 +346,7 @@ class AuthnetJsonResponseTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers            \JohnConde\Authnet\AuthnetJsonResponse::getError()
+     * @covers            \JohnConde\Authnet\AuthnetJsonResponse::getErrorText()
      * @covers            \JohnConde\Authnet\AuthnetJsonResponse::getErrorCode()
      */
     public function testGetErrorMethods()
@@ -367,14 +367,14 @@ class AuthnetJsonResponseTest extends \PHPUnit_Framework_TestCase
 
         $this->assertTrue($response->isError());
         $this->assertEquals('E00027', $response->getErrorCode());
-        $this->assertEquals('The transaction was unsuccessful.', $response->getError());
+        $this->assertEquals('The transaction was unsuccessful.', $response->getErrorText());
     }
 
     /**
-     * @covers            \JohnConde\Authnet\AuthnetJsonResponse::getError()
+     * @covers            \JohnConde\Authnet\AuthnetJsonResponse::getErrorText()
      * @covers            \JohnConde\Authnet\AuthnetJsonResponse::getErrorCode()
      */
-    public function testGetErrorAim()
+    public function testGetErrorTextAim()
     {
         $responseJson = '{
            "transactionResponse":{
@@ -418,7 +418,7 @@ class AuthnetJsonResponseTest extends \PHPUnit_Framework_TestCase
 
         $this->assertTrue($response->isError());
         $this->assertEquals('11', $response->getErrorCode());
-        $this->assertEquals('A duplicate transaction has been submitted.', $response->getError());
+        $this->assertEquals('A duplicate transaction has been submitted.', $response->getErrorText());
     }
 
     /**
@@ -440,6 +440,6 @@ class AuthnetJsonResponseTest extends \PHPUnit_Framework_TestCase
 
         $response = new AuthnetJsonResponse($responseJson);
 
-        $this->assertEquals($response->getError(), $response->getErrorMessage());
+        $this->assertEquals($response->getErrorText(), $response->getErrorMessage());
     }
 }
