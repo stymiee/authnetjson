@@ -176,7 +176,7 @@ class AuthnetApiFactoryTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers            \JohnConde\Authnet\AuthnetApiFactory::getSimHandler
+     * @covers            \JohnConde\Authnet\AuthnetApiFactory::getSimURL
      * @expectedException \JohnConde\Authnet\AuthnetInvalidServerException
      */
     public function testExceptionIsRaisedForAuthnetInvalidSimServer()
