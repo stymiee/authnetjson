@@ -1,5 +1,9 @@
 CHANGE LOG
 
+2016-06-08 - Version 2.5.1
+--------------------------------------------
+Uses the Akamai endpoint by default
+
 2015-09-11 - Version 2.5.0
 --------------------------------------------
 Exceptions extend AuthnetJson exception to allow for better error handling in client code
