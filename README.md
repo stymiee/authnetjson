@@ -7,8 +7,6 @@
 
 Library that abstracts [Authorize.Net](http://www.authorize.net/)'s [JSON APIs](http://developer.authorize.net/api/reference/).
 
-**The JSON API is currently in BETA and requires contacting Authorize.Net to enable it in their production environment.**
-
 ## Installation
 
 Simply add a dependency on `stymiee/authnetjson` to your project's `composer.json` file if you use [Composer](http://getcomposer.org/)
