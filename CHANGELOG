@@ -1,5 +1,14 @@
 CHANGE LOG
 
+2017-??-?? - Version 3.0.0
+--------------------------------------------
+Added support for webhooks
+Switched to use \Curl\Curl for all Curl requests
+Updated examples to use recent dates
+Cleaned up and improved some unit tests
+Converted some errant tabs to spaces
+Removed BETA notice from README
+
 2016-06-08 - Version 2.5.1
 --------------------------------------------
 Uses the Akamai endpoint by default
@@ -22,7 +31,7 @@ Added examples for Verified by Visa
 
 2015-08-21 - Version 2.4.3
 --------------------------------------------
-Updated docblock comments and added phpdoc.xml to allow for better and easier to generate documentation
+Updated docbloc comments and added phpdoc.xml to allow for better and easier to generate documentation
 
 2015-08-16 - Version 2.4.2
 --------------------------------------------

@@ -18,7 +18,7 @@ SAMPLE REQUEST
          "payment":{
             "creditCard":{
                "cardNumber":"4111111111111111",
-               "expirationDate":"122016"
+               "expirationDate":"122017"
             }
          },
          "authCode":"2165668159"
@@ -76,7 +76,7 @@ SAMPLE RESPONSE
             'payment' => array(
                 'creditCard' => array(
                     'cardNumber' => '4111111111111111',
-                    'expirationDate' => '122016',
+                    'expirationDate' => '122017',
                 )
             ),
             'authCode' => '2165668159'

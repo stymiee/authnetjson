@@ -28,7 +28,7 @@ SAMPLE REQUEST
          "payment":{  
             "creditCard":{  
                "cardNumber":"5424000000000015",
-               "expirationDate":"122016",
+               "expirationDate":"122017",
                "cardCode":"999"
             }
          },
@@ -158,7 +158,7 @@ SAMPLE RESPONSE
             'payment' => array(
                 'creditCard' => array(
                     'cardNumber' => '5424000000000015',
-                    'expirationDate' => '122016',
+                    'expirationDate' => '122017',
                     'cardCode' => '999',
                 ),
             ),

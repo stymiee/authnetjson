@@ -280,6 +280,22 @@ or
 Field name and number can be found in the [Authorize.Net AIM Guide](http://www.authorize.net/support/AIM_guide.pdf). Note
 that the field name has all spaces removed so `TransactionID` becomes `TransactionID`.
 
+#### Create a Webhook
+
+    $response = $request->createWebhooks([
+        "net.authorize.customer.subscription.expiring",
+        "net.authorize.customer.subscription.suspended",
+        "net.authorize.payment.authcapture.created",
+        "net.authorize.payment.authorization.created",
+        "net.authorize.payment.capture.created",
+        "net.authorize.payment.fraud.approved",
+        "net.authorize.payment.fraud.declined",
+        "net.authorize.payment.fraud.held",
+        "net.authorize.payment.priorAuthCapture.created",
+        "net.authorize.payment.refund.created",
+        "net.authorize.payment.void.created"
+    ], 'http://www.example.com:55950/api/webhooks', 'active');
+
 ## Debugging
 
 To assist with debugging the `__toString()` method has been overridden to output important elements pertaining to the

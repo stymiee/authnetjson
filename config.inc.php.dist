@@ -4,13 +4,11 @@
      * It exists solely for the examples to work "out of the box".
      */
 
+    require(__DIR__ . '/vendor/autoload.php');
+
     defined('AUTHNET_LOGIN')    || define('AUTHNET_LOGIN', '');
     defined('AUTHNET_TRANSKEY') || define('AUTHNET_TRANSKEY', '');
 
-    if (version_compare(PHP_VERSION, '5.3.0') < 0) {
-        throw new \Exception('AuthnetJson requires PHP 5.3 or greater');
-    }
-
-    if (!function_exists('curl_init')) {
-        throw new \Exception('cURL PHP extension not installed');
+    if (version_compare(PHP_VERSION, '5.4.0') < 0) {
+        throw new \Exception('AuthnetJson requires PHP 5.4 or greater');
     }

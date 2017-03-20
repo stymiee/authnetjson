@@ -11,6 +11,8 @@
 
 namespace JohnConde\Authnet;
 
+require(__DIR__ . '/../config.inc.php');
+
 class AuthnetJsonAimTest extends \PHPUnit_Framework_TestCase
 {
     private $login;
@@ -24,9 +26,10 @@ class AuthnetJsonAimTest extends \PHPUnit_Framework_TestCase
         $this->transactionKey = 'test';
         $this->server         = AuthnetApiFactory::USE_DEVELOPMENT_SERVER;
 
-        $this->http = $this->getMockBuilder('\JohnConde\Authnet\CurlWrapper')
-            ->disableOriginalConstructor()
+        $this->http = $this->getMockBuilder('\Curl\Curl')
+            ->setMethods(['post'])
             ->getMock();
+        $this->http->error = false;
     }
 
     /**
@@ -186,9 +189,7 @@ class AuthnetJsonAimTest extends \PHPUnit_Framework_TestCase
            }
         }';
 
-        $this->http->expects($this->once())
-            ->method('process')
-            ->will($this->returnValue($responseJson));
+        $this->http->response = $responseJson;
 
         $request = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server);
         $request->setProcessHandler($this->http);
@@ -362,9 +363,7 @@ class AuthnetJsonAimTest extends \PHPUnit_Framework_TestCase
            }
         }';
 
-        $this->http->expects($this->once())
-            ->method('process')
-            ->will($this->returnValue($responseJson));
+        $this->http->response = $responseJson;
 
         $request = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server);
         $request->setProcessHandler($this->http);
@@ -549,9 +548,7 @@ class AuthnetJsonAimTest extends \PHPUnit_Framework_TestCase
            }
         }';
 
-        $this->http->expects($this->once())
-            ->method('process')
-            ->will($this->returnValue($responseJson));
+        $this->http->response = $responseJson;
 
         $request = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server);
         $request->setProcessHandler($this->http);
@@ -635,9 +632,7 @@ class AuthnetJsonAimTest extends \PHPUnit_Framework_TestCase
            }
         }';
 
-        $this->http->expects($this->once())
-            ->method('process')
-            ->will($this->returnValue($responseJson));
+        $this->http->response = $responseJson;
 
         $request = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server);
         $request->setProcessHandler($this->http);
@@ -695,9 +690,7 @@ class AuthnetJsonAimTest extends \PHPUnit_Framework_TestCase
            }
         }';
 
-        $this->http->expects($this->once())
-            ->method('process')
-            ->will($this->returnValue($responseJson));
+        $this->http->response = $responseJson;
 
         $request = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server);
         $request->setProcessHandler($this->http);
@@ -769,9 +762,7 @@ class AuthnetJsonAimTest extends \PHPUnit_Framework_TestCase
            }
         }';
 
-        $this->http->expects($this->once())
-            ->method('process')
-            ->will($this->returnValue($responseJson));
+        $this->http->response = $responseJson;
 
         $request = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server);
         $request->setProcessHandler($this->http);
@@ -851,9 +842,7 @@ class AuthnetJsonAimTest extends \PHPUnit_Framework_TestCase
            }
         }';
 
-        $this->http->expects($this->once())
-            ->method('process')
-            ->will($this->returnValue($responseJson));
+        $this->http->response = $responseJson;
 
         $request = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server);
         $request->setProcessHandler($this->http);
@@ -927,9 +916,7 @@ class AuthnetJsonAimTest extends \PHPUnit_Framework_TestCase
            }
         }';
 
-        $this->http->expects($this->once())
-            ->method('process')
-            ->will($this->returnValue($responseJson));
+        $this->http->response = $responseJson;
 
         $request = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server);
         $request->setProcessHandler($this->http);
@@ -1003,9 +990,7 @@ class AuthnetJsonAimTest extends \PHPUnit_Framework_TestCase
            }
         }';
 
-        $this->http->expects($this->once())
-            ->method('process')
-            ->will($this->returnValue($responseJson));
+        $this->http->response = $responseJson;
 
         $request = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server);
         $request->setProcessHandler($this->http);
@@ -1068,9 +1053,7 @@ class AuthnetJsonAimTest extends \PHPUnit_Framework_TestCase
            }
         }';
 
-        $this->http->expects($this->once())
-            ->method('process')
-            ->will($this->returnValue($responseJson));
+        $this->http->response = $responseJson;
 
         $request = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server);
         $request->setProcessHandler($this->http);
@@ -1140,9 +1123,7 @@ class AuthnetJsonAimTest extends \PHPUnit_Framework_TestCase
             }
         }';
 
-        $this->http->expects($this->once())
-            ->method('process')
-            ->will($this->returnValue($responseJson));
+        $this->http->response = $responseJson;
 
         $request = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server);
         $request->setProcessHandler($this->http);
@@ -1227,9 +1208,7 @@ class AuthnetJsonAimTest extends \PHPUnit_Framework_TestCase
             }
         }';
 
-        $this->http->expects($this->once())
-            ->method('process')
-            ->will($this->returnValue($responseJson));
+        $this->http->response = $responseJson;
 
         $request = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server);
         $request->setProcessHandler($this->http);
@@ -1292,9 +1271,7 @@ class AuthnetJsonAimTest extends \PHPUnit_Framework_TestCase
            }
         }';
 
-        $this->http->expects($this->once())
-            ->method('process')
-            ->will($this->returnValue($responseJson));
+        $this->http->response = $responseJson;
 
         $request = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $this->server);
         $request->setProcessHandler($this->http);

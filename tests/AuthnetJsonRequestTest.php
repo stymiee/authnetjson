@@ -11,6 +11,8 @@
 
 namespace JohnConde\Authnet;
 
+require(__DIR__ . '/../config.inc.php');
+
 class AuthnetJsonRequestTest extends \PHPUnit_Framework_TestCase
 {
     /**
@@ -57,15 +59,13 @@ class AuthnetJsonRequestTest extends \PHPUnit_Framework_TestCase
             'customerProfileId' => '123456789'
         );
 
-        $http = $this->getMockBuilder('\JohnConde\Authnet\CurlWrapper')
-            ->disableOriginalConstructor()
+        $this->http = $this->getMockBuilder('\Curl\Curl')
+            ->setMethods(['post'])
             ->getMock();
-        $http->expects($this->once())
-            ->method('process')
-            ->will($this->returnValue(''));
+        $this->http->error = false;
 
         $request = AuthnetApiFactory::getJsonApiHandler('asdcfvgbhn', 'asdcfvgbhn', AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
-        $request->setProcessHandler($http);
+        $request->setProcessHandler($this->http);
         $request->deleteCustomerProfileRequest($requestJson);
     }
 
@@ -76,13 +76,13 @@ class AuthnetJsonRequestTest extends \PHPUnit_Framework_TestCase
     public function testProcessorIsInstanceOfCurlWrapper()
     {
         $request = new AuthnetJsonRequest(null, null, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
-        $request->setProcessHandler(new CurlWrapper());
+        $request->setProcessHandler(new \Curl\Curl());
 
         $reflectionOfRequest = new \ReflectionObject($request);
         $processor = $reflectionOfRequest->getProperty('processor');
         $processor->setAccessible(true);
 
-        $this->assertTrue($processor->getValue($request) instanceof \JohnConde\Authnet\CurlWrapper);
+        $this->assertInstanceOf('\Curl\Curl', $processor->getValue($request));
     }
 
 
@@ -244,17 +244,15 @@ class AuthnetJsonRequestTest extends \PHPUnit_Framework_TestCase
         $apiLogin    = 'apiLogin';
         $apiTransKey = 'apiTransKey';
 
-        $this->http = $this->getMockBuilder('\JohnConde\Authnet\CurlWrapper')
-            ->disableOriginalConstructor()
+        $http = $this->getMockBuilder('\Curl\Curl')
+            ->setMethods(['post'])
             ->getMock();
-
-        $this->http->expects($this->once())
-            ->method('process')
-            ->will($this->returnValue($responseJson));
+        $http->error = false;
+        $http->response = $responseJson;
 
         $request = AuthnetApiFactory::getJsonApiHandler($apiLogin, $apiTransKey, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
-        $request->setProcessHandler($this->http);
-        $response = $request->createTransactionRequest($requestJson);
+        $request->setProcessHandler($http);
+        $request->createTransactionRequest($requestJson);
 
         ob_start();
         echo $request;
@@ -287,12 +285,11 @@ class AuthnetJsonRequestTest extends \PHPUnit_Framework_TestCase
         $apiLogin    = 'apiLogin';
         $apiTransKey = 'apiTransKey';
 
-        $http = $this->getMockBuilder('\JohnConde\Authnet\CurlWrapper')
-            ->disableOriginalConstructor()
+        $http = $this->getMockBuilder('\Curl\Curl')
+            ->setMethods(['post'])
             ->getMock();
-        $http->expects($this->once())
-            ->method('process')
-            ->will($this->returnValue('{}'));
+        $http->error = false;
+        $http->response = '{}';
 
         $request = AuthnetApiFactory::getJsonApiHandler($apiLogin, $apiTransKey, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
         $request->setProcessHandler($http);
@@ -300,5 +297,26 @@ class AuthnetJsonRequestTest extends \PHPUnit_Framework_TestCase
 
         $response = '{"deleteCustomerProfileRequest":{"merchantAuthentication":{"name":"apiLogin","transactionKey":"apiTransKey"},"refId":"94564789","transactionRequest":{"transactionType":"authCaptureTransaction","amount":5,"payment":{"creditCard":{"cardNumber":"4111111111111111","expirationDate":"122016","cardCode":"999"}}}}}';
         $this->assertSame($response, $request->getRawRequest());
+    }
+
+    /**
+     * @covers            \JohnConde\Authnet\AuthnetJsonRequest::process()
+     * @expectedException \JohnConde\Authnet\AuthnetCurlException
+     */
+    public function testProcessError()
+    {
+        $apiLogin    = 'apiLogin';
+        $apiTransKey = 'apiTransKey';
+
+        $http = $this->getMockBuilder('\Curl\Curl')
+            ->setMethods(['post'])
+            ->getMock();
+        $http->error      = true;
+        $http->error_code = 10;
+        $http->error      = 'Test Error Message';
+
+        $request = AuthnetApiFactory::getJsonApiHandler($apiLogin, $apiTransKey, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
+        $request->setProcessHandler($http);
+        $request->deleteCustomerProfileRequest([]);
     }
 }

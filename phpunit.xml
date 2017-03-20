@@ -20,6 +20,7 @@
     <filter>
         <blacklist>
             <file>./src/autoload.php</file>
+            <directory>./vendor/</directory>
         </blacklist>
     </filter>
 

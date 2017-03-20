@@ -78,7 +78,7 @@ class AuthnetJsonRequest
     private $requestJson;
 
     /**
-     * @var     object  Wrapper object repsenting an endpoint
+     * @var     object  Wrapper object representing an endpoint
      */
     private $processor;
 
@@ -90,21 +90,21 @@ class AuthnetJsonRequest
      * @param   string  $transactionKey     Authorize.Net API Transaction Key
      * @param   string  $api_url            URL endpoint for processing a transaction
      */
-	public function __construct($login, $transactionKey, $api_url)
-	{
-		$this->login          = $login;
+    public function __construct($login, $transactionKey, $api_url)
+    {
+        $this->login          = $login;
         $this->transactionKey = $transactionKey;
         $this->url            = $api_url;
-	}
+    }
 
     /**
      * Outputs the account credentials, endpoint URL, and request JSON in a human readable format
      *
      * @return  string  HTML table containing debugging information
      */
-	public function __toString()
-	{
-	    $output  = '';
+    public function __toString()
+    {
+        $output  = '';
         $output .= '<table summary="Authorize.Net Request" id="authnet-request">' . "\n";
         $output .= '<tr>' . "\n\t\t" . '<th colspan="2"><b>Class Parameters</b></th>' . "\n" . '</tr>' . "\n";
         $output .= '<tr>' . "\n\t\t" . '<td><b>API Login ID</b></td><td>' . $this->login . '</td>' . "\n" . '</tr>' . "\n";
@@ -119,7 +119,7 @@ class AuthnetJsonRequest
         $output .= '</table>';
 
         return $output;
-	}
+    }
 
     /**
      * The __set() method should never be used as all values to ba made in the APi call must be passed as an array
@@ -129,9 +129,9 @@ class AuthnetJsonRequest
      * @throws  \JohnConde\Authnet\AuthnetCannotSetParamsException
      */
     public function __set($name, $value)
-	{
+    {
         throw new AuthnetCannotSetParamsException('You cannot set parameters directly in ' . __CLASS__ . '.');
-	}
+    }
 
     /**
      * Magic method that dynamically creates our API call based on the name of the method in the client code and
@@ -142,7 +142,7 @@ class AuthnetJsonRequest
      * @returns null
      */
     public function __call($api_call, Array $args)
-	{
+    {
         $authentication = array(
             'merchantAuthentication' => array(
                 'name'           => $this->login,
@@ -158,22 +158,33 @@ class AuthnetJsonRequest
         );
         $this->requestJson = json_encode($parameters);
 
-		$response = $this->process();
+        $response = $this->process();
         return new AuthnetJsonResponse($response);
-	}
+    }
 
     /**
      * Tells the handler to make the API call to Authorize.Net
      *
-     * @throws  \JohnConde\Authnet\AuthnetInvalidJsonException
+     * @throws  \JohnConde\Authnet\AuthnetCurlException
      */
     private function process()
     {
-        return $this->processor->process($this->url, $this->requestJson);
+        $this->processor->post($this->url, $this->requestJson);
+
+        if(!$this->processor->error) {
+            return $this->processor->response;
+        }
+        $error_message = null;
+        $error_code    = null;
+        if ($this->processor->error_code) {
+            $error_message = $this->processor->error_message;
+            $error_code    = $this->processor->error_code;
+        }
+        throw new AuthnetCurlException('Connection error: ' . $error_message . ' (' . $error_code . ')');
     }
 
     /**
-     * Sets the handler to be used to handle our API call
+     * Sets the handler to be used to handle our API call. Mainly used for unit testing as Curl is used by default.
      *
      * @param   object  $processor
      */

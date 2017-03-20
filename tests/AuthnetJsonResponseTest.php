@@ -30,7 +30,7 @@ class AuthnetJsonResponseTest extends \PHPUnit_Framework_TestCase
     public function testExceptionIsRaisedForInvalidJsonException()
     {
         $responseJson = 'I am invalid';
-        $response = new AuthnetJsonResponse($responseJson);
+        new AuthnetJsonResponse($responseJson);
     }
 
     /**
