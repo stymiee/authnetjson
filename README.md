@@ -16,7 +16,7 @@ Here is a minimal example of a `composer.json` file that just defines a dependen
 
     {
         "require": {
-            "stymiee/authnetjson": "2.5.*"
+            "stymiee/authnetjson": "3.0.*"
         }
     }
 
