@@ -71,6 +71,9 @@ class AuthnetWebhooksRequest
             $output .= $this->requestJson . "\n";
             $output .= '</pre></td></tr>' . "\n";
         }
+        else {
+            $output .= '<tr><td colspan="2" style="text-align: center;"><pre>N/A</pre></td></tr>' . "\n";
+        }
         $output .= '</table>';
 
         return $output;
@@ -245,6 +248,8 @@ class AuthnetWebhooksRequest
      * @param   object  $url
      *
      * @throws  \JohnConde\Authnet\AuthnetCurlException
+     *
+     * @codeCoverageIgnore
      */
     private function get($url) {
         $this->processor->get($url);
@@ -258,6 +263,8 @@ class AuthnetWebhooksRequest
      * @param   object  $request    JSON request payload
      *
      * @throws  \JohnConde\Authnet\AuthnetCurlException
+     *
+     * @codeCoverageIgnore
      */
     private function post($url, $request) {
         $this->processor->post($url, $request);
@@ -271,6 +278,8 @@ class AuthnetWebhooksRequest
      * @param   object  $request    JSON request payload
      *
      * @throws  \JohnConde\Authnet\AuthnetCurlException
+     *
+     * @codeCoverageIgnore
      */
     private function put($url, $request) {
         $this->processor->put($url, $request, true);
@@ -281,9 +290,10 @@ class AuthnetWebhooksRequest
      * Make DELETE request via Curl
      *
      * @param   object  $url        API endpoint
-     * @param   object  $request    JSON request payload
      *
      * @throws  \JohnConde\Authnet\AuthnetCurlException
+     *
+     * @codeCoverageIgnore
      */
     private function delete($url) {
         $this->processor->delete($url, [], true);

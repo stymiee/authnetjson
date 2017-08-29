@@ -20,11 +20,6 @@ namespace JohnConde\Authnet;
  * @license     http://www.apache.org/licenses/LICENSE-2.0.html Apache License, Version 2.0
  * @link        https://github.com/stymiee/authnetjson
  * @see         https://developer.authorize.net/api/reference/
- *
- * @property    object  $messages
- * @property    string  $directResponse
- * @property    string  $validationDirectResponse
- * @property    object  $transactionResponse
  */
 class AuthnetWebhooksResponse
 {

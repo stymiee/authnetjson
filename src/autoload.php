@@ -18,6 +18,7 @@ spl_autoload_register(
                 'johnconde\\authnet\\authnetjsonrequest'                      => '/authnet/AuthnetJsonRequest.php',
                 'johnconde\\authnet\\authnetjsonresponse'                     => '/authnet/AuthnetJsonResponse.php',
                 'johnconde\\authnet\\authnetsim'                              => '/authnet/AuthnetSim.php',
+                'johnconde\\authnet\\authnetwebhook'                          => '/authnet/AuthnetWebhook.php',
                 'johnconde\\authnet\\authnetwebhooksrequest'                  => '/authnet/AuthnetWebhooksRequest.php',
                 'johnconde\\authnet\\authnetwebhooksresponse'                 => '/authnet/AuthnetWebhooksResponse.php',
                 'johnconde\\authnet\\transactionresponse'                     => '/authnet/TransactionResponse.php',
