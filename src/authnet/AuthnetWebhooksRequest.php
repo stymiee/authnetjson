@@ -246,13 +246,14 @@ class AuthnetWebhooksRequest
      * Make GET request via Curl
      *
      * @param   string  $url
+     * @param   array   $params
      *
      * @throws  \JohnConde\Authnet\AuthnetCurlException
      *
      * @codeCoverageIgnore
      */
-    private function get($url) {
-        $this->processor->get($url);
+    private function get($url, Array $params = []) {
+        $this->processor->get($url, $params);
         return $this->handleResponse();
     }
 
