@@ -6,8 +6,9 @@
 
     require(__DIR__ . '/vendor/autoload.php');
 
-    defined('AUTHNET_LOGIN')    || define('AUTHNET_LOGIN', '');
-    defined('AUTHNET_TRANSKEY') || define('AUTHNET_TRANSKEY', '');
+    defined('AUTHNET_LOGIN')     || define('AUTHNET_LOGIN', '');
+    defined('AUTHNET_TRANSKEY')  || define('AUTHNET_TRANSKEY', '');
+    defined('AUTHNET_SIGNATURE') || define('AUTHNET_SIGNATURE', '');
 
     if (version_compare(PHP_VERSION, '5.4.0') < 0) {
         throw new \Exception('AuthnetJson requires PHP 5.4 or greater');
