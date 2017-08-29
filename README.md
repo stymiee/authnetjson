@@ -296,6 +296,16 @@ that the field name has all spaces removed so `TransactionID` becomes `Transacti
         "net.authorize.payment.void.created"
     ], 'http://www.example.com:55950/api/webhooks', 'active');
 
+#### Validate and access a Webhook 
+
+    $headers = getallheaders();
+    $payload = file_get_contents("php://input");
+    $webhook = new AuthnetWebhook(AUTHNET_SIGNATURE, $payload, $headers);
+    if ($webhook->isValid()) {
+        // Access notifcation values
+        // echo $webhook->eventType;
+    }
+
 ## Debugging
 
 To assist with debugging the `__toString()` method has been overridden to output important elements pertaining to the
