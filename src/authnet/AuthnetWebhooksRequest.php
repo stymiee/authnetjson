@@ -245,7 +245,7 @@ class AuthnetWebhooksRequest
     /**
      * Make GET request via Curl
      *
-     * @param   object  $url
+     * @param   string  $url
      *
      * @throws  \JohnConde\Authnet\AuthnetCurlException
      *
@@ -259,8 +259,8 @@ class AuthnetWebhooksRequest
     /**
      * Make POST request via Curl
      *
-     * @param   object  $url        API endpoint
-     * @param   object  $request    JSON request payload
+     * @param   string  $url        API endpoint
+     * @param   string  $request    JSON request payload
      *
      * @throws  \JohnConde\Authnet\AuthnetCurlException
      *
@@ -274,8 +274,8 @@ class AuthnetWebhooksRequest
     /**
      * Make PUT request via Curl
      *
-     * @param   object  $url        API endpoint
-     * @param   object  $request    JSON request payload
+     * @param   string  $url        API endpoint
+     * @param   string  $request    JSON request payload
      *
      * @throws  \JohnConde\Authnet\AuthnetCurlException
      *
@@ -289,7 +289,7 @@ class AuthnetWebhooksRequest
     /**
      * Make DELETE request via Curl
      *
-     * @param   object  $url        API endpoint
+     * @param   string  $url        API endpoint
      *
      * @throws  \JohnConde\Authnet\AuthnetCurlException
      *
