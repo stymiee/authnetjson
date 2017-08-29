@@ -1,6 +1,12 @@
 CHANGE LOG
 
-2017-??-?? - Version 3.0.0
+2017-08-28 - Version 3.1.0
+--------------------------------------------
+Added signature verification when receiving a webhook
+Show N/A when there is no request JSON when printing out response objects
+Got unit test coverage back to 100%
+
+2017-04-18 - Version 3.0.0
 --------------------------------------------
 Added support for webhooks
 Switched to use \Curl\Curl for all Curl requests
@@ -31,7 +37,7 @@ Added examples for Verified by Visa
 
 2015-08-21 - Version 2.4.3
 --------------------------------------------
-Updated docbloc comments and added phpdoc.xml to allow for better and easier to generate documentation
+Updated docblock comments and added phpdoc.xml to allow for better and easier to generate documentation
 
 2015-08-16 - Version 2.4.2
 --------------------------------------------
