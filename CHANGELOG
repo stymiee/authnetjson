@@ -1,5 +1,10 @@
 CHANGE LOG
 
+2017-08-30 - Version 3.1.1
+--------------------------------------------
+Made providing headers when handling a webhook optional if apache_request_headers()/getallheaders() is available
+Throws an exception when no signature is provided
+
 2017-08-28 - Version 3.1.0
 --------------------------------------------
 Added signature verification when receiving a webhook

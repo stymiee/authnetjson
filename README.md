@@ -298,7 +298,17 @@ that the field name has all spaces removed so `TransactionID` becomes `Transacti
 
 #### Validate and access a Webhook 
 
-    $headers = getallheaders();
+    $payload = file_get_contents("php://input");
+    $webhook = new AuthnetWebhook(AUTHNET_SIGNATURE, $payload);
+    if ($webhook->isValid()) {
+        // Access notifcation values
+        // echo $webhook->eventType;
+    }
+    
+    If `apache_request_headers()`/`getallheaders()` are not available to you, you can will need to get the HTTP request 
+    headers and pass them as the third parameter to `AuthnetWebhook()`.
+    
+    $headers = yourGetHeadersFunction();
     $payload = file_get_contents("php://input");
     $webhook = new AuthnetWebhook(AUTHNET_SIGNATURE, $payload, $headers);
     if ($webhook->isValid()) {
