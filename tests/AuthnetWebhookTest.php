@@ -36,11 +36,20 @@ class AuthnetWebhookTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers            \JohnConde\Authnet\AuthnetWebhook::__construct()
+     * @expectedException \JohnConde\Authnet\AuthnetInvalidCredentialsException
+     */
+    public function testExceptionIsRaisedForNoSignature()
+    {
+        new AuthnetWebhook('', 'Not JSON', []);
+    }
+
+    /**
+     * @covers            \JohnConde\Authnet\AuthnetWebhook::__construct()
      * @expectedException \JohnConde\Authnet\AuthnetInvalidJsonException
      */
     public function testExceptionIsRaisedForCannotSetParamsException()
     {
-        new AuthnetWebhook('', 'Not JSON', []);
+        new AuthnetWebhook('a', 'Not JSON', []);
     }
 
     /**
