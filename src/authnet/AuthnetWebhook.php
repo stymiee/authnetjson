@@ -46,9 +46,10 @@ class AuthnetWebhook
     /**
      * Creates the response object with the response json returned from the API call
      *
-     * @param   string     $signature       Authorize.Net Signature Key
-     * @param   string     $payload         Webhook Notification sent by Authorize.Net
-     * @param   array      $headers         HTTP headers sent with the Webhook notification
+     * @param   string   $signature    Authorize.Net Signature Key
+     * @param   string   $payload      Webhook Notification sent by Authorize.Net
+     * @param   array    $headers      HTTP headers sent with the Webhook notification. Optional if PHP is run as an Apache module
+     * @throws  \JohnConde\Authnet\AuthnetInvalidCredentialsException
      * @throws  \JohnConde\Authnet\AuthnetInvalidJsonException
      */
     public function __construct($signature, $payload, Array $headers)
@@ -56,6 +57,12 @@ class AuthnetWebhook
         $this->signature   = $signature;
         $this->webhookJson = $payload;
         $this->headers     = $headers;
+        if (empty($this->headers) && function_exists('apache_request_headers')) {
+            $this->headers = apache_request_headers();
+        }
+        if (empty($this->signature)) {
+            throw new AuthnetInvalidCredentialsException('You have not configured your signature properly.');
+        }
         if (($this->webhook = json_decode($this->webhookJson)) === null) {
             throw new AuthnetInvalidJsonException('Invalid JSON sent in the Webhook notification');
         }
