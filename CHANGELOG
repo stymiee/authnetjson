@@ -1,5 +1,9 @@
 CHANGE LOG
 
+2017-09-06 - Version 3.1.2
+--------------------------------------------
+Made third parameter of AuthnetWebhook::__construct() optional
+
 2017-08-30 - Version 3.1.1
 --------------------------------------------
 Made providing headers when handling a webhook optional if apache_request_headers()/getallheaders() is available
