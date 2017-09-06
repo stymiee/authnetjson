@@ -52,7 +52,7 @@ class AuthnetWebhook
      * @throws  \JohnConde\Authnet\AuthnetInvalidCredentialsException
      * @throws  \JohnConde\Authnet\AuthnetInvalidJsonException
      */
-    public function __construct($signature, $payload, Array $headers)
+    public function __construct($signature, $payload, Array $headers = [])
     {
         $this->signature   = $signature;
         $this->webhookJson = $payload;
@@ -120,5 +120,26 @@ class AuthnetWebhook
     public function getRequestId()
     {
         return (isset($this->headers['X-Request-Id'])) ? $this->headers['X-Request-Id'] : null;
+    }
+
+    /**
+     * Retrieves all HTTP headers of a given request
+     *
+     * @return array
+     */
+    protected function getAllHeaders()
+    {
+        $headers = [];
+        if (function_exists('apache_request_headers')) {
+            $headers = apache_request_headers();
+        }
+        else {
+            foreach ($_SERVER as $name => $value) {
+                if (substr($name, 0, 5) == 'HTTP_') {
+                    $headers[str_replace(' ', '-', ucwords(strtolower(str_replace('_', ' ', substr($name, 5)))))] = $value;
+                }
+            }
+        }
+        return $headers;
     }
 }
