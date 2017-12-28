@@ -16,7 +16,7 @@ Here is a minimal example of a `composer.json` file that just defines a dependen
 
     {
         "require": {
-            "stymiee/authnetjson": "3.0.*"
+            "stymiee/authnetjson": "3.1.*"
         }
     }
 
@@ -296,7 +296,7 @@ that the field name has all spaces removed so `TransactionID` becomes `Transacti
         "net.authorize.payment.void.created"
     ], 'http://www.example.com:55950/api/webhooks', 'active');
 
-#### Validate and access a Webhook 
+#### Validate and access a Webhook
 
     $payload = file_get_contents("php://input");
     $webhook = new AuthnetWebhook(AUTHNET_SIGNATURE, $payload);
@@ -304,10 +304,10 @@ that the field name has all spaces removed so `TransactionID` becomes `Transacti
         // Access notifcation values
         // echo $webhook->eventType;
     }
-    
-    If `apache_request_headers()`/`getallheaders()` are not available to you, you can will need to get the HTTP request 
+
+    If `apache_request_headers()`/`getallheaders()` are not available to you, you can will need to get the HTTP request
     headers and pass them as the third parameter to `AuthnetWebhook()`.
-    
+
     $headers = yourGetHeadersFunction();
     $payload = file_get_contents("php://input");
     $webhook = new AuthnetWebhook(AUTHNET_SIGNATURE, $payload, $headers);
