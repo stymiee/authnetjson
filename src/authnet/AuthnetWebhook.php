@@ -109,7 +109,7 @@ class AuthnetWebhook
     public function isValid()
     {
         $hashedBody = strtoupper(hash_hmac('sha512', $this->webhookJson, $this->signature));
-        return (isset($this->headers['X-ANET-Signature']) && strtoupper(explode('=', $this->headers['X-ANET-Signature'])[1]) === $hashedBody);
+        return (isset($this->headers['X-Anet-Signature']) && strtoupper(explode('=', $this->headers['X-Anet-Signature'])[1]) === $hashedBody);
     }
 
     /**
