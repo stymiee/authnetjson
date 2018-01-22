@@ -8,36 +8,36 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
- 
+
 /*************************************************************************************************
 
 Use the AIM JSON API to process an Authorization Only transaction
 
 SAMPLE REQUEST
 --------------------------------------------------------------------------------------------------
-{  
-   "createTransactionRequest":{  
-      "merchantAuthentication":{  
+{
+   "createTransactionRequest":{
+      "merchantAuthentication":{
          "name":"",
          "transactionKey":""
       },
       "refId":14290435,
-      "transactionRequest":{  
+      "transactionRequest":{
          "transactionType":"authOnlyTransaction",
          "amount":5,
-         "payment":{  
-            "creditCard":{  
+         "payment":{
+            "creditCard":{
                "cardNumber":"5424000000000015",
-               "expirationDate":"122017",
+               "expirationDate":"122020",
                "cardCode":"999"
             }
          },
-         "order":{  
+         "order":{
             "invoiceNumber":"1324567890",
             "description":"this is a test transaction"
          },
-         "lineItems":{  
-            "lineItem":{  
+         "lineItems":{
+            "lineItem":{
                "itemId":"1",
                "name":"vase",
                "description":"Cannes logo",
@@ -45,27 +45,27 @@ SAMPLE REQUEST
                "unitPrice":"45.00"
             }
          },
-         "tax":{  
+         "tax":{
             "amount":"4.26",
             "name":"level2 tax name",
             "description":"level2 tax"
          },
-         "duty":{  
+         "duty":{
             "amount":"8.55",
             "name":"duty name",
             "description":"duty description"
          },
-         "shipping":{  
+         "shipping":{
             "amount":"4.26",
             "name":"level2 tax name",
             "description":"level2 tax"
          },
          "poNumber":"456654",
-         "customer":{  
+         "customer":{
             "id":"18",
             "email":"someone@blackhole.tv"
          },
-         "billTo":{  
+         "billTo":{
             "firstName":"Ellen",
             "lastName":"Johnson",
             "company":"Souveniropolis",
@@ -75,7 +75,7 @@ SAMPLE REQUEST
             "zip":"44628",
             "country":"USA"
          },
-         "shipTo":{  
+         "shipTo":{
             "firstName":"China",
             "lastName":"Bayles",
             "company":"Thyme for Tea",
@@ -86,14 +86,14 @@ SAMPLE REQUEST
             "country":"USA"
          },
          "customerIP":"192.168.1.1",
-         "transactionSettings":{  
-            "setting":{  
+         "transactionSettings":{
+            "setting":{
                "settingName":"testRequest",
                "settingValue":"false"
             }
          },
-         "userFields":{  
-            "userField":{  
+         "userFields":{
+            "userField":{
                "name":"favorite_color",
                "value":"blue"
             }
@@ -104,8 +104,8 @@ SAMPLE REQUEST
 
 SAMPLE RESPONSE
 --------------------------------------------------------------------------------------------------
-{  
-   "transactionResponse":{  
+{
+   "transactionResponse":{
       "responseCode":"1",
       "authCode":"7M6LIT",
       "avsResultCode":"Y",
@@ -117,24 +117,24 @@ SAMPLE RESPONSE
       "testRequest":"0",
       "accountNumber":"XXXX0015",
       "accountType":"MasterCard",
-      "messages":[  
-         {  
+      "messages":[
+         {
             "code":"1",
             "description":"This transaction has been approved."
          }
       ],
-      "userFields":[  
-         {  
+      "userFields":[
+         {
             "name":"favorite_color",
             "value":"blue"
          }
       ]
    },
    "refId":"65376587",
-   "messages":{  
+   "messages":{
       "resultCode":"Ok",
-      "message":[  
-         {  
+      "message":[
+         {
             "code":"I00001",
             "text":"Successful."
          }
@@ -158,7 +158,7 @@ SAMPLE RESPONSE
             'payment' => array(
                 'creditCard' => array(
                     'cardNumber' => '5424000000000015',
-                    'expirationDate' => '122017',
+                    'expirationDate' => '122020',
                     'cardCode' => '999',
                 ),
             ),
