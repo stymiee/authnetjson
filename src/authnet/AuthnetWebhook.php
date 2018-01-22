@@ -66,6 +66,7 @@ class AuthnetWebhook
         if (($this->webhook = json_decode($this->webhookJson)) === null) {
             throw new AuthnetInvalidJsonException('Invalid JSON sent in the Webhook notification');
         }
+        $this->headers = array_change_key_case($this->headers, CASE_UPPER);
     }
 
     /**
@@ -109,7 +110,7 @@ class AuthnetWebhook
     public function isValid()
     {
         $hashedBody = strtoupper(hash_hmac('sha512', $this->webhookJson, $this->signature));
-        return (isset($this->headers['X-Anet-Signature']) && strtoupper(explode('=', $this->headers['X-Anet-Signature'])[1]) === $hashedBody);
+        return (isset($this->headers['X-ANET-SIGNATURE']) && strtoupper(explode('=', $this->headers['X-ANET-SIGNATURE'])[1]) === $hashedBody);
     }
 
     /**
@@ -119,7 +120,7 @@ class AuthnetWebhook
      */
     public function getRequestId()
     {
-        return (isset($this->headers['X-Request-Id'])) ? $this->headers['X-Request-Id'] : null;
+        return (isset($this->headers['X-REQUEST-ID'])) ? $this->headers['X-REQUEST-ID'] : null;
     }
 
     /**
@@ -136,7 +137,7 @@ class AuthnetWebhook
         else {
             foreach ($_SERVER as $name => $value) {
                 if (substr($name, 0, 5) == 'HTTP_') {
-                    $headers[str_replace(' ', '-', ucwords(strtolower(str_replace('_', ' ', substr($name, 5)))))] = $value;
+                    $headers[str_replace(' ', '-', ucwords(strtoupper(str_replace('_', ' ', substr($name, 5)))))] = $value;
                 }
             }
         }
