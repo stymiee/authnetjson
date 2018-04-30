@@ -25,7 +25,7 @@ class TransactionResponse {
     /**
      * @var     array Transaction response fields to map to values parsed from a transaction response string
      */
-    private $fieldMap = array(
+    private $fieldMap = [
         1 => 'ResponseCode',
         2 => 'ResponseSubcode',
         3 => 'ResponseReasonCode',
@@ -71,12 +71,12 @@ class TransactionResponse {
         53 => 'SplitTenderID',
         54 => 'AmountRequested',
         55 => 'BalanceOnCard'
-    );
+    ];
 
     /**
      * @var     array Transaction response fields to map to values parsed from a transaction response string
      */
-    private $responseArray = array();
+    private $responseArray = [];
 
     /**
      * Creates out TransactionResponse object and assigns the response variables to an array
@@ -85,7 +85,7 @@ class TransactionResponse {
      */
     public function __construct($response)
     {
-        $this->responseArray = array_merge(array(null), explode(',', $response));
+        $this->responseArray = array_merge([null], explode(',', $response));
     }
 
     /**

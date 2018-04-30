@@ -57,10 +57,10 @@ SAMPLE RESPONSE
     require('../../src/autoload.php');
 
     $request  = AuthnetApiFactory::getJsonApiHandler(AUTHNET_LOGIN, AUTHNET_TRANSKEY, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
-    $response = $request->getCustomerPaymentProfileRequest(array(
+    $response = $request->getCustomerPaymentProfileRequest([
         'customerProfileId' => '31390172',
         'customerPaymentProfileId' => '28393490'
-    ));
+    ]);
 ?>
 
 <!DOCTYPE html>

@@ -44,23 +44,23 @@ SAMPLE RESPONSE
     require('../../src/autoload.php');
 
     $request  = AuthnetApiFactory::getJsonApiHandler(AUTHNET_LOGIN, AUTHNET_TRANSKEY, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
-    $response = $request->getHostedProfilePageRequest(array(
+    $response = $request->getHostedProfilePageRequest([
         'customerProfileId' => '31390172',
-        'hostedProfileSettings' => array(
-            'setting' => array(
+        'hostedProfileSettings' => [
+            'setting' => [
                 'settingName' => 'hostedProfileReturnUrl',
                 'settingValue' => 'https://blah.com/blah/',
-            ),
-            'setting' => array(
+            ],
+            'setting' => [
                 'settingName' => 'hostedProfileReturnUrlText',
                 'settingValue' => 'Continue to blah.',
-            ),
-            'setting' => array(
+            ],
+            'setting' => [
                 'settingName' => 'hostedProfilePageBorderVisible',
                 'settingValue' => 'true',
-            )
-        )
-    ));
+            ]
+        ]
+    ]);
 ?>
 
 <!DOCTYPE html>

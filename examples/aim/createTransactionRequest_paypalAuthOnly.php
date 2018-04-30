@@ -74,18 +74,18 @@ SAMPLE RESPONSE
     require('../../src/autoload.php');
 
     $request  = AuthnetApiFactory::getJsonApiHandler(AUTHNET_LOGIN, AUTHNET_TRANSKEY, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
-    $response = $request->createTransactionRequest(array(
-        "transactionRequest" => array(
+    $response = $request->createTransactionRequest([
+        "transactionRequest" => [
             "transactionType" => "authOnlyTransaction",
             "amount" => "5",
-            "payment" => array(
-                "payPal" => array(
+            "payment" => [
+                "payPal" => [
                     "successUrl" => "https://my.server.com/success.html",
                     "cancelUrl" => "https://my.server.com/cancel.html"
-                )
-            )
-        )
-    ));
+                ]
+            ]
+        ]
+    ]);
 ?>
 
 <!DOCTYPE html>

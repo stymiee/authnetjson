@@ -8,24 +8,24 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
- 
+
 /*************************************************************************************************
 
 Use the ARB JSON API to update a subscription
 
 SAMPLE REQUEST
 --------------------------------------------------------------------------------------------------
-{  
-   "ARBUpdateSubscriptionRequest":{  
-      "merchantAuthentication":{  
+{
+   "ARBUpdateSubscriptionRequest":{
+      "merchantAuthentication":{
          "name":"",
          "transactionKey":""
       },
       "refId":"Sample",
       "subscriptionId":"2342682",
-      "subscription":{  
-         "payment":{  
-            "creditCard":{  
+      "subscription":{
+         "payment":{
+            "creditCard":{
                "cardNumber":"6011000000000012",
                "expirationDate":"2016-08"
             }
@@ -36,12 +36,12 @@ SAMPLE REQUEST
 
 SAMPLE RESPONSE
 --------------------------------------------------------------------------------------------------
-{  
+{
    "refId":"Sample",
-   "messages":{  
+   "messages":{
       "resultCode":"Ok",
-      "message":[  
-         {  
+      "message":[
+         {
             "code":"I00001",
             "text":"Successful."
          }
@@ -57,18 +57,18 @@ SAMPLE RESPONSE
     require('../../src/autoload.php');
 
     $request  = AuthnetApiFactory::getJsonApiHandler(AUTHNET_LOGIN, AUTHNET_TRANSKEY, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
-    $response = $request->ARBUpdateSubscriptionRequest(array(
+    $response = $request->ARBUpdateSubscriptionRequest([
         'refId' => 'Sample',
         'subscriptionId' => '2342682',
-        'subscription' => array(
-            'payment' => array(
-                'creditCard' => array(
+        'subscription' => [
+            'payment' => [
+                'creditCard' => [
                     'cardNumber' => '6011000000000012',
                     'expirationDate' => '2016-08'
-                ),
-            ),
-        ),
-    ));
+                ],
+            ],
+        ],
+    ]);
 ?>
 
 <!DOCTYPE html>

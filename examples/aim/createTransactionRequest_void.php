@@ -61,13 +61,13 @@ SAMPLE RESPONSE
     require('../../src/autoload.php');
 
     $request  = AuthnetApiFactory::getJsonApiHandler(AUTHNET_LOGIN, AUTHNET_TRANSKEY, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
-    $response = $request->createTransactionRequest(array(
+    $response = $request->createTransactionRequest([
         'refId' => rand(1000000, 100000000),
-        'transactionRequest' => array(
+        'transactionRequest' => [
             'transactionType' => 'voidTransaction',
             'refTransId' => '2230581408'
-        ),
-    ));
+        ],
+    ]);
 ?>
 
 <!DOCTYPE html>

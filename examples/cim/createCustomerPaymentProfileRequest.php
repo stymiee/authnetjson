@@ -61,10 +61,10 @@ SAMPLE RESPONSE
     require('../../src/autoload.php');
 
     $request  = AuthnetApiFactory::getJsonApiHandler(AUTHNET_LOGIN, AUTHNET_TRANSKEY, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
-    $response = $request->createCustomerPaymentProfileRequest(array(
+    $response = $request->createCustomerPaymentProfileRequest([
         'customerProfileId' => '30582495',
-        'paymentProfile' => array(
-            'billTo' => array(
+        'paymentProfile' => [
+            'billTo' => [
                 'firstName' => 'John',
                 'lastName' => 'Doe',
                 'company' => '',
@@ -75,16 +75,16 @@ SAMPLE RESPONSE
                 'country' => 'USA',
                 'phoneNumber' => '800-555-1234',
                 'faxNumber' => '800-555-1234'
-            ),
-            'payment' => array(
-                'creditCard' => array(
+            ],
+            'payment' => [
+                'creditCard' => [
                     'cardNumber' => '4111111111111111',
                     'expirationDate' => '2016-08'
-                )
-            )
-        ),
+                ]
+            ]
+        ],
         'validationMode' => 'liveMode'
-    ));
+    ]);
 ?>
 
 <!DOCTYPE html>

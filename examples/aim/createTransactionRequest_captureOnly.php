@@ -68,20 +68,20 @@ SAMPLE RESPONSE
     require('../../src/autoload.php');
 
     $json = AuthnetApiFactory::getJsonApiHandler(AUTHNET_LOGIN, AUTHNET_TRANSKEY, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
-    $json->createTransactionRequest(array(
+    $json->createTransactionRequest([
         'refId' => rand(1000000, 100000000),
-        'transactionRequest' => array(
+        'transactionRequest' => [
             'transactionType' => 'captureOnlyTransaction',
             'amount' => 5,
-            'payment' => array(
-                'creditCard' => array(
+            'payment' => [
+                'creditCard' => [
                     'cardNumber' => '5424000000000015',
                     'expirationDate' => '122020'
-                )
-            ),
+                ]
+            ],
             'authCode' => '123456'
-        ),
-    ));
+        ],
+    ]);
 ?>
 
 <!DOCTYPE html>

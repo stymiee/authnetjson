@@ -8,16 +8,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
- 
+
 /*************************************************************************************************
 
 Use the Transaction Details API to get the details of a transaction
 
 SAMPLE REQUEST
 --------------------------------------------------------------------------------------------------
-{  
-   "getTransactionDetailsRequest":{  
-      "merchantAuthentication":{  
+{
+   "getTransactionDetailsRequest":{
+      "merchantAuthentication":{
          "name":"",
          "transactionKey":""
       },
@@ -27,8 +27,8 @@ SAMPLE REQUEST
 
 SAMPLE RESPONSE
 --------------------------------------------------------------------------------------------------
-{  
-   "transaction":{  
+{
+   "transaction":{
       "transId":"2162566217",
       "submitTimeUTC":"2011-09-01T16:30:49.39Z",
       "submitTimeLocal":"2011-09-01T10:30:49.39",
@@ -39,7 +39,7 @@ SAMPLE RESPONSE
       "responseReasonDescription":"Approval",
       "authCode":"JPG9DJ",
       "AVSResponse":"Y",
-      "batch":{  
+      "batch":{
          "batchId":"1221577",
          "settlementTimeUTC":"2011-09-01T16:38:54.52Z",
          "settlementTimeUTCSpecified":true,
@@ -47,7 +47,7 @@ SAMPLE RESPONSE
          "settlementTimeLocalSpecified":true,
          "settlementState":"settledSuccessfully"
       },
-      "order":{  
+      "order":{
          "invoiceNumber":"60",
          "description":"Auto-charge for Invoice #60"
       },
@@ -57,18 +57,18 @@ SAMPLE RESPONSE
       "prepaidBalanceRemainingSpecified":false,
       "taxExempt":false,
       "taxExemptSpecified":true,
-      "payment":{  
-         "creditCard":{  
+      "payment":{
+         "creditCard":{
             "cardNumber":"XXXX4444",
             "expirationDate":"XXXX",
             "cardType":"MasterCard"
          }
       },
-      "customer":{  
+      "customer":{
          "typeSpecified":false,
          "id":"4"
       },
-      "billTo":{  
+      "billTo":{
          "phoneNumber":"(619) 274-0494",
          "firstName":"Matteo",
          "lastName":"Bignotti",
@@ -83,10 +83,10 @@ SAMPLE RESPONSE
       "product":"Card Not Present",
       "marketType":"eCommerce"
    },
-   "messages":{  
+   "messages":{
       "resultCode":"Ok",
-      "message":[  
-         {  
+      "message":[
+         {
             "code":"I00001",
             "text":"Successful."
          }
@@ -102,9 +102,9 @@ SAMPLE RESPONSE
     require('../../src/autoload.php');
 
     $request  = AuthnetApiFactory::getJsonApiHandler(AUTHNET_LOGIN, AUTHNET_TRANSKEY, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
-    $response = $request->getTransactionDetailsRequest(array(
+    $response = $request->getTransactionDetailsRequest([
         'transId' => '2162566217'
-    ));
+    ]);
 ?>
 
 <!DOCTYPE html>

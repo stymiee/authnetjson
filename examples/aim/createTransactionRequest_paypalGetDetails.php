@@ -70,12 +70,12 @@ SAMPLE RESPONSE
     require('../../src/autoload.php');
 
     $request  = AuthnetApiFactory::getJsonApiHandler(AUTHNET_LOGIN, AUTHNET_TRANSKEY, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
-    $response = $request->createTransactionRequest(array(
-        "transactionRequest" => array(
+    $response = $request->createTransactionRequest([
+        "transactionRequest" => [
             "transactionType" => "getDetailsTransaction",
             "refTransId" => "128"
-        )
-    ));
+        ]
+    ]);
 ?>
 
 <!DOCTYPE html>

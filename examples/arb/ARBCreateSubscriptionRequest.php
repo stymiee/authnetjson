@@ -8,24 +8,24 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
- 
+
 /*************************************************************************************************
 
 Use the ARB JSON API to create a subscription
 
 SAMPLE REQUEST
 --------------------------------------------------------------------------------------------------
-{  
-   "ARBCreateSubscriptionRequest":{  
-      "merchantAuthentication":{  
+{
+   "ARBCreateSubscriptionRequest":{
+      "merchantAuthentication":{
          "name":"",
          "transactionKey":""
       },
       "refId":"Sample",
-      "subscription":{  
+      "subscription":{
          "name":"Sample subscription",
-         "paymentSchedule":{  
-            "interval":{  
+         "paymentSchedule":{
+            "interval":{
                "length":"1",
                "unit":"months"
             },
@@ -35,13 +35,13 @@ SAMPLE REQUEST
          },
          "amount":"10.29",
          "trialAmount":"0.00",
-         "payment":{  
-            "creditCard":{  
+         "payment":{
+            "creditCard":{
                "cardNumber":"4111111111111111",
                "expirationDate":"2016-08"
             }
          },
-         "billTo":{  
+         "billTo":{
             "firstName":"John",
             "lastName":"Smith"
          }
@@ -51,13 +51,13 @@ SAMPLE REQUEST
 
 SAMPLE RESPONSE
 --------------------------------------------------------------------------------------------------
-{  
+{
    "subscriptionId":"2341621",
    "refId":"Sample",
-   "messages":{  
+   "messages":{
       "resultCode":"Ok",
-      "message":[  
-         {  
+      "message":[
+         {
             "code":"I00001",
             "text":"Successful."
          }
@@ -73,33 +73,33 @@ SAMPLE RESPONSE
     require('../../src/autoload.php');
 
     $request  = AuthnetApiFactory::getJsonApiHandler(AUTHNET_LOGIN, AUTHNET_TRANSKEY, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
-    $response = $request->ARBCreateSubscriptionRequest(array(
+    $response = $request->ARBCreateSubscriptionRequest([
         'refId' => 'Sample',
-        'subscription' => array(
+        'subscription' => [
             'name' => 'Sample subscription',
-            'paymentSchedule' => array(
-                'interval' => array(
+            'paymentSchedule' => [
+                'interval' => [
                     'length' => '1',
                     'unit' => 'months'
-                ),
+                ],
                 'startDate' => '2015-04-18',
                 'totalOccurrences' => '12',
                 'trialOccurrences' => '1'
-            ),
+            ],
             'amount' => '10.29',
             'trialAmount' => '0.00',
-            'payment' => array(
-                'creditCard' => array(
+            'payment' => [
+                'creditCard' => [
                     'cardNumber' => '4111111111111111',
                     'expirationDate' => '2016-08'
-                )
-            ),
-            'billTo' => array(
+                ]
+            ],
+            'billTo' => [
                 'firstName' => 'John',
                 'lastName' => 'Smith'
-            )
-        )
-    ));
+            ]
+        ]
+    ]);
 ?>
 
 <!DOCTYPE html>

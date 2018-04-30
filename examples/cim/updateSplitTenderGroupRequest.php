@@ -38,10 +38,10 @@ SAMPLE RESPONSE
     require('../../src/autoload.php');
 
     $request  = AuthnetApiFactory::getJsonApiHandler(AUTHNET_LOGIN, AUTHNET_TRANSKEY, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
-    $response = $request->updateSplitTenderGroupRequest(array(
+    $response = $request->updateSplitTenderGroupRequest([
         'splitTenderId' => '123456',
         'splitTenderStatus' => 'voided'
-    ));
+    ]);
 ?>
 
 <!DOCTYPE html>

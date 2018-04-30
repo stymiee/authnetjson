@@ -38,10 +38,10 @@ SAMPLE RESPONSE
     require('../../src/autoload.php');
 
     $request  = AuthnetApiFactory::getJsonApiHandler(AUTHNET_LOGIN, AUTHNET_TRANSKEY, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
-    $response = $request->deleteCustomerShippingAddressRequest(array(
+    $response = $request->deleteCustomerShippingAddressRequest([
         'customerProfileId' => '31390172',
         'customerAddressId' => '29366174'
-    ));
+    ]);
 ?>
 
 <!DOCTYPE html>

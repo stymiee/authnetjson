@@ -38,10 +38,10 @@ SAMPLE RESPONSE
     require('../../src/autoload.php');
 
     $request  = AuthnetApiFactory::getJsonApiHandler(AUTHNET_LOGIN, AUTHNET_TRANSKEY, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
-    $response = $request->deleteCustomerPaymentProfileRequest(array(
+    $response = $request->deleteCustomerPaymentProfileRequest([
         'customerProfileId' => '31390172',
         'customerPaymentProfileId' => '28393490'
-    ));
+    ]);
 ?>
 
 <!DOCTYPE html>

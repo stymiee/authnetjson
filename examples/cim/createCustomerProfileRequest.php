@@ -8,24 +8,24 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
- 
+
 /*************************************************************************************************
 
 Use the CIM JSON API to create a customer profile
 
 SAMPLE REQUEST
 --------------------------------------------------------------------------------------------------
-{  
-   "createCustomerProfileRequest":{  
-      "merchantAuthentication":{  
+{
+   "createCustomerProfileRequest":{
+      "merchantAuthentication":{
          "name":"",
          "transactionKey":""
       },
-      "profile":{  
+      "profile":{
          "merchantCustomerId":"12345",
          "email":"user@example.com",
-         "paymentProfiles":{  
-            "billTo":{  
+         "paymentProfiles":{
+            "billTo":{
                "firstName":"John",
                "lastName":"Smith",
                "address":"123 Main Street",
@@ -34,14 +34,14 @@ SAMPLE REQUEST
                "zip":"12345",
                "phoneNumber":"800-555-1234"
             },
-            "payment":{  
-               "creditCard":{  
+            "payment":{
+               "creditCard":{
                   "cardNumber":"4111111111111111",
                   "expirationDate":"2016-08"
                }
             }
          },
-         "shipToList":{  
+         "shipToList":{
             "firstName":"John",
             "lastName":"Smith",
             "address":"123 Main Street",
@@ -57,21 +57,21 @@ SAMPLE REQUEST
 
 SAMPLE RESPONSE
 --------------------------------------------------------------------------------------------------
-{  
+{
    "customerProfileId":"31390172",
-   "customerPaymentProfileIdList":[  
+   "customerPaymentProfileIdList":[
       "28393490"
    ],
-   "customerShippingAddressIdList":[  
+   "customerShippingAddressIdList":[
       "29366174"
    ],
-   "validationDirectResponseList":[  
+   "validationDirectResponseList":[
       "1,1,1,This transaction has been approved.,1VQHEI,Y,2228580111,none,Test transaction for ValidateCustomerPaymentProfile.,0.00,CC,auth_only,12345,John,Smith,,123 Main Street,Townsville,NJ,12345,,800-555-1234,,user@example.com,,,,,,,,,0.00,0.00,0.00,FALSE,none,317FCDBBCBABB2C7442766267D4C099C,,2,,,,,,,,,,,XXXX1111,Visa,,,,,,,,,,,,,,,,"
    ],
-   "messages":{  
+   "messages":{
       "resultCode":"Ok",
-      "message":[  
-         {  
+      "message":[
+         {
             "code":"I00001",
             "text":"Successful."
          }
@@ -87,12 +87,12 @@ SAMPLE RESPONSE
     require('../../src/autoload.php');
 
     $request  = AuthnetApiFactory::getJsonApiHandler(AUTHNET_LOGIN, AUTHNET_TRANSKEY, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
-    $response = $request->createCustomerProfileRequest(array(
-            'profile' => array(
+    $response = $request->createCustomerProfileRequest([
+            'profile' => [
 			'merchantCustomerId' => '123456',
 			'email' => 'user@example.com',
-			'paymentProfiles' => array(
-				'billTo' => array(
+			'paymentProfiles' => [
+				'billTo' => [
 					'firstName' => 'John',
 					'lastName' => 'Smith',
 					'address' => '123 Main Street',
@@ -100,15 +100,15 @@ SAMPLE RESPONSE
 					'state' => 'NJ',
 					'zip' => '12345',
 					'phoneNumber' => '800-555-1234'
-				),
-				'payment' => array(
-					'creditCard' => array(
+				],
+				'payment' => [
+					'creditCard' => [
 					'cardNumber' => '4111111111111111',
 					'expirationDate' => '2016-08',
-					),
-				),
-			),
-    		'shipToList' => array(
+					],
+				],
+			],
+    		'shipToList' => [
     		    'firstName' => 'John',
 				'lastName' => 'Smith',
 				'address' => '123 Main Street',
@@ -116,10 +116,10 @@ SAMPLE RESPONSE
 				'state' => 'NJ',
 				'zip' => '12345',
 				'phoneNumber' => '800-555-1234'
-    		),
-		),
+    		],
+		],
 		'validationMode' => 'liveMode'
-	));
+	]);
 ?>
 
 <!DOCTYPE html>

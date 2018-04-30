@@ -46,21 +46,21 @@ SAMPLE RESPONSE
     require('../../src/autoload.php');
 
     $request  = AuthnetApiFactory::getJsonApiHandler(AUTHNET_LOGIN, AUTHNET_TRANSKEY, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
-    $response = $request->sendCustomerTransactionReceiptRequest(array(
+    $response = $request->sendCustomerTransactionReceiptRequest([
         'refId' => rand(1000000, 100000000),
         'transId' => '2165665581',
         'customerEmail' => 'user@example.com',
-        'emailSettings' => array(
-            'setting' => array(
+        'emailSettings' => [
+            'setting' => [
                 'settingName' => 'headerEmailReceipt',
                 'settingValue' => 'some HEADER stuff'
-            ),
-            'setting' => array(
+            ],
+            'setting' => [
                 'settingName' => 'footerEmailReceipt',
                 'settingValue' => 'some FOOTER stuff'
-            ),
-        ),
-    ));
+            ],
+        ],
+    ]);
 ?>
 
 <!DOCTYPE html>

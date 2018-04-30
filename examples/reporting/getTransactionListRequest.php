@@ -8,16 +8,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
- 
+
 /*************************************************************************************************
 
 Use the Transaction Details API to get a list of transaction in a batch
 
 SAMPLE REQUEST
 --------------------------------------------------------------------------------------------------
-{  
-   "getTransactionListRequest":{  
-      "merchantAuthentication":{  
+{
+   "getTransactionListRequest":{
+      "merchantAuthentication":{
          "name":"",
          "transactionKey":""
       },
@@ -27,9 +27,9 @@ SAMPLE REQUEST
 
 SAMPLE RESPONSE
 --------------------------------------------------------------------------------------------------
-{  
-   "transactions":[  
-      {  
+{
+   "transactions":[
+      {
          "transId":"2162566217",
          "submitTimeUTC":"2011-09-01T16:30:49Z",
          "submitTimeLocal":"2011-09-01T10:30:49",
@@ -45,10 +45,10 @@ SAMPLE RESPONSE
          "hasReturnedItemsSpecified":false
       }
    ],
-   "messages":{  
+   "messages":{
       "resultCode":"Ok",
-      "message":[  
-         {  
+      "message":[
+         {
             "code":"I00001",
             "text":"Successful."
          }
@@ -64,9 +64,9 @@ SAMPLE RESPONSE
     require('../../src/autoload.php');
 
     $request  = AuthnetApiFactory::getJsonApiHandler(AUTHNET_LOGIN, AUTHNET_TRANSKEY, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
-    $response = $request->getTransactionListRequest(array(
+    $response = $request->getTransactionListRequest([
         'batchId' => '1221577'
-    ));
+    ]);
 ?>
 
 <!DOCTYPE html>

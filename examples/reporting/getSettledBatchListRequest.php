@@ -8,16 +8,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
- 
+
 /*************************************************************************************************
 
 Use the Transaction Details API to get a list of settled batches
 
 SAMPLE REQUEST
 --------------------------------------------------------------------------------------------------
-{  
-   "getSettledBatchListRequest":{  
-      "merchantAuthentication":{  
+{
+   "getSettledBatchListRequest":{
+      "merchantAuthentication":{
          "name":"",
          "transactionKey":""
       },
@@ -29,9 +29,9 @@ SAMPLE REQUEST
 
 SAMPLE RESPONSE
 --------------------------------------------------------------------------------------------------
-{  
-   "batchList":[  
-      {  
+{
+   "batchList":[
+      {
          "batchId":"3990061",
          "settlementTimeUTC":"2015-01-02T08:40:29Z",
          "settlementTimeUTCSpecified":true,
@@ -41,8 +41,8 @@ SAMPLE RESPONSE
          "paymentMethod":"creditCard",
          "marketType":"eCommerce",
          "product":"Card Not Present",
-         "statistics":[  
-            {  
+         "statistics":[
+            {
                "accountType":"MasterCard",
                "chargeAmount":98.00,
                "chargeCount":2,
@@ -65,7 +65,7 @@ SAMPLE RESPONSE
                "refundReturnedItemsAmountSpecified":false,
                "refundReturnedItemsCountSpecified":false
             },
-            {  
+            {
                "accountType":"Visa",
                "chargeAmount":2255.50,
                "chargeCount":4,
@@ -90,7 +90,7 @@ SAMPLE RESPONSE
             }
          ]
       },
-      {  
+      {
          "batchId":"3990090",
          "settlementTimeUTC":"2015-01-02T08:55:35Z",
          "settlementTimeUTCSpecified":true,
@@ -100,8 +100,8 @@ SAMPLE RESPONSE
          "paymentMethod":"creditCard",
          "marketType":"eCommerce",
          "product":"Card Not Present",
-         "statistics":[  
-            {  
+         "statistics":[
+            {
                "accountType":"MasterCard",
                "chargeAmount":19.95,
                "chargeCount":1,
@@ -124,7 +124,7 @@ SAMPLE RESPONSE
                "refundReturnedItemsAmountSpecified":false,
                "refundReturnedItemsCountSpecified":false
             },
-            {  
+            {
                "accountType":"Visa",
                "chargeAmount":5.00,
                "chargeCount":1,
@@ -150,10 +150,10 @@ SAMPLE RESPONSE
          ]
       }
    ],
-   "messages":{  
+   "messages":{
       "resultCode":"Ok",
-      "message":[  
-         {  
+      "message":[
+         {
             "code":"I00001",
             "text":"Successful."
          }
@@ -169,11 +169,11 @@ SAMPLE RESPONSE
     require('../../src/autoload.php');
 
     $request  = AuthnetApiFactory::getJsonApiHandler(AUTHNET_LOGIN, AUTHNET_TRANSKEY, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
-    $response = $request->getSettledBatchListRequest(array(
+    $response = $request->getSettledBatchListRequest([
         'includeStatistics'   => 'true',
         'firstSettlementDate' => '2015-01-01T08:15:30',
         'lastSettlementDate'  => '2015-01-30T08:15:30',
-    ));
+    ]);
 ?>
 
 <!DOCTYPE html>

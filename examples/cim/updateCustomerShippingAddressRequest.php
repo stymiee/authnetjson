@@ -50,9 +50,9 @@ SAMPLE RESPONSE
     require('../../src/autoload.php');
 
     $request  = AuthnetApiFactory::getJsonApiHandler(AUTHNET_LOGIN, AUTHNET_TRANSKEY, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
-    $response = $request->updateCustomerShippingAddressRequest(array(
+    $response = $request->updateCustomerShippingAddressRequest([
         'customerProfileId' => '31390172',
-        'address' => array(
+        'address' => [
             'firstName' => 'John',
             'lastName' => 'Doe',
             'company' => '',
@@ -64,8 +64,8 @@ SAMPLE RESPONSE
             'phoneNumber' => '800-555-1234',
             'faxNumber' => '800-555-1234',
             'customerAddressId' => '29366174'
-        )
-    ));
+        ]
+    ]);
 ?>
 
 <!DOCTYPE html>

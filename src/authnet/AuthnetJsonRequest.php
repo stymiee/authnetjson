@@ -143,19 +143,19 @@ class AuthnetJsonRequest
      */
     public function __call($api_call, Array $args)
     {
-        $authentication = array(
-            'merchantAuthentication' => array(
+        $authentication = [
+            'merchantAuthentication' => [
                 'name'           => $this->login,
                 'transactionKey' => $this->transactionKey,
-            )
-        );
-        $call = array();
+            ]
+        ];
+        $call = [];
         if (count($args)) {
             $call = $args[0];
         }
-        $parameters = array(
+        $parameters = [
             $api_call => $authentication + $call
-        );
+        ];
         $this->requestJson = json_encode($parameters);
 
         $response = $this->process();

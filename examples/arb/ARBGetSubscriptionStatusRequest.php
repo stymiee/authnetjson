@@ -8,16 +8,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
- 
+
 /*************************************************************************************************
 
 Use the ARB API to get a subscription's status
 
 SAMPLE REQUEST
 --------------------------------------------------------------------------------------------------
-{  
-   "ARBGetSubscriptionStatusRequest":{  
-      "merchantAuthentication":{  
+{
+   "ARBGetSubscriptionStatusRequest":{
+      "merchantAuthentication":{
          "name":"",
          "transactionKey":""
       },
@@ -28,17 +28,17 @@ SAMPLE REQUEST
 
 SAMPLE RESPONSE
 --------------------------------------------------------------------------------------------------
-{  
+{
    "note":"Status with a capital 'S' is obsolete.",
    "status":"canceled",
    "Status":"canceled",
    "statusSpecified":true,
    "StatusSpecified":true,
    "refId":"Sample",
-   "messages":{  
+   "messages":{
       "resultCode":"Ok",
-      "message":[  
-         {  
+      "message":[
+         {
             "code":"I00001",
             "text":"Successful."
          }
@@ -54,10 +54,10 @@ SAMPLE RESPONSE
     require('../../src/autoload.php');
 
     $request  = AuthnetApiFactory::getJsonApiHandler(AUTHNET_LOGIN, AUTHNET_TRANSKEY, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
-    $response = $request->ARBGetSubscriptionStatusRequest(array(
+    $response = $request->ARBGetSubscriptionStatusRequest([
         'refId' => 'Sample',
         'subscriptionId' => '1207505'
-    ));
+    ]);
 ?>
 
 <!DOCTYPE html>

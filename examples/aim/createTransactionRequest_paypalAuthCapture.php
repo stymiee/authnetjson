@@ -82,29 +82,29 @@ SAMPLE RESPONSE
     require('../../src/autoload.php');
 
     $request  = AuthnetApiFactory::getJsonApiHandler(AUTHNET_LOGIN, AUTHNET_TRANSKEY, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
-    $response = $request->createTransactionRequest(array(
-        "transactionRequest" => array(
+    $response = $request->createTransactionRequest([
+        "transactionRequest" => [
             "transactionType" => "authCaptureTransaction",
             "amount" => "80.93",
-            "payment" => array(
-                "payPal" => array(
+            "payment" => [
+                "payPal" => [
                     "successUrl" => "https://my.server.com/success.html",
                     "cancelUrl" => "https://my.server.com/cancel.html",
                     "paypalLc" => "",
                     "paypalHdrImg" => "",
                     "paypalPayflowcolor" => "FFFF00"
-                )
-            ),
-            "lineItems" => array(
-                "lineItem" => array(
+                ]
+            ],
+            "lineItems" => [
+                "lineItem" => [
                     "itemId" => "item1",
                     "name" => "golf balls",
                     "quantity" => "1",
                     "unitPrice" => "18.95"
-                )
-            )
-        )
-    ));
+                ]
+            ]
+        ]
+    ]);
 ?>
 
 <!DOCTYPE html>

@@ -177,61 +177,61 @@ SAMPLE RESPONSE
     require('../../src/autoload.php');
 
     $request  = AuthnetApiFactory::getJsonApiHandler(AUTHNET_LOGIN, AUTHNET_TRANSKEY, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
-    $response = $request->createTransactionRequest(array(
+    $response = $request->createTransactionRequest([
         'refId' => rand(1000000, 100000000),
-        'transactionRequest' => array(
+        'transactionRequest' => [
             'transactionType' => 'authCaptureTransaction',
             'amount' => 5,
-            'payment' => array(
-                'creditCard' => array(
+            'payment' => [
+                'creditCard' => [
                     'cardNumber' => '4111111111111111',
                     'expirationDate' => '122020',
                     'cardCode' => '999',
-                ),
-            ),
-            'order' => array(
+                ],
+            ],
+            'order' => [
                 'invoiceNumber' => '1324567890',
                 'description' => 'this is a test transaction',
-            ),
-            'lineItems' => array(
-                'lineItem' => array(
-                    0 => array(
+            ],
+            'lineItems' => [
+                'lineItem' => [
+                    0 => [
                         'itemId' => '1',
                         'name' => 'vase',
                         'description' => 'Cannes logo',
                         'quantity' => '18',
                         'unitPrice' => '45.00'
-                    ),
-                    1 => array(
+                    ],
+                    1 => [
                         'itemId' => '2',
                         'name' => 'desk',
                         'description' => 'Big Desk',
                         'quantity' => '10',
                         'unitPrice' => '85.00'
-                    )
-                )
-            ),
-            'tax' => array(
+                    ]
+                ]
+            ],
+            'tax' => [
                'amount' => '4.26',
                'name' => 'level2 tax name',
                'description' => 'level2 tax',
-            ),
-            'duty' => array(
+            ],
+            'duty' => [
                'amount' => '8.55',
                'name' => 'duty name',
                'description' => 'duty description',
-            ),
-            'shipping' => array(
+            ],
+            'shipping' => [
                'amount' => '4.26',
                'name' => 'level2 tax name',
                'description' => 'level2 tax',
-            ),
+            ],
             'poNumber' => '456654',
-            'customer' => array(
+            'customer' => [
                'id' => '18',
                'email' => 'someone@blackhole.tv',
-            ),
-            'billTo' => array(
+            ],
+            'billTo' => [
                'firstName' => 'Ellen',
                'lastName' => 'Johnson',
                'company' => 'Souveniropolis',
@@ -240,8 +240,8 @@ SAMPLE RESPONSE
                'state' => 'TX',
                'zip' => '44628',
                'country' => 'USA',
-            ),
-            'shipTo' => array(
+            ],
+            'shipTo' => [
                'firstName' => 'China',
                'lastName' => 'Bayles',
                'company' => 'Thyme for Tea',
@@ -250,44 +250,44 @@ SAMPLE RESPONSE
                'state' => 'TX',
                'zip' => '44628',
                'country' => 'USA',
-            ),
+            ],
             'customerIP' => '192.168.1.1',
-            'transactionSettings' => array(
-                'setting' => array(
-                    0 => array(
+            'transactionSettings' => [
+                'setting' => [
+                    0 => [
                         'settingName' =>'allowPartialAuth',
                         'settingValue' => 'false'
-                    ),
-                    1 => array(
+                    ],
+                    1 => [
                         'settingName' => 'duplicateWindow',
                         'settingValue' => '0'
-                    ),
-                    2 => array(
+                    ],
+                    2 => [
                         'settingName' => 'emailCustomer',
                         'settingValue' => 'false'
-                    ),
-                    3 => array(
+                    ],
+                    3 => [
                         'settingName' => 'recurringBilling',
                         'settingValue' => 'false'
-                    ),
-                    4 => array(
+                    ],
+                    4 => [
                         'settingName' => 'testRequest',
                         'settingValue' => 'false'
-                    )
-                )
-            ),
-            'userFields' => array(
-                'userField' => array(
+                    ]
+                ]
+            ],
+            'userFields' => [
+                'userField' => [
                     'name' => 'MerchantDefinedFieldName1',
                     'value' => 'MerchantDefinedFieldValue1',
-                ),
-                'userField' => array(
+                ],
+                'userField' => [
                     'name' => 'favorite_color',
                     'value' => 'blue',
-                ),
-            ),
-        ),
-    ));
+                ],
+            ],
+        ],
+    ]);
 ?>
 
 <!DOCTYPE html>

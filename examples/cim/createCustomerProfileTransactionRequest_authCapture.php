@@ -80,51 +80,51 @@ SAMPLE RESPONSE
     require('../../src/autoload.php');
 
     $request  = AuthnetApiFactory::getJsonApiHandler(AUTHNET_LOGIN, AUTHNET_TRANSKEY, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
-    $response = $request->createCustomerProfileTransactionRequest(array(
-        'transaction' => array(
-            'profileTransAuthCapture' => array(
+    $response = $request->createCustomerProfileTransactionRequest([
+        'transaction' => [
+            'profileTransAuthCapture' => [
                 'amount' => '10.95',
-                'tax' => array(
+                'tax' => [
                     'amount' => '1.00',
                     'name' => 'WA state sales tax',
                     'description' => 'Washington state sales tax'
-                ),
-                'shipping' => array(
+                ],
+                'shipping' => [
                     'amount' => '2.00',
                     'name' => 'ground based shipping',
                     'description' => 'Ground based 5 to 10 day shipping'
-                ),
-                'lineItems' => array(
-                    0 => array(
+                ],
+                'lineItems' => [
+                    0 => [
                         'itemId' => '1',
                         'name' => 'vase',
                         'description' => 'Cannes logo',
                         'quantity' => '18',
                         'unitPrice' => '45.00'
-                    ),
-                    1 => array(
+                    ],
+                    1 => [
                         'itemId' => '2',
                         'name' => 'desk',
                         'description' => 'Big Desk',
                         'quantity' => '10',
                         'unitPrice' => '85.00'
-                    )
-                ),
+                    ]
+                ],
                 'customerProfileId' => '33201103',
                 'customerPaymentProfileId' => '29821643',
                 'customerShippingAddressId' => '30904643',
-                'order' => array(
+                'order' => [
                     'invoiceNumber' => 'INV000001',
                     'description' => 'description of transaction',
                     'purchaseOrderNumber' => 'PONUM000001'
-                ),
+                ],
                 'taxExempt' => 'false',
                 'recurringBilling' => 'false',
                 'cardCode' => '000'
-            )
-        ),
+            ]
+        ],
         'extraOptions' => 'x_customer_ip=100.0.0.1'
-    ));
+    ]);
 ?>
 
 <!DOCTYPE html>

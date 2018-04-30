@@ -41,12 +41,12 @@ SAMPLE RESPONSE
     require('../../src/autoload.php');
 
     $request  = AuthnetApiFactory::getJsonApiHandler(AUTHNET_LOGIN, AUTHNET_TRANSKEY, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
-    $response = $request->validateCustomerPaymentProfileRequest(array(
+    $response = $request->validateCustomerPaymentProfileRequest([
         'customerProfileId' => '31390172',
         'customerPaymentProfileId' => '28393490',
         'customerShippingAddressId' => '29366174',
         'validationMode' => 'liveMode'
-    ));
+    ]);
 ?>
 
 <!DOCTYPE html>

@@ -88,9 +88,9 @@ SAMPLE RESPONSE
     require('../../src/autoload.php');
 
     $request  = AuthnetApiFactory::getJsonApiHandler(AUTHNET_LOGIN, AUTHNET_TRANSKEY, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
-    $response = $request->getCustomerProfileRequest(array(
+    $response = $request->getCustomerProfileRequest([
         'customerProfileId' => '31390172'
-    ));
+    ]);
 ?>
 
 <!DOCTYPE html>

@@ -46,17 +46,17 @@ SAMPLE RESPONSE
     require('../../src/autoload.php');
 
     $request  = AuthnetApiFactory::getJsonApiHandler(AUTHNET_LOGIN, AUTHNET_TRANSKEY, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
-    $response = $request->createCustomerProfileTransactionRequest(array(
-        'transaction' => array(
-            'profileTransVoid' => array(
+    $response = $request->createCustomerProfileTransactionRequest([
+        'transaction' => [
+            'profileTransVoid' => [
                 'customerProfileId' => '31390172',
                 'customerPaymentProfileId' => '28393490',
                 'customerShippingAddressId' => '29366174',
                 'transId' => '2230582868'
-            )
-        ),
+            ]
+        ],
         'extraOptions' => 'x_customer_ip=100.0.0.1'
-    ));
+    ]);
 ?>
 
 <!DOCTYPE html>

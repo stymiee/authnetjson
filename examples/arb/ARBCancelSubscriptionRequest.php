@@ -8,16 +8,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
- 
+
 /*************************************************************************************************
 
 Use the ARB XML API to cancel a subscription
 
 SAMPLE REQUEST
 --------------------------------------------------------------------------------------------------
-{  
-   "ARBCancelSubscriptionRequest":{  
-      "merchantAuthentication":{  
+{
+   "ARBCancelSubscriptionRequest":{
+      "merchantAuthentication":{
          "name":"",
          "transactionKey":""
       },
@@ -28,12 +28,12 @@ SAMPLE REQUEST
 
 SAMPLE RESPONSE
 --------------------------------------------------------------------------------------------------
-{  
+{
    "refId":"Sample",
-   "messages":{  
+   "messages":{
       "resultCode":"Ok",
-      "message":[  
-         {  
+      "message":[
+         {
             "code":"I00001",
             "text":"Successful."
          }
@@ -49,10 +49,10 @@ SAMPLE RESPONSE
     require('../../src/autoload.php');
 
     $request  = AuthnetApiFactory::getJsonApiHandler(AUTHNET_LOGIN, AUTHNET_TRANSKEY, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
-    $response = $request->ARBCancelSubscriptionRequest(array(
+    $response = $request->ARBCancelSubscriptionRequest([
         'refId' => 'Sample',
         'subscriptionId' => '2341621'
-    ));
+    ]);
 ?>
 
 <!DOCTYPE html>

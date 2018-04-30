@@ -42,14 +42,14 @@ SAMPLE RESPONSE
     require('../../src/autoload.php');
 
     $request  = AuthnetApiFactory::getJsonApiHandler(AUTHNET_LOGIN, AUTHNET_TRANSKEY, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
-    $response = $request->updateCustomerProfileRequest(array(
-        'profile' => array(
+    $response = $request->updateCustomerProfileRequest([
+        'profile' => [
             'merchantCustomerId' => '12345',
             'description' => 'some description',
             'email' => 'newaddress@example.com',
             'customerProfileId' => '31390172'
-        )
-    ));
+        ]
+    ]);
 ?>
 
 <!DOCTYPE html>
