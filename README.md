@@ -31,9 +31,9 @@ Using this library usually consists of three steps:
 Simple usage:
 
     $request = AuthnetApiFactory::getJsonApiHandler(AUTHNET_LOGIN, AUTHNET_TRANSKEY);
-    $response = $request->getTransactionDetailsRequest(array(
+    $response = $request->getTransactionDetailsRequest([
         'transId' => '2162566217'
-    ));
+    ]);
     if ($response->isSuccessful()) {
         echo $json->transaction->transactionStatus;
     }
@@ -54,64 +54,85 @@ Examples for all of the current APIs calls are represented. You *may* need to ma
 they may be dependant on valid values created from other API calls (i.e. a void will not work without a valid
 transaction ID).
 
-#### Authorize and Capture
+#### Authorize and Capture (Basic)
 
     $request = AuthnetApiFactory::getJsonApiHandler(AUTHNET_LOGIN, AUTHNET_TRANSKEY);
-    $response = $request->createTransactionRequest(array(
-        'refId' => rand(1000000, 100000000),
-        'transactionRequest' => array(
+    $response = $request->createTransactionRequest([
+        'refId' => rand(1000000, 100000000],
+        'transactionRequest' => [
             'transactionType' => 'authCaptureTransaction',
             'amount' => 5,
-            'payment' => array(
-                'creditCard' => array(
+            'payment' => [
+                'creditCard' => [
                     'cardNumber' => '4111111111111111',
                     'expirationDate' => '122016',
                     'cardCode' => '999',
-                ),
-            ),
-            'order' => array(
+                ]
+            ]
+        ]
+    ]);
+
+    if ($response->isSuccessful()) {
+        echo $response->transactionResponse->authCode;
+    }
+#### Authorize and Capture (Full)
+
+    $request = AuthnetApiFactory::getJsonApiHandler(AUTHNET_LOGIN, AUTHNET_TRANSKEY);
+    $response = $request->createTransactionRequest([
+        'refId' => rand(1000000, 100000000],
+        'transactionRequest' => [
+            'transactionType' => 'authCaptureTransaction',
+            'amount' => 5,
+            'payment' => [
+                'creditCard' => [
+                    'cardNumber' => '4111111111111111',
+                    'expirationDate' => '122016',
+                    'cardCode' => '999',
+                ],
+            ],
+            'order' => [
                 'invoiceNumber' => '1324567890',
                 'description' => 'this is a test transaction',
-            ),
-            'lineItems' => array(
-                'lineItem' => array(
-                    0 => array(
+            ],
+            'lineItems' => [
+                'lineItem' => [
+                    0 => [
                         'itemId' => '1',
                         'name' => 'vase',
                         'description' => 'Cannes logo',
                         'quantity' => '18',
                         'unitPrice' => '45.00'
-                    ),
-                    1 => array(
+                    ],
+                    1 => [
                         'itemId' => '2',
                         'name' => 'desk',
                         'description' => 'Big Desk',
                         'quantity' => '10',
                         'unitPrice' => '85.00'
-                    )
-                )
-            ),
-            'tax' => array(
+                    ]
+                ]
+            ],
+            'tax' => [
                'amount' => '4.26',
                'name' => 'level2 tax name',
                'description' => 'level2 tax',
-            ),
-            'duty' => array(
+            ],
+            'duty' => [
                'amount' => '8.55',
                'name' => 'duty name',
                'description' => 'duty description',
-            ),
-            'shipping' => array(
+            ],
+            'shipping' => [
                'amount' => '4.26',
                'name' => 'level2 tax name',
                'description' => 'level2 tax',
-            ),
+            ],
             'poNumber' => '456654',
-            'customer' => array(
+            'customer' => [
                'id' => '18',
                'email' => 'someone@blackhole.tv',
-            ),
-            'billTo' => array(
+            ],
+            'billTo' => [
                'firstName' => 'Ellen',
                'lastName' => 'Johnson',
                'company' => 'Souveniropolis',
@@ -120,8 +141,8 @@ transaction ID).
                'state' => 'TX',
                'zip' => '44628',
                'country' => 'USA',
-            ),
-            'shipTo' => array(
+            ],
+            'shipTo' => [
                'firstName' => 'China',
                'lastName' => 'Bayles',
                'company' => 'Thyme for Tea',
@@ -130,44 +151,44 @@ transaction ID).
                'state' => 'TX',
                'zip' => '44628',
                'country' => 'USA',
-            ),
+            ],
             'customerIP' => '192.168.1.1',
-            'transactionSettings' => array(
-                'setting' => array(
-                    0 => array(
+            'transactionSettings' => [
+                'setting' => [
+                    0 => [
                         'settingName' =>'allowPartialAuth',
                         'settingValue' => 'false'
-                    ),
-                    1 => array(
+                    ],
+                    1 => [
                         'settingName' => 'duplicateWindow',
                         'settingValue' => '0'
-                    ),
-                    2 => array(
+                    ],
+                    2 => [
                         'settingName' => 'emailCustomer',
                         'settingValue' => 'false'
-                    ),
-                    3 => array(
+                    ],
+                    3 => [
                         'settingName' => 'recurringBilling',
                         'settingValue' => 'false'
-                    ),
-                    4 => array(
+                    ],
+                    4 => [
                         'settingName' => 'testRequest',
                         'settingValue' => 'false'
-                    )
-                )
-            ),
-            'userFields' => array(
-                'userField' => array(
+                    ]
+                ])
+            ],
+            'userFields' => [
+                'userField' => [
                     'name' => 'MerchantDefinedFieldName1',
                     'value' => 'MerchantDefinedFieldValue1',
-                ),
-                'userField' => array(
+                ],
+                'userField' => [
                     'name' => 'favorite_color',
                     'value' => 'blue',
-                ),
-            ),
-        ),
-    ));
+                ],
+            ],
+        ],
+    ]);
 
     if ($response->isSuccessful()) {
         echo $response->transactionResponse->authCode;
@@ -176,39 +197,39 @@ transaction ID).
 #### Create a Customer Profile
 
     $request = AuthnetApiFactory::getJsonApiHandler(AUTHNET_LOGIN, AUTHNET_TRANSKEY);
-    $response = $request->createCustomerProfileRequest(array(
-            'profile' => array(
-			'merchantCustomerId' => '12345',
-			'email' => 'user@example.com',
-			'paymentProfiles' => array(
-				'billTo' => array(
-					'firstName' => 'John',
-					'lastName' => 'Smith',
-					'address' => '123 Main Street',
-					'city' => 'Townsville',
-					'state' => 'NJ',
-					'zip' => '12345',
-					'phoneNumber' => '800-555-1234'
-				),
-				'payment' => array(
-					'creditCard' => array(
-					'cardNumber' => '4111111111111111',
-					'expirationDate' => '2016-08',
-					),
-				),
-			),
-    		'shipToList' => array(
-    		    'firstName' => 'John',
-				'lastName' => 'Smith',
-				'address' => '123 Main Street',
-				'city' => 'Townsville',
-				'state' => 'NJ',
-				'zip' => '12345',
-				'phoneNumber' => '800-555-1234'
-    		),
-		),
-		'validationMode' => 'liveMode'
-	));
+    $response = $request->createCustomerProfileRequest([
+            'profile' => [
+            'merchantCustomerId' => '12345',
+            'email' => 'user@example.com',
+            'paymentProfiles' => [
+                'billTo' => [
+                    'firstName' => 'John',
+                    'lastName' => 'Smith',
+                    'address' => '123 Main Street',
+                    'city' => 'Townsville',
+                    'state' => 'NJ',
+                    'zip' => '12345',
+                    'phoneNumber' => '800-555-1234'
+                ],
+                'payment' => [
+                    'creditCard' => [
+                    'cardNumber' => '4111111111111111',
+                    'expirationDate' => '2016-08',
+                    ],
+                ],
+            ],
+            'shipToList' => [
+                'firstName' => 'John',
+                'lastName' => 'Smith',
+                'address' => '123 Main Street',
+                'city' => 'Townsville',
+                'state' => 'NJ',
+                'zip' => '12345',
+                'phoneNumber' => '800-555-1234'
+            ],
+        ],
+        'validationMode' => 'liveMode'
+    ]);
 
     if ($response->isSuccessful()) {
         echo $response->customerProfileId;
@@ -217,33 +238,33 @@ transaction ID).
 #### Create a Recurring Subscription
 
     $request = AuthnetApiFactory::getJsonApiHandler(AUTHNET_LOGIN, AUTHNET_TRANSKEY);
-    $response = $request->ARBCreateSubscriptionRequest(array(
+    $response = $request->ARBCreateSubscriptionRequest([
         'refId' => 'Sample',
-        'subscription' => array(
+        'subscription' => [
             'name' => 'Sample subscription',
-            'paymentSchedule' => array(
-                'interval' => array(
+            'paymentSchedule' => [
+                'interval' => [
                     'length' => '1',
                     'unit' => 'months'
-                ),
+                ],
                 'startDate' => '2015-04-18',
                 'totalOccurrences' => '12',
                 'trialOccurrences' => '1'
-            ),
+            ],
             'amount' => '10.29',
             'trialAmount' => '0.00',
-            'payment' => array(
-                'creditCard' => array(
+            'payment' => [
+                'creditCard' => [
                     'cardNumber' => '4111111111111111',
                     'expirationDate' => '2016-08'
-                )
-            ),
-            'billTo' => array(
+                ])
+            ],
+            'billTo' => [
                 'firstName' => 'John',
                 'lastName' => 'Smith'
-            )
-        )
-    ));
+            ]
+        ]
+    ]);
 
     if ($response->isSuccessful()) {
         echo $response->subscriptionId;
@@ -252,11 +273,11 @@ transaction ID).
 #### Get a List of Settled Batches
 
     $request = AuthnetApiFactory::getJsonApiHandler(AUTHNET_LOGIN, AUTHNET_TRANSKEY);
-    $response = $request->getSettledBatchListRequest(array(
+    $response = $request->getSettledBatchListRequest([
         'includeStatistics'   => 'true',
         'firstSettlementDate' => '2015-01-01T08:15:30',
         'lastSettlementDate'  => '2015-01-30T08:15:30',
-    ));
+    ]);
 
     if ($response->isSuccessful()) {
         foreach ($response->batchList as $batch) {
