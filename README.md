@@ -325,7 +325,7 @@ that the field name has all spaces removed so `TransactionID` becomes `Transacti
         // echo $webhook->eventType;
     }
 
-    If `apache_request_headers()`/`getallheaders()` are not available to you, you can will need to get the HTTP request
+If `apache_request_headers()`/`getallheaders()` are not available to you, you can will need to get the HTTP request
     headers and pass them as the third parameter to `AuthnetWebhook()`.
 
     $headers = yourGetHeadersFunction();
