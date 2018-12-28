@@ -88,38 +88,38 @@ SAMPLE RESPONSE
 
     $request  = AuthnetApiFactory::getJsonApiHandler(AUTHNET_LOGIN, AUTHNET_TRANSKEY, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
     $response = $request->createCustomerProfileRequest([
-            'profile' => [
-			'merchantCustomerId' => '123456',
-			'email' => 'user@example.com',
-			'paymentProfiles' => [
-				'billTo' => [
-					'firstName' => 'John',
-					'lastName' => 'Smith',
-					'address' => '123 Main Street',
-					'city' => 'Townsville',
-					'state' => 'NJ',
-					'zip' => '12345',
-					'phoneNumber' => '800-555-1234'
-				],
-				'payment' => [
-					'creditCard' => [
-					'cardNumber' => '4111111111111111',
-					'expirationDate' => '2016-08',
-					],
-				],
-			],
-    		'shipToList' => [
-    		    'firstName' => 'John',
-				'lastName' => 'Smith',
-				'address' => '123 Main Street',
-				'city' => 'Townsville',
-				'state' => 'NJ',
-				'zip' => '12345',
-				'phoneNumber' => '800-555-1234'
-    		],
-		],
-		'validationMode' => 'liveMode'
-	]);
+        'profile' => [
+            'merchantCustomerId' => '123456',
+            'email' => 'user@example.com',
+            'paymentProfiles' => [
+                'billTo' => [
+                    'firstName' => 'John',
+                    'lastName' => 'Smith',
+                    'address' => '123 Main Street',
+                    'city' => 'Townsville',
+                    'state' => 'NJ',
+                    'zip' => '12345',
+                    'phoneNumber' => '800-555-1234'
+                ],
+                'payment' => [
+                    'creditCard' => [
+                    'cardNumber' => '4111111111111111',
+                    'expirationDate' => '2020-08',
+                    ],
+                ],
+            ],
+            'shipToList' => [
+                'firstName' => 'John',
+                'lastName' => 'Smith',
+                'address' => '123 Main Street',
+                'city' => 'Townsville',
+                'state' => 'NJ',
+                'zip' => '12345',
+                'phoneNumber' => '800-555-1234'
+            ],
+        ],
+        'validationMode' => 'liveMode'
+    ]);
 ?>
 
 <!DOCTYPE html>
@@ -145,13 +145,13 @@ SAMPLE RESPONSE
 
             pre
             {
-            	overflow-x: auto; /* Use horizontal scroller if needed; for Firefox 2, not needed in Firefox 3 */
-            	white-space: pre-wrap; /* css-3 */
-            	white-space: -moz-pre-wrap !important; /* Mozilla, since 1999 */
-            	white-space: -pre-wrap; /* Opera 4-6 */
-            	white-space: -o-pre-wrap; /* Opera 7 */ /*
-            	width: 99%; */
-            	word-wrap: break-word; /* Internet Explorer 5.5+ */
+                overflow-x: auto; /* Use horizontal scroller if needed; for Firefox 2, not needed in Firefox 3 */
+                white-space: pre-wrap; /* css-3 */
+                white-space: -moz-pre-wrap !important; /* Mozilla, since 1999 */
+                white-space: -pre-wrap; /* Opera 4-6 */
+                white-space: -o-pre-wrap; /* Opera 7 */ /*
+                width: 99%; */
+                word-wrap: break-word; /* Internet Explorer 5.5+ */
             }
 
             table th
