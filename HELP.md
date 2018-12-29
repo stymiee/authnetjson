@@ -10,12 +10,17 @@ Before doing any development for the Authorize.Net suite of APIs, be sure to cre
 [Sandbox Account](https://developer.authorize.net/hello_world/sandbox/) with Authorize.Net. With it you can simulate virtually
 every aspect of the Authorize.Net production APIs without incurring any fees.
 
+### Use a webhook testing site to test webhooks
+
+Having a full understanding of what a webhook looks like makes working with webhooks easier. You can inspect an Authorize.Net
+webhook using a third party service like [RequestBin](https://requestbin.fullcontact.com/).
+
 ## FAQ
 
 Solutions to common problems when integrating the [AuthnetJSON](https://github.com/stymiee/authnetjson) library into your project.
 
 ### php://input is empty, POST is empty, webhook has no data
-This typically occurs because a redirect occurred and steps weren't taken to persist that data across the redirect. 
+This may happen because a redirect occurred and steps were not taken to persist that data across the redirect. 
 Look for redirects to HTTPS or to/from the `www` subdomain in your .htaccess or web.config file. 
 
 ## Support
