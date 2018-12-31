@@ -11,7 +11,9 @@
 
 namespace JohnConde\Authnet;
 
-class TransactionResponseTest extends \PHPUnit_Framework_TestCase
+use PHPUnit\Framework\TestCase;
+
+class TransactionResponseTest extends TestCase
 {
     /**
      * @covers            \JohnConde\Authnet\TransactionResponse::__construct()

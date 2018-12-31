@@ -11,9 +11,11 @@
 
 namespace JohnConde\Authnet;
 
+use PHPUnit\Framework\TestCase;
+
 require(__DIR__ . '/../config.inc.php');
 
-class AuthnetJsonRequestTest extends \PHPUnit_Framework_TestCase
+class AuthnetJsonRequestTest extends TestCase
 {
     /**
      * @covers            \JohnConde\Authnet\AuthnetJsonRequest::__construct()

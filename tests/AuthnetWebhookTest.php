@@ -11,7 +11,9 @@
 
 namespace JohnConde\Authnet;
 
-class AuthnetWebhookTest extends \PHPUnit_Framework_TestCase
+use PHPUnit\Framework\TestCase;
+
+class AuthnetWebhookTest extends TestCase
 {
     /**
      * @covers            \JohnConde\Authnet\AuthnetWebhook::__construct()

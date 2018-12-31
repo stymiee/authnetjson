@@ -11,7 +11,9 @@
 
 namespace JohnConde\Authnet;
 
-class AuthnetWebhooksResponseTest extends \PHPUnit_Framework_TestCase
+use PHPUnit\Framework\TestCase;
+
+class AuthnetWebhooksResponseTest extends TestCase
 {
     /**
      * @covers            \JohnConde\Authnet\AuthnetWebhooksResponse::__construct()
@@ -34,7 +36,13 @@ class AuthnetWebhooksResponseTest extends \PHPUnit_Framework_TestCase
             ],
             "status": "active"
         }';
-        new AuthnetWebhooksResponse($responseJson);
+        try {
+            new AuthnetWebhooksResponse($responseJson);
+            $this->assertTrue(true);
+        }
+        catch (\Exception $e) {
+            $this->assertTrue(false);
+        }
     }
 
     /**

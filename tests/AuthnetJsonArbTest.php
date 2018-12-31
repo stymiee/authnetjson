@@ -11,9 +11,11 @@
 
 namespace JohnConde\Authnet;
 
+use PHPUnit\Framework\TestCase;
+
 require(__DIR__ . '/../config.inc.php');
 
-class AuthnetJsonArbTest extends \PHPUnit_Framework_TestCase
+class AuthnetJsonArbTest extends TestCase
 {
     private $login;
     private $transactionKey;

@@ -11,7 +11,9 @@
 
 namespace JohnConde\Authnet;
 
-class AuthnetJsonResponseTest extends \PHPUnit_Framework_TestCase
+use PHPUnit\Framework\TestCase;
+
+class AuthnetJsonResponseTest extends TestCase
 {
     /**
      * @covers            \JohnConde\Authnet\AuthnetJsonRequest::__set()
