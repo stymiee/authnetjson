@@ -6,6 +6,8 @@ Updated all usage of array() to []
 Added examples/cim/createCustomerProfileRequestMultiplePayAccounts.php to demonstrate adding multiple payment accounts
 Added HELP.md file
 Updated unit tests for PHPUnit 7
+Added unit test for AuthnetWebhook::getAllHeaders()
+Updated AuthnetWebhook::__constructor() to use AuthnetWebhook::getAllHeaders() instead of going straight to apache_get_headers()
 Converted tabs to spaces!
 
 2018-01-21 - Version 3.1.4
