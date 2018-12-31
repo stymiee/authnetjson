@@ -160,7 +160,7 @@ class AuthnetWebhooksResponse
     public function getNotificationHistory()
     {
         $notifications = [];
-        if (count($this->response)) {
+        if (count($this->response->notifications)) {
             foreach ($this->response->notifications as $notification) {
                 $notifications[] = new AuthnetWebhooksResponse(json_encode($notification));
             }
