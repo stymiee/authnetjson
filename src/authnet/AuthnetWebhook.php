@@ -57,8 +57,8 @@ class AuthnetWebhook
         $this->signature   = $signature;
         $this->webhookJson = $payload;
         $this->headers     = $headers;
-        if (empty($this->headers) && function_exists('apache_request_headers')) {
-            $this->headers = apache_request_headers();
+        if (empty($this->headers)) {
+            $this->headers = $this->getAllHeaders();
         }
         if (empty($this->signature)) {
             throw new AuthnetInvalidCredentialsException('You have not configured your signature properly.');
@@ -136,7 +136,7 @@ class AuthnetWebhook
         }
         else {
             foreach ($_SERVER as $name => $value) {
-                if (substr($name, 0, 5) == 'HTTP_') {
+                if (substr(strtoupper($name), 0, 5) == 'HTTP_') {
                     $headers[str_replace(' ', '-', ucwords(strtoupper(str_replace('_', ' ', substr($name, 5)))))] = $value;
                 }
             }

@@ -157,4 +157,23 @@ class AuthnetWebhookTest extends TestCase
 
         $this->assertEquals('ae3b39b1-c58e-4a78-859b-1b4e6c62c5b7', $webhook->getRequestId());
     }
+
+    /**
+     * @covers            \JohnConde\Authnet\AuthnetWebhook::getAllHeaders()
+     */
+    public function testGetAllHeaders()
+    {
+        $_SERVER += [
+            'HTTP_TEST' => 'test'
+        ];
+        $signatureKey = '52CB4A002C634B84E397DC8A218E1A160BA7CAB7CBE4C05B35E9CBB05E14FE4A2385812E980CCF97D177F17863CE214D1BE6CE8E1E894487AACF3609C1A5FE17';
+        $webhookJson = '{"notificationId":"182cbbff-cab2-4080-931d-80e5d818f23a","eventType":"net.authorize.payment.authcapture.created","eventDate":"2017-08-18T20:40:52.7722007Z","webhookId":"849eb87e-078a-4169-a34b-c0bded5019a8","payload":{"responseCode":0,"authCode":"Z3PV5H","avsResponse":"Y","authAmount":0.0,"entityName":"transaction","id":"40005915599"}}';
+        $webhook = new AuthnetWebhook($signatureKey, $webhookJson);
+
+        $reflectionOfWebhook = new \ReflectionObject($webhook);
+        $headers = $reflectionOfWebhook->getProperty('headers');
+        $headers->setAccessible(true);
+
+        $this->assertNotEmpty($headers->getValue($webhook));
+    }
 }
