@@ -18,33 +18,54 @@ SAMPLE REQUEST
 {
   "createCustomerProfileRequest": {
     "merchantAuthentication": {
-      "name": "",
-      "transactionKey": ""
+      "name": "8zY2zT32",
+      "transactionKey": "4WDx9a97v5DKY67a"
     },
     "profile": {
-      "merchantCustomerId": "12345",
+      "merchantCustomerId": "52353345",
       "email": "user@example.com",
-      "paymentProfiles": {
-        "billTo": {
-          "firstName": "John",
-          "lastName": "Smith",
-          "address": "123 Main Street",
-          "city": "Townsville",
-          "state": "NJ",
-          "zip": "12345",
-          "phoneNumber": "800-555-1234"
+      "paymentProfiles": [
+        {
+          "customerType": "individual",
+          "billTo": {
+            "firstName": "John",
+            "lastName": "Smith",
+            "address": "12345 Main Street",
+            "city": "Townsville",
+            "state": "NJ",
+            "zip": "12345",
+            "phoneNumber": "800-555-1234"
+          },
+          "payment": {
+            "creditCard": {
+              "cardNumber": "5555555555554444",
+              "expirationDate": "2023-08"
+            }
+          }
         },
-        "payment": {
-          "creditCard": {
-            "cardNumber": "4111111111111111",
-            "expirationDate": "2016-08"
+        {
+          "customerType": "individual",
+          "billTo": {
+            "firstName": "John",
+            "lastName": "Smithberg",
+            "address": "42 Main Street",
+            "city": "Townsville",
+            "state": "NJ",
+            "zip": "12345",
+            "phoneNumber": "800-555-1234"
+          },
+          "payment": {
+            "creditCard": {
+              "cardNumber": "5105105105105100",
+              "expirationDate": "2023-09"
+            }
           }
         }
-      },
+      ],
       "shipToList": {
         "firstName": "John",
         "lastName": "Smith",
-        "address": "123 Main Street",
+        "address": "12345 Main Street",
         "city": "Townsville",
         "state": "NJ",
         "zip": "12345",
@@ -58,17 +79,17 @@ SAMPLE REQUEST
 SAMPLE RESPONSE
 --------------------------------------------------------------------------------------------------
 {
-  "customerProfileId": "1506307937",
+  "customerProfileId": "1506322353",
   "customerPaymentProfileIdList": [
-    "1505651943",
-    "1505651944"
+    "1505667207",
+    "1505667208"
   ],
   "customerShippingAddressIdList": [
-    "1505640104"
+    "1505655763"
   ],
   "validationDirectResponseList": [
-    "1,1,1,This transaction has been approved.,AMC5UR,Y,40023389473,none,Test transaction for ValidateCustomerPaymentProfile.,0.00,CC,auth_only,5235345,John,Smith,,1234 Main Street,Townsville,NJ,12345,,800-555-1234,,user@example.com,,,,,,,,,0.00,0.00,0.00,FALSE,none,238BC844E4A5C2A0B8F6BB4DDCCCAC99,P,2,,,,,,,,,,,XXXX4444,MasterCard,,,,,,,,,,,,,,,,,",
-    "1,1,1,This transaction has been approved.,AF0YC7,Y,40023389474,none,Test transaction for ValidateCustomerPaymentProfile.,0.00,CC,auth_only,5235345,John,Smithberg,,4 Main Street,Townsville,NJ,12345,,800-555-1234,,user@example.com,,,,,,,,,0.00,0.00,0.00,FALSE,none,26A41377525AE7543ECB46AE4D060C12,P,2,,,,,,,,,,,XXXX5100,MasterCard,,,,,,,,,,,,,,,,,"
+    "1,1,1,This transaction has been approved.,A2FD5O,Y,40023515435,none,Test transaction for ValidateCustomerPaymentProfile.,0.00,CC,auth_only,52353345,John,Smith,,12345 Main Street,Townsville,NJ,12345,,800-555-1234,,user@example.com,,,,,,,,,0.00,0.00,0.00,FALSE,none,32573C7D03376A9052AACA73835EDAEF,P,2,,,,,,,,,,,XXXX4444,MasterCard,,,,,,,,,,,,,,,,,",
+    "1,1,1,This transaction has been approved.,AO13Y1,Y,40023515436,none,Test transaction for ValidateCustomerPaymentProfile.,0.00,CC,auth_only,52353345,John,Smithberg,,42 Main Street,Townsville,NJ,12345,,800-555-1234,,user@example.com,,,,,,,,,0.00,0.00,0.00,FALSE,none,5B937D29D29F261776859B50DC1C3CF6,P,2,,,,,,,,,,,XXXX5100,MasterCard,,,,,,,,,,,,,,,,,"
   ],
   "messages": {
     "resultCode": "Ok",
@@ -91,7 +112,7 @@ require('../../src/autoload.php');
 $request  = AuthnetApiFactory::getJsonApiHandler(AUTHNET_LOGIN, AUTHNET_TRANSKEY, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
 $response = $request->createCustomerProfileRequest([
     'profile' => [
-        'merchantCustomerId' => '5235345',
+        'merchantCustomerId' => '52353345',
         'email' => 'user@example.com',
         'paymentProfiles' => [
             [
@@ -99,7 +120,7 @@ $response = $request->createCustomerProfileRequest([
                 'billTo' => [
                     'firstName' => 'John',
                     'lastName' => 'Smith',
-                    'address' => '1234 Main Street',
+                    'address' => '12345 Main Street',
                     'city' => 'Townsville',
                     'state' => 'NJ',
                     'zip' => '12345',
@@ -108,7 +129,7 @@ $response = $request->createCustomerProfileRequest([
                 'payment' => [
                     'creditCard' => [
                         'cardNumber' => '5555555555554444',
-                        'expirationDate' => '2024-08',
+                        'expirationDate' => '2023-08',
                     ],
                 ],
             ],
@@ -117,7 +138,7 @@ $response = $request->createCustomerProfileRequest([
                 'billTo' => [
                     'firstName' => 'John',
                     'lastName' => 'Smithberg',
-                    'address' => '4 Main Street',
+                    'address' => '42 Main Street',
                     'city' => 'Townsville',
                     'state' => 'NJ',
                     'zip' => '12345',
@@ -126,7 +147,7 @@ $response = $request->createCustomerProfileRequest([
                 'payment' => [
                     'creditCard' => [
                         'cardNumber' => '5105105105105100',
-                        'expirationDate' => '2024-09',
+                        'expirationDate' => '2023-09',
                     ],
                 ],
             ],
