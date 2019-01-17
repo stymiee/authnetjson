@@ -6,12 +6,22 @@
 
 Library that abstracts [Authorize.Net](http://www.authorize.net/)'s [JSON APIs](http://developer.authorize.net/api/reference/).
 
+## Requirements
+
+- PHP 5.4+
+- cURL PHP Extension
+- JSON PHP Extension
+- An Authorize.Net account
+- TLS 1.2 capable versions of libcurl and OpenSSL or equivalent
+
+**NOTE:** AuthnetJSON 4.0 will not be backwards compatible with PHP 5 and the minimum PHP version will be 7.1.
+
 ## Installation
 
 Simply add a dependency on `stymiee/authnetjson` to your project's `composer.json` file if you use [Composer](http://getcomposer.org/)
 to manage the dependencies of your project.
 
-Here is a minimal example of a `composer.json` file that just defines a dependency on Authnet-Json:
+Here is a minimal example of a `composer.json` file that just defines a dependency on AuthnetJson:
 
     {
         "require": {
@@ -347,7 +357,7 @@ usage of this library. Simple `echo` your AuthnetJson object to see:
 - The request JSON
 - The response JSON
 
-Basic Usage:
+###Basic Usage:
 
     $request = AuthnetApiFactory::getJsonApiHandler(AUTHNET_LOGIN, AUTHNET_TRANSKEY);
     $response = $request->getUnsettledTransactionListRequest();
