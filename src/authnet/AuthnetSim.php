@@ -82,7 +82,7 @@ class AuthnetSim
             $this->sequence,
             $this->timestamp,
             $amount
-        ),  $this->transactionKey);
+        ), $this->transactionKey);
     }
 
     /**

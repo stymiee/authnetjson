@@ -55,11 +55,11 @@ class AuthnetWebhooksResponse
     public function __toString()
     {
         $output  = '';
-        $output .= '<table summary="Authorize.Net Webhooks Response" id="authnet-response">' . "\n";
-        $output .= '<tr>' . "\n\t\t" . '<th colspan="2"><b>Response JSON</b></th>' . "\n" . '</tr>' . "\n";
-        $output .= '<tr><td colspan="2"><pre>' . "\n";
-        $output .= $this->responseJson . "\n";
-        $output .= '</pre></td></tr>' . "\n";
+        $output .= '<table summary="Authorize.Net Webhooks Response" id="authnet-response">'."\n";
+        $output .= '<tr>' . "\n\t\t" . '<th colspan="2"><b>Response JSON</b></th>'."\n".'</tr>'."\n";
+        $output .= '<tr><td colspan="2"><pre>'."\n";
+        $output .= $this->responseJson."\n";
+        $output .= '</pre></td></tr>'."\n";
         $output .= '</table>';
 
         return $output;
@@ -99,8 +99,7 @@ class AuthnetWebhooksResponse
             foreach ($this->response->eventTypes as $event) {
                 $events[] = $event;
             }
-        }
-        else {
+        } else {
             foreach ($this->response as $event) {
                 $events[] = $event->name;
             }

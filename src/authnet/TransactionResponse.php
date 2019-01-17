@@ -101,8 +101,7 @@ class TransactionResponse {
         $value = null;
         if (is_int($field)) {
             $value = (isset($this->responseArray[$field])) ? $this->responseArray[$field] : $value;
-        }
-        else {
+        } else {
             if ($key = array_search($field, $this->fieldMap)) {
                 $value = $this->responseArray[$key];
             }

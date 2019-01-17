@@ -239,7 +239,7 @@ class AuthnetWebhooksRequest
                 $error_message = sprintf('(%u) %s: %s', $response->status, $response->reason, $response->message);
             }
         }
-        throw new AuthnetCurlException('Connection error: ' . $error_message . ' (' . $error_code . ')');
+        throw new AuthnetCurlException(sprintf('Connection error: %s (%s)', $error_message, $error_code));
     }
 
     /**

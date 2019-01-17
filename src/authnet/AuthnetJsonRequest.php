@@ -105,16 +105,16 @@ class AuthnetJsonRequest
     public function __toString()
     {
         $output  = '';
-        $output .= '<table summary="Authorize.Net Request" id="authnet-request">' . "\n";
-        $output .= '<tr>' . "\n\t\t" . '<th colspan="2"><b>Class Parameters</b></th>' . "\n" . '</tr>' . "\n";
-        $output .= '<tr>' . "\n\t\t" . '<td><b>API Login ID</b></td><td>' . $this->login . '</td>' . "\n" . '</tr>' . "\n";
-        $output .= '<tr>' . "\n\t\t" . '<td><b>Transaction Key</b></td><td>' . $this->transactionKey . '</td>' . "\n" . '</tr>' . "\n";
-        $output .= '<tr>' . "\n\t\t" . '<td><b>Authnet Server URL</b></td><td>' . $this->url . '</td>' . "\n" . '</tr>' . "\n";
-        $output .= '<tr>' . "\n\t\t" . '<th colspan="2"><b>Request JSON</b></th>' . "\n" . '</tr>' . "\n";
+        $output .= '<table summary="Authorize.Net Request" id="authnet-request">'."\n";
+        $output .= '<tr>'."\n\t\t".'<th colspan="2"><b>Class Parameters</b></th>'."\n".'</tr>'."\n";
+        $output .= '<tr>'."\n\t\t".'<td><b>API Login ID</b></td><td>'.$this->login.'</td>'."\n".'</tr>'."\n";
+        $output .= '<tr>'."\n\t\t".'<td><b>Transaction Key</b></td><td>'.$this->transactionKey.'</td>'."\n".'</tr>'."\n";
+        $output .= '<tr>'."\n\t\t".'<td><b>Authnet Server URL</b></td><td>'.$this->url . '</td>'."\n".'</tr>'."\n";
+        $output .= '<tr>'."\n\t\t".'<th colspan="2"><b>Request JSON</b></th>'."\n".'</tr>'."\n";
         if (!empty($this->requestJson)) {
-            $output .= '<tr><td colspan="2"><pre>' . "\n";
-            $output .= $this->requestJson . "\n";
-            $output .= '</pre></td></tr>' . "\n";
+            $output .= '<tr><td colspan="2"><pre>'."\n";
+            $output .= $this->requestJson."\n";
+            $output .= '</pre></td></tr>'."\n";
         }
         $output .= '</table>';
 
@@ -130,7 +130,7 @@ class AuthnetJsonRequest
      */
     public function __set($name, $value)
     {
-        throw new AuthnetCannotSetParamsException('You cannot set parameters directly in ' . __CLASS__ . '.');
+        throw new AuthnetCannotSetParamsException(sprintf('You cannot set parameters directly in %s.', __CLASS__));
     }
 
     /**
@@ -180,7 +180,7 @@ class AuthnetJsonRequest
             $error_message = $this->processor->error_message;
             $error_code    = $this->processor->error_code;
         }
-        throw new AuthnetCurlException('Connection error: ' . $error_message . ' (' . $error_code . ')');
+        throw new AuthnetCurlException(sprintf('Connection error: %s (%s)', $error_message, $error_code));
     }
 
     /**

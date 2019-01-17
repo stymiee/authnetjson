@@ -130,11 +130,11 @@ class AuthnetJsonResponse
     public function __toString()
     {
         $output  = '';
-        $output .= '<table summary="Authorize.Net Response" id="authnet-response">' . "\n";
-        $output .= '<tr>' . "\n\t\t" . '<th colspan="2"><b>Response JSON</b></th>' . "\n" . '</tr>' . "\n";
-        $output .= '<tr><td colspan="2"><pre>' . "\n";
-        $output .= $this->responseJson . "\n";
-        $output .= '</pre></td></tr>' . "\n";
+        $output .= '<table summary="Authorize.Net Response" id="authnet-response">'."\n";
+        $output .= '<tr>'."\n\t\t" . '<th colspan="2"><b>Response JSON</b></th>'."\n".'</tr>'."\n";
+        $output .= '<tr><td colspan="2"><pre>'."\n";
+        $output .= $this->responseJson."\n";
+        $output .= '</pre></td></tr>'."\n";
         $output .= '</table>';
 
         return $output;
@@ -178,7 +178,7 @@ class AuthnetJsonResponse
      */
     public function isApproved()
     {
-        return $this->isSuccessful() && $this->checkTransactionStatus(self::STATUS_APPROVED) ;
+        return $this->isSuccessful() && $this->checkTransactionStatus(self::STATUS_APPROVED);
     }
 
     /**
@@ -188,7 +188,7 @@ class AuthnetJsonResponse
      */
     public function isDeclined()
     {
-        return $this->isSuccessful() && $this->checkTransactionStatus(self::STATUS_DECLINED) ;
+        return $this->isSuccessful() && $this->checkTransactionStatus(self::STATUS_DECLINED);
     }
 
     /**
@@ -201,8 +201,7 @@ class AuthnetJsonResponse
     {
         if ($this->transactionInfo instanceof TransactionResponse) {
             $match = (int) $this->transactionInfo->getTransactionResponseField('ResponseCode') === (int) $status;
-        }
-        else {
+        } else {
             $match = (int) $this->transactionResponse->responseCode === $status;
         }
         return $match;
@@ -224,10 +223,10 @@ class AuthnetJsonResponse
     }
 
     /**
-    * Gets the transaction response from Authorize.Net in JSON format for logging purposes
-    *
-    * @return  string transaction response from Authorize.Net in JSON format
-    */
+     * Gets the transaction response from Authorize.Net in JSON format for logging purposes
+     *
+     * @return  string transaction response from Authorize.Net in JSON format
+     */
     public function getRawResponse()
     {
         return $this->responseJson;
