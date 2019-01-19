@@ -20,7 +20,7 @@ Use the SIM tools to create a SIM transaction form
     require('../../config.inc.php');
     require('../../src/autoload.php');
 
-    $sim         = AuthnetApiFactory::getSimHandler(AUTHNET_LOGIN, AUTHNET_TRANSKEY, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
+    $sim         = AuthnetApiFactory::getSimHandler(AUTHNET_LOGIN, AUTHNET_SIGNATURE, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
     $amount      = 10.00;
     $login       = $sim->getLogin();
     $url         = $sim->getEndpoint();

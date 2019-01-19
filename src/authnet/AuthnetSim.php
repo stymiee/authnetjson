@@ -29,9 +29,9 @@ class AuthnetSim
     private $login;
 
     /**
-     * @var     string  Authorize.Net API Transaction Key
+     * @var     string  Authorize.Net API signature key
      */
-    private $transactionKey;
+    private $signature;
 
     /**
      * @var     string  URL endpoint for processing a transaction
@@ -52,15 +52,15 @@ class AuthnetSim
      * Creates a SIM wrapper by setting the Authorize.Net credentials and URL of the endpoint to be used
      * for the API call
      *
-     * @param   string  $login              Authorize.Net API login ID
-     * @param   string  $transactionKey     Authorize.Net API Transaction Key
-     * @param   string  $api_url            URL endpoint for processing a transaction
+     * @param   string  $login         Authorize.Net API login ID
+     * @param   string  $signature     Authorize.Net API Transaction Key
+     * @param   string  $api_url       URL endpoint for processing a transaction
      */
-    public function __construct($login, $transactionKey, $api_url)
+    public function __construct($login, $signature, $api_url)
     {
-        $this->login          = $login;
-        $this->transactionKey = $transactionKey;
-        $this->url            = $api_url;
+        $this->login     = $login;
+        $this->signature = $signature;
+        $this->url       = $api_url;
         $this->resetParameters();
     }
 
@@ -77,12 +77,12 @@ class AuthnetSim
             throw new AuthnetInvalidAmountException('You must enter a valid amount greater than zero.');
         }
 
-        return hash_hmac('sha512', sprintf('%s^%s^%s^%s^',
+        return strtoupper(hash_hmac('sha512', sprintf('%s^%s^%s^%s^',
             $this->login,
             $this->sequence,
             $this->timestamp,
             $amount
-        ), $this->transactionKey);
+        ), hex2bin($this->signature)));
     }
 
     /**
