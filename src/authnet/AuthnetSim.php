@@ -73,11 +73,11 @@ class AuthnetSim
      */
     public function getFingerprint($amount)
     {
-        if (!filter_var($amount, FILTER_VALIDATE_FLOAT)) {
+        if (!filter_var($amount, FILTER_VALIDATE_FLOAT, FILTER_FLAG_ALLOW_THOUSAND)) {
             throw new AuthnetInvalidAmountException('You must enter a valid amount greater than zero.');
         }
 
-        return hash_hmac('md5', sprintf('%s^%s^%s^%s^',
+        return hash_hmac('sha512', sprintf('%s^%s^%s^%s^',
             $this->login,
             $this->sequence,
             $this->timestamp,
