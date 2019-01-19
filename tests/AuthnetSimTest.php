@@ -17,12 +17,14 @@ class AuthnetJsonSimTest extends TestCase
 {
     private $login;
     private $transactionKey;
+    private $signature;
     private $server;
 
     protected function setUp()
     {
         $this->login          = 'test';
         $this->transactionKey = 'test';
+        $this->signature      = '546C62A5B61434BCE2FA4C8EC86E4B85FB2AC34957C894C89927800F878EA20154A0903FA3A5B3DD1C219053789874F4F96E88850CDC246F049119F6AB71CD21';
         $this->server         = AuthnetApiFactory::USE_DEVELOPMENT_SERVER;
     }
 
@@ -31,16 +33,16 @@ class AuthnetJsonSimTest extends TestCase
      */
     public function testConstructor()
     {
-        $request = AuthnetApiFactory::getSimHandler($this->login, $this->transactionKey, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
+        $request = AuthnetApiFactory::getSimHandler($this->login, $this->signature, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
 
         $reflectionOfSim = new \ReflectionObject($request);
         $login = $reflectionOfSim->getProperty('login');
         $login->setAccessible(true);
-        $key = $reflectionOfSim->getProperty('transactionKey');
+        $key = $reflectionOfSim->getProperty('signature');
         $key->setAccessible(true);
 
         $this->assertEquals($login->getValue($request), $this->login);
-        $this->assertEquals($key->getValue($request), $this->transactionKey);
+        $this->assertEquals($key->getValue($request), $this->signature);
     }
 
     /**
@@ -50,17 +52,17 @@ class AuthnetJsonSimTest extends TestCase
     {
         $amount    = 9.01;
 
-        $sim       = AuthnetApiFactory::getSimHandler($this->login, $this->transactionKey, $this->server);
+        $sim       = AuthnetApiFactory::getSimHandler($this->login, $this->signature, $this->server);
         $hash      = $sim->getFingerprint($amount);
         $sequence  = $sim->getSequence();
         $timestamp = $sim->getTimestamp();
 
-        $this->assertEquals($hash, hash_hmac('md5', sprintf('%s^%s^%s^%s^',
+        $this->assertEquals($hash, strtoupper(hash_hmac('sha512', sprintf('%s^%s^%s^%s^',
             $this->login,
             $sequence,
             $timestamp,
             $amount
-        ),  $this->transactionKey));
+        ), hex2bin($this->signature))));
     }
 
     /**
