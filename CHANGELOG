@@ -1,5 +1,14 @@
 CHANGE LOG
 
+2019-01-21 - Version 3.1.6
+--------------------------------------------
+Changed SIM algorithm to SHA512
+Added FILTER_FLAG_ALLOW_THOUSAND when validating amount for SIM fingerprint
+Added the requirements section to README.md
+Added notice about AuthnetJSON 4.0 PHP compatibility level changing.
+Used sprintf() for string formatting with variables
+Minor formatting changes
+
 2019-01-02 - Version 3.1.5
 --------------------------------------------
 Updated all usage of array() to []
