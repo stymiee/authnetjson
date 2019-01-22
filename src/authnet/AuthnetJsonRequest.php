@@ -109,7 +109,7 @@ class AuthnetJsonRequest
         $output .= '<tr>'."\n\t\t".'<th colspan="2"><b>Class Parameters</b></th>'."\n".'</tr>'."\n";
         $output .= '<tr>'."\n\t\t".'<td><b>API Login ID</b></td><td>'.$this->login.'</td>'."\n".'</tr>'."\n";
         $output .= '<tr>'."\n\t\t".'<td><b>Transaction Key</b></td><td>'.$this->transactionKey.'</td>'."\n".'</tr>'."\n";
-        $output .= '<tr>'."\n\t\t".'<td><b>Authnet Server URL</b></td><td>'.$this->url . '</td>'."\n".'</tr>'."\n";
+        $output .= '<tr>'."\n\t\t".'<td><b>Authnet Server URL</b></td><td>'.$this->url.'</td>'."\n".'</tr>'."\n";
         $output .= '<tr>'."\n\t\t".'<th colspan="2"><b>Request JSON</b></th>'."\n".'</tr>'."\n";
         if (!empty($this->requestJson)) {
             $output .= '<tr><td colspan="2"><pre>'."\n";
@@ -171,7 +171,7 @@ class AuthnetJsonRequest
     {
         $this->processor->post($this->url, $this->requestJson);
 
-        if(!$this->processor->error) {
+        if (!$this->processor->error) {
             return $this->processor->response;
         }
         $error_message = null;

@@ -56,7 +56,7 @@ class AuthnetWebhooksResponse
     {
         $output  = '';
         $output .= '<table summary="Authorize.Net Webhooks Response" id="authnet-response">'."\n";
-        $output .= '<tr>' . "\n\t\t" . '<th colspan="2"><b>Response JSON</b></th>'."\n".'</tr>'."\n";
+        $output .= '<tr>'."\n\t\t".'<th colspan="2"><b>Response JSON</b></th>'."\n".'</tr>'."\n";
         $output .= '<tr><td colspan="2"><pre>'."\n";
         $output .= $this->responseJson."\n";
         $output .= '</pre></td></tr>'."\n";
