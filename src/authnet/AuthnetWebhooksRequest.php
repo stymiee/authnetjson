@@ -79,7 +79,7 @@ class AuthnetWebhooksRequest
     }
 
     /**
-     * Outputs the endpoint URL and request JSON in a human readable format
+     * Gets all of the available event types
      *
      * @return  array   list of event types
      */
@@ -92,7 +92,7 @@ class AuthnetWebhooksRequest
     }
 
     /**
-     * Outputs the endpoint URL and request JSON in a human readable format
+     * Creates a new webhook
      *
      * @param   array   $webhooks   Array of webhooks to be created or modified
      * @param   string  $webhookUrl URL of where webhook notifications will be sent
