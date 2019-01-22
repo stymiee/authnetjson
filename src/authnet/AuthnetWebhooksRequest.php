@@ -161,7 +161,7 @@ class AuthnetWebhooksRequest
     }
 
     /**
-     * Outputs the endpoint URL and request JSON in a human readable format
+     * Updates webhook event types
      *
      * @param   array   $webhookId      Webhook ID to be modified
      * @param   string  $webhookUrl     URL of where webhook notifications will be sent
@@ -197,7 +197,7 @@ class AuthnetWebhooksRequest
     {
         $this->endpoint = 'webhooks';
         $this->url = sprintf('%s%s/%s', $this->url, $this->endpoint, $webhookId);
-        $this->delete($this->url);
+        return $this->delete($this->url);
     }
 
     /**
