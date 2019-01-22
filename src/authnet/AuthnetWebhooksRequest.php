@@ -70,8 +70,7 @@ class AuthnetWebhooksRequest
             $output .= '<tr><td colspan="2"><pre>'."\n";
             $output .= $this->requestJson."\n";
             $output .= '</pre></td></tr>'."\n";
-        }
-        else {
+        } else {
             $output .= '<tr><td colspan="2" style="text-align: center;"><pre>N/A</pre></td></tr>'."\n";
         }
         $output .= '</table>';

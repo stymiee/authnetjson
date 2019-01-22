@@ -179,11 +179,9 @@ class AuthnetApiFactory
     {
         if ($server === static::USE_PRODUCTION_SERVER) {
             $url = 'https://api.authorize.net/rest/v1/';
-        }
-        else if ($server === static::USE_DEVELOPMENT_SERVER) {
+        } else if ($server === static::USE_DEVELOPMENT_SERVER) {
             $url = 'https://apitest.authorize.net/rest/v1/';
-        }
-        else {
+        } else {
             throw new AuthnetInvalidServerException('You did not provide a valid server.');
         }
         return $url;
