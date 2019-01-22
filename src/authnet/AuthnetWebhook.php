@@ -77,15 +77,15 @@ class AuthnetWebhook
     public function __toString()
     {
         $output  = '';
-        $output .= '<table summary="Authorize.Net Webhook" id="authnet-webhook">' . "\n";
-        $output .= '<tr>' . "\n\t\t" . '<th colspan="2"><b>Response HTTP Headers</b></th>' . "\n" . '</tr>' . "\n";
-        $output .= '<tr><td colspan="2"><pre>' . "\n";
-        $output .= var_export($this->headers) . "\n";
-        $output .= '</pre></td></tr>' . "\n";
-        $output .= '<tr>' . "\n\t\t" . '<th colspan="2"><b>Response JSON</b></th>' . "\n" . '</tr>' . "\n";
-        $output .= '<tr><td colspan="2"><pre>' . "\n";
-        $output .= $this->webhookJson . "\n";
-        $output .= '</pre></td></tr>' . "\n";
+        $output .= '<table summary="Authorize.Net Webhook" id="authnet-webhook">'."\n";
+        $output .= '<tr>'."\n\t\t".'<th colspan="2"><b>Response HTTP Headers</b></th>'."\n".'</tr>'."\n";
+        $output .= '<tr><td colspan="2"><pre>'."\n";
+        $output .= var_export($this->headers)."\n";
+        $output .= '</pre></td></tr>'."\n";
+        $output .= '<tr>'."\n\t\t".'<th colspan="2"><b>Response JSON</b></th>'."\n".'</tr>'."\n";
+        $output .= '<tr><td colspan="2"><pre>'."\n";
+        $output .= $this->webhookJson."\n";
+        $output .= '</pre></td></tr>'."\n";
         $output .= '</table>';
 
         return $output;
@@ -133,8 +133,7 @@ class AuthnetWebhook
         $headers = [];
         if (function_exists('apache_request_headers')) {
             $headers = apache_request_headers();
-        }
-        else {
+        } else {
             foreach ($_SERVER as $name => $value) {
                 if (substr(strtoupper($name), 0, 5) == 'HTTP_') {
                     $headers[str_replace(' ', '-', ucwords(strtoupper(str_replace('_', ' ', substr($name, 5)))))] = $value;
