@@ -21,39 +21,39 @@ namespace JohnConde\Authnet;
  * @link        https://github.com/stymiee/authnetjson
  * @see         https://developer.authorize.net/api/reference/
  *
- * @method      \JohnConde\Authnet\AuthnetJsonResponse createTransactionRequest(array $array)                                 process a payment
- * @method      \JohnConde\Authnet\AuthnetJsonResponse sendCustomerTransactionReceiptRequest(array $array)                    get a list of unsettled transactions
- * @method      \JohnConde\Authnet\AuthnetJsonResponse ARBCancelSubscriptionRequest(array $array)                             cancel a subscription
- * @method      \JohnConde\Authnet\AuthnetJsonResponse ARBCreateSubscriptionRequest(array $array)                             create a subscription
- * @method      \JohnConde\Authnet\AuthnetJsonResponse ARBGetSubscriptionStatusRequest(array $array)                          get a subscription's status
- * @method      \JohnConde\Authnet\AuthnetJsonResponse ARBUpdateSubscriptionRequest(array $array)                             update a subscription
- * @method      \JohnConde\Authnet\AuthnetJsonResponse createCustomerPaymentProfileRequest(array $array)                      create a payment profile
- * @method      \JohnConde\Authnet\AuthnetJsonResponse createCustomerProfileRequest(array $array)                             create a customer profile
- * @method      \JohnConde\Authnet\AuthnetJsonResponse createCustomerProfileTransactionRequest_authCapture(array $array)      process an Authorization and Capture transaction (Sale)
- * @method      \JohnConde\Authnet\AuthnetJsonResponse createCustomerProfileTransactionRequest_authOnly(array $array)         process an Authorization Only transaction
- * @method      \JohnConde\Authnet\AuthnetJsonResponse createCustomerProfileTransactionRequest_captureOnly(array $array)      process a Capture Only transaction
- * @method      \JohnConde\Authnet\AuthnetJsonResponse createCustomerProfileTransactionRequest_priorAuthCapture(array $array) process a Prior Authorization Capture transaction
- * @method      \JohnConde\Authnet\AuthnetJsonResponse createCustomerProfileTransactionRequest_refund(array $array)           process a Refund (credit)
- * @method      \JohnConde\Authnet\AuthnetJsonResponse createCustomerProfileTransactionRequest_void(array $array)             void a transaction
- * @method      \JohnConde\Authnet\AuthnetJsonResponse createCustomerShippingAddressRequest(array $array)                     create a shipping profile
- * @method      \JohnConde\Authnet\AuthnetJsonResponse deleteCustomerPaymentProfileRequest(array $array)                      delete a payment profile
- * @method      \JohnConde\Authnet\AuthnetJsonResponse deleteCustomerProfileRequest(array $array)                             delete a customer profile
- * @method      \JohnConde\Authnet\AuthnetJsonResponse deleteCustomerShippingAddressRequest(array $array)                     delete a shipping profile
- * @method      \JohnConde\Authnet\AuthnetJsonResponse getCustomerPaymentProfileRequest(array $array)                         retrieve a payment profile
- * @method      \JohnConde\Authnet\AuthnetJsonResponse getCustomerProfileIdsRequest(array $array)                             retrieve a list of profile IDs
- * @method      \JohnConde\Authnet\AuthnetJsonResponse getCustomerProfileRequest(array $array)                                retrieve a customer profile
- * @method      \JohnConde\Authnet\AuthnetJsonResponse getCustomerShippingAddressRequest(array $array)                        retrieve a shipping address
- * @method      \JohnConde\Authnet\AuthnetJsonResponse getHostedProfilePageRequest(array $array)                              retrieve a hosted payment page token
- * @method      \JohnConde\Authnet\AuthnetJsonResponse updateCustomerPaymentProfileRequest(array $array)                      update a customer profile
- * @method      \JohnConde\Authnet\AuthnetJsonResponse updateCustomerProfileRequest(array $array)                             update a customer profile
- * @method      \JohnConde\Authnet\AuthnetJsonResponse updateCustomerShippingAddressRequest(array $array)                     update a shipping address
- * @method      \JohnConde\Authnet\AuthnetJsonResponse updateSplitTenderGroupRequest(array $array)                            update a split tender transaction
- * @method      \JohnConde\Authnet\AuthnetJsonResponse validateCustomerPaymentProfileRequest(array $array)                    validate a payment profile
- * @method      \JohnConde\Authnet\AuthnetJsonResponse getBatchStatisticsRequest(array $array)                                get a summary of a settled batch
- * @method      \JohnConde\Authnet\AuthnetJsonResponse getSettledBatchListRequest(array $array)                               get a list of settled batches
- * @method      \JohnConde\Authnet\AuthnetJsonResponse getTransactionDetailsRequest(array $array)                             get the details of a transaction
- * @method      \JohnConde\Authnet\AuthnetJsonResponse getTransactionListRequest(array $array)                                get a list of transaction in a batch
- * @method      \JohnConde\Authnet\AuthnetJsonResponse getUnsettledTransactionListRequest(array $array)                       get a list of unsettled transactions
+ * @method      AuthnetJsonResponse createTransactionRequest(array $array)                                 process a payment
+ * @method      AuthnetJsonResponse sendCustomerTransactionReceiptRequest(array $array)                    get a list of unsettled transactions
+ * @method      AuthnetJsonResponse ARBCancelSubscriptionRequest(array $array)                             cancel a subscription
+ * @method      AuthnetJsonResponse ARBCreateSubscriptionRequest(array $array)                             create a subscription
+ * @method      AuthnetJsonResponse ARBGetSubscriptionStatusRequest(array $array)                          get a subscription's status
+ * @method      AuthnetJsonResponse ARBUpdateSubscriptionRequest(array $array)                             update a subscription
+ * @method      AuthnetJsonResponse createCustomerPaymentProfileRequest(array $array)                      create a payment profile
+ * @method      AuthnetJsonResponse createCustomerProfileRequest(array $array)                             create a customer profile
+ * @method      AuthnetJsonResponse createCustomerProfileTransactionRequest_authCapture(array $array)      process an Authorization and Capture transaction (Sale)
+ * @method      AuthnetJsonResponse createCustomerProfileTransactionRequest_authOnly(array $array)         process an Authorization Only transaction
+ * @method      AuthnetJsonResponse createCustomerProfileTransactionRequest_captureOnly(array $array)      process a Capture Only transaction
+ * @method      AuthnetJsonResponse createCustomerProfileTransactionRequest_priorAuthCapture(array $array) process a Prior Authorization Capture transaction
+ * @method      AuthnetJsonResponse createCustomerProfileTransactionRequest_refund(array $array)           process a Refund (credit)
+ * @method      AuthnetJsonResponse createCustomerProfileTransactionRequest_void(array $array)             void a transaction
+ * @method      AuthnetJsonResponse createCustomerShippingAddressRequest(array $array)                     create a shipping profile
+ * @method      AuthnetJsonResponse deleteCustomerPaymentProfileRequest(array $array)                      delete a payment profile
+ * @method      AuthnetJsonResponse deleteCustomerProfileRequest(array $array)                             delete a customer profile
+ * @method      AuthnetJsonResponse deleteCustomerShippingAddressRequest(array $array)                     delete a shipping profile
+ * @method      AuthnetJsonResponse getCustomerPaymentProfileRequest(array $array)                         retrieve a payment profile
+ * @method      AuthnetJsonResponse getCustomerProfileIdsRequest(array $array)                             retrieve a list of profile IDs
+ * @method      AuthnetJsonResponse getCustomerProfileRequest(array $array)                                retrieve a customer profile
+ * @method      AuthnetJsonResponse getCustomerShippingAddressRequest(array $array)                        retrieve a shipping address
+ * @method      AuthnetJsonResponse getHostedProfilePageRequest(array $array)                              retrieve a hosted payment page token
+ * @method      AuthnetJsonResponse updateCustomerPaymentProfileRequest(array $array)                      update a customer profile
+ * @method      AuthnetJsonResponse updateCustomerProfileRequest(array $array)                             update a customer profile
+ * @method      AuthnetJsonResponse updateCustomerShippingAddressRequest(array $array)                     update a shipping address
+ * @method      AuthnetJsonResponse updateSplitTenderGroupRequest(array $array)                            update a split tender transaction
+ * @method      AuthnetJsonResponse validateCustomerPaymentProfileRequest(array $array)                    validate a payment profile
+ * @method      AuthnetJsonResponse getBatchStatisticsRequest(array $array)                                get a summary of a settled batch
+ * @method      AuthnetJsonResponse getSettledBatchListRequest(array $array)                               get a list of settled batches
+ * @method      AuthnetJsonResponse getTransactionDetailsRequest(array $array)                             get the details of a transaction
+ * @method      AuthnetJsonResponse getTransactionListRequest(array $array)                                get a list of transaction in a batch
+ * @method      AuthnetJsonResponse getUnsettledTransactionListRequest(array $array)                       get a list of unsettled transactions
  */
 class AuthnetJsonRequest
 {
@@ -139,7 +139,9 @@ class AuthnetJsonRequest
      *
      * @param   string  $api_call   name of the API call to be made
      * @param   array   $args       the array to be passed to the API
-     * @returns null
+     * @return  \JohnConde\Authnet\AuthnetJsonResponse
+     * @throws  \JohnConde\Authnet\AuthnetCurlException
+     * @throws  \JohnConde\Authnet\AuthnetInvalidJsonException
      */
     public function __call($api_call, Array $args)
     {

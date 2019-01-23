@@ -141,6 +141,7 @@ class AuthnetWebhooksResponse
      * Gets a list of webhooks
      *
      * @return  array
+     * @throws  \JohnConde\Authnet\AuthnetInvalidJsonException
      */
     public function getWebhooks()
     {
@@ -155,6 +156,7 @@ class AuthnetWebhooksResponse
      * Gets a list of webhooks
      *
      * @return  array
+     * @throws  \JohnConde\Authnet\AuthnetInvalidJsonException
      */
     public function getNotificationHistory()
     {
