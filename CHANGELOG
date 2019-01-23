@@ -1,11 +1,10 @@
 CHANGE LOG
 
-2019-XX-XX - Version 3.1.7
+2019-01-22 - Version 3.1.7
 --------------------------------------------
-Fixed incorrect docblock comment for AuthnetWebhooksRequest::createWebhook
-Fixed incorrect docblock comment for AuthnetWebhooksRequest::getEventTypes
-Fixed incorrect docblock comment for AuthnetWebhooksRequest::updateWebhook
+Fixed incorrect and/or incomplete docblock comments
 Added missing return statement to AuthnetWebhooksRequest::delete
+Added ext-curl and ext-json to composer.json as dependencies
 Minor formatting changes
 
 2019-01-21 - Version 3.1.6
