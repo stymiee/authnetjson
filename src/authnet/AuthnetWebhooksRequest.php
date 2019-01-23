@@ -81,7 +81,9 @@ class AuthnetWebhooksRequest
     /**
      * Gets all of the available event types
      *
-     * @return  array   list of event types
+     * @return  \JohnConde\Authnet\AuthnetWebhooksResponse
+     * @throws  \JohnConde\Authnet\AuthnetInvalidJsonException
+     * @throws  \JohnConde\Authnet\AuthnetCurlException
      */
     public function getEventTypes()
     {
@@ -97,10 +99,9 @@ class AuthnetWebhooksRequest
      * @param   array   $webhooks   Array of webhooks to be created or modified
      * @param   string  $webhookUrl URL of where webhook notifications will be sent
      * @param   string  $status     Status of webhooks to be created or modified [active/inactive]
-     *
-     * @throws  \JohnConde\Authnet\AuthnetInvalidParameterException
-     *
-     * @return  array   list of event types
+     * @return  \JohnConde\Authnet\AuthnetWebhooksResponse
+     * @throws  \JohnConde\Authnet\AuthnetInvalidJsonException
+     * @throws  \JohnConde\Authnet\AuthnetCurlException
      */
     public function createWebhooks(Array $webhooks, $webhookUrl, $status = 'active')
     {
@@ -120,8 +121,7 @@ class AuthnetWebhooksRequest
      * Sends a test ping to a URL for (a) designated webhook(s)
      *
      * @param   string   $webhookId   Webhook ID to be tested
-     *
-     * @throws  \JohnConde\Authnet\AuthnetInvalidParameterException
+     * @throws  \JohnConde\Authnet\AuthnetCurlException
      */
     public function testWebhook($webhookId)
     {
@@ -134,7 +134,9 @@ class AuthnetWebhooksRequest
     /**
      * List all of your webhooks
      *
-     * @return  array   list of event types
+     * @return  \JohnConde\Authnet\AuthnetWebhooksResponse
+     * @throws  \JohnConde\Authnet\AuthnetInvalidJsonException
+     * @throws  \JohnConde\Authnet\AuthnetCurlException
      */
     public function getWebhooks()
     {
@@ -148,8 +150,9 @@ class AuthnetWebhooksRequest
      * Get a webhook
      *
      * @param   string   $webhookId   Webhook ID to be retrieved
-     *
-     * @return  array   list of event types
+     * @return  \JohnConde\Authnet\AuthnetWebhooksResponse
+     * @throws  \JohnConde\Authnet\AuthnetInvalidJsonException
+     * @throws  \JohnConde\Authnet\AuthnetCurlException
      */
     public function getWebhook($webhookId)
     {
@@ -166,10 +169,9 @@ class AuthnetWebhooksRequest
      * @param   string  $webhookUrl     URL of where webhook notifications will be sent
      * @param   array   $eventTypes     Array of event types to be added/removed
      * @param   string  $status         Status of webhooks to be modified [active/inactive]
-     *
-     * @throws  \JohnConde\Authnet\AuthnetInvalidParameterException
-     *
-     * @return  array   list of event types
+     * @return  \JohnConde\Authnet\AuthnetWebhooksResponse
+     * @throws  \JohnConde\Authnet\AuthnetInvalidJsonException
+     * @throws  \JohnConde\Authnet\AuthnetCurlException
      */
     public function updateWebhook($webhookId, $webhookUrl, Array $eventTypes, $status = 'active')
     {
@@ -188,9 +190,9 @@ class AuthnetWebhooksRequest
     /**
      * Delete a webhook
      *
-     * @param   string   $webhookId   Webhook ID to be retrieved
-     *
-     * @return  array   list of event types
+     * @param   string   $webhookId   Webhook ID to be deleted
+     * @return  string
+     * @throws  \JohnConde\Authnet\AuthnetCurlException
      */
     public function deleteWebhook($webhookId)
     {
@@ -204,8 +206,9 @@ class AuthnetWebhooksRequest
      *
      * @param   integer   $limit    Default: 1000
      * @param   integer   $offset   Default: 0
-     *
-     * @return  array   list of event types
+     * @return  \JohnConde\Authnet\AuthnetWebhooksResponse
+     * @throws  \JohnConde\Authnet\AuthnetInvalidJsonException
+     * @throws  \JohnConde\Authnet\AuthnetCurlException
      */
     public function getNotificationHistory($limit = 1000, $offset = 0)
     {
@@ -221,6 +224,7 @@ class AuthnetWebhooksRequest
     /**
      * Tells the handler to make the API call to Authorize.Net
      *
+     * @return  string
      * @throws  \JohnConde\Authnet\AuthnetCurlException
      */
     private function handleResponse()
@@ -246,7 +250,7 @@ class AuthnetWebhooksRequest
      *
      * @param   string  $url
      * @param   array   $params
-     *
+     * @return  string
      * @throws  \JohnConde\Authnet\AuthnetCurlException
      *
      * @codeCoverageIgnore
@@ -261,7 +265,7 @@ class AuthnetWebhooksRequest
      *
      * @param   string  $url        API endpoint
      * @param   string  $request    JSON request payload
-     *
+     * @return  string
      * @throws  \JohnConde\Authnet\AuthnetCurlException
      *
      * @codeCoverageIgnore
@@ -276,7 +280,7 @@ class AuthnetWebhooksRequest
      *
      * @param   string  $url        API endpoint
      * @param   string  $request    JSON request payload
-     *
+     * @return  string
      * @throws  \JohnConde\Authnet\AuthnetCurlException
      *
      * @codeCoverageIgnore
@@ -290,7 +294,7 @@ class AuthnetWebhooksRequest
      * Make DELETE request via Curl
      *
      * @param   string  $url        API endpoint
-     *
+     * @return  string
      * @throws  \JohnConde\Authnet\AuthnetCurlException
      *
      * @codeCoverageIgnore

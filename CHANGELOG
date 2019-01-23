@@ -1,5 +1,13 @@
 CHANGE LOG
 
+2019-XX-XX - Version 3.1.7
+--------------------------------------------
+Fixed incorrect docblock comment for AuthnetWebhooksRequest::createWebhook
+Fixed incorrect docblock comment for AuthnetWebhooksRequest::getEventTypes
+Fixed incorrect docblock comment for AuthnetWebhooksRequest::updateWebhook
+Added missing return statement to AuthnetWebhooksRequest::delete
+Minor formatting changes
+
 2019-01-21 - Version 3.1.6
 --------------------------------------------
 Changed SIM algorithm to SHA512

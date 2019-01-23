@@ -15,7 +15,9 @@
     ],
     "require": {
         "php": ">=5.4.0",
-        "curl/curl": "^1.5"
+        "curl/curl": "^1.5",
+        "ext-json": "*",
+        "ext-curl": "*"
     },
     "autoload": {
         "classmap": [

@@ -47,8 +47,10 @@ class AuthnetApiFactory
      * @param   string      $login                          Authorize.Net API Login ID
      * @param   string      $transaction_key                Authorize.Net API Transaction Key
      * @param   integer     $server                         ID of which server to use (optional)
-     * @return  object      \JohnConde\Authnet\AuthnetJson
+     * @return  \JohnConde\Authnet\AuthnetJsonRequest
+     * @throws  \ErrorException
      * @throws  \JohnConde\Authnet\AuthnetInvalidCredentialsException
+     * @throws  \JohnConde\Authnet\AuthnetInvalidServerException
      */
     public static function getJsonApiHandler($login, $transaction_key, $server = self::USE_AKAMAI_SERVER)
     {
@@ -99,8 +101,9 @@ class AuthnetApiFactory
      * @param   string      $login                          Authorize.Net API Login ID
      * @param   string      $transaction_key                Authorize.Net API Transaction Key
      * @param   integer     $server                         ID of which server to use (optional)
-     * @return  object      \JohnConde\Authnet\AuthnetSim
+     * @return  \JohnConde\Authnet\AuthnetSim
      * @throws  \JohnConde\Authnet\AuthnetInvalidCredentialsException
+     * @throws  \JohnConde\Authnet\AuthnetInvalidServerException
      */
     public static function getSimHandler($login, $transaction_key, $server = self::USE_PRODUCTION_SERVER)
     {
@@ -140,8 +143,10 @@ class AuthnetApiFactory
      * @param   string      $login                          Authorize.Net API Login ID
      * @param   string      $transaction_key                Authorize.Net API Transaction Key
      * @param   integer     $server                         ID of which server to use (optional)
-     * @return  object      \JohnConde\Authnet\AuthnetJson
+     * @throws  \ErrorException
+     * @return  \JohnConde\Authnet\AuthnetWebhooksRequest
      * @throws  \JohnConde\Authnet\AuthnetInvalidCredentialsException
+     * @throws  \JohnConde\Authnet\AuthnetInvalidServerException
      */
     public static function getWebhooksHandler($login, $transaction_key, $server = self::USE_PRODUCTION_SERVER)
     {
