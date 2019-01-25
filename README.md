@@ -15,7 +15,7 @@ Library that abstracts [Authorize.Net](http://www.authorize.net/)'s [JSON APIs](
 - An Authorize.Net account
 - TLS 1.2 capable versions of libcurl and OpenSSL or equivalent
 
-**NOTE:** AuthnetJSON 4.0 will not be backwards compatible with PHP 5 and the minimum PHP version will be 7.1.
+**NOTE:** AuthnetJSON 4.0 will not be backwards compatible with PHP 5 and the minimum PHP version will be 7.2.
 
 ## Installation
 
