@@ -85,7 +85,7 @@ class AuthnetApiFactoryTest extends TestCase
     public function testExceptionIsRaisedForInvalidCredentialsLogin()
     {
         $server  = AuthnetApiFactory::USE_DEVELOPMENT_SERVER;
-        AuthnetApiFactory::getJsonApiHandler(null, $this->transactionKey, $server);
+        AuthnetApiFactory::getJsonApiHandler('', $this->transactionKey, $server);
     }
 
     /**
@@ -96,7 +96,7 @@ class AuthnetApiFactoryTest extends TestCase
     public function testExceptionIsRaisedForInvalidCredentialsTransactionKey()
     {
         $server  = AuthnetApiFactory::USE_DEVELOPMENT_SERVER;
-        AuthnetApiFactory::getJsonApiHandler($this->login, null, $server);
+        AuthnetApiFactory::getJsonApiHandler($this->login, '', $server);
     }
 
     /**
@@ -105,7 +105,7 @@ class AuthnetApiFactoryTest extends TestCase
      */
     public function testExceptionIsRaisedForAuthnetInvalidServer()
     {
-        AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, null);
+        AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, 5);
     }
 
     /**
@@ -160,7 +160,7 @@ class AuthnetApiFactoryTest extends TestCase
     public function testExceptionIsRaisedForInvalidCredentialsSim()
     {
         $server  = AuthnetApiFactory::USE_DEVELOPMENT_SERVER;
-        AuthnetApiFactory::getSimHandler(null, $this->transactionKey, $server);
+        AuthnetApiFactory::getSimHandler('', $this->transactionKey, $server);
     }
 
     /**
@@ -171,7 +171,7 @@ class AuthnetApiFactoryTest extends TestCase
         $server           = AuthnetApiFactory::USE_DEVELOPMENT_SERVER;
         $reflectionMethod = new \ReflectionMethod('\JohnConde\Authnet\AuthnetApiFactory', 'getSimURL');
         $reflectionMethod->setAccessible(true);
-        $url              = $reflectionMethod->invoke(null, $server);
+        $url              = $reflectionMethod->invoke($reflectionMethod, $server);
 
         $this->assertEquals($url, 'https://test.authorize.net/gateway/transact.dll');
     }
@@ -184,7 +184,7 @@ class AuthnetApiFactoryTest extends TestCase
         $server           = AuthnetApiFactory::USE_PRODUCTION_SERVER;
         $reflectionMethod = new \ReflectionMethod('\JohnConde\Authnet\AuthnetApiFactory', 'getSimURL');
         $reflectionMethod->setAccessible(true);
-        $url              = $reflectionMethod->invoke(null, $server);
+        $url              = $reflectionMethod->invoke($reflectionMethod, $server);
 
         $this->assertEquals($url, 'https://secure2.authorize.net/gateway/transact.dll');
     }
@@ -195,17 +195,8 @@ class AuthnetApiFactoryTest extends TestCase
      */
     public function testExceptionIsRaisedForAuthnetInvalidSimServer()
     {
-        AuthnetApiFactory::getSimHandler($this->login, $this->transactionKey, null);
+        AuthnetApiFactory::getSimHandler($this->login, $this->transactionKey, 5);
     }
-
-
-
-
-
-
-
-
-
 
     /**
      * @covers            \JohnConde\Authnet\AuthnetApiFactory::getWebhooksHandler
@@ -215,7 +206,7 @@ class AuthnetApiFactoryTest extends TestCase
     public function testExceptionIsRaisedForInvalidCredentialsLoginWebhooks()
     {
         $server  = AuthnetApiFactory::USE_DEVELOPMENT_SERVER;
-        AuthnetApiFactory::getWebhooksHandler(null, $this->transactionKey, $server);
+        AuthnetApiFactory::getWebhooksHandler('', $this->transactionKey, $server);
     }
 
     /**
@@ -226,7 +217,7 @@ class AuthnetApiFactoryTest extends TestCase
     public function testExceptionIsRaisedForInvalidCredentialsTransactionKeyWebhooks()
     {
         $server  = AuthnetApiFactory::USE_DEVELOPMENT_SERVER;
-        AuthnetApiFactory::getWebhooksHandler($this->login, null, $server);
+        AuthnetApiFactory::getWebhooksHandler($this->login, '', $server);
     }
 
     /**
@@ -235,7 +226,7 @@ class AuthnetApiFactoryTest extends TestCase
      */
     public function testExceptionIsRaisedForAuthnetInvalidServerWebhooks()
     {
-        AuthnetApiFactory::getWebhooksHandler($this->login, $this->transactionKey, null);
+        AuthnetApiFactory::getWebhooksHandler($this->login, $this->transactionKey, 5);
     }
 
     /**
@@ -271,18 +262,6 @@ class AuthnetApiFactoryTest extends TestCase
 
         $this->assertInstanceOf('\Curl\Curl', $processor);
     }
-
-
-
-
-
-
-
-
-
-
-
-
 
     /**
      * @covers            \JohnConde\Authnet\AuthnetApiFactory::getWebhooksURL
