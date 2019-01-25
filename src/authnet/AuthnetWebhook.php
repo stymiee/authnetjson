@@ -130,15 +130,12 @@ class AuthnetWebhook
      */
     protected function getAllHeaders()
     {
-        $headers = [];
         if (function_exists('apache_request_headers')) {
             $headers = apache_request_headers();
         } else {
-            foreach ($_SERVER as $name => $value) {
-                if (substr(strtoupper($name), 0, 5) == 'HTTP_') {
-                    $headers[str_replace(' ', '-', ucwords(strtoupper(str_replace('_', ' ', substr($name, 5)))))] = $value;
-                }
-            }
+            $headers = array_filter($_SERVER, function ($key) {
+                return strpos($key, 'HTTP_') === 0;
+            }, ARRAY_FILTER_USE_KEY);
         }
         return $headers;
     }
