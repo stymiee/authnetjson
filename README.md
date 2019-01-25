@@ -358,7 +358,7 @@ usage of this library. Simple `echo` your AuthnetJson object to see:
 - The request JSON
 - The response JSON
 
-###Basic Usage:
+### Basic Usage:
 
     $request = AuthnetApiFactory::getJsonApiHandler(AUTHNET_LOGIN, AUTHNET_TRANSKEY);
     $response = $request->getUnsettledTransactionListRequest();
