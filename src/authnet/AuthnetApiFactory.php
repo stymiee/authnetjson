@@ -83,16 +83,15 @@ class AuthnetApiFactory
      */
     protected static function getWebServiceURL($server)
     {
-        if ($server === static::USE_PRODUCTION_SERVER) {
-            $url = 'https://api.authorize.net/xml/v1/request.api';
-        } else if ($server === static::USE_DEVELOPMENT_SERVER) {
-            $url = 'https://apitest.authorize.net/xml/v1/request.api';
-        } else if ($server === static::USE_AKAMAI_SERVER) {
-            $url = 'https://api2.authorize.net/xml/v1/request.api';
-        } else {
-            throw new AuthnetInvalidServerException('You did not provide a valid server.');
+        $urls = [
+            static::USE_PRODUCTION_SERVER  => 'https://api.authorize.net/xml/v1/request.api',
+            static::USE_DEVELOPMENT_SERVER => 'https://apitest.authorize.net/xml/v1/request.api',
+            static::USE_AKAMAI_SERVER      => 'https://api2.authorize.net/xml/v1/request.api'
+        ];
+        if (array_key_exists($server, $urls)) {
+           return $urls[$server];
         }
-        return $url;
+        throw new AuthnetInvalidServerException('You did not provide a valid server.');
     }
 
     /**
