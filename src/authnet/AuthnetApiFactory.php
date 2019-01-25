@@ -89,7 +89,7 @@ class AuthnetApiFactory
             static::USE_AKAMAI_SERVER      => 'https://api2.authorize.net/xml/v1/request.api'
         ];
         if (array_key_exists($server, $urls)) {
-           return $urls[$server];
+            return $urls[$server];
         }
         throw new AuthnetInvalidServerException('You did not provide a valid server.');
     }
