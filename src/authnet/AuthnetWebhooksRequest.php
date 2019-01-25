@@ -191,7 +191,6 @@ class AuthnetWebhooksRequest
      * Delete a webhook
      *
      * @param   string   $webhookId   Webhook ID to be deleted
-     * @return  null
      * @throws  \JohnConde\Authnet\AuthnetCurlException
      */
     public function deleteWebhook($webhookId)
