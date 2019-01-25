@@ -52,10 +52,11 @@ class AuthnetApiFactory
      * @throws  \JohnConde\Authnet\AuthnetInvalidCredentialsException
      * @throws  \JohnConde\Authnet\AuthnetInvalidServerException
      */
-    public static function getJsonApiHandler(string $login, string $transaction_key, $server = self::USE_AKAMAI_SERVER) : object
+    public static function getJsonApiHandler(string $login, string $transaction_key, ?int $server) : object
     {
         $login           = trim($login);
         $transaction_key = trim($transaction_key);
+        $server          = $server ?? self::USE_AKAMAI_SERVER;
         $api_url         = static::getWebServiceURL($server);
 
         if (empty($login) || empty($transaction_key)) {
