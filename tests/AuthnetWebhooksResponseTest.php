@@ -69,24 +69,6 @@ class AuthnetWebhooksResponseTest extends TestCase
         $this->assertContains('active', $string);
     }
 
-//    /**
-//     * @covers            \JohnConde\Authnet\AuthnetWebhooksResponse::__get()
-//     */
-//    public function testGet()
-//    {
-//        $responseJson = '{
-//            "url": "http://example.com",
-//            "eventTypes": [
-//                "net.authorize.payment.authorization.created"
-//            ],
-//            "status": "active"
-//        }';
-//
-//        $response = new AuthnetJsonResponse($responseJson);
-//
-//        $this->assertEquals('http://example.com', $response->url);
-//    }
-
     /**
      * @covers            \JohnConde\Authnet\AuthnetWebhooksResponse::getEventTypes()
      */
