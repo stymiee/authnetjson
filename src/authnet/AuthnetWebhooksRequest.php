@@ -191,14 +191,14 @@ class AuthnetWebhooksRequest
      * Delete a webhook
      *
      * @param   string   $webhookId   Webhook ID to be deleted
-     * @return  string
+     * @return  null
      * @throws  \JohnConde\Authnet\AuthnetCurlException
      */
     public function deleteWebhook($webhookId)
     {
         $this->endpoint = 'webhooks';
         $this->url = sprintf('%s%s/%s', $this->url, $this->endpoint, $webhookId);
-        return $this->delete($this->url);
+        $this->delete($this->url);
     }
 
     /**
