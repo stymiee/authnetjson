@@ -375,6 +375,7 @@ class AuthnetJsonResponseTest extends TestCase
     /**
      * @covers            \JohnConde\Authnet\AuthnetJsonResponse::getErrorText()
      * @covers            \JohnConde\Authnet\AuthnetJsonResponse::getErrorCode()
+     * @covers            \JohnConde\Authnet\AuthnetJsonResponse::getError()
      */
     public function testGetErrorTextAim()
     {
@@ -424,7 +425,8 @@ class AuthnetJsonResponseTest extends TestCase
     }
 
     /**
-     * @covers            \JohnConde\Authnet\AuthnetJsonResponse::getErrorMessage()
+     * @covers \JohnConde\Authnet\AuthnetJsonResponse::getErrorMessage()
+     * @covers \JohnConde\Authnet\AuthnetJsonResponse::getError()
      */
     public function testGetErrorMessage()
     {
