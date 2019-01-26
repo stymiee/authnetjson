@@ -21,7 +21,7 @@ class AuthnetJsonResponseTest extends TestCase
      */
     public function testExceptionIsRaisedForCannotSetParamsException()
     {
-        $request = new AuthnetJsonRequest(null, null, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
+        $request = new AuthnetJsonRequest('', '', AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
         $request->login = 'test';
     }
 

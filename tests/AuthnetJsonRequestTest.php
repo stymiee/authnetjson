@@ -44,7 +44,7 @@ class AuthnetJsonRequestTest extends TestCase
      */
     public function testExceptionIsRaisedForCannotSetParamsException()
     {
-        $request = new AuthnetJsonRequest(null, null, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
+        $request = new AuthnetJsonRequest('', '', AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
         $request->login = 'test';
     }
 
@@ -53,7 +53,7 @@ class AuthnetJsonRequestTest extends TestCase
      * @covers            \JohnConde\Authnet\AuthnetJsonRequest::process()
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
-     * @expectedException \JohnConde\Authnet\AuthnetInvalidJsonException
+     * @expectedException \JohnConde\Authnet\AuthnetCurlException
      */
     public function testExceptionIsRaisedForInvalidJsonException()
     {
@@ -77,7 +77,7 @@ class AuthnetJsonRequestTest extends TestCase
      */
     public function testProcessorIsInstanceOfCurlWrapper()
     {
-        $request = new AuthnetJsonRequest(null, null, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
+        $request = new AuthnetJsonRequest('', '', AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
         $request->setProcessHandler(new \Curl\Curl());
 
         $reflectionOfRequest = new \ReflectionObject($request);
