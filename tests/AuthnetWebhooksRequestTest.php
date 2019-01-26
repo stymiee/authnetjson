@@ -93,6 +93,7 @@ class AuthnetWebhooksRequestTest extends TestCase
 
     /**
      * @covers            \JohnConde\Authnet\AuthnetWebhooksRequest::getEventTypes()
+     * @covers            \JohnConde\Authnet\AuthnetWebhooksRequest::getByUrl()
      */
     public function testGetEventTypes()
     {
@@ -236,6 +237,7 @@ class AuthnetWebhooksRequestTest extends TestCase
 
     /**
      * @covers            \JohnConde\Authnet\AuthnetWebhooksRequest::getWebhooks()
+     * @covers            \JohnConde\Authnet\AuthnetWebhooksRequest::getByUrl()
      */
     public function testGetWebhooks()
     {
@@ -296,6 +298,7 @@ class AuthnetWebhooksRequestTest extends TestCase
 
     /**
      * @covers            \JohnConde\Authnet\AuthnetWebhooksRequest::getWebhook()
+     * @covers            \JohnConde\Authnet\AuthnetWebhooksRequest::getByUrl()
      */
     public function testGetWebhook()
     {
