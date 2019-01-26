@@ -16,9 +16,12 @@
     "require": {
         "php": ">=7.2.0",
         "curl/curl": "^1.5",
-        "ext-apache": "*",
         "ext-curl": "*",
         "ext-json": "*"
+    },
+    "require-dev": {
+        "squizlabs/php_codesniffer": "3.*",
+        "phpmd/phpmd" : "@stable"
     },
     "autoload": {
         "classmap": [
