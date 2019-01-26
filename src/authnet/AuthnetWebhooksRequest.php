@@ -78,21 +78,6 @@ class AuthnetWebhooksRequest
     }
 
     /**
-     * Gets all of the available event types
-     *
-     * @return  \JohnConde\Authnet\AuthnetWebhooksResponse
-     * @throws  \JohnConde\Authnet\AuthnetInvalidJsonException
-     * @throws  \JohnConde\Authnet\AuthnetCurlException
-     */
-    public function getEventTypes() : object
-    {
-        $this->endpoint = 'eventtypes';
-        $this->url = sprintf('%s%s', $this->url, $this->endpoint);
-        $response = $this->get($this->url);
-        return new AuthnetWebhooksResponse($response);
-    }
-
-    /**
      * Creates a new webhook
      *
      * @param   array   $webhooks   Array of webhooks to be created or modified
@@ -131,18 +116,29 @@ class AuthnetWebhooksRequest
     }
 
     /**
+     * Gets all of the available event types
+     *
+     * @return  \JohnConde\Authnet\AuthnetWebhooksResponse
+     */
+    public function getEventTypes() : object
+    {
+        $this->endpoint = 'eventtypes';
+        $this->url = sprintf('%s%s', $this->url, $this->endpoint);
+        return $this->getByUrl('eventtypes', '%s%s');
+    }
+
+    /**
      * List all of your webhooks
      *
      * @return  \JohnConde\Authnet\AuthnetWebhooksResponse
-     * @throws  \JohnConde\Authnet\AuthnetInvalidJsonException
      * @throws  \JohnConde\Authnet\AuthnetCurlException
+     * @throws  \JohnConde\Authnet\AuthnetInvalidJsonException
      */
     public function getWebhooks() : object
     {
         $this->endpoint = 'webhooks';
         $this->url = sprintf('%s%s', $this->url, $this->endpoint);
-        $response = $this->get($this->url);
-        return new AuthnetWebhooksResponse($response);
+        return $this->getByUrl('webhooks', '%s%s');
     }
 
     /**
@@ -150,14 +146,27 @@ class AuthnetWebhooksRequest
      *
      * @param   string   $webhookId   Webhook ID to be retrieved
      * @return  \JohnConde\Authnet\AuthnetWebhooksResponse
-     * @throws  \JohnConde\Authnet\AuthnetInvalidJsonException
      * @throws  \JohnConde\Authnet\AuthnetCurlException
+     * @throws  \JohnConde\Authnet\AuthnetInvalidJsonException
      */
     public function getWebhook(string $webhookId) : object
     {
         $this->endpoint = 'webhooks';
         $this->url = sprintf('%s%s/%s', $this->url, $this->endpoint, $webhookId);
-        $response = $this->get($this->url);
+        return $this->getByUrl('webhooks', '%s%s/%s');
+    }
+
+    /**
+     * GET API request
+     *
+     * @param   string $url API endpoint to hit
+     * @return  object
+     * @throws  \JohnConde\Authnet\AuthnetCurlException
+     * @throws  \JohnConde\Authnet\AuthnetInvalidJsonException
+     */
+    private function getByUrl(string $url) : object
+    {
+        $response = $this->get($url);
         return new AuthnetWebhooksResponse($response);
     }
 
@@ -309,9 +318,9 @@ class AuthnetWebhooksRequest
     /**
      * Sets the handler to be used to handle our API call. Mainly used for unit testing as Curl is used by default.
      *
-     * @param   object  $processor
+     * @param   \Curl\Curl  $processor
      */
-    public function setProcessHandler(object $processor)
+    public function setProcessHandler(\Curl\Curl $processor)
     {
         $this->processor = $processor;
     }
