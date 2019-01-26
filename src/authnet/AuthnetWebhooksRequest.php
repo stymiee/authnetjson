@@ -124,7 +124,7 @@ class AuthnetWebhooksRequest
     {
         $this->endpoint = 'eventtypes';
         $this->url = sprintf('%s%s', $this->url, $this->endpoint);
-        return $this->getByUrl('eventtypes', '%s%s');
+        return $this->getByUrl($this->url);
     }
 
     /**
@@ -138,7 +138,7 @@ class AuthnetWebhooksRequest
     {
         $this->endpoint = 'webhooks';
         $this->url = sprintf('%s%s', $this->url, $this->endpoint);
-        return $this->getByUrl('webhooks', '%s%s');
+        return $this->getByUrl($this->url);
     }
 
     /**
@@ -153,7 +153,7 @@ class AuthnetWebhooksRequest
     {
         $this->endpoint = 'webhooks';
         $this->url = sprintf('%s%s/%s', $this->url, $this->endpoint, $webhookId);
-        return $this->getByUrl('webhooks', '%s%s/%s');
+        return $this->getByUrl($this->url);
     }
 
     /**
