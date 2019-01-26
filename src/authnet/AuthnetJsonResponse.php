@@ -232,23 +232,6 @@ class AuthnetJsonResponse
     }
 
     /**
-     * If an error has occurred, returns the error message
-     *
-     * @return  string Error response from Authorize.Net
-     */
-    public function getErrorText() : string
-    {
-        $message = '';
-        if ($this->isError()) {
-            $message = $this->messages->message[0]->text;
-            if (@$this->transactionResponse->errors[0]->errorText) {
-                $message = $this->transactionResponse->errors[0]->errorText;
-            }
-        }
-        return $message;
-    }
-
-    /**
      * An alias of self::getErrorText()
      *
      * @return  string Error response from Authorize.Net
@@ -263,15 +246,35 @@ class AuthnetJsonResponse
      *
      * @return  string Error response from Authorize.Net
      */
+    public function getErrorText() : string
+    {
+        return $this->getError('text');
+    }
+
+    /**
+     * If an error has occurred, returns the error message
+     *
+     * @return  string Error response from Authorize.Net
+     */
     public function getErrorCode() : string
     {
-        $code = '';
+        return $this->getError('code');
+    }
+
+    /**
+     * @param  string   $type     Whether to get the error code or text
+     * @return string
+     */
+    private function getError(string $type) : string
+    {
+        $msg = '';
         if ($this->isError()) {
-            $code = $this->messages->message[0]->code;
-            if (@$this->transactionResponse->errors[0]->errorCode) {
-                $code = $this->transactionResponse->errors[0]->errorCode;
+            $prop = sprintf('error%s', ucfirst($type));
+            $msg = $this->messages->message[0]->{$type};
+            if (@$this->transactionResponse->errors[0]->{$prop}) {
+                $msg = $this->transactionResponse->errors[0]->{$prop};
             }
         }
-        return $code;
+        return $msg;
     }
 }
