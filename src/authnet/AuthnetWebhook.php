@@ -76,8 +76,7 @@ class AuthnetWebhook
      */
     public function __toString()
     {
-        $output  = '';
-        $output .= '<table summary="Authorize.Net Webhook" id="authnet-webhook">'."\n";
+        $output  = '<table summary="Authorize.Net Webhook" id="authnet-webhook">'."\n";
         $output .= '<tr>'."\n\t\t".'<th colspan="2"><b>Response HTTP Headers</b></th>'."\n".'</tr>'."\n";
         $output .= '<tr><td colspan="2"><pre>'."\n";
         $output .= var_export($this->headers)."\n";
