@@ -83,7 +83,7 @@ class TransactionResponse {
      *
      * @param   string  $response   Comma delimited transaction response string
      */
-    public function __construct($response)
+    public function __construct(string $response)
     {
         $this->responseArray = array_merge([null], explode(',', $response));
     }
@@ -96,7 +96,7 @@ class TransactionResponse {
      * @param   mixed  $field  Name or key of the transaction field to be retrieved
      * @return  string Transaction field to be retrieved
      */
-    public function getTransactionResponseField($field)
+    public function getTransactionResponseField($field) : string
     {
         $value = null;
         if (is_int($field)) {

@@ -48,11 +48,11 @@ class AuthnetWebhook
      *
      * @param   string   $signature    Authorize.Net Signature Key
      * @param   string   $payload      Webhook Notification sent by Authorize.Net
-     * @param   array    $headers      HTTP headers sent with the Webhook notification. Optional if PHP is run as an Apache module
+     * @param   array    $headers      HTTP headers sent with Webhook. Optional if PHP is run as an Apache module
      * @throws  \JohnConde\Authnet\AuthnetInvalidCredentialsException
      * @throws  \JohnConde\Authnet\AuthnetInvalidJsonException
      */
-    public function __construct($signature, $payload, Array $headers = [])
+    public function __construct(string $signature, string $payload, array $headers = [])
     {
         $this->signature   = $signature;
         $this->webhookJson = $payload;
@@ -106,18 +106,19 @@ class AuthnetWebhook
      *
      * @return bool
      */
-    public function isValid()
+    public function isValid() : bool
     {
         $hashedBody = strtoupper(hash_hmac('sha512', $this->webhookJson, $this->signature));
-        return (isset($this->headers['X-ANET-SIGNATURE']) && strtoupper(explode('=', $this->headers['X-ANET-SIGNATURE'])[1]) === $hashedBody);
+        return (isset($this->headers['X-ANET-SIGNATURE']) &&
+            strtoupper(explode('=', $this->headers['X-ANET-SIGNATURE'])[1]) === $hashedBody);
     }
 
     /**
      * Validates a webhook signature to determine if the webhook is valid
      *
-     * @return string
+     * @return string|null
      */
-    public function getRequestId()
+    public function getRequestId() : ?string
     {
         return (isset($this->headers['X-REQUEST-ID'])) ? $this->headers['X-REQUEST-ID'] : null;
     }
@@ -127,14 +128,18 @@ class AuthnetWebhook
      *
      * @return array
      */
-    protected function getAllHeaders()
+    protected function getAllHeaders() : array
     {
         if (function_exists('apache_request_headers')) {
             $headers = apache_request_headers();
         } else {
-            $headers = array_filter($_SERVER, function($key) {
-                return strpos($key, 'HTTP_') === 0;
-            }, ARRAY_FILTER_USE_KEY);
+            $headers = array_filter(
+                $_SERVER,
+                function ($key) {
+                    return strpos($key, 'HTTP_') === 0;
+                },
+                ARRAY_FILTER_USE_KEY
+            );
         }
         return $headers;
     }

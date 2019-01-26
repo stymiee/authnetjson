@@ -71,18 +71,25 @@ class AuthnetSim
      * @return  string           Hash of five different unique transaction parameters
      * @throws  \JohnConde\Authnet\AuthnetInvalidAmountException
      */
-    public function getFingerprint($amount)
+    public function getFingerprint(float $amount) : string
     {
         if (!filter_var($amount, FILTER_VALIDATE_FLOAT, FILTER_FLAG_ALLOW_THOUSAND)) {
             throw new AuthnetInvalidAmountException('You must enter a valid amount greater than zero.');
         }
 
-        return strtoupper(hash_hmac('sha512', sprintf('%s^%s^%s^%s^',
-            $this->login,
-            $this->sequence,
-            $this->timestamp,
-            $amount
-        ), hex2bin($this->signature)));
+        return strtoupper(
+            hash_hmac(
+                'sha512',
+                sprintf(
+                    '%s^%s^%s^%s^',
+                    $this->login,
+                    $this->sequence,
+                    $this->timestamp,
+                    $amount
+                ),
+                hex2bin($this->signature)
+            )
+        );
     }
 
     /**
@@ -90,7 +97,7 @@ class AuthnetSim
      *
      * @return  integer           Current sequence
      */
-    public function getSequence()
+    public function getSequence() : int
     {
         return $this->sequence;
     }
@@ -100,7 +107,7 @@ class AuthnetSim
      *
      * @return  integer           Current timestamp
      */
-    public function getTimestamp()
+    public function getTimestamp() : int
     {
         return $this->timestamp;
     }
@@ -110,7 +117,7 @@ class AuthnetSim
      *
      * @return  string           API login ID
      */
-    public function getLogin()
+    public function getLogin() : string
     {
         return $this->login;
     }
@@ -120,7 +127,7 @@ class AuthnetSim
      *
      * @return  string           url endpoint
      */
-    public function getEndpoint()
+    public function getEndpoint() : string
     {
         return $this->url;
     }

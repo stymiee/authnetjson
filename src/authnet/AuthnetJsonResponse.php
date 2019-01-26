@@ -26,39 +26,39 @@ namespace JohnConde\Authnet;
  * @property    string  $validationDirectResponse
  * @property    object  $transactionResponse
  *
- * @method      null createTransactionRequest(array $array)                                 process a payment
- * @method      null sendCustomerTransactionReceiptRequest(array $array)                    get a list of unsettled transactions
- * @method      null ARBCancelSubscriptionRequest(array $array)                             cancel a subscription
- * @method      null ARBCreateSubscriptionRequest(array $array)                             create a subscription
- * @method      null ARBGetSubscriptionStatusRequest(array $array)                          get a subscription's status
- * @method      null ARBUpdateSubscriptionRequest(array $array)                             update a subscription
- * @method      null createCustomerPaymentProfileRequest(array $array)                      create a payment profile
- * @method      null createCustomerProfileRequest(array $array)                             create a customer profile
- * @method      null createCustomerProfileTransactionRequest_authCapture(array $array)      process an Authorization and Capture transaction (Sale)
- * @method      null createCustomerProfileTransactionRequest_authOnly(array $array)         process an Authorization Only transaction
- * @method      null createCustomerProfileTransactionRequest_captureOnly(array $array)      process a Capture Only transaction
- * @method      null createCustomerProfileTransactionRequest_priorAuthCapture(array $array) process a Prior Authorization Capture transaction
- * @method      null createCustomerProfileTransactionRequest_refund(array $array)           process a Refund (credit)
- * @method      null createCustomerProfileTransactionRequest_void(array $array)             void a transaction
- * @method      null createCustomerShippingAddressRequest(array $array)                     create a shipping profile
- * @method      null deleteCustomerPaymentProfileRequest(array $array)                      delete a payment profile
- * @method      null deleteCustomerProfileRequest(array $array)                             delete a customer profile
- * @method      null deleteCustomerShippingAddressRequest(array $array)                     delete a shipping profile
- * @method      null getCustomerPaymentProfileRequest(array $array)                         retrieve a payment profile
- * @method      null getCustomerProfileIdsRequest(array $array)                             retrieve a list of profile IDs
- * @method      null getCustomerProfileRequest(array $array)                                retrieve a customer profile
- * @method      null getCustomerShippingAddressRequest(array $array)                        retrieve a shipping address
- * @method      null getHostedProfilePageRequest(array $array)                              retrieve a hosted payment page token
- * @method      null updateCustomerPaymentProfileRequest(array $array)                      update a customer profile
- * @method      null updateCustomerProfileRequest(array $array)                             update a customer profile
- * @method      null updateCustomerShippingAddressRequest(array $array)                     update a shipping address
- * @method      null updateSplitTenderGroupRequest(array $array)                            update a split tender transaction
- * @method      null validateCustomerPaymentProfileRequest(array $array)                    validate a payment profile
- * @method      null getBatchStatisticsRequest(array $array)                                get a summary of a settled batch
- * @method      null getSettledBatchListRequest(array $array)                               get a list of settled batches
- * @method      null getTransactionDetailsRequest(array $array)                             get the details of a transaction
- * @method      null getTransactionListRequest(array $array)                                get a list of transaction in a batch
- * @method      null getUnsettledTransactionListRequest(array $array)                       get a list of unsettled transactions
+ * @method null createTransactionRequest(array $array)                                 process a payment
+ * @method null sendCustomerTransactionReceiptRequest(array $array)                    get a list of unsettled transactions
+ * @method null ARBCancelSubscriptionRequest(array $array)                             cancel a subscription
+ * @method null ARBCreateSubscriptionRequest(array $array)                             create a subscription
+ * @method null ARBGetSubscriptionStatusRequest(array $array)                          get a subscription's status
+ * @method null ARBUpdateSubscriptionRequest(array $array)                             update a subscription
+ * @method null createCustomerPaymentProfileRequest(array $array)                      create a payment profile
+ * @method null createCustomerProfileRequest(array $array)                             create a customer profile
+ * @method null createCustomerProfileTransactionRequest_authCapture(array $array)      process an Authorization and Capture transaction (Sale)
+ * @method null createCustomerProfileTransactionRequest_authOnly(array $array)         process an Authorization Only transaction
+ * @method null createCustomerProfileTransactionRequest_captureOnly(array $array)      process a Capture Only transaction
+ * @method null createCustomerProfileTransactionRequest_priorAuthCapture(array $array) process a Prior Authorization Capture transaction
+ * @method null createCustomerProfileTransactionRequest_refund(array $array)           process a Refund (credit)
+ * @method null createCustomerProfileTransactionRequest_void(array $array)             void a transaction
+ * @method null createCustomerShippingAddressRequest(array $array)                     create a shipping profile
+ * @method null deleteCustomerPaymentProfileRequest(array $array)                      delete a payment profile
+ * @method null deleteCustomerProfileRequest(array $array)                             delete a customer profile
+ * @method null deleteCustomerShippingAddressRequest(array $array)                     delete a shipping profile
+ * @method null getCustomerPaymentProfileRequest(array $array)                         retrieve a payment profile
+ * @method null getCustomerProfileIdsRequest(array $array)                             retrieve a list of profile IDs
+ * @method null getCustomerProfileRequest(array $array)                                retrieve a customer profile
+ * @method null getCustomerShippingAddressRequest(array $array)                        retrieve a shipping address
+ * @method null getHostedProfilePageRequest(array $array)                              retrieve a hosted payment page token
+ * @method null updateCustomerPaymentProfileRequest(array $array)                      update a customer profile
+ * @method null updateCustomerProfileRequest(array $array)                             update a customer profile
+ * @method null updateCustomerShippingAddressRequest(array $array)                     update a shipping address
+ * @method null updateSplitTenderGroupRequest(array $array)                            update a split tender transaction
+ * @method null validateCustomerPaymentProfileRequest(array $array)                    validate a payment profile
+ * @method null getBatchStatisticsRequest(array $array)                                get a summary of a settled batch
+ * @method null getSettledBatchListRequest(array $array)                               get a list of settled batches
+ * @method null getTransactionDetailsRequest(array $array)                             get the details of a transaction
+ * @method null getTransactionListRequest(array $array)                                get a list of transaction in a batch
+ * @method null getUnsettledTransactionListRequest(array $array)                       get a list of unsettled transactions
  */
 class AuthnetJsonResponse
 {
@@ -108,7 +108,7 @@ class AuthnetJsonResponse
      * @param   string  $responseJson   Response from Authorize.Net
      * @throws  \JohnConde\Authnet\AuthnetInvalidJsonException
      */
-    public function __construct($responseJson)
+    public function __construct(string $responseJson)
     {
         $this->responseJson = preg_replace('/[\x00-\x1F\x80-\xFF]/', '', $responseJson);
         if (($this->response = json_decode($this->responseJson)) === null) {
@@ -145,7 +145,7 @@ class AuthnetJsonResponse
      * @param   string  $var    unused
      * @return  string          requested variable from the API call response
      */
-    public function __get($var)
+    public function __get(string $var)
     {
         return $this->response->{$var};
     }
@@ -155,7 +155,7 @@ class AuthnetJsonResponse
      *
      * @return  bool    Whether the transaction was in an successful state
      */
-    public function isSuccessful()
+    public function isSuccessful() : bool
     {
         return strtolower($this->messages->resultCode) === 'ok';
     }
@@ -165,7 +165,7 @@ class AuthnetJsonResponse
      *
      * @return  bool    Whether the transaction was in an error state
      */
-    public function isError()
+    public function isError() : bool
     {
         return strtolower($this->messages->resultCode) === 'error';
     }
@@ -175,7 +175,7 @@ class AuthnetJsonResponse
      *
      * @return bool     true if the transaction is approved
      */
-    public function isApproved()
+    public function isApproved() : bool
     {
         return $this->isSuccessful() && $this->checkTransactionStatus(self::STATUS_APPROVED);
     }
@@ -185,7 +185,7 @@ class AuthnetJsonResponse
      *
      * @return bool     true if the transaction is declined
      */
-    public function isDeclined()
+    public function isDeclined() : bool
     {
         return $this->isSuccessful() && $this->checkTransactionStatus(self::STATUS_DECLINED);
     }
@@ -196,12 +196,12 @@ class AuthnetJsonResponse
      * @param  integer $status
      * @return bool Check to see if the ResponseCode matches the expected value
      */
-    protected function checkTransactionStatus($status)
+    protected function checkTransactionStatus(int $status) : bool
     {
         if ($this->transactionInfo instanceof TransactionResponse) {
-            $match = (int) $this->transactionInfo->getTransactionResponseField('ResponseCode') === (int) $status;
+            $match = $this->transactionInfo->getTransactionResponseField('ResponseCode') == $status;
         } else {
-            $match = (int) $this->transactionResponse->responseCode === $status;
+            $match = $this->transactionResponse->responseCode == $status;
         }
         return $match;
     }
@@ -213,7 +213,7 @@ class AuthnetJsonResponse
      * @return  string Transaction field to be retrieved
      * @throws  \JohnConde\Authnet\AuthnetTransactionResponseCallException
      */
-    public function getTransactionResponseField($field)
+    public function getTransactionResponseField($field) : string
     {
         if ($this->transactionInfo instanceof TransactionResponse) {
             return $this->transactionInfo->getTransactionResponseField($field);
@@ -226,7 +226,7 @@ class AuthnetJsonResponse
      *
      * @return  string transaction response from Authorize.Net in JSON format
      */
-    public function getRawResponse()
+    public function getRawResponse() : string
     {
         return $this->responseJson;
     }
@@ -236,7 +236,7 @@ class AuthnetJsonResponse
      *
      * @return  string Error response from Authorize.Net
      */
-    public function getErrorText()
+    public function getErrorText() : string
     {
         $message = '';
         if ($this->isError()) {
@@ -253,7 +253,7 @@ class AuthnetJsonResponse
      *
      * @return  string Error response from Authorize.Net
      */
-    public function getErrorMessage()
+    public function getErrorMessage() : string
     {
         return $this->getErrorText();
     }
@@ -263,7 +263,7 @@ class AuthnetJsonResponse
      *
      * @return  string Error response from Authorize.Net
      */
-    public function getErrorCode()
+    public function getErrorCode() : string
     {
         $code = '';
         if ($this->isError()) {

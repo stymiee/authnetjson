@@ -39,7 +39,7 @@ class AuthnetWebhooksResponse
      * @param   string      $responseJson   Response from Authorize.Net
      * @throws  \JohnConde\Authnet\AuthnetInvalidJsonException
      */
-    public function __construct($responseJson)
+    public function __construct(string $responseJson)
     {
         $this->responseJson = $responseJson;
         if (($this->response = json_decode($this->responseJson)) === null) {
@@ -91,7 +91,7 @@ class AuthnetWebhooksResponse
      *
      * @return  array   Array of event types supported by Webhooks API
      */
-    public function getEventTypes()
+    public function getEventTypes() : array
     {
         $events = [];
         if (isset($this->response->eventTypes)) {
@@ -109,7 +109,7 @@ class AuthnetWebhooksResponse
      *
      * @return  string  Webhooks ID
      */
-    public function getWebhooksId()
+    public function getWebhooksId() : string
     {
         return $this->response->webhookId;
     }
@@ -119,7 +119,7 @@ class AuthnetWebhooksResponse
      *
      * @return  string  Staus of the webhooks [active|inactive]
      */
-    public function getStatus()
+    public function getStatus() : string
     {
         return $this->response->status;
     }
@@ -129,7 +129,7 @@ class AuthnetWebhooksResponse
      *
      * @return  string
      */
-    public function getUrl()
+    public function getUrl() : string
     {
         return $this->response->url;
     }
@@ -140,7 +140,7 @@ class AuthnetWebhooksResponse
      * @return  array
      * @throws  \JohnConde\Authnet\AuthnetInvalidJsonException
      */
-    public function getWebhooks()
+    public function getWebhooks() : array
     {
         $webhooks = [];
         foreach ($this->response as $webhook) {
@@ -155,7 +155,7 @@ class AuthnetWebhooksResponse
      * @return  array
      * @throws  \JohnConde\Authnet\AuthnetInvalidJsonException
      */
-    public function getNotificationHistory()
+    public function getNotificationHistory() : array
     {
         $notifications = [];
         if (count($this->response->notifications)) {
@@ -171,7 +171,7 @@ class AuthnetWebhooksResponse
      *
      * @return  string
      */
-    public function getNotificationId()
+    public function getNotificationId() : string
     {
         return $this->response->notificationId;
     }
@@ -181,7 +181,7 @@ class AuthnetWebhooksResponse
      *
      * @return  string
      */
-    public function getDeliveryStatus()
+    public function getDeliveryStatus() : string
     {
         return $this->response->deliveryStatus;
     }
@@ -191,7 +191,7 @@ class AuthnetWebhooksResponse
      *
      * @return  string
      */
-    public function getEventType()
+    public function getEventType() : string
     {
         return $this->response->eventType;
     }
@@ -201,7 +201,7 @@ class AuthnetWebhooksResponse
      *
      * @return  string
      */
-    public function getEventDate()
+    public function getEventDate() : string
     {
         return $this->response->eventDate;
     }
