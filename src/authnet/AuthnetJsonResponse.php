@@ -129,8 +129,7 @@ class AuthnetJsonResponse
      */
     public function __toString()
     {
-        $output  = '';
-        $output .= '<table summary="Authorize.Net Response" id="authnet-response">'."\n";
+        $output  = '<table summary="Authorize.Net Response" id="authnet-response">'."\n";
         $output .= '<tr>'."\n\t\t".'<th colspan="2"><b>Response JSON</b></th>'."\n".'</tr>'."\n";
         $output .= '<tr><td colspan="2"><pre>'."\n";
         $output .= $this->responseJson."\n";

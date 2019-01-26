@@ -61,8 +61,7 @@ class AuthnetWebhooksRequest
      */
     public function __toString()
     {
-        $output  = '';
-        $output .= '<table summary="Authorize.Net Request" id="authnet-request">'."\n";
+        $output  = '<table summary="Authorize.Net Request" id="authnet-request">'."\n";
         $output .= '<tr>'."\n\t\t".'<th colspan="2"><b>Class Parameters</b></th>'."\n".'</tr>'."\n";
         $output .= '<tr>'."\n\t\t".'<td><b>Authnet Server URL</b></td><td>'.$this->url.'</td>'."\n".'</tr>'."\n";
         $output .= '<tr>'."\n\t\t".'<th colspan="2"><b>Request JSON</b></th>'."\n".'</tr>'."\n";
