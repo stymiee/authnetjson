@@ -21,4 +21,7 @@ namespace JohnConde\Authnet;
  * @license    http://www.apache.org/licenses/LICENSE-2.0.html Apache License, Version 2.0
  * @link       https://github.com/stymiee/authnetjson
  */
-class AuthnetInvalidServerException Extends AuthnetException {}
+class AuthnetInvalidServerException extends AuthnetException
+{
+
+}
