@@ -1,5 +1,12 @@
 CHANGE LOG
 
+2019-01-26 - Version 3.1.8
+--------------------------------------------
+Removed not actually missing return statement to AuthnetWebhooksRequest::delete
+Reduced complexity of AuthnetApiFactory::getWebServiceURL)(
+Reduced complexity of AuthnetWebhooksResponse::getEventTypes()
+Reduced complexity of AuthnetWebhook::getAllHeaders()
+
 2019-01-22 - Version 3.1.7
 --------------------------------------------
 Fixed incorrect and/or incomplete docblock comments
