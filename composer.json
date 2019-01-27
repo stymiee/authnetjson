@@ -16,7 +16,6 @@
     "require": {
         "php": ">=5.4.0",
         "curl/curl": "^1.5",
-        "ext-apache": "*",
         "ext-curl": "*",
         "ext-json": "*"
     },
