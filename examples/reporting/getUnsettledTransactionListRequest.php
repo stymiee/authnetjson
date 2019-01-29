@@ -8,16 +8,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
- 
+
 /*************************************************************************************************
 
 Use the Transaction Details API to get a list of unsettled transactions
 
 SAMPLE REQUEST
 --------------------------------------------------------------------------------------------------
-{  
-   "getUnsettledTransactionListRequest":{  
-      "merchantAuthentication":{  
+{
+   "getUnsettledTransactionListRequest":{
+      "merchantAuthentication":{
          "name":"",
          "transactionKey":""
       }
@@ -27,8 +27,8 @@ SAMPLE REQUEST
 SAMPLE RESPONSE
 --------------------------------------------------------------------------------------------------
 {
-   "transactions":[  
-      {  
+   "transactions":[
+      {
          "transId":"2228546203",
          "submitTimeUTC":"2015-02-16T03:34:43Z",
          "submitTimeLocal":"2015-02-15T20:34:43",
@@ -43,7 +43,7 @@ SAMPLE RESPONSE
          "product":"Card Not Present",
          "hasReturnedItemsSpecified":false
       },
-      {  
+      {
          "transId":"2228546083",
          "submitTimeUTC":"2015-02-16T03:31:42Z",
          "submitTimeLocal":"2015-02-15T20:31:42",
@@ -58,7 +58,7 @@ SAMPLE RESPONSE
          "product":"Card Not Present",
          "hasReturnedItemsSpecified":false
       },
-      {  
+      {
          "transId":"2228545865",
          "submitTimeUTC":"2015-02-16T03:25:00Z",
          "submitTimeLocal":"2015-02-15T20:25:00",
@@ -74,10 +74,10 @@ SAMPLE RESPONSE
          "hasReturnedItemsSpecified":false
       }
    ],
-   "messages":{  
+   "messages":{
       "resultCode":"Ok",
-      "message":[  
-         {  
+      "message":[
+         {
             "code":"I00001",
             "text":"Successful."
          }
@@ -119,13 +119,13 @@ SAMPLE RESPONSE
 
             pre
             {
-            	overflow-x: auto; /* Use horizontal scroller if needed; for Firefox 2, not needed in Firefox 3 */
-            	white-space: pre-wrap; /* css-3 */
-            	white-space: -moz-pre-wrap !important; /* Mozilla, since 1999 */
-            	white-space: -pre-wrap; /* Opera 4-6 */
-            	white-space: -o-pre-wrap; /* Opera 7 */ /*
-            	width: 99%; */
-            	word-wrap: break-word; /* Internet Explorer 5.5+ */
+                overflow-x: auto; /* Use horizontal scroller if needed; for Firefox 2, not needed in Firefox 3 */
+                white-space: pre-wrap; /* css-3 */
+                white-space: -moz-pre-wrap !important; /* Mozilla, since 1999 */
+                white-space: -pre-wrap; /* Opera 4-6 */
+                white-space: -o-pre-wrap; /* Opera 7 */ /*
+                width: 99%; */
+                word-wrap: break-word; /* Internet Explorer 5.5+ */
             }
 
             table th
@@ -160,7 +160,7 @@ SAMPLE RESPONSE
                 <th>Error?</th>
                 <td><?php echo ($response->isError()) ? 'yes' : 'no'; ?></td>
             </tr>
-            <?php foreach ($json->transactions as $transaction) : ?>
+            <?php foreach ($response->transactions as $transaction) : ?>
             <tr>
                 <th>Transaction</th>
                 <td>

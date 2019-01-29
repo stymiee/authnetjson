@@ -65,7 +65,7 @@ SAMPLE RESPONSE
 
     $request  = AuthnetApiFactory::getJsonApiHandler(AUTHNET_LOGIN, AUTHNET_TRANSKEY, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
     $response = $request->getTransactionListRequest([
-        'batchId' => '1221577'
+        'batchId' => '7864228'
     ]);
 ?>
 
@@ -92,13 +92,13 @@ SAMPLE RESPONSE
 
             pre
             {
-            	overflow-x: auto; /* Use horizontal scroller if needed; for Firefox 2, not needed in Firefox 3 */
-            	white-space: pre-wrap; /* css-3 */
-            	white-space: -moz-pre-wrap !important; /* Mozilla, since 1999 */
-            	white-space: -pre-wrap; /* Opera 4-6 */
-            	white-space: -o-pre-wrap; /* Opera 7 */ /*
-            	width: 99%; */
-            	word-wrap: break-word; /* Internet Explorer 5.5+ */
+                overflow-x: auto; /* Use horizontal scroller if needed; for Firefox 2, not needed in Firefox 3 */
+                white-space: pre-wrap; /* css-3 */
+                white-space: -moz-pre-wrap !important; /* Mozilla, since 1999 */
+                white-space: -pre-wrap; /* Opera 4-6 */
+                white-space: -o-pre-wrap; /* Opera 7 */ /*
+                width: 99%; */
+                word-wrap: break-word; /* Internet Explorer 5.5+ */
             }
 
             table th
@@ -133,7 +133,7 @@ SAMPLE RESPONSE
                 <th>Error?</th>
                 <td><?php echo ($response->isError()) ? 'yes' : 'no'; ?></td>
             </tr>
-            <?php foreach ($json->transactions as $transaction) : ?>
+            <?php foreach ($response->transactions as $transaction) : ?>
             <tr>
                 <th>Transaction</th>
                 <td>

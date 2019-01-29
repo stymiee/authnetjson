@@ -171,8 +171,8 @@ SAMPLE RESPONSE
     $request  = AuthnetApiFactory::getJsonApiHandler(AUTHNET_LOGIN, AUTHNET_TRANSKEY, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
     $response = $request->getSettledBatchListRequest([
         'includeStatistics'   => 'true',
-        'firstSettlementDate' => '2015-01-01T08:15:30',
-        'lastSettlementDate'  => '2015-01-30T08:15:30',
+        'firstSettlementDate' => '2018-01-01T08:15:30',
+        'lastSettlementDate'  => '2018-01-30T08:15:30',
     ]);
 ?>
 
@@ -199,13 +199,13 @@ SAMPLE RESPONSE
 
             pre
             {
-            	overflow-x: auto; /* Use horizontal scroller if needed; for Firefox 2, not needed in Firefox 3 */
-            	white-space: pre-wrap; /* css-3 */
-            	white-space: -moz-pre-wrap !important; /* Mozilla, since 1999 */
-            	white-space: -pre-wrap; /* Opera 4-6 */
-            	white-space: -o-pre-wrap; /* Opera 7 */ /*
-            	width: 99%; */
-            	word-wrap: break-word; /* Internet Explorer 5.5+ */
+                overflow-x: auto; /* Use horizontal scroller if needed; for Firefox 2, not needed in Firefox 3 */
+                white-space: pre-wrap; /* css-3 */
+                white-space: -moz-pre-wrap !important; /* Mozilla, since 1999 */
+                white-space: -pre-wrap; /* Opera 4-6 */
+                white-space: -o-pre-wrap; /* Opera 7 */ /*
+                width: 99%; */
+                word-wrap: break-word; /* Internet Explorer 5.5+ */
             }
 
             table th
@@ -240,7 +240,7 @@ SAMPLE RESPONSE
                 <th>Error?</th>
                 <td><?php echo ($response->isError()) ? 'yes' : 'no'; ?></td>
             </tr>
-            <?php foreach ($json->batchList as $batch) : ?>
+            <?php foreach ($response->batchList as $batch) : ?>
             <tr>
                 <th>Batch</th>
                 <td>
