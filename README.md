@@ -1,8 +1,9 @@
 [![Latest Stable Version](https://poser.pugx.org/stymiee/authnetjson/v/stable.svg)](https://packagist.org/packages/stymiee/authnetjson)
+[![Total Downloads](https://poser.pugx.org/stymiee/authnetjson/downloads)](https://packagist.org/packages/stymiee/authnetjson)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/stymiee/authnetjson/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/stymiee/authnetjson/?branch=master)
 [![Build Status](https://scrutinizer-ci.com/g/stymiee/authnetjson/badges/build.png?b=master)](https://scrutinizer-ci.com/g/stymiee/authnetjson/build-status/master)
 [![Maintainability](https://api.codeclimate.com/v1/badges/5847da924af47933e25f/maintainability)](https://codeclimate.com/github/stymiee/authnetjson/maintainability)
-
+[![License](https://poser.pugx.org/stymiee/authnetjson/license)](https://packagist.org/packages/stymiee/authnetjson)
 # AuthnetJSON
 
 Library that abstracts [Authorize.Net](http://www.authorize.net/)'s [JSON APIs](http://developer.authorize.net/api/reference/).
