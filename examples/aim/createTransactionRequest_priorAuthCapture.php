@@ -60,8 +60,8 @@ SAMPLE RESPONSE
     require('../../config.inc.php');
     require('../../src/autoload.php');
 
-    $json = AuthnetApiFactory::getJsonApiHandler(AUTHNET_LOGIN, AUTHNET_TRANSKEY, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
-    $json->createTransactionRequest([
+    $request = AuthnetApiFactory::getJsonApiHandler(AUTHNET_LOGIN, AUTHNET_TRANSKEY, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
+    $response = $request->createTransactionRequest([
         'refId' => rand(1000000, 100000000),
         'transactionRequest' => [
             'transactionType' => 'priorAuthCaptureTransaction',
