@@ -92,38 +92,16 @@ catch (\Exception $e) {
 
 ?>
 <!DOCTYPE html>
-<html>
 <html lang="en">
     <head>
         <title>Webhooks :: Create Webhooks</title>
         <style type="text/css">
-            table {
-                border: 1px solid #cccccc;
-                margin: auto;
-                border-collapse: collapse;
-                max-width: 90%;
-            }
-
-            table td {
-                padding: 3px 5px;
-                vertical-align: top;
-                border-top: 1px solid #cccccc;
-            }
-
-            pre {
-                white-space: pre-wrap; /* css-3 */
-                word-wrap: break-word; /* Internet Explorer 5.5+ */
-            }
-
-            table th {
-                background: #e5e5e5;
-                color: #666666;
-            }
-
-            h1, h2 {
-                text-align: center;
-            }
-        </style>
+        table { border: 1px solid #cccccc; margin: auto; border-collapse: collapse; max-width: 90%; }
+        table td { padding: 3px 5px; vertical-align: top; border-top: 1px solid #cccccc; }
+        pre { white-space: pre-wrap; }
+        table th { background: #e5e5e5; color: #666666; }
+        h1, h2 { text-align: center; }
+    </style>
     </head>
     <body>
         <h1>

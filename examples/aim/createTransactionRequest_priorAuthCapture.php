@@ -71,7 +71,6 @@ SAMPLE RESPONSE
 ?>
 
 <!DOCTYPE html>
-<html>
 <html lang="en">
 <head>
     <title></title>

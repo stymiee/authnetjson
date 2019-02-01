@@ -30,7 +30,6 @@ Use the SIM tools to create a SIM transaction form
 ?>
 
 <!DOCTYPE html>
-<html>
 <html lang="en">
     <head>
         <title>SIM </title>

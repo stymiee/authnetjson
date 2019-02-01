@@ -167,7 +167,6 @@ $response = $request->createCustomerProfileRequest([
 ?>
 
 <!DOCTYPE html>
-<html>
 <html lang="en">
 <head>
     <title></title>
