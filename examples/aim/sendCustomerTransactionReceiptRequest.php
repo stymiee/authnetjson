@@ -55,10 +55,6 @@ SAMPLE RESPONSE
                 'settingName' => 'headerEmailReceipt',
                 'settingValue' => 'some HEADER stuff'
             ],
-            'setting' => [
-                'settingName' => 'footerEmailReceipt',
-                'settingValue' => 'some FOOTER stuff'
-            ],
         ],
     ]);
 ?>
