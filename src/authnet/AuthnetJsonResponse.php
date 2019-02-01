@@ -147,7 +147,7 @@ class AuthnetJsonResponse
      */
     public function __get(string $var)
     {
-        return $this->response->{$var};
+        return $this->response->{$var} ?? null;
     }
 
     /**
