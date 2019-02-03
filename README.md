@@ -10,13 +10,10 @@ Library that abstracts [Authorize.Net](http://www.authorize.net/)'s [JSON APIs](
 
 ## Requirements
 
-- PHP 5.4+
+- PHP 7.2+
 - cURL PHP Extension
 - JSON PHP Extension
 - An Authorize.Net account
-- TLS 1.2 capable versions of libcurl and OpenSSL or equivalent
-
-**NOTE:** AuthnetJSON 4.0 will not be backwards compatible with PHP 5 and the minimum PHP version will be 7.2.
 
 ## Installation
 
@@ -27,7 +24,7 @@ Here is a minimal example of a `composer.json` file that just defines a dependen
 
     {
         "require": {
-            "stymiee/authnetjson": "3.1.*"
+            "stymiee/authnetjson": "4.0.*"
         }
     }
 
@@ -367,7 +364,10 @@ usage of this library. Simple `echo` your AuthnetJson object to see:
 
 ## Support
 
-If you require assistance using this library I can be found at Stack Overflow. Be sure when you
+If you require assistance using this library start by viewing the [HELP.md](HELP.md) file included in this package. It 
+includes common problems and their solutions.
+
+If you need additional assistance, I can be found at Stack Overflow. Be sure when you
 [ask a question](http://stackoverflow.com/questions/ask?tags=php,authorize.net) pertaining to the usage of
 this class to tag your question with the **PHP** and **Authorize.Net** tags. Make sure you follow their
 [guide for asking a good question](http://stackoverflow.com/help/how-to-ask) as poorly asked questions will be closed
