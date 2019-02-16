@@ -2,7 +2,6 @@
 <phpunit
     backupGlobals="false"
     backupStaticAttributes="false"
-    bootstrap="./src/autoload.php"
     colors="true"
     convertErrorsToExceptions="true"
     convertNoticesToExceptions="true"
@@ -23,7 +22,6 @@
             <directory suffix=".php">./src</directory>
             <exclude>
                 <directory>vendor</directory>
-                <file>./src/autoload.php</file>
             </exclude>
         </whitelist>
     </filter>

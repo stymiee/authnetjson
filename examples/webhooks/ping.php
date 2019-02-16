@@ -40,7 +40,6 @@ HTTP 500 response for connection error
 namespace JohnConde\Authnet;
 
 require('../../config.inc.php');
-require('../../src/autoload.php');
 
 $successful = false;
 $error      = true;

@@ -8,7 +8,6 @@
     </transformer>
     <files>
         <directory>src</directory>
-        <ignore>src/autoload.php</ignore>
         <ignore>tests/*</ignore>
     </files>
 </phpdoc>

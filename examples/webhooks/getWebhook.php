@@ -44,7 +44,6 @@ SAMPLE RESPONSE
 namespace JohnConde\Authnet;
 
 require('../../config.inc.php');
-require('../../src/autoload.php');
 
 $successful = false;
 $error      = true;

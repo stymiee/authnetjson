@@ -36,8 +36,8 @@
         "phpmd/phpmd" : "@stable"
     },
     "autoload": {
-        "classmap": [
-            "src/"
-        ]
+        "psr-4": {
+            "JohnConde\\Authnet\\": ["src/authnet/" ,"src/exceptions/"]
+        }
     }
 }

@@ -29,10 +29,6 @@ Look for redirects to HTTPS or to/from the `www` subdomain in your .htaccess or 
 
       require __DIR__.'/vendor/autoload.php';
 
-- If you do not use Composer, you did not include the AuthnetJSON autoload.php file in your project)
-
-      require __DIR__.'vendor/stymiee/authnetjson/src/autoload.php';
-
 ## Support
 
 If you require assistance using this library I can be found at Stack Overflow. Be sure when you
