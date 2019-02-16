@@ -83,7 +83,7 @@ SAMPLE RESPONSE
                     'unit' => 'months'
                 ],
                 'startDate' => '2015-04-18',
-                'totalOccurrences' => '12',
+                'totalOccurrences' => AuthnetJson::BOUNDLESS_OCCURRENCES,
                 'trialOccurrences' => '1'
             ],
             'amount' => '10.29',

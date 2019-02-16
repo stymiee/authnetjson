@@ -14,6 +14,7 @@ spl_autoload_register(
         static $classes = null;
         if ($classes === null) {
             $classes = array(
+                'johnconde\\authnet\\authnetjson'                             => '/authnet/AuthnetJson.php',
                 'johnconde\\authnet\\authnetapifactory'                       => '/authnet/AuthnetApiFactory.php',
                 'johnconde\\authnet\\authnetjsonrequest'                      => '/authnet/AuthnetJsonRequest.php',
                 'johnconde\\authnet\\authnetjsonresponse'                     => '/authnet/AuthnetJsonResponse.php',
