@@ -369,7 +369,7 @@ includes common problems and their solutions.
 
 If you need additional assistance, I can be found at Stack Overflow. Be sure when you
 [ask a question](http://stackoverflow.com/questions/ask?tags=php,authorize.net) pertaining to the usage of
-this class to tag your question with the **PHP** and **Authorize.Net** tags. Make sure you follow their
+this class be sure to tag your question with the **PHP** and **Authorize.Net** tags. Make sure you follow their
 [guide for asking a good question](http://stackoverflow.com/help/how-to-ask) as poorly asked questions will be closed
 and I will not be able to assist you.
 
