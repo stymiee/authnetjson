@@ -20,7 +20,7 @@ Library that abstracts [Authorize.Net](http://www.authorize.net/)'s [JSON APIs](
 Simply add a dependency on `stymiee/authnetjson` to your project's `composer.json` file if you use [Composer](http://getcomposer.org/)
 to manage the dependencies of your project.
 
-Here is a minimal example of a `composer.json` file that just defines a dependency on AuthnetJson:
+Here is a minimal example of a `composer.json` file that just defines a dependency on AuthnetJSON:
 
     {
         "require": {
@@ -348,7 +348,7 @@ If `apache_request_headers()`/`getallheaders()` are not available to you, you ca
 ## Debugging
 
 To assist with debugging the `__toString()` method has been overridden to output important elements pertaining to the
-usage of this library. Simple `echo` your AuthnetJson object to see:
+usage of this library. Simple `echo` your AuthnetJSON object to see:
 
 - The API Login ID used
 - The API transaction Key used
