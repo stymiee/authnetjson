@@ -20,7 +20,7 @@ class AuthnetJsonRequestTest extends TestCase
     /**
      * @covers            \JohnConde\Authnet\AuthnetJsonRequest::__construct()
      */
-    public function testConstructor()
+    public function testConstructor() : void
     {
         $apiLogin    = 'apiLogin';
         $apiTransKey = 'apiTransKey';
@@ -40,10 +40,12 @@ class AuthnetJsonRequestTest extends TestCase
 
     /**
      * @covers            \JohnConde\Authnet\AuthnetJsonRequest::__set()
-     * @expectedException \JohnConde\Authnet\AuthnetCannotSetParamsException
+     * @covers            \JohnConde\Authnet\AuthnetCannotSetParamsException::__construct()
      */
-    public function testExceptionIsRaisedForCannotSetParamsException()
+    public function testExceptionIsRaisedForCannotSetParamsException() : void
     {
+        $this->expectException('\JohnConde\Authnet\AuthnetCannotSetParamsException');
+
         $request = new AuthnetJsonRequest('', '', AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
         $request->login = 'test';
     }
@@ -51,12 +53,14 @@ class AuthnetJsonRequestTest extends TestCase
 
     /**
      * @covers            \JohnConde\Authnet\AuthnetJsonRequest::process()
+     * @covers            \JohnConde\Authnet\AuthnetCurlException::__construct()
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
-     * @expectedException \JohnConde\Authnet\AuthnetCurlException
      */
-    public function testExceptionIsRaisedForInvalidJsonException()
+    public function testExceptionIsRaisedForInvalidJsonException() : void
     {
+        $this->expectException('\JohnConde\Authnet\AuthnetCurlException');
+
         $requestJson = array(
             'customerProfileId' => '123456789'
         );
@@ -75,7 +79,7 @@ class AuthnetJsonRequestTest extends TestCase
     /**
      * @covers            \JohnConde\Authnet\AuthnetJsonRequest::setProcessHandler()
      */
-    public function testProcessorIsInstanceOfCurlWrapper()
+    public function testProcessorIsInstanceOfCurlWrapper() : void
     {
         $request = new AuthnetJsonRequest('', '', AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
         $request->setProcessHandler(new \Curl\Curl());
@@ -92,7 +96,7 @@ class AuthnetJsonRequestTest extends TestCase
      * @covers            \JohnConde\Authnet\AuthnetJsonRequest::__toString()
      * @covers            \JohnConde\Authnet\AuthnetJsonRequest::__call()
      */
-    public function testToString()
+    public function testToString() : void
     {
         $requestJson = array(
             'refId' => '94564789',
@@ -260,14 +264,14 @@ class AuthnetJsonRequestTest extends TestCase
         echo $request;
         $string = ob_get_clean();
 
-        $this->assertContains($apiLogin, $string);
-        $this->assertContains($apiTransKey, $string);
+        $this->assertStringContainsString($apiLogin, $string);
+        $this->assertStringContainsString($apiTransKey, $string);
     }
 
     /**
      * @covers            \JohnConde\Authnet\AuthnetJsonRequest::getRawRequest()
      */
-    public function testGetRawRequest()
+    public function testGetRawRequest() : void
     {
         $requestJson = array(
             'refId' => '94564789',
@@ -303,10 +307,12 @@ class AuthnetJsonRequestTest extends TestCase
 
     /**
      * @covers            \JohnConde\Authnet\AuthnetJsonRequest::process()
-     * @expectedException \JohnConde\Authnet\AuthnetCurlException
+     * @covers            \JohnConde\Authnet\AuthnetCurlException::__construct()
      */
-    public function testProcessError()
+    public function testProcessError() : void
     {
+        $this->expectException('\JohnConde\Authnet\AuthnetCurlException');
+
         $apiLogin    = 'apiLogin';
         $apiTransKey = 'apiTransKey';
 

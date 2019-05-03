@@ -20,7 +20,7 @@ class AuthnetJsonSimTest extends TestCase
     private $signature;
     private $server;
 
-    protected function setUp()
+    protected function setUp() : void
     {
         $this->login          = 'test';
         $this->transactionKey = 'test';
@@ -31,7 +31,7 @@ class AuthnetJsonSimTest extends TestCase
     /**
      * @covers            \JohnConde\Authnet\AuthnetSim::__construct()
      */
-    public function testConstructor()
+    public function testConstructor() : void
     {
         $request = AuthnetApiFactory::getSimHandler($this->login, $this->signature, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
 
@@ -48,7 +48,7 @@ class AuthnetJsonSimTest extends TestCase
     /**
      * @covers            \JohnConde\Authnet\AuthnetSim::getFingerprint()
      */
-    public function testGetFingerprint()
+    public function testGetFingerprint() : void
     {
         $amount    = 9.01;
 
@@ -67,10 +67,12 @@ class AuthnetJsonSimTest extends TestCase
 
     /**
      * @covers            \JohnConde\Authnet\AuthnetSim::getFingerprint()
-     * @expectedException \JohnConde\Authnet\AuthnetInvalidAmountException
+     * @covers            \JohnConde\Authnet\AuthnetInvalidAmountException::__construct()
      */
-    public function testGetFingerprintException()
+    public function testGetFingerprintException() : void
     {
+        $this->expectException('\JohnConde\Authnet\AuthnetInvalidAmountException');
+
         $amount    = 0;
         $sim       = AuthnetApiFactory::getSimHandler($this->login, $this->transactionKey, $this->server);
         $hash      = $sim->getFingerprint($amount);
@@ -79,7 +81,7 @@ class AuthnetJsonSimTest extends TestCase
     /**
      * @covers            \JohnConde\Authnet\AuthnetSim::getSequence()
      */
-    public function testGetSequence()
+    public function testGetSequence() : void
     {
         $sim = AuthnetApiFactory::getSimHandler($this->login, $this->transactionKey, $this->server);
         $sequence = $sim->getSequence();
@@ -94,7 +96,7 @@ class AuthnetJsonSimTest extends TestCase
     /**
      * @covers            \JohnConde\Authnet\AuthnetSim::getTimestamp()
      */
-    public function testGetTimestamp()
+    public function testGetTimestamp() : void
     {
         $sim = AuthnetApiFactory::getSimHandler($this->login, $this->transactionKey, $this->server);
         $timestamp = $sim->getTimestamp();
@@ -109,7 +111,7 @@ class AuthnetJsonSimTest extends TestCase
     /**
      * @covers            \JohnConde\Authnet\AuthnetSim::getLogin()
      */
-    public function testGetLogin()
+    public function testGetLogin() : void
     {
         $sim   = AuthnetApiFactory::getSimHandler($this->login, $this->transactionKey, $this->server);
         $login = $sim->getLogin();
@@ -124,7 +126,7 @@ class AuthnetJsonSimTest extends TestCase
     /**
      * @covers            \JohnConde\Authnet\AuthnetSim::getEndpoint()
      */
-    public function testGetEndpoint()
+    public function testGetEndpoint() : void
     {
         $sim = AuthnetApiFactory::getSimHandler($this->login, $this->transactionKey, $this->server);
         $url = $sim->getEndpoint();
@@ -139,11 +141,10 @@ class AuthnetJsonSimTest extends TestCase
     /**
      * @covers            \JohnConde\Authnet\AuthnetSim::resetParameters()
      */
-    public function testResetParameters()
+    public function testResetParameters() : void
     {
         $sim = AuthnetApiFactory::getSimHandler($this->login, $this->transactionKey, $this->server);
 
-        $sequence = $sim->getSequence();
         $timestamp = $sim->getTimestamp();
         sleep(1);
         $sim->resetParameters();

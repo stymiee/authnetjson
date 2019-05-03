@@ -20,7 +20,7 @@ class AuthnetApiFactoryTest extends TestCase
     private $login;
     private $transactionKey;
 
-    protected function setUp()
+    protected function setUp() : void
     {
         $this->login          = 'test';
         $this->transactionKey = 'test';
@@ -29,7 +29,7 @@ class AuthnetApiFactoryTest extends TestCase
     /**
      * @covers            \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
      */
-    public function testGetWebServiceUrlProductionServer()
+    public function testGetWebServiceUrlProductionServer() : void
     {
         $server           = AuthnetApiFactory::USE_PRODUCTION_SERVER;
         $reflectionMethod = new \ReflectionMethod('\JohnConde\Authnet\AuthnetApiFactory', 'getWebServiceURL');
@@ -42,7 +42,7 @@ class AuthnetApiFactoryTest extends TestCase
     /**
      * @covers            \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
      */
-    public function testGetWebServiceUrlDevelopmentServer()
+    public function testGetWebServiceUrlDevelopmentServer() : void
     {
         $server           = AuthnetApiFactory::USE_DEVELOPMENT_SERVER;
         $reflectionMethod = new \ReflectionMethod('\JohnConde\Authnet\AuthnetApiFactory', 'getWebServiceURL');
@@ -55,7 +55,7 @@ class AuthnetApiFactoryTest extends TestCase
     /**
      * @covers            \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
      */
-    public function testGetWebServiceUrlAkamaiServer()
+    public function testGetWebServiceUrlAkamaiServer() : void
     {
         $server           = AuthnetApiFactory::USE_AKAMAI_SERVER;
         $reflectionMethod = new \ReflectionMethod('\JohnConde\Authnet\AuthnetApiFactory', 'getWebServiceURL');
@@ -67,10 +67,13 @@ class AuthnetApiFactoryTest extends TestCase
 
     /**
      * @covers            \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
-     * @expectedException \JohnConde\Authnet\AuthnetInvalidServerException
+     * @covers            \JohnConde\Authnet\AuthnetException::__construct()
+     * @covers            \JohnConde\Authnet\AuthnetInvalidServerException::__construct()
      */
-    public function testGetWebServiceUrlBadServer()
+    public function testGetWebServiceUrlBadServer() : void
     {
+        $this->expectException('\JohnConde\Authnet\AuthnetInvalidServerException');
+
         $server           = 99;
         $reflectionMethod = new \ReflectionMethod('\JohnConde\Authnet\AuthnetApiFactory', 'getWebServiceURL');
         $reflectionMethod->setAccessible(true);
@@ -79,32 +82,38 @@ class AuthnetApiFactoryTest extends TestCase
 
     /**
      * @covers            \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
+     * @covers            \JohnConde\Authnet\AuthnetInvalidCredentialsException::__construct()
      * @uses              \JohnConde\Authnet\AuthnetJsonRequest
-     * @expectedException \JohnConde\Authnet\AuthnetInvalidCredentialsException
      */
-    public function testExceptionIsRaisedForInvalidCredentialsLogin()
+    public function testExceptionIsRaisedForInvalidCredentialsLogin() : void
     {
+        $this->expectException('\JohnConde\Authnet\AuthnetInvalidCredentialsException');
+
         $server  = AuthnetApiFactory::USE_DEVELOPMENT_SERVER;
         AuthnetApiFactory::getJsonApiHandler('', $this->transactionKey, $server);
     }
 
     /**
      * @covers            \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
+     * @covers            \JohnConde\Authnet\AuthnetInvalidCredentialsException::__construct()
      * @uses              \JohnConde\Authnet\AuthnetJsonRequest
-     * @expectedException \JohnConde\Authnet\AuthnetInvalidCredentialsException
      */
-    public function testExceptionIsRaisedForInvalidCredentialsTransactionKey()
+    public function testExceptionIsRaisedForInvalidCredentialsTransactionKey() : void
     {
+        $this->expectException('\JohnConde\Authnet\AuthnetInvalidCredentialsException');
+
         $server  = AuthnetApiFactory::USE_DEVELOPMENT_SERVER;
         AuthnetApiFactory::getJsonApiHandler($this->login, '', $server);
     }
 
     /**
      * @covers            \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
-     * @expectedException \JohnConde\Authnet\AuthnetInvalidServerException
+     * @covers            \JohnConde\Authnet\AuthnetInvalidServerException::__construct()
      */
-    public function testExceptionIsRaisedForAuthnetInvalidServer()
+    public function testExceptionIsRaisedForAuthnetInvalidServer() : void
     {
+        $this->expectException('\JohnConde\Authnet\AuthnetInvalidServerException');
+
         AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, 5);
     }
 
@@ -112,7 +121,7 @@ class AuthnetApiFactoryTest extends TestCase
      * @covers            \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
      * @uses              \JohnConde\Authnet\AuthnetJsonRequest
      */
-    public function testCurlWrapperProductionResponse()
+    public function testCurlWrapperProductionResponse() : void
     {
         $server  = AuthnetApiFactory::USE_PRODUCTION_SERVER;
         $authnet = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $server);
@@ -129,7 +138,7 @@ class AuthnetApiFactoryTest extends TestCase
      * @covers            \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
      * @uses              \JohnConde\Authnet\AuthnetJsonRequest
      */
-    public function testCurlWrapperDevelopmentResponse()
+    public function testCurlWrapperDevelopmentResponse() : void
     {
         $server  = AuthnetApiFactory::USE_DEVELOPMENT_SERVER;
         $authnet = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $server);
@@ -145,7 +154,7 @@ class AuthnetApiFactoryTest extends TestCase
     /**
      * @covers            \JohnConde\Authnet\AuthnetApiFactory::getSimHandler
      */
-    public function testGetSimHandler()
+    public function testGetSimHandler() : void
     {
         $server = AuthnetApiFactory::USE_DEVELOPMENT_SERVER;
         $sim    = AuthnetApiFactory::getSimHandler($this->login, $this->transactionKey, $server);
@@ -155,10 +164,12 @@ class AuthnetApiFactoryTest extends TestCase
 
     /**
      * @covers            \JohnConde\Authnet\AuthnetApiFactory::getSimHandler
-     * @expectedException \JohnConde\Authnet\AuthnetInvalidCredentialsException
+     * @covers            \JohnConde\Authnet\AuthnetInvalidCredentialsException::__construct()
      */
-    public function testExceptionIsRaisedForInvalidCredentialsSim()
+    public function testExceptionIsRaisedForInvalidCredentialsSim() : void
     {
+        $this->expectException('\JohnConde\Authnet\AuthnetInvalidCredentialsException');
+
         $server  = AuthnetApiFactory::USE_DEVELOPMENT_SERVER;
         AuthnetApiFactory::getSimHandler('', $this->transactionKey, $server);
     }
@@ -166,7 +177,7 @@ class AuthnetApiFactoryTest extends TestCase
     /**
      * @covers            \JohnConde\Authnet\AuthnetApiFactory::getSimURL
      */
-    public function testGetSimServerTest()
+    public function testGetSimServerTest() : void
     {
         $server           = AuthnetApiFactory::USE_DEVELOPMENT_SERVER;
         $reflectionMethod = new \ReflectionMethod('\JohnConde\Authnet\AuthnetApiFactory', 'getSimURL');
@@ -179,7 +190,7 @@ class AuthnetApiFactoryTest extends TestCase
     /**
      * @covers            \JohnConde\Authnet\AuthnetApiFactory::getSimURL
      */
-    public function testGetSimServerProduction()
+    public function testGetSimServerProduction() : void
     {
         $server           = AuthnetApiFactory::USE_PRODUCTION_SERVER;
         $reflectionMethod = new \ReflectionMethod('\JohnConde\Authnet\AuthnetApiFactory', 'getSimURL');
@@ -191,41 +202,49 @@ class AuthnetApiFactoryTest extends TestCase
 
     /**
      * @covers            \JohnConde\Authnet\AuthnetApiFactory::getSimURL
-     * @expectedException \JohnConde\Authnet\AuthnetInvalidServerException
+     * @covers            \JohnConde\Authnet\AuthnetInvalidServerException::__construct()
      */
-    public function testExceptionIsRaisedForAuthnetInvalidSimServer()
+    public function testExceptionIsRaisedForAuthnetInvalidSimServer() : void
     {
+        $this->expectException('\JohnConde\Authnet\AuthnetInvalidServerException');
+
         AuthnetApiFactory::getSimHandler($this->login, $this->transactionKey, 5);
     }
 
     /**
      * @covers            \JohnConde\Authnet\AuthnetApiFactory::getWebhooksHandler
+     * @covers            \JohnConde\Authnet\AuthnetInvalidCredentialsException::__construct()
      * @uses              \JohnConde\Authnet\AuthnetWebhooksRequest
-     * @expectedException \JohnConde\Authnet\AuthnetInvalidCredentialsException
      */
-    public function testExceptionIsRaisedForInvalidCredentialsLoginWebhooks()
+    public function testExceptionIsRaisedForInvalidCredentialsLoginWebhooks() : void
     {
+        $this->expectException('\JohnConde\Authnet\AuthnetInvalidCredentialsException');
+
         $server  = AuthnetApiFactory::USE_DEVELOPMENT_SERVER;
         AuthnetApiFactory::getWebhooksHandler('', $this->transactionKey, $server);
     }
 
     /**
      * @covers            \JohnConde\Authnet\AuthnetApiFactory::getWebhooksHandler
+     * @covers            \JohnConde\Authnet\AuthnetInvalidCredentialsException::__construct()
      * @uses              \JohnConde\Authnet\AuthnetWebhooksRequest
-     * @expectedException \JohnConde\Authnet\AuthnetInvalidCredentialsException
      */
-    public function testExceptionIsRaisedForInvalidCredentialsTransactionKeyWebhooks()
+    public function testExceptionIsRaisedForInvalidCredentialsTransactionKeyWebhooks() : void
     {
+        $this->expectException('\JohnConde\Authnet\AuthnetInvalidCredentialsException');
+
         $server  = AuthnetApiFactory::USE_DEVELOPMENT_SERVER;
         AuthnetApiFactory::getWebhooksHandler($this->login, '', $server);
     }
 
     /**
      * @covers            \JohnConde\Authnet\AuthnetApiFactory::getWebhooksHandler
-     * @expectedException \JohnConde\Authnet\AuthnetInvalidServerException
+     * @covers            \JohnConde\Authnet\AuthnetInvalidServerException::__construct()
      */
-    public function testExceptionIsRaisedForAuthnetInvalidServerWebhooks()
+    public function testExceptionIsRaisedForAuthnetInvalidServerWebhooks() : void
     {
+        $this->expectException('\JohnConde\Authnet\AuthnetInvalidServerException');
+
         AuthnetApiFactory::getWebhooksHandler($this->login, $this->transactionKey, 5);
     }
 
@@ -233,7 +252,7 @@ class AuthnetApiFactoryTest extends TestCase
      * @covers            \JohnConde\Authnet\AuthnetApiFactory::getWebhooksHandler
      * @uses              \JohnConde\Authnet\AuthnetWebhooksRequest
      */
-    public function testCurlWrapperProductionResponseWebhooks()
+    public function testCurlWrapperProductionResponseWebhooks() : void
     {
         $server  = AuthnetApiFactory::USE_PRODUCTION_SERVER;
         $authnet = AuthnetApiFactory::getWebhooksHandler($this->login, $this->transactionKey, $server);
@@ -250,7 +269,7 @@ class AuthnetApiFactoryTest extends TestCase
      * @covers            \JohnConde\Authnet\AuthnetApiFactory::getWebhooksHandler
      * @uses              \JohnConde\Authnet\AuthnetWebhooksRequest
      */
-    public function testCurlWrapperDevelopmentResponseWebhooks()
+    public function testCurlWrapperDevelopmentResponseWebhooks() : void
     {
         $server  = AuthnetApiFactory::USE_DEVELOPMENT_SERVER;
         $authnet = AuthnetApiFactory::getWebhooksHandler($this->login, $this->transactionKey, $server);
@@ -266,7 +285,7 @@ class AuthnetApiFactoryTest extends TestCase
     /**
      * @covers            \JohnConde\Authnet\AuthnetApiFactory::getWebhooksURL
      */
-    public function testGetWebhooksUrlProductionServer()
+    public function testGetWebhooksUrlProductionServer() : void
     {
         $server           = AuthnetApiFactory::USE_PRODUCTION_SERVER;
         $reflectionMethod = new \ReflectionMethod('\JohnConde\Authnet\AuthnetApiFactory', 'getWebhooksURL');
@@ -279,7 +298,7 @@ class AuthnetApiFactoryTest extends TestCase
     /**
      * @covers            \JohnConde\Authnet\AuthnetApiFactory::getWebhooksURL
      */
-    public function testGetWebhooksUrlDevelopmentServer()
+    public function testGetWebhooksUrlDevelopmentServer() : void
     {
         $server           = AuthnetApiFactory::USE_DEVELOPMENT_SERVER;
         $reflectionMethod = new \ReflectionMethod('\JohnConde\Authnet\AuthnetApiFactory', 'getWebhooksURL');
@@ -291,10 +310,12 @@ class AuthnetApiFactoryTest extends TestCase
 
     /**
      * @covers            \JohnConde\Authnet\AuthnetApiFactory::getWebhooksURL
-     * @expectedException \JohnConde\Authnet\AuthnetInvalidServerException
+     * @covers            \JohnConde\Authnet\AuthnetInvalidServerException::__construct()
      */
-    public function testGetWebhooksUrlBadServer()
+    public function testGetWebhooksUrlBadServer() : void
     {
+        $this->expectException('\JohnConde\Authnet\AuthnetInvalidServerException');
+
         $server           = 99;
         $reflectionMethod = new \ReflectionMethod('\JohnConde\Authnet\AuthnetApiFactory', 'getWebhooksURL');
         $reflectionMethod->setAccessible(true);

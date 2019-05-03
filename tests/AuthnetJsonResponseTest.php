@@ -17,20 +17,24 @@ class AuthnetJsonResponseTest extends TestCase
 {
     /**
      * @covers            \JohnConde\Authnet\AuthnetJsonRequest::__set()
-     * @expectedException \JohnConde\Authnet\AuthnetCannotSetParamsException
+     * @covers            \JohnConde\Authnet\AuthnetCannotSetParamsException::__construct()
      */
-    public function testExceptionIsRaisedForCannotSetParamsException()
+    public function testExceptionIsRaisedForCannotSetParamsException() : void
     {
+        $this->expectException('\JohnConde\Authnet\AuthnetCannotSetParamsException');
+
         $request = new AuthnetJsonRequest('', '', AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
         $request->login = 'test';
     }
 
     /**
      * @covers            \JohnConde\Authnet\AuthnetJsonResponse::__construct()
-     * @expectedException \JohnConde\Authnet\AuthnetInvalidJsonException
+     * @covers            \JohnConde\Authnet\AuthnetInvalidJsonException::__construct()
      */
-    public function testExceptionIsRaisedForInvalidJsonException()
+    public function testExceptionIsRaisedForInvalidJsonException() : void
     {
+        $this->expectException('\JohnConde\Authnet\AuthnetInvalidJsonException');
+
         $responseJson = 'I am invalid';
         new AuthnetJsonResponse($responseJson);
     }
@@ -39,7 +43,7 @@ class AuthnetJsonResponseTest extends TestCase
      * @covers            \JohnConde\Authnet\AuthnetJsonResponse::isSuccessful()
      * @covers            \JohnConde\Authnet\AuthnetJsonResponse::isError()
      */
-    public function testSuccessfulApiCall()
+    public function testSuccessfulApiCall() : void
     {
         $responseJson = '{
            "messages":{
@@ -66,7 +70,7 @@ class AuthnetJsonResponseTest extends TestCase
      * @covers            \JohnConde\Authnet\AuthnetJsonResponse::isSuccessful()
      * @covers            \JohnConde\Authnet\AuthnetJsonResponse::isError()
      */
-    public function testFailedApiCall()
+    public function testFailedApiCall() : void
     {
         $responseJson = '{
            "messages":{
@@ -93,7 +97,7 @@ class AuthnetJsonResponseTest extends TestCase
      * @covers            \JohnConde\Authnet\AuthnetJsonResponse::getTransactionResponseField()
      * @covers            \JohnConde\Authnet\TransactionResponse::getTransactionResponseField()
      */
-    public function testTransactionResponse()
+    public function testTransactionResponse() : void
     {
         $responseJson = '{
            "directResponse":"1,1,1,This transaction has been approved.,902R0T,Y,2230582306,INV000001,description of transaction,10.95,CC,auth_capture,12345,John,Smith,,123 Main Street,Townsville,NJ,12345,,800-555-1234,,user@example.com,John,Smith,,123 Main Street,Townsville,NJ,12345,,1.00,,2.00,FALSE,PONUM000001,D3B20D6194B0E86C03A18987300E781C,P,2,,,,,,,,,,,XXXX1111,Visa,,,,,,,,,,,,,,,,,29366174",
@@ -117,7 +121,7 @@ class AuthnetJsonResponseTest extends TestCase
     /**
      * @covers            \JohnConde\Authnet\AuthnetJsonResponse::isApproved()
      */
-    public function testIsApproved()
+    public function testIsApproved() : void
     {
         $responseJson = '{
            "customerPaymentProfileId":"28821903",
@@ -143,7 +147,7 @@ class AuthnetJsonResponseTest extends TestCase
     /**
      * @covers            \JohnConde\Authnet\AuthnetJsonResponse::isDeclined()
      */
-    public function testIsDeclined()
+    public function testIsDeclined() : void
     {
         $responseJson = '{
            "customerPaymentProfileId":"28821903",
@@ -169,7 +173,7 @@ class AuthnetJsonResponseTest extends TestCase
     /**
      * @covers            \JohnConde\Authnet\AuthnetJsonResponse::__toString()
      */
-    public function testToString()
+    public function testToString() : void
     {
         $responseJson = '{
            "customerPaymentProfileId":"28821903",
@@ -191,16 +195,16 @@ class AuthnetJsonResponseTest extends TestCase
         echo $response;
         $string = ob_get_clean();
 
-        $this->assertContains('validationDirectResponse":"2,2,205,This transaction has been declined,902R0T,Y,2230582306,INV000001,description of transaction,10.95,CC,auth_capture,12345,John,Smith,Company Name,123 Main Street,Townsville,NJ,12345,United States,800-555-1234,800-555-1235,user@example.com,John,Smith,Other Company Name,123 Main Street,Townsville,NJ,12345,United States,1.00,2.00,3.00,FALSE,PONUM000001,D3B20D6194B0E86C03A18987300E781C,P,2,,,,,,,,,,,XXXX1111,Visa,,,,,,,,,,,,,,,,,29366174', $string);
-        $this->assertContains('28821903', $string);
-        $this->assertContains('I00001', $string);
-        $this->assertContains('Successful', $string);
+        $this->assertStringContainsString('validationDirectResponse":"2,2,205,This transaction has been declined,902R0T,Y,2230582306,INV000001,description of transaction,10.95,CC,auth_capture,12345,John,Smith,Company Name,123 Main Street,Townsville,NJ,12345,United States,800-555-1234,800-555-1235,user@example.com,John,Smith,Other Company Name,123 Main Street,Townsville,NJ,12345,United States,1.00,2.00,3.00,FALSE,PONUM000001,D3B20D6194B0E86C03A18987300E781C,P,2,,,,,,,,,,,XXXX1111,Visa,,,,,,,,,,,,,,,,,29366174', $string);
+        $this->assertStringContainsString('28821903', $string);
+        $this->assertStringContainsString('I00001', $string);
+        $this->assertStringContainsString('Successful', $string);
     }
 
     /**
      * @covers            \JohnConde\Authnet\AuthnetJsonResponse::getRawResponse()
      */
-    public function testGetRawResponse()
+    public function testGetRawResponse() : void
     {
         $responseJson = '{
            "customerPaymentProfileId":"28821903",
@@ -225,7 +229,7 @@ class AuthnetJsonResponseTest extends TestCase
     /**
      * @covers            \JohnConde\Authnet\AuthnetJsonResponse::__get()
      */
-    public function testGet()
+    public function testGet() : void
     {
         $responseJson = '{
            "customerPaymentProfileId":"28821903",
@@ -246,12 +250,13 @@ class AuthnetJsonResponseTest extends TestCase
         $this->assertEquals(28821903, $response->customerPaymentProfileId);
     }
 
-
     /**
-     * @expectedException \JohnConde\Authnet\AuthnetTransactionResponseCallException
+     * @covers            \JohnConde\Authnet\AuthnetTransactionResponseCallException::__construct()
      */
-    public function testExceptionIsRaisedForTransactionResponseCall()
+    public function testExceptionIsRaisedForTransactionResponseCall() : void
     {
+        $this->expectException('\JohnConde\Authnet\AuthnetTransactionResponseCallException');
+
         $responseJson = '{
            "refId":"2241729",
            "messages":{
@@ -272,7 +277,7 @@ class AuthnetJsonResponseTest extends TestCase
     /**
      * @covers            \JohnConde\Authnet\AuthnetJsonResponse::checkTransactionStatus()
      */
-    public function testCheckTransactionStatusCim()
+    public function testCheckTransactionStatusCim() : void
     {
         $responseJson = '{
            "customerPaymentProfileId":"28821903",
@@ -299,7 +304,7 @@ class AuthnetJsonResponseTest extends TestCase
     /**
      * @covers            \JohnConde\Authnet\AuthnetJsonResponse::checkTransactionStatus()
      */
-    public function testCheckTransactionStatusAim()
+    public function testCheckTransactionStatusAim() : void
     {
         $responseJson = '{
            "transactionResponse":{
@@ -351,7 +356,7 @@ class AuthnetJsonResponseTest extends TestCase
      * @covers            \JohnConde\Authnet\AuthnetJsonResponse::getErrorText()
      * @covers            \JohnConde\Authnet\AuthnetJsonResponse::getErrorCode()
      */
-    public function testGetErrorMethods()
+    public function testGetErrorMethods() : void
     {
         $responseJson = '{
            "messages":{
@@ -377,7 +382,7 @@ class AuthnetJsonResponseTest extends TestCase
      * @covers            \JohnConde\Authnet\AuthnetJsonResponse::getErrorCode()
      * @covers            \JohnConde\Authnet\AuthnetJsonResponse::getError()
      */
-    public function testGetErrorTextAim()
+    public function testGetErrorTextAim() : void
     {
         $responseJson = '{
            "transactionResponse":{
@@ -428,7 +433,7 @@ class AuthnetJsonResponseTest extends TestCase
      * @covers \JohnConde\Authnet\AuthnetJsonResponse::getErrorMessage()
      * @covers \JohnConde\Authnet\AuthnetJsonResponse::getError()
      */
-    public function testGetErrorMessage()
+    public function testGetErrorMessage() : void
     {
         $responseJson = '{
            "messages":{

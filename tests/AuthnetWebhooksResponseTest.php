@@ -17,17 +17,18 @@ class AuthnetWebhooksResponseTest extends TestCase
 {
     /**
      * @covers            \JohnConde\Authnet\AuthnetWebhooksResponse::__construct()
-     * @expectedException \JohnConde\Authnet\AuthnetInvalidJsonException
+     * @covers            \JohnConde\Authnet\AuthnetInvalidJsonException::__construct()
      */
-    public function testExceptionIsRaisedForInvalidJsonException()
+    public function testExceptionIsRaisedForInvalidJsonException() : void
     {
+        $this->expectException('\JohnConde\Authnet\AuthnetInvalidJsonException');
         new AuthnetWebhooksResponse('');
     }
 
     /**
      * @covers            \JohnConde\Authnet\AuthnetWebhooksResponse::__construct()
      */
-    public function testConstruct()
+    public function testConstruct() : void
     {
         $responseJson = '{
             "url": "http://example.com",
@@ -48,7 +49,7 @@ class AuthnetWebhooksResponseTest extends TestCase
     /**
      * @covers            \JohnConde\Authnet\AuthnetWebhooksResponse::__toString()
      */
-    public function testToString()
+    public function testToString() : void
     {
         $responseJson = '{
             "url": "http://example.com",
@@ -64,15 +65,15 @@ class AuthnetWebhooksResponseTest extends TestCase
         echo $response;
         $string = ob_get_clean();
 
-        $this->assertContains('example.com', $string);
-        $this->assertContains('net.authorize.payment.authorization.created', $string);
-        $this->assertContains('active', $string);
+        $this->assertStringContainsString('example.com', $string);
+        $this->assertStringContainsString('net.authorize.payment.authorization.created', $string);
+        $this->assertStringContainsString('active', $string);
     }
 
     /**
      * @covers            \JohnConde\Authnet\AuthnetWebhooksResponse::getEventTypes()
      */
-    public function testGetEventTypes()
+    public function testGetEventTypes() : void
     {
         $responseJson = '[{
             "name": "net.authorize.payment.authcapture.created"
@@ -93,7 +94,7 @@ class AuthnetWebhooksResponseTest extends TestCase
     /**
      * @covers            \JohnConde\Authnet\AuthnetWebhooksResponse::getEventTypes()
      */
-    public function testGetEventTypesFromWebhooks()
+    public function testGetEventTypesFromWebhooks() : void
     {
         $responseJson = '{
             "_links": {
@@ -124,7 +125,7 @@ class AuthnetWebhooksResponseTest extends TestCase
     /**
      * @covers            \JohnConde\Authnet\AuthnetWebhooksResponse::getWebhooksId()
      */
-    public function testGetWebhooksId()
+    public function testGetWebhooksId() : void
     {
         $responseJson = '{
             "_links": {
@@ -151,7 +152,7 @@ class AuthnetWebhooksResponseTest extends TestCase
     /**
      * @covers            \JohnConde\Authnet\AuthnetWebhooksResponse::getStatus()
      */
-    public function testGetStatus()
+    public function testGetStatus() : void
     {
         $responseJson = '{
             "_links": {
@@ -178,7 +179,7 @@ class AuthnetWebhooksResponseTest extends TestCase
     /**
      * @covers            \JohnConde\Authnet\AuthnetWebhooksResponse::getUrl()
      */
-    public function testGetUrl()
+    public function testGetUrl() : void
     {
         $responseJson = '{
             "_links": {
@@ -205,7 +206,7 @@ class AuthnetWebhooksResponseTest extends TestCase
     /**
      * @covers            \JohnConde\Authnet\AuthnetWebhooksResponse::getWebhooks()
      */
-    public function testGetWebhooks()
+    public function testGetWebhooks() : void
     {
         $responseJson = '[{
             "_links": {
@@ -271,7 +272,7 @@ class AuthnetWebhooksResponseTest extends TestCase
      * @covers            \JohnConde\Authnet\AuthnetWebhooksResponse::getEventType()
      * @covers            \JohnConde\Authnet\AuthnetWebhooksResponse::getEventDate()
      */
-    public function testGetNotificationHistory()
+    public function testGetNotificationHistory() : void
     {
         $responseJson = '{
             "_links": {

@@ -22,7 +22,7 @@ class AuthnetJsonCimTest extends TestCase
     private $server;
     private $http;
 
-    protected function setUp()
+    protected function setUp() : void
     {
         $this->login          = 'test';
         $this->transactionKey = 'test';
@@ -41,7 +41,7 @@ class AuthnetJsonCimTest extends TestCase
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
      */
-    public function testCreateCustomerProfileRequestSuccess()
+    public function testCreateCustomerProfileRequestSuccess() : void
     {
         $requestJson = array(
             'profile' => array(
@@ -121,7 +121,7 @@ class AuthnetJsonCimTest extends TestCase
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
      */
-    public function testCreateCustomerProfileRequestDuplicateRecordError()
+    public function testCreateCustomerProfileRequestDuplicateRecordError() : void
     {
         $requestJson = array(
             'profile' => array(
@@ -197,7 +197,7 @@ class AuthnetJsonCimTest extends TestCase
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
      */
-    public function testCreateCustomerPaymentProfileRequest()
+    public function testCreateCustomerPaymentProfileRequest() : void
     {
         $requestJson = array(
             'customerProfileId' => '30582495',
@@ -258,7 +258,7 @@ class AuthnetJsonCimTest extends TestCase
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
      */
-    public function testCreateCustomerProfileTransactionAuthCaptureRequest()
+    public function testCreateCustomerProfileTransactionAuthCaptureRequest() : void
     {
         $requestJson = array(
             'transaction' => array(
@@ -339,7 +339,7 @@ class AuthnetJsonCimTest extends TestCase
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
      */
-    public function testCreateCustomerProfileTransactionRequestAuthCaptureError()
+    public function testCreateCustomerProfileTransactionRequestAuthCaptureError() : void
     {
         $requestJson = array (
             'createCustomerProfileTransactionRequest' => array (
@@ -424,7 +424,7 @@ class AuthnetJsonCimTest extends TestCase
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
      */
-    public function testCreateCustomerProfileTransactionRequestAuthOnly()
+    public function testCreateCustomerProfileTransactionRequestAuthOnly() : void
     {
         $requestJson = array(
             'transaction' => array(
@@ -505,7 +505,7 @@ class AuthnetJsonCimTest extends TestCase
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
      */
-    public function testCreateCustomerProfileTransactionRequestCaptureOnly()
+    public function testCreateCustomerProfileTransactionRequestCaptureOnly() : void
     {
         $requestJson = array(
             'transaction' => array(
@@ -587,7 +587,7 @@ class AuthnetJsonCimTest extends TestCase
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
      */
-    public function testCreateCustomerProfileTransactionRequestPriorAuthCapture()
+    public function testCreateCustomerProfileTransactionRequestPriorAuthCapture() : void
     {
         $requestJson = array(
             'transaction' => array(
@@ -661,7 +661,7 @@ class AuthnetJsonCimTest extends TestCase
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
      */
-    public function testCreateCustomerProfileTransactionRequestPriorAuthCaptureError()
+    public function testCreateCustomerProfileTransactionRequestPriorAuthCaptureError() : void
     {
         $requestJson = array (
             'createCustomerProfileTransactionRequest' => array (
@@ -740,7 +740,7 @@ class AuthnetJsonCimTest extends TestCase
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
      */
-    public function testCreateCustomerProfileTransactionRequestRefund()
+    public function testCreateCustomerProfileTransactionRequestRefund() : void
     {
         $requestJson = array(
             'transaction' => array(
@@ -820,7 +820,7 @@ class AuthnetJsonCimTest extends TestCase
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
      */
-    public function testCreateCustomerProfileTransactionRequestRefundError()
+    public function testCreateCustomerProfileTransactionRequestRefundError() : void
     {
         $requestJson = array (
             'createCustomerProfileTransactionRequest' => array (
@@ -905,7 +905,7 @@ class AuthnetJsonCimTest extends TestCase
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
      */
-    public function testCreateCustomerProfileTransactionRequestVoid()
+    public function testCreateCustomerProfileTransactionRequestVoid() : void
     {
         $requestJson = array(
             'transaction' => array(
@@ -952,7 +952,7 @@ class AuthnetJsonCimTest extends TestCase
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
      */
-    public function testCreateCustomerShippingAddressRequest()
+    public function testCreateCustomerShippingAddressRequest() : void
     {
         $requestJson = array(
             'customerProfileId' => '31390172',
@@ -1003,7 +1003,7 @@ class AuthnetJsonCimTest extends TestCase
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
      */
-    public function testUpdateCustomerProfileRequest()
+    public function testUpdateCustomerProfileRequest() : void
     {
         $requestJson = array(
             'profile' => array(
@@ -1045,7 +1045,7 @@ class AuthnetJsonCimTest extends TestCase
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
      */
-    public function testUpdateCustomerProfileRequestError()
+    public function testUpdateCustomerProfileRequestError() : void
     {
         $requestJson = array (
             'updateCustomerPaymentProfileRequest' => array (
@@ -1109,7 +1109,7 @@ class AuthnetJsonCimTest extends TestCase
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
      */
-    public function testUpdateCustomerPaymentProfileRequest()
+    public function testUpdateCustomerPaymentProfileRequest() : void
     {
         $requestJson = array(
             'customerProfileId' => '31390172',
@@ -1167,7 +1167,7 @@ class AuthnetJsonCimTest extends TestCase
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
      */
-    public function testUpdateCustomerShippingAddressRequest()
+    public function testUpdateCustomerShippingAddressRequest() : void
     {
         $requestJson = array(
             'customerProfileId' => '31390172',
@@ -1217,7 +1217,7 @@ class AuthnetJsonCimTest extends TestCase
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
      */
-    public function testUpdateCustomerShippingAddressRequestError()
+    public function testUpdateCustomerShippingAddressRequestError() : void
     {
         $requestJson = array (
             'updateCustomerShippingAddressRequest' => array (
@@ -1273,7 +1273,7 @@ class AuthnetJsonCimTest extends TestCase
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
      */
-    public function testUpdateSplitTenderGroupRequest()
+    public function testUpdateSplitTenderGroupRequest() : void
     {
         $requestJson = array (
             'splitTenderId' => '123456',
@@ -1311,7 +1311,7 @@ class AuthnetJsonCimTest extends TestCase
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
      */
-    public function testUpdateSplitTenderGroupRequestError()
+    public function testUpdateSplitTenderGroupRequestError() : void
     {
         $requestJson = array (
             'updateSplitTenderGroupRequest' => array (
@@ -1355,7 +1355,7 @@ class AuthnetJsonCimTest extends TestCase
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
      */
-    public function testDeleteCustomerProfileRequest()
+    public function testDeleteCustomerProfileRequest() : void
     {
         $requestJson = array(
             'customerProfileId' => '31390172'
@@ -1392,7 +1392,7 @@ class AuthnetJsonCimTest extends TestCase
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
      */
-    public function testDeleteCustomerProfileRequestError()
+    public function testDeleteCustomerProfileRequestError() : void
     {
         $requestJson = array (
             'deleteCustomerProfileRequest' => array (
@@ -1435,7 +1435,7 @@ class AuthnetJsonCimTest extends TestCase
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
      */
-    public function testDeleteCustomerPaymentProfileRequest()
+    public function testDeleteCustomerPaymentProfileRequest() : void
     {
         $requestJson = array(
             'customerProfileId' => '31390172',
@@ -1473,7 +1473,7 @@ class AuthnetJsonCimTest extends TestCase
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
      */
-    public function testDeleteCustomerShippingAddressRequest()
+    public function testDeleteCustomerShippingAddressRequest() : void
     {
         $requestJson = array(
             'customerProfileId' => '31390172',
@@ -1511,7 +1511,7 @@ class AuthnetJsonCimTest extends TestCase
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
      */
-    public function testValidateCustomerPaymentProfileRequest()
+    public function testValidateCustomerPaymentProfileRequest() : void
     {
         $requestJson = array(
             'customerProfileId' => '31390172',
@@ -1553,7 +1553,7 @@ class AuthnetJsonCimTest extends TestCase
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
      */
-    public function testGetCustomerPaymentProfileRequest()
+    public function testGetCustomerPaymentProfileRequest() : void
     {
         $requestJson = array(
             'customerProfileId' => '31390172',
@@ -1621,7 +1621,7 @@ class AuthnetJsonCimTest extends TestCase
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
      */
-    public function testGetCustomerProfileIdsRequest()
+    public function testGetCustomerProfileIdsRequest() : void
     {
         $responseJson = '{
            "ids":[
@@ -1745,7 +1745,7 @@ class AuthnetJsonCimTest extends TestCase
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
      */
-    public function testGetCustomerProfileRequest()
+    public function testGetCustomerProfileRequest() : void
     {
         $requestJson = array(
             'customerProfileId' => '31390172'
@@ -1866,7 +1866,7 @@ class AuthnetJsonCimTest extends TestCase
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
      */
-    public function testGetCustomerShippingAddressRequest()
+    public function testGetCustomerShippingAddressRequest() : void
     {
         $requestJson = array(
             'customerProfileId' => '31390172',
@@ -1922,7 +1922,7 @@ class AuthnetJsonCimTest extends TestCase
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
      */
-    public function testGetHostedProfilePageRequest()
+    public function testGetHostedProfilePageRequest() : void
     {
         $requestJson = array(
             'customerProfileId' => '31390172',
