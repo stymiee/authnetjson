@@ -1,11 +1,14 @@
 CHANGE LOG
 
-2019-XX-XX - Version 4.0.0
+2019-XX-XX - Version 4.0.0-beta
 --------------------------------------------
 Bumped minimum supported version of PHP to 7.2
 If trying to retrieve non-existent response value, NULL is returned in AuthnetJsonResponse::__get()
 Added AuthnetJson::BOUNDLESS_OCCURRENCES to indicate an endless subscription
 Added constructor to Authnet exceptions
+Removed unused AuthnetInvalidParameterException class
+Updated unit tests for phpunit 8
+Added phpunit to require-dev
 Shiny badges for the README
 Cleaned up HTML and CSS in examples
 Minor formatting changes

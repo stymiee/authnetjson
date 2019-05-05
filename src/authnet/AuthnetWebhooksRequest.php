@@ -12,7 +12,7 @@ declare(strict_types=1);
 
 namespace JohnConde\Authnet;
 
-use \Curl\Curl;
+use Curl\Curl;
 
 /**
  * Creates a request to the Authorize.Net Webhooks endpoints
