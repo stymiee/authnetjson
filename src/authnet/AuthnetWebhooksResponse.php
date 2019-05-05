@@ -38,12 +38,12 @@ class AuthnetWebhooksResponse
      * Creates the response object with the response json returned from the API call
      *
      * @param   string      $responseJson   Response from Authorize.Net
-     * @throws  \JohnConde\Authnet\AuthnetInvalidJsonException
+     * @throws  AuthnetInvalidJsonException
      */
     public function __construct(string $responseJson)
     {
         $this->responseJson = $responseJson;
-        if (($this->response = json_decode($this->responseJson)) === null) {
+        if (($this->response = json_decode($this->responseJson, false)) === null) {
             throw new AuthnetInvalidJsonException('Invalid JSON returned by the API');
         }
     }
@@ -55,7 +55,8 @@ class AuthnetWebhooksResponse
      */
     public function __toString()
     {
-        $output  = '<table summary="Authorize.Net Webhooks Response" id="authnet-response">'."\n";
+        $output  = '<table id="authnet-response">'."\n";
+        $output .= '<caption>Authorize.Net Webhook Response</caption>'."\n";
         $output .= '<tr>'."\n\t\t".'<th colspan="2"><b>Webhook Response JSON</b></th>'."\n".'</tr>'."\n";
         $output .= '<tr><td colspan="2"><pre>'."\n";
         $output .= $this->responseJson."\n";
@@ -139,7 +140,7 @@ class AuthnetWebhooksResponse
      * Gets a list of webhooks
      *
      * @return  array
-     * @throws  \JohnConde\Authnet\AuthnetInvalidJsonException
+     * @throws  AuthnetInvalidJsonException
      */
     public function getWebhooks() : array
     {
@@ -154,7 +155,7 @@ class AuthnetWebhooksResponse
      * Gets a list of webhooks
      *
      * @return  array
-     * @throws  \JohnConde\Authnet\AuthnetInvalidJsonException
+     * @throws  AuthnetInvalidJsonException
      */
     public function getNotificationHistory() : array
     {

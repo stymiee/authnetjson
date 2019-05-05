@@ -13,6 +13,7 @@ declare(strict_types=1);
 namespace JohnConde\Authnet;
 
 use \Curl\Curl;
+use \ErrorException;
 
 /**
  * Factory to instantiate an instance of an AuthnetJson object with the proper endpoint
@@ -48,10 +49,10 @@ class AuthnetApiFactory
      * @param   string      $login                          Authorize.Net API Login ID
      * @param   string      $transaction_key                Authorize.Net API Transaction Key
      * @param   integer     $server                         ID of which server to use (optional)
-     * @return  \JohnConde\Authnet\AuthnetJsonRequest
-     * @throws  \ErrorException
-     * @throws  \JohnConde\Authnet\AuthnetInvalidCredentialsException
-     * @throws  \JohnConde\Authnet\AuthnetInvalidServerException
+     * @return  AuthnetJsonRequest
+     * @throws  ErrorException
+     * @throws  AuthnetInvalidCredentialsException
+     * @throws  AuthnetInvalidServerException
      */
     public static function getJsonApiHandler(string $login, string $transaction_key, ?int $server) : object
     {
@@ -81,7 +82,7 @@ class AuthnetApiFactory
      *
      * @param   integer     $server     ID of which server to use
      * @return  string                  The URL endpoint the request is to be sent to
-     * @throws  \JohnConde\Authnet\AuthnetInvalidServerException
+     * @throws  AuthnetInvalidServerException
      */
     protected static function getWebServiceURL(int $server) : string
     {
@@ -102,9 +103,9 @@ class AuthnetApiFactory
      * @param   string      $login                          Authorize.Net API Login ID
      * @param   string      $transaction_key                Authorize.Net API Transaction Key
      * @param   integer     $server                         ID of which server to use (optional)
-     * @return  \JohnConde\Authnet\AuthnetSim
-     * @throws  \JohnConde\Authnet\AuthnetInvalidCredentialsException
-     * @throws  \JohnConde\Authnet\AuthnetInvalidServerException
+     * @return  AuthnetSim
+     * @throws  AuthnetInvalidCredentialsException
+     * @throws  AuthnetInvalidServerException
      */
     public static function getSimHandler(string $login, string $transaction_key, $server = self::USE_PRODUCTION_SERVER) : object
     {
@@ -124,7 +125,7 @@ class AuthnetApiFactory
      *
      * @param   integer     $server     ID of which server to use
      * @return  string                  The URL endpoint the request is to be sent to
-     * @throws  \JohnConde\Authnet\AuthnetInvalidServerException
+     * @throws  AuthnetInvalidServerException
      */
     protected static function getSimURL(int $server) : string
     {
@@ -144,10 +145,10 @@ class AuthnetApiFactory
      * @param   string      $login                          Authorize.Net API Login ID
      * @param   string      $transaction_key                Authorize.Net API Transaction Key
      * @param   integer     $server                         ID of which server to use (optional)
-     * @throws  \ErrorException
-     * @return  \JohnConde\Authnet\AuthnetWebhooksRequest
-     * @throws  \JohnConde\Authnet\AuthnetInvalidCredentialsException
-     * @throws  \JohnConde\Authnet\AuthnetInvalidServerException
+     * @throws  ErrorException
+     * @return  AuthnetWebhooksRequest
+     * @throws  AuthnetInvalidCredentialsException
+     * @throws  AuthnetInvalidServerException
      */
     public static function getWebhooksHandler(string $login, string $transaction_key, $server = self::USE_PRODUCTION_SERVER) : object
     {
@@ -179,7 +180,7 @@ class AuthnetApiFactory
      *
      * @param   integer     $server     ID of which server to use
      * @return  string                  The URL endpoint the request is to be sent to
-     * @throws  \JohnConde\Authnet\AuthnetInvalidServerException
+     * @throws  AuthnetInvalidServerException
      */
     protected static function getWebhooksURL(int $server) : string
     {

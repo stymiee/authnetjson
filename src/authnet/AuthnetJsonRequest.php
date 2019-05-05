@@ -105,7 +105,8 @@ class AuthnetJsonRequest
      */
     public function __toString()
     {
-        $output  = '<table summary="Authorize.Net Request" id="authnet-request">'."\n";
+        $output  = '<table id="authnet-request">'."\n";
+        $output .= '<caption>Authorize.Net Request</caption>'."\n";
         $output .= '<tr>'."\n\t\t".'<th colspan="2"><b>Class Parameters</b></th>'."\n".'</tr>'."\n";
         $output .= '<tr>'."\n\t\t".'<td><b>API Login ID</b></td><td>'.$this->login.'</td>'."\n".'</tr>'."\n";
         $output .= '<tr>'."\n\t\t".'<td><b>Transaction Key</b></td><td>'.$this->transactionKey.'</td>'."\n".'</tr>'."\n";
@@ -126,7 +127,7 @@ class AuthnetJsonRequest
      *
      * @param   string  $name       unused
      * @param   mixed   $value      unused
-     * @throws  \JohnConde\Authnet\AuthnetCannotSetParamsException
+     * @throws  AuthnetCannotSetParamsException
      */
     public function __set($name, $value)
     {
@@ -139,9 +140,9 @@ class AuthnetJsonRequest
      *
      * @param   string  $api_call   name of the API call to be made
      * @param   array   $args       the array to be passed to the API
-     * @return  \JohnConde\Authnet\AuthnetJsonResponse
-     * @throws  \JohnConde\Authnet\AuthnetCurlException
-     * @throws  \JohnConde\Authnet\AuthnetInvalidJsonException
+     * @return  AuthnetJsonResponse
+     * @throws  AuthnetCurlException
+     * @throws  AuthnetInvalidJsonException
      */
     public function __call($api_call, Array $args)
     {
@@ -168,7 +169,7 @@ class AuthnetJsonRequest
      * Tells the handler to make the API call to Authorize.Net
      *
      * @return  string  JSON string containing API response
-     * @throws  \JohnConde\Authnet\AuthnetCurlException
+     * @throws  AuthnetCurlException
      */
     private function process() : string
     {
@@ -191,7 +192,7 @@ class AuthnetJsonRequest
      *
      * @param   object  $processor
      */
-    public function setProcessHandler($processor)
+    public function setProcessHandler($processor) : void
     {
         $this->processor = $processor;
     }

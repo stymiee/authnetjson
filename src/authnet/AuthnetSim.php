@@ -12,6 +12,8 @@ declare(strict_types=1);
 
 namespace JohnConde\Authnet;
 
+use Exception;
+
 /**
  * Wrapper to simplify the creation of SIM data
  *
@@ -56,6 +58,7 @@ class AuthnetSim
      * @param   string  $login         Authorize.Net API login ID
      * @param   string  $signature     Authorize.Net API Transaction Key
      * @param   string  $api_url       URL endpoint for processing a transaction
+     * @throws  Exception
      */
     public function __construct($login, $signature, $api_url)
     {
@@ -70,7 +73,7 @@ class AuthnetSim
      *
      * @param   float  $amount   The amount of the transaction
      * @return  string           Hash of five different unique transaction parameters
-     * @throws  \JohnConde\Authnet\AuthnetInvalidAmountException
+     * @throws  AuthnetInvalidAmountException
      */
     public function getFingerprint(float $amount) : string
     {
@@ -135,10 +138,11 @@ class AuthnetSim
 
     /**
      * Resets the sequence and timestamp
+     * @throws Exception
      */
-    public function resetParameters()
+    public function resetParameters() : void
     {
-        $this->sequence  = rand(1, 1000);
+        $this->sequence  = random_int(1, 1000);
         $this->timestamp = time();
     }
 }
