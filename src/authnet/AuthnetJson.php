@@ -27,5 +27,5 @@ class AuthnetJson
     /**
      * @var int Subscription of endless length.
      */
-    const BOUNDLESS_OCCURRENCES = 9999;
+    public const BOUNDLESS_OCCURRENCES = 9999;
 }

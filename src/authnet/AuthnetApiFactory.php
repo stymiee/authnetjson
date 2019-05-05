@@ -30,17 +30,17 @@ class AuthnetApiFactory
     /**
      * @const Indicates use of Authorize.Net's production server
      */
-    const USE_PRODUCTION_SERVER = 0;
+    public const USE_PRODUCTION_SERVER = 0;
 
     /**
      * @const Indicates use of the development server
      */
-    const USE_DEVELOPMENT_SERVER = 1;
+    public const USE_DEVELOPMENT_SERVER = 1;
 
     /**
      * @const Indicates use of the Akamai endpoint
      */
-    const USE_AKAMAI_SERVER = 2;
+    public const USE_AKAMAI_SERVER = 2;
 
     /**
     Validates the Authorize.Net credentials and returns a Request object to be used to make an API call

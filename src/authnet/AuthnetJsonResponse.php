@@ -66,27 +66,27 @@ class AuthnetJsonResponse
     /**
      * @const Indicates the status code of an approved transaction
      */
-    const STATUS_APPROVED = 1;
+    public const STATUS_APPROVED = 1;
 
     /**
      * @const Indicates the status code of an declined transaction
      */
-    const STATUS_DECLINED = 2;
+    public const STATUS_DECLINED = 2;
 
     /**
      * @const Indicates the status code of an transaction which has encountered an error
      */
-    const STATUS_ERROR = 3;
+    public const STATUS_ERROR = 3;
 
     /**
      * @const Indicates the status code of a transaction held for review
      */
-    const STATUS_HELD = 4;
+    public const STATUS_HELD = 4;
 
     /**
      * @const Indicates the status code of a transaction held for review
      */
-    const STATUS_PAYPAL_NEED_CONSENT = 5;
+    public const STATUS_PAYPAL_NEED_CONSENT = 5;
 
     /**
      * @var     object  SimpleXML object representing the API response
