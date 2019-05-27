@@ -27,7 +27,7 @@
     ],
     "require": {
         "php": ">=7.2.0",
-        "curl/curl": "^1.5",
+        "curl/curl": "^2.2",
         "ext-curl": "*",
         "ext-json": "*"
     },
