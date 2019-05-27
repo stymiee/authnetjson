@@ -24,7 +24,7 @@ Here is a minimal example of a `composer.json` file that just defines a dependen
 
     {
         "require": {
-            "stymiee/authnetjson": "4.0.*"
+            "stymiee/authnetjson": "~4.0"
         }
     }
 
