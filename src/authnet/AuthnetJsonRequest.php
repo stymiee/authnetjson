@@ -59,6 +59,11 @@ namespace JohnConde\Authnet;
 class AuthnetJsonRequest
 {
     /**
+     * @var     int     Maximum number of retires making HTTP request before failure
+     */
+    private const MAX_RETRIES = 3;
+
+    /**
      * @var     string  Authorize.Net API login ID
      */
     private $login;
@@ -123,7 +128,7 @@ class AuthnetJsonRequest
     }
 
     /**
-     * The __set() method should never be used as all values to ba made in the APi call must be passed as an array
+     * The __set() method should never be used as all values to be made in the APi call must be passed as an array
      *
      * @param   string  $name       unused
      * @param   mixed   $value      unused
@@ -173,14 +178,20 @@ class AuthnetJsonRequest
      */
     private function process() : string
     {
-        $this->processor->post($this->url, $this->requestJson);
-
+        $retries = 0;
+        while ($retries < self::MAX_RETRIES) {
+            $this->processor->post($this->url, $this->requestJson);
+            if (!$this->processor->error) {
+                break;
+            }
+            $retries++;
+        }
         if (!$this->processor->error && isset($this->processor->response)) {
             return $this->processor->response;
         }
         $error_message = null;
         $error_code    = null;
-        if ($this->processor->error_code) {
+        if ($this->processor->error_code || $this->processor->error_message) {
             $error_message = $this->processor->error_message;
             $error_code    = $this->processor->error_code;
         }
