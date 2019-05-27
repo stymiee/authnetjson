@@ -14,6 +14,7 @@ namespace JohnConde\Authnet;
 
 use Curl\Curl;
 use ErrorException;
+use Exception;
 
 /**
  * Factory to instantiate an instance of an AuthnetJson object with the proper endpoint
@@ -107,6 +108,7 @@ class AuthnetApiFactory
      * @return  AuthnetSim
      * @throws  AuthnetInvalidCredentialsException
      * @throws  AuthnetInvalidServerException
+     * @throws  Exception
      */
     public static function getSimHandler(string $login, string $transaction_key, $server = self::USE_PRODUCTION_SERVER) : object
     {
