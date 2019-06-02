@@ -230,17 +230,10 @@ class AuthnetWebhooksRequest
         if (!$this->processor->error) {
             return $this->processor->response;
         }
-        $error_message = null;
-        $error_code    = null;
-        if ($this->processor->error_code) {
-            $error_message = $this->processor->error_message;
-            $error_code    = $this->processor->error_code;
-            if (empty($error_message)) {
-                $response = json_decode($this->processor->response);
-                $error_message = sprintf('(%u) %s: %s', $response->status, $response->reason, $response->message);
-            }
-        }
-        throw new AuthnetCurlException(sprintf('Connection error: %s (%s)', $error_message, $error_code));
+        $response = json_decode($this->processor->response, false);
+        $error_message = sprintf('(%u) %s: %s', $response->status, $response->reason, $response->message);
+
+        throw new AuthnetCurlException(sprintf('Connection error: %s', $error_message));
     }
 
     /**

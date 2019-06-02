@@ -415,7 +415,12 @@ class AuthnetWebhooksRequestTest extends TestCase
         $this->http->error          = true;
         $this->http->error_message  = 'Error Message';
         $this->http->error_code     = 100;
-        $this->http->response       = '{"error"}';
+        $this->http->response       = '{
+  "status": 400,
+  "reason": "MISSING_DATA",
+  "message": "error",
+  "correlationId": "xxxxxxx"
+}';
 
         $request = AuthnetApiFactory::getWebhooksHandler($this->login, $this->transactionKey, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
         $request->setProcessHandler($this->http);
@@ -435,7 +440,12 @@ class AuthnetWebhooksRequestTest extends TestCase
         $this->http->error          = true;
         $this->http->error_message  = 'Error Message';
         $this->http->error_code     = 100;
-        $this->http->response       = '{"error"}';
+        $this->http->response       = '{
+  "status": 400,
+  "reason": "MISSING_DATA",
+  "message": "error",
+  "correlationId": "xxxxxxx"
+}';
 
         $request = AuthnetApiFactory::getWebhooksHandler($this->login, $this->transactionKey, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
         $request->setProcessHandler($this->http);
