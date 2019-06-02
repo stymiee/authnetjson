@@ -423,8 +423,8 @@ class AuthnetWebhooksRequestTest extends TestCase
         $this->http->response       = '{
   "status": 400,
   "reason": "MISSING_DATA",
-  "message": "The specified event type could not be found or is invalid: net.authorize.customer.create",
-  "correlationId": "dc4816ae-e753-491f-9ae1-ab56768748f5"
+  "message": "error",
+  "correlationId": "xxxxxxx"
 }';
 
         $request = AuthnetApiFactory::getWebhooksHandler($this->login, $this->transactionKey, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
@@ -450,8 +450,8 @@ class AuthnetWebhooksRequestTest extends TestCase
         $this->http->response       = '{
   "status": 400,
   "reason": "MISSING_DATA",
-  "message": "The specified event type could not be found or is invalid: net.authorize.customer.create",
-  "correlationId": "dc4816ae-e753-491f-9ae1-ab56768748f5"
+  "message": "error",
+  "correlationId": "xxxxxxx"
 }';
 
         $request = AuthnetApiFactory::getWebhooksHandler($this->login, $this->transactionKey, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
