@@ -116,8 +116,8 @@ class AuthnetJsonResponse
         }
 
         $this->transactionInfo = null;
-        if (@$this->directResponse || @$this->validationDirectResponse) {
-            $dr = (@$this->directResponse) ? $this->directResponse : $this->validationDirectResponse;
+        if ($this->directResponse || $this->validationDirectResponse) {
+            $dr = ($this->directResponse) ? $this->directResponse : $this->validationDirectResponse;
             $this->transactionInfo = new TransactionResponse($dr);
         }
     }
@@ -147,7 +147,9 @@ class AuthnetJsonResponse
      */
     public function __get($var)
     {
-        return $this->response->{$var};
+        if (isset($this->response->{$var})) {
+            return $this->response->{$var};
+        }
     }
 
     /**
@@ -241,7 +243,7 @@ class AuthnetJsonResponse
         $message = '';
         if ($this->isError()) {
             $message = $this->messages->message[0]->text;
-            if (@$this->transactionResponse->errors[0]->errorText) {
+            if (isset($this->transactionResponse->errors[0]->errorText)) {
                 $message = $this->transactionResponse->errors[0]->errorText;
             }
         }
@@ -268,7 +270,7 @@ class AuthnetJsonResponse
         $code = '';
         if ($this->isError()) {
             $code = $this->messages->message[0]->code;
-            if (@$this->transactionResponse->errors[0]->errorCode) {
+            if (isset($this->transactionResponse->errors[0]->errorCode)) {
                 $code = $this->transactionResponse->errors[0]->errorCode;
             }
         }
