@@ -116,8 +116,8 @@ class AuthnetJsonResponse
         }
 
         $this->transactionInfo = null;
-        if (@$this->directResponse || @$this->validationDirectResponse) {
-            $dr = (@$this->directResponse) ? $this->directResponse : $this->validationDirectResponse;
+        if ($this->directResponse || $this->validationDirectResponse) {
+            $dr = $this->directResponse ?: $this->validationDirectResponse;
             $this->transactionInfo = new TransactionResponse($dr);
         }
     }
@@ -147,7 +147,7 @@ class AuthnetJsonResponse
      */
     public function __get($var)
     {
-        return $this->response->{$var};
+        return isset($this->response->{$var}) ? $this->response->{$var} : null;
     }
 
     /**
