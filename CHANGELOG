@@ -9,6 +9,7 @@ Added support for prepaid cards
 Added constructor to Authnet exceptions
 Removed unused AuthnetInvalidParameterException class
 Updated unit tests for phpunit 8
+Removed unneeded require of config file in unit tests
 Added phpunit to require-dev
 Shiny badges for the README
 Cleaned up HTML and CSS in examples
