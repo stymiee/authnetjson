@@ -182,6 +182,16 @@ class AuthnetJsonResponse
     }
 
     /**
+     * Checks if a transaction was completed using a prepaid card
+     *
+     * @return bool     true if the transaction was completed using a prepaid card
+     */
+    public function isPrePaidCard() : bool
+    {
+        return isset($this->transactionResponse->prePaidCard);
+    }
+
+    /**
      * Checks if a transaction was declined
      *
      * @return bool     true if the transaction is declined

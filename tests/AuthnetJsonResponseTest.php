@@ -169,6 +169,55 @@ class AuthnetJsonResponseTest extends TestCase
         $this->assertTrue($response->isDeclined());
     }
 
+    /**
+     * @covers            \JohnConde\Authnet\AuthnetJsonResponse::isPrePaidCard()
+     */
+    public function testIsPrePaidCard() : void
+    {
+        $responseJson = '{
+           "transactionResponse":{
+              "responseCode":"1",
+              "authCode":"LYTVH0",
+              "avsResultCode":"Y",
+              "cvvResultCode":"P",
+              "cavvResultCode":"2",
+              "transId":"40033638873",
+              "refTransID":"",
+              "transHash":"",
+              "testRequest":"0",
+              "accountNumber":"XXXX1111",
+              "accountType":"Visa",
+              "prePaidCard":{
+                 "requestedAmount":"5.00",
+                 "approvedAmount":"5.00",
+                 "balanceOnCard":"1.23"
+              },
+              "messages":[
+                 {
+                    "code":"1",
+                    "description":"This transaction has been approved."
+                 }
+              ],
+              "transHashSha2":"5B69E7D68DE994D9A60A0F684BEBA11EE5C97DC22A45BEF70C558D0D9A3476597566EAB841A7B7A63F7768B3458C0E345BACE75AA97462220E16A6DC94F6361C",
+              "SupplementalDataQualificationIndicator":0
+           },
+           "refId":"47222105",
+           "messages":{
+              "resultCode":"Ok",
+              "message":[
+                 {
+                    "code":"I00001",
+                    "text":"Successful."
+                 }
+              ]
+           }
+        }';
+
+        $response = new AuthnetJsonResponse($responseJson);
+
+        $this->assertTrue($response->isPrePaidCard());
+    }
+
 
     /**
      * @covers            \JohnConde\Authnet\AuthnetJsonResponse::__toString()
@@ -222,7 +271,7 @@ class AuthnetJsonResponseTest extends TestCase
 
         $response = new AuthnetJsonResponse($responseJson);
 
-        $this->assertSame(str_replace("\r\n", '', $responseJson), $response->getRawResponse());
+        $this->assertSame(str_replace("\n", '', $responseJson), $response->getRawResponse());
     }
 
 

@@ -5,6 +5,7 @@ CHANGE LOG
 Bumped minimum supported version of PHP to 7.2
 If trying to retrieve non-existent response value, NULL is returned in AuthnetJsonResponse::__get()
 Added AuthnetJson::BOUNDLESS_OCCURRENCES to indicate an endless subscription
+Added support for prepaid cards
 Added constructor to Authnet exceptions
 Removed unused AuthnetInvalidParameterException class
 Updated unit tests for phpunit 8
