@@ -38,3 +38,9 @@ this class to tag your question with the **PHP** and **Authorize.Net** tags. Mak
 and I will not be able to assist you.
 
 **Do not use Stack Overflow to report bugs.** Bugs may be reported [here](https://github.com/stymiee/authnetjson/issues/new).
+
+## Helpful Links
+
+* [Authorize.Net Developer Guides](https://developer.authorize.net/api/)
+* [Authorize.Net Testing Guide](https://developer.authorize.net/hello_world/testing_guide/)
+* [Response Codes](https://developer.authorize.net/api/reference/responseCodes.html)
