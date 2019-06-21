@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace JohnConde\Authnet;
 
+use \Curl\Curl;
+
 /**
  * Creates a request to the Authorize.Net JSON endpoints
  *
@@ -210,7 +212,7 @@ class AuthnetJsonRequest
     /**
      * Sets the handler to be used to handle our API call. Mainly used for unit testing as Curl is used by default.
      *
-     * @param   object  $processor
+     * @param   Curl  $processor
      */
     public function setProcessHandler($processor) : void
     {
