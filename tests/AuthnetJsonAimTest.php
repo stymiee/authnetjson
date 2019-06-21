@@ -1079,7 +1079,7 @@ class AuthnetJsonAimTest extends TestCase
     public function testCreateTransactionRequestVisaCheckout() : void
     {
         $requestJson = array(
-            "refId" => rand(1000000, 100000000),
+            "refId" => random_int(1000000, 100000000),
             "transactionRequest" => array(
                 "transactionType" => "authCaptureTransaction",
                 "amount" => "5",

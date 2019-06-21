@@ -46,7 +46,7 @@ SAMPLE RESPONSE
 
     $request  = AuthnetApiFactory::getJsonApiHandler(AUTHNET_LOGIN, AUTHNET_TRANSKEY, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
     $response = $request->sendCustomerTransactionReceiptRequest([
-        'refId' => rand(1000000, 100000000),
+        'refId' => random_int(1000000, 100000000),
         'transId' => '2165665581',
         'customerEmail' => 'user@example.com',
         'emailSettings' => [

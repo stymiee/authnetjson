@@ -61,7 +61,7 @@ SAMPLE RESPONSE
 
     $request = AuthnetApiFactory::getJsonApiHandler(AUTHNET_LOGIN, AUTHNET_TRANSKEY, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
     $response = $request->createTransactionRequest([
-        'refId' => rand(1000000, 100000000),
+        'refId' => random_int(1000000, 100000000),
         'transactionRequest' => [
             'transactionType' => 'priorAuthCaptureTransaction',
             'refTransId' => '2230581333'
