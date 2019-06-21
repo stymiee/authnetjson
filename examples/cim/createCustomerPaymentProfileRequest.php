@@ -116,11 +116,11 @@ SAMPLE RESPONSE
             </tr>
             <tr>
                 <th>Successful?</th>
-                <td><?php echo ($response->isSuccessful()) ? 'yes' : 'no'; ?></td>
+                <td><?php echo $response->isSuccessful() ? 'yes' : 'no'; ?></td>
             </tr>
             <tr>
                 <th>Error?</th>
-                <td><?php echo ($response->isError()) ? 'yes' : 'no'; ?></td>
+                <td><?php echo $response->isError() ? 'yes' : 'no'; ?></td>
             </tr>
             <tr>
                 <th>customerProfileId</th>
