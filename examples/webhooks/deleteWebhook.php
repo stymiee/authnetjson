@@ -28,7 +28,7 @@ HTTP response code 200 will be returned for a successful deletion
 
 namespace JohnConde\Authnet;
 
-require('../../config.inc.php');
+require '../../config.inc.php';
 
 $successful = false;
 $error      = true;

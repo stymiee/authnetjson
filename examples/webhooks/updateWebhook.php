@@ -48,7 +48,7 @@ SAMPLE RESPONSE
 
 namespace JohnConde\Authnet;
 
-require('../../config.inc.php');
+require '../../config.inc.php';
 
 $successful = false;
 $error      = true;

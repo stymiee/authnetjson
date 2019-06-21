@@ -17,7 +17,7 @@ Use the SIM tools to create a SIM transaction form
 
     namespace JohnConde\Authnet;
 
-    require('../../config.inc.php');
+    require '../../config.inc.php';
 
     $sim         = AuthnetApiFactory::getSimHandler(AUTHNET_LOGIN, AUTHNET_SIGNATURE, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
     $amount      = 10.00;

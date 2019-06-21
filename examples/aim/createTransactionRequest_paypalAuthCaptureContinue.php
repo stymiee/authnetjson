@@ -71,7 +71,7 @@ SAMPLE RESPONSE
 
     namespace JohnConde\Authnet;
 
-    require('../../config.inc.php');
+    require '../../config.inc.php';
 
     $request  = AuthnetApiFactory::getJsonApiHandler(AUTHNET_LOGIN, AUTHNET_TRANSKEY, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
     $response = $request->createTransactionRequest([
