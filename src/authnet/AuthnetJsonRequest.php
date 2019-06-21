@@ -171,12 +171,9 @@ class AuthnetJsonRequest
     }
 
     /**
-     * Tells the handler to make the API call to Authorize.Net
-     *
-     * @return  string  JSON string containing API response
-     * @throws  AuthnetCurlException
+     * Makes POST request with retry logic.
      */
-    private function process() : string
+    private function makeRequest() : void
     {
         $retries = 0;
         while ($retries < self::MAX_RETRIES) {
@@ -186,6 +183,17 @@ class AuthnetJsonRequest
             }
             $retries++;
         }
+    }
+
+    /**
+     * Tells the handler to make the API call to Authorize.Net
+     *
+     * @return  string  JSON string containing API response
+     * @throws  AuthnetCurlException
+     */
+    private function process() : string
+    {
+        $this->makeRequest();
         if (!$this->processor->error && isset($this->processor->response)) {
             return $this->processor->response;
         }
