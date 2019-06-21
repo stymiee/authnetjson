@@ -20,7 +20,6 @@ use Exception;
  * Factory to instantiate an instance of an AuthnetJson object with the proper endpoint
  * URL and Processor Class.
  *
- * @package    AuthnetJSON
  * @author     John Conde <stymiee@gmail.com>
  * @copyright  John Conde <stymiee@gmail.com>
  * @license    http://www.apache.org/licenses/LICENSE-2.0.html Apache License, Version 2.0

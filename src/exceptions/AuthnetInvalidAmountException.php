@@ -15,7 +15,6 @@ namespace JohnConde\Authnet;
 /**
  * Exception that is thrown when invalid amount to pay is provided for a SIM transaction
  *
- * @package    AuthnetJSON
  * @author     John Conde <stymiee@gmail.com>
  * @copyright  John Conde <stymiee@gmail.com>
  * @license    http://www.apache.org/licenses/LICENSE-2.0.html Apache License, Version 2.0
@@ -23,7 +22,7 @@ namespace JohnConde\Authnet;
  */
 class AuthnetInvalidAmountException extends AuthnetException
 {
-    public function __construct(string $message = "", int $code = 0, \Throwable $previous = null)
+    public function __construct(string $message = '', int $code = 0, \Throwable $previous = null)
     {
         parent::__construct($message, $code, $previous);
     }

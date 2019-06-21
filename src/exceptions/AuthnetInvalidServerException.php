@@ -16,7 +16,6 @@ namespace JohnConde\Authnet;
  * Exception that is throw when an invalid value is given for the $server paramater when
  * initiating an instance of the AuthnetJson class
  *
- * @package    AuthnetJSON
  * @author     John Conde <stymiee@gmail.com>
  * @copyright  John Conde <stymiee@gmail.com>
  * @license    http://www.apache.org/licenses/LICENSE-2.0.html Apache License, Version 2.0
@@ -24,7 +23,7 @@ namespace JohnConde\Authnet;
  */
 class AuthnetInvalidServerException extends AuthnetException
 {
-    public function __construct(string $message = "", int $code = 0, \Throwable $previous = null)
+    public function __construct(string $message = '', int $code = 0, \Throwable $previous = null)
     {
         parent::__construct($message, $code, $previous);
     }
