@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 /**
@@ -26,7 +27,6 @@ use Exception;
  *
  * @link       https://github.com/stymiee/authnetjson
  */
-
 class AuthnetApiFactory
 {
     /**

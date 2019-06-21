@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 /**
@@ -22,7 +23,6 @@ use Exception;
  * @license    http://www.apache.org/licenses/LICENSE-2.0.html Apache License, Version 2.0
  * @link       https://github.com/stymiee/authnetjson
  */
-
 class AuthnetSim
 {
     /**
