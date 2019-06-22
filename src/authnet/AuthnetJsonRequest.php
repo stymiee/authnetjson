@@ -16,7 +16,7 @@ namespace JohnConde\Authnet;
 use \Curl\Curl;
 
 /**
- * Creates a request to the Authorize.Net JSON endpoints
+ * Creates a request to the Authorize.Net JSON endpoints.
  *
  * @package     AuthnetJSON
  * @author      John Conde <stymiee@gmail.com>
@@ -93,7 +93,7 @@ class AuthnetJsonRequest
 
     /**
      * Creates the request object by setting the Authorize.Net credentials and URL of the endpoint to be used
-     * for the API call
+     * for the API call.
      *
      * @param   string  $login              Authorize.Net API login ID
      * @param   string  $transactionKey     Authorize.Net API Transaction Key
@@ -144,7 +144,7 @@ class AuthnetJsonRequest
 
     /**
      * Magic method that dynamically creates our API call based on the name of the method in the client code and
-     * the array passed as its parameter
+     * the array passed as its parameter.
      *
      * @param   string  $api_call   name of the API call to be made
      * @param   array   $args       the array to be passed to the API
@@ -189,7 +189,7 @@ class AuthnetJsonRequest
     }
 
     /**
-     * Tells the handler to make the API call to Authorize.Net
+     * Tells the handler to make the API call to Authorize.Net.
      *
      * @return  string  JSON string containing API response
      * @throws  AuthnetCurlException
@@ -220,7 +220,7 @@ class AuthnetJsonRequest
     }
 
     /**
-     * Gets the request sent to Authorize.Net in JSON format for logging purposes
+     * Gets the request sent to Authorize.Net in JSON format for logging purposes.
      *
      * @return  string transaction request sent to Authorize.Net in JSON format
      */

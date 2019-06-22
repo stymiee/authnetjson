@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace JohnConde\Authnet;
 
 /**
- * Contains constant values
+ * Contains constant values.
  *
  * @package     AuthnetJSON
  * @author      John Conde <stymiee@gmail.com>

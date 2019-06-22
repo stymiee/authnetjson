@@ -79,7 +79,7 @@ class AuthnetApiFactory
     }
 
     /**
-     * Gets the API endpoint to be used for a JSON API call
+     * Gets the API endpoint to be used for a JSON API call.
      *
      * @param  integer     $server     ID of which server to use
      * @return string                  The URL endpoint the request is to be sent to
