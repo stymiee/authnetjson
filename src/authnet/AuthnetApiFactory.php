@@ -21,11 +21,11 @@ use Exception;
  * Factory to instantiate an instance of an AuthnetJson object with the proper endpoint
  * URL and Processor Class.
  *
- * @author     John Conde <stymiee@gmail.com>
- * @copyright  John Conde <stymiee@gmail.com>
- * @license    http://www.apache.org/licenses/LICENSE-2.0.html Apache License, Version 2.0
+ * @author    John Conde <stymiee@gmail.com>
+ * @copyright John Conde <stymiee@gmail.com>
+ * @license   http://www.apache.org/licenses/LICENSE-2.0.html Apache License, Version 2.0
  *
- * @link       https://github.com/stymiee/authnetjson
+ * @link      https://github.com/stymiee/authnetjson
  */
 class AuthnetApiFactory
 {
@@ -45,17 +45,17 @@ class AuthnetApiFactory
     public const USE_AKAMAI_SERVER = 2;
 
     /**
-    Validates the Authorize.Net credentials and returns a Request object to be used to make an API call
+     * Validates the Authorize.Net credentials and returns a Request object to be used to make an API call.
      *
-     * @param   string      $login                          Authorize.Net API Login ID
-     * @param   string      $transaction_key                Authorize.Net API Transaction Key
-     * @param   integer     $server                         ID of which server to use (optional)
-     * @return  AuthnetJsonRequest
-     * @throws  ErrorException
-     * @throws  AuthnetInvalidCredentialsException
-     * @throws  AuthnetInvalidServerException
+     * @param  string      $login                          Authorize.Net API Login ID
+     * @param  string      $transaction_key                Authorize.Net API Transaction Key
+     * @param  integer     $server                         ID of which server to use (optional)
+     * @return AuthnetJsonRequest
+     * @throws ErrorException
+     * @throws AuthnetInvalidCredentialsException
+     * @throws AuthnetInvalidServerException
      */
-    public static function getJsonApiHandler(string $login, string $transaction_key, ?int $server) : object
+    public static function getJsonApiHandler(string $login, string $transaction_key, ?int $server = null) : object
     {
         $login           = trim($login);
         $transaction_key = trim($transaction_key);
@@ -81,16 +81,16 @@ class AuthnetApiFactory
     /**
      * Gets the API endpoint to be used for a JSON API call
      *
-     * @param   integer     $server     ID of which server to use
-     * @return  string                  The URL endpoint the request is to be sent to
-     * @throws  AuthnetInvalidServerException
+     * @param  integer     $server     ID of which server to use
+     * @return string                  The URL endpoint the request is to be sent to
+     * @throws AuthnetInvalidServerException
      */
     protected static function getWebServiceURL(int $server) : string
     {
         $urls = [
             static::USE_PRODUCTION_SERVER  => 'https://api.authorize.net/xml/v1/request.api',
             static::USE_DEVELOPMENT_SERVER => 'https://apitest.authorize.net/xml/v1/request.api',
-            static::USE_AKAMAI_SERVER      => 'https://api2.authorize.net/xml/v1/request.api'
+            static::USE_AKAMAI_SERVER      => 'https://api2.authorize.net/xml/v1/request.api',
         ];
         if (array_key_exists($server, $urls)) {
             return $urls[$server];
@@ -99,20 +99,21 @@ class AuthnetApiFactory
     }
 
     /**
-     * Validates the Authorize.Net credentials and returns a SIM object to be used to make a SIM API call
+     * Validates the Authorize.Net credentials and returns a SIM object to be used to make a SIM API call.
      *
-     * @param   string      $login                          Authorize.Net API Login ID
-     * @param   string      $transaction_key                Authorize.Net API Transaction Key
-     * @param   integer     $server                         ID of which server to use (optional)
-     * @return  AuthnetSim
-     * @throws  AuthnetInvalidCredentialsException
-     * @throws  AuthnetInvalidServerException
-     * @throws  Exception
+     * @param  string      $login                  Authorize.Net API Login ID
+     * @param  string      $transaction_key        Authorize.Net API Transaction Key
+     * @param  integer     $server                 ID of which server to use (optional)
+     * @return AuthnetSim
+     * @throws AuthnetInvalidCredentialsException
+     * @throws AuthnetInvalidServerException
+     * @throws Exception
      */
-    public static function getSimHandler(string $login, string $transaction_key, $server = self::USE_PRODUCTION_SERVER) : object
+    public static function getSimHandler(string $login, string $transaction_key, ?int $server = null) : object
     {
         $login           = trim($login);
         $transaction_key = trim($transaction_key);
+        $server          = $server ?? self::USE_PRODUCTION_SERVER;
         $api_url         = static::getSimURL($server);
 
         if (empty($login) || empty($transaction_key)) {
@@ -123,11 +124,11 @@ class AuthnetApiFactory
     }
 
     /**
-     * Gets the API endpoint to be used for a SIM API call
+     * Gets the API endpoint to be used for a SIM API call.
      *
-     * @param   integer     $server     ID of which server to use
-     * @return  string                  The URL endpoint the request is to be sent to
-     * @throws  AuthnetInvalidServerException
+     * @param  integer     $server     ID of which server to use
+     * @return string                  The URL endpoint the request is to be sent to
+     * @throws AuthnetInvalidServerException
      */
     protected static function getSimURL(int $server) : string
     {
@@ -142,20 +143,21 @@ class AuthnetApiFactory
     }
 
     /**
-     * Validates the Authorize.Net credentials and returns a Webhooks Request object to be used to make an Webhook call
+     * Validates the Authorize.Net credentials and returns a Webhooks Request object to be used to make an Webhook call.
      *
-     * @param   string      $login                          Authorize.Net API Login ID
-     * @param   string      $transaction_key                Authorize.Net API Transaction Key
-     * @param   integer     $server                         ID of which server to use (optional)
-     * @throws  ErrorException
-     * @return  AuthnetWebhooksRequest
-     * @throws  AuthnetInvalidCredentialsException
-     * @throws  AuthnetInvalidServerException
+     * @param  string      $login                          Authorize.Net API Login ID
+     * @param  string      $transaction_key                Authorize.Net API Transaction Key
+     * @param  integer     $server                         ID of which server to use (optional)
+     * @throws ErrorException
+     * @return AuthnetWebhooksRequest
+     * @throws AuthnetInvalidCredentialsException
+     * @throws AuthnetInvalidServerException
      */
-    public static function getWebhooksHandler(string $login, string $transaction_key, $server = self::USE_PRODUCTION_SERVER) : object
+    public static function getWebhooksHandler(string $login, string $transaction_key, ?int $server = null) : object
     {
         $login           = trim($login);
         $transaction_key = trim($transaction_key);
+        $server          = $server ?? self::USE_PRODUCTION_SERVER;
         $api_url         = static::getWebhooksURL($server);
 
         if (empty($login) || empty($transaction_key)) {
@@ -178,11 +180,11 @@ class AuthnetApiFactory
     }
 
     /**
-     * Gets the API endpoint to be used for a SIM API call
+     * Gets the API endpoint to be used for a SIM API call.
      *
-     * @param   integer     $server     ID of which server to use
-     * @return  string                  The URL endpoint the request is to be sent to
-     * @throws  AuthnetInvalidServerException
+     * @param  integer     $server     ID of which server to use
+     * @return string                  The URL endpoint the request is to be sent to
+     * @throws AuthnetInvalidServerException
      */
     protected static function getWebhooksURL(int $server) : string
     {
