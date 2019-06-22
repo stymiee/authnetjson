@@ -268,10 +268,12 @@ class AuthnetJsonResponseTest extends TestCase
               ]
            }
         }';
+        $responseJson = json_encode(json_decode($responseJson, false));
 
         $response = new AuthnetJsonResponse($responseJson);
+        $response = json_encode(json_decode($response->getRawResponse(), false));
 
-        $this->assertSame(str_replace("\n", '', $responseJson), $response->getRawResponse());
+        $this->assertSame($responseJson, $response);
     }
 
 
