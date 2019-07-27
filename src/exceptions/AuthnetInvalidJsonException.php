@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace JohnConde\Authnet;
 
+use Throwable;
+
 /**
  * Exception that is throw when invalid JSON is returned by the API
  *
@@ -23,7 +25,7 @@ namespace JohnConde\Authnet;
  */
 class AuthnetInvalidJsonException extends AuthnetException
 {
-    public function __construct(string $message = '', int $code = 0, \Throwable $previous = null)
+    public function __construct(string $message = '', int $code = 0, Throwable $previous = null)
     {
         parent::__construct($message, $code, $previous);
     }

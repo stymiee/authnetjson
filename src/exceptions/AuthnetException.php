@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace JohnConde\Authnet;
 
+use Throwable;
+
 /**
  * Generic Exception that may be thrown whenever an unexpect error occurs using the AuthnetJson class
  *
@@ -23,7 +25,7 @@ namespace JohnConde\Authnet;
  */
 class AuthnetException extends \Exception
 {
-    public function __construct(string $message = '', int $code = 0, \Throwable $previous = null)
+    public function __construct(string $message = '', int $code = 0, Throwable $previous = null)
     {
         parent::__construct($message, $code, $previous);
     }

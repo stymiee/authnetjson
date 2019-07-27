@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace JohnConde\Authnet;
 
+use Throwable;
+
 /**
  * Exception that is throw when cURL experiences an unexpected error
  *
@@ -23,7 +25,7 @@ namespace JohnConde\Authnet;
  */
 class AuthnetCurlException extends AuthnetException
 {
-    public function __construct(string $message = '', int $code = 0, \Throwable $previous = null)
+    public function __construct(string $message = '', int $code = 0, Throwable $previous = null)
     {
         parent::__construct($message, $code, $previous);
     }
