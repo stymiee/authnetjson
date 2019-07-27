@@ -80,11 +80,11 @@ class AuthnetWebhook
     {
         $output  = '<table id="authnet-webhook">'."\n";
         $output .= '<caption>Authorize.Net Webhook</caption>'."\n";
-        $output .= '<tr>'."\n\t\t".'<th colspan="2"><b>Response HTTP Headers</b></th>'."\n".'</tr>'."\n";
+        $output .= '<tr><th colspan="2"><b>Response HTTP Headers</b></th></tr>'."\n";
         $output .= '<tr><td colspan="2"><pre>'."\n";
         $output .= var_export($this->headers)."\n";
         $output .= '</pre></td></tr>'."\n";
-        $output .= '<tr>'."\n\t\t".'<th colspan="2"><b>Response JSON</b></th>'."\n".'</tr>'."\n";
+        $output .= '<tr><th colspan="2"><b>Response JSON</b></th></tr>'."\n";
         $output .= '<tr><td colspan="2"><pre>'."\n";
         $output .= $this->webhookJson."\n";
         $output .= '</pre></td></tr>'."\n";

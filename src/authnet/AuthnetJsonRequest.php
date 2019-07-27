@@ -115,11 +115,11 @@ class AuthnetJsonRequest
     {
         $output  = '<table id="authnet-request">'."\n";
         $output .= '<caption>Authorize.Net Request</caption>'."\n";
-        $output .= '<tr>'."\n\t\t".'<th colspan="2"><b>Class Parameters</b></th>'."\n".'</tr>'."\n";
-        $output .= '<tr>'."\n\t\t".'<td><b>API Login ID</b></td><td>'.$this->login.'</td>'."\n".'</tr>'."\n";
-        $output .= '<tr>'."\n\t\t".'<td><b>Transaction Key</b></td><td>'.$this->transactionKey.'</td>'."\n".'</tr>'."\n";
-        $output .= '<tr>'."\n\t\t".'<td><b>Authnet Server URL</b></td><td>'.$this->url.'</td>'."\n".'</tr>'."\n";
-        $output .= '<tr>'."\n\t\t".'<th colspan="2"><b>Request JSON</b></th>'."\n".'</tr>'."\n";
+        $output .= '<tr><th colspan="2"><b>Class Parameters</b></th></tr>'."\n";
+        $output .= '<tr><td><b>API Login ID</b></td><td>'.$this->login.'</td></tr>'."\n";
+        $output .= '<tr><td><b>Transaction Key</b></td><td>'.$this->transactionKey.'</td></tr>'."\n";
+        $output .= '<tr><td><b>Authnet Server URL</b></td><td>'.$this->url.'</td></tr>'."\n";
+        $output .= '<tr><th colspan="2"><b>Request JSON</b></th></tr>'."\n";
         if (!empty($this->requestJson)) {
             $output .= '<tr><td colspan="2"><pre>'."\n";
             $output .= $this->requestJson."\n";
