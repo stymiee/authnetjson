@@ -304,8 +304,8 @@ class AuthnetJsonRequestTest extends TestCase
     }
 
     /**
-     * @covers            \JohnConde\Authnet\AuthnetJsonRequest::process()
-     * @covers            \JohnConde\Authnet\AuthnetCurlException::__construct()
+     * @covers \JohnConde\Authnet\AuthnetJsonRequest::process()
+     * @covers \JohnConde\Authnet\AuthnetCurlException::__construct()
      */
     public function testProcessError() : void
     {
@@ -317,12 +317,69 @@ class AuthnetJsonRequestTest extends TestCase
         $http = $this->getMockBuilder('\Curl\Curl')
             ->setMethods(['post'])
             ->getMock();
-        $http->error      = true;
-        $http->error_code = 10;
-        $http->error      = 'Test Error Message';
+        $http->error         = true;
+        $http->error_code    = 10;
+        $http->error_message = 'Test Error Message';
 
         $request = AuthnetApiFactory::getJsonApiHandler($apiLogin, $apiTransKey, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
         $request->setProcessHandler($http);
         $request->deleteCustomerProfileRequest([]);
+    }
+
+    /**
+     * @covers \JohnConde\Authnet\AuthnetJsonRequest::makeRequest()
+     */
+    public function testMakeRequestWithError() : void
+    {
+        $apiLogin    = 'apiLogin';
+        $apiTransKey = 'apiTransKey';
+
+        $http = $this->getMockBuilder('\Curl\Curl')
+            ->setMethods(['post'])
+            ->getMock();
+        $http->error         = true;
+        $http->error_code    = 10;
+        $http->error_message = 'Test Error Message';
+
+        $request = AuthnetApiFactory::getJsonApiHandler($apiLogin, $apiTransKey, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
+        $request->setProcessHandler($http);
+
+        $method = new \ReflectionMethod('\JohnConde\Authnet\AuthnetJsonRequest', 'makeRequest');
+        $method->setAccessible(true);
+        $method->invoke($request);
+
+        $reflectionOfRequest = new \ReflectionObject($request);
+        $retries = $reflectionOfRequest->getProperty('retries');
+        $retries->setAccessible(true);
+
+        $reflectionOfMaxRetries = new \ReflectionClassConstant('\JohnConde\Authnet\AuthnetJsonRequest', 'MAX_RETRIES');
+
+        $this->assertEquals($reflectionOfMaxRetries->getValue(), $retries->getValue($request));
+    }
+
+    /**
+     * @covers \JohnConde\Authnet\AuthnetJsonRequest::makeRequest()
+     */
+    public function testMakeRequestWithNoError() : void
+    {
+        $apiLogin    = 'apiLogin';
+        $apiTransKey = 'apiTransKey';
+
+        $http = $this->getMockBuilder('\Curl\Curl')
+            ->setMethods(['post'])
+            ->getMock();
+        $http->error         = false;
+
+        $request = AuthnetApiFactory::getJsonApiHandler($apiLogin, $apiTransKey, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
+        $request->setProcessHandler($http);
+
+        $method = new \ReflectionMethod('\JohnConde\Authnet\AuthnetJsonRequest', 'makeRequest');
+        $method->setAccessible(true);
+        $method->invoke($request);
+
+        $reflectionOfRequest = new \ReflectionObject($request);
+        $retries = $reflectionOfRequest->getProperty('retries');
+        $retries->setAccessible(true);
+        $this->assertEquals(0, $retries->getValue($request));
     }
 }
