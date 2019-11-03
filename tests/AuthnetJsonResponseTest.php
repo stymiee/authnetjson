@@ -117,6 +117,17 @@ class AuthnetJsonResponseTest extends TestCase
         $this->assertEquals('2230582306', $response->getTransactionResponseField('TransactionID'));
     }
 
+    /**
+     * @covers            \JohnConde\Authnet\AuthnetJsonResponse::getTransactionResponseField()
+     */
+    public function testTransactionResponseException() : void
+    {
+        $this->expectException('\JohnConde\Authnet\AuthnetTransactionResponseCallException');
+
+        $AuthnetJsonResponse = new AuthnetJsonResponse('{}');
+        $method = new \ReflectionMethod($AuthnetJsonResponse, 'getTransactionResponseField');
+        $method->invoke($AuthnetJsonResponse, 'test');
+    }
 
     /**
      * @covers            \JohnConde\Authnet\AuthnetJsonResponse::isApproved()
