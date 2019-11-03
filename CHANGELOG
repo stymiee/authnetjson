@@ -11,6 +11,7 @@ Removed unused AuthnetInvalidParameterException class
 Updated unit tests for phpunit 8
 Removed unneeded require of config file in unit tests
 Added phpunit to require-dev
+Added CONTRIBUTING.md
 Shiny badges for the README
 Cleaned up HTML and CSS in examples
 Minor formatting changes
