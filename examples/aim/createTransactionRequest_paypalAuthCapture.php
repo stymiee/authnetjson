@@ -82,24 +82,24 @@ SAMPLE RESPONSE
 
     $request  = AuthnetApiFactory::getJsonApiHandler(AUTHNET_LOGIN, AUTHNET_TRANSKEY, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
     $response = $request->createTransactionRequest([
-        "transactionRequest" => [
-            "transactionType" => "authCaptureTransaction",
-            "amount" => "80.93",
-            "payment" => [
-                "payPal" => [
-                    "successUrl" => "https://my.server.com/success.html",
-                    "cancelUrl" => "https://my.server.com/cancel.html",
-                    "paypalLc" => "",
-                    "paypalHdrImg" => "",
-                    "paypalPayflowcolor" => "FFFF00"
+        'transactionRequest' => [
+            'transactionType' => 'authCaptureTransaction',
+            'amount' => '80.93',
+            'payment' => [
+                'payPal' => [
+                    'successUrl' => 'https://my.server.com/success.html',
+                    'cancelUrl' => 'https://my.server.com/cancel.html',
+                    'paypalLc' => '',
+                    'paypalHdrImg' => '',
+                    'paypalPayflowcolor' => 'FFFF00'
                 ]
             ],
-            "lineItems" => [
-                "lineItem" => [
-                    "itemId" => "item1",
-                    "name" => "golf balls",
-                    "quantity" => "1",
-                    "unitPrice" => "18.95"
+            'lineItems' => [
+                'lineItem' => [
+                    'itemId' => 'item1',
+                    'name' => 'golf balls',
+                    'quantity' => '1',
+                    'unitPrice' => '18.95'
                 ]
             ]
         ]

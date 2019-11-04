@@ -252,35 +252,33 @@ SAMPLE RESPONSE
             ],
             'customerIP' => '192.168.1.1',
             'transactionSettings' => [
-                'setting' => [
-                    0 => [
-                        'settingName' =>'allowPartialAuth',
-                        'settingValue' => 'false'
-                    ],
-                    1 => [
-                        'settingName' => 'duplicateWindow',
-                        'settingValue' => '0'
-                    ],
-                    2 => [
-                        'settingName' => 'emailCustomer',
-                        'settingValue' => 'false'
-                    ],
-                    3 => [
-                        'settingName' => 'recurringBilling',
-                        'settingValue' => 'false'
-                    ],
-                    4 => [
-                        'settingName' => 'testRequest',
-                        'settingValue' => 'false'
-                    ]
+                [
+                    'settingName' =>'allowPartialAuth',
+                    'settingValue' => 'false'
+                ],
+                [
+                    'settingName' => 'duplicateWindow',
+                    'settingValue' => '0'
+                ],
+                [
+                    'settingName' => 'emailCustomer',
+                    'settingValue' => 'false'
+                ],
+                [
+                    'settingName' => 'recurringBilling',
+                    'settingValue' => 'false'
+                ],
+                [
+                    'settingName' => 'testRequest',
+                    'settingValue' => 'false'
                 ]
             ],
             'userFields' => [
-                'userField' => [
+                [
                     'name' => 'MerchantDefinedFieldName1',
                     'value' => 'MerchantDefinedFieldValue1',
                 ],
-                'userField' => [
+                [
                     'name' => 'favorite_color',
                     'value' => 'blue',
                 ],

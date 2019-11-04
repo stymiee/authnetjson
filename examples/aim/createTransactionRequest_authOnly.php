@@ -216,33 +216,33 @@ SAMPLE RESPONSE
             ],
             'customerIP' => '192.168.1.1',
             'transactionSettings' => [
-                'setting' => [
+                [
                     'settingName' => 'allowPartialAuth',
                     'settingValue' => 'false',
                 ],
-                'setting' => [
+                [
                     'settingName' => 'duplicateWindow',
                     'settingValue' => '0',
                 ],
-                'setting' => [
+                [
                     'settingName' => 'emailCustomer',
                     'settingValue' => 'false',
                 ],
-                'setting' => [
+                [
                   'settingName' => 'recurringBilling',
                   'settingValue' => 'false',
                 ],
-                'setting' => [
+                [
                     'settingName' => 'testRequest',
                     'settingValue' => 'false',
                 ],
             ],
             'userFields' => [
-                'userField' => [
+                [
                     'name' => 'MerchantDefinedFieldName1',
                     'value' => 'MerchantDefinedFieldValue1',
                 ],
-                'userField' => [
+                [
                     'name' => 'favorite_color',
                     'value' => 'blue',
                 ],

@@ -70,9 +70,9 @@ SAMPLE RESPONSE
 
     $request  = AuthnetApiFactory::getJsonApiHandler(AUTHNET_LOGIN, AUTHNET_TRANSKEY, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
     $response = $request->createTransactionRequest([
-        "transactionRequest" => [
-            "transactionType" => "priorAuthCaptureTransaction",
-            "refTransId" => "128"
+        'transactionRequest' => [
+            'transactionType' => 'priorAuthCaptureTransaction',
+            'refTransId' => '128'
         ]
     ]);
 ?>

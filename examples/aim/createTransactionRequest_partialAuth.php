@@ -151,7 +151,7 @@ SAMPLE RESPONSE
                'country' => 'USA',
             ],
             'transactionSettings' => [
-                'setting' => [
+                [
                     0 => [
                         'settingName' =>'allowPartialAuth',
                         'settingValue' => 'true'

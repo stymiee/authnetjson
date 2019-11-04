@@ -75,14 +75,14 @@ SAMPLE RESPONSE
 
     $request  = AuthnetApiFactory::getJsonApiHandler(AUTHNET_LOGIN, AUTHNET_TRANSKEY, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
     $response = $request->authOnlyContinueTransaction([
-        "transactionRequest" => [
-            "transactionType" => "authOnlyContinueTransaction",
-            "payment" => [
-                "payPal" => [
-                    "payerID" => "S6D5ETGSVYX94"
+        'transactionRequest' => [
+            'transactionType' => 'authOnlyContinueTransaction',
+            'payment' => [
+                'payPal' => [
+                    'payerID' => 'S6D5ETGSVYX94'
                 ]
             ],
-            "refTransId" => "128"
+            'refTransId' => '128'
         ]
     ]);
 ?>

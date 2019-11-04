@@ -1,5 +1,6 @@
 <?php
 
+
 /*
  * This file is part of the AuthnetJSON package.
  *
@@ -74,13 +75,13 @@ SAMPLE RESPONSE
 
     $request  = AuthnetApiFactory::getJsonApiHandler(AUTHNET_LOGIN, AUTHNET_TRANSKEY, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
     $response = $request->createTransactionRequest([
-        "transactionRequest" => [
-            "transactionType" => "authOnlyTransaction",
-            "amount" => "5",
-            "payment" => [
-                "payPal" => [
-                    "successUrl" => "https://my.server.com/success.html",
-                    "cancelUrl" => "https://my.server.com/cancel.html"
+        'transactionRequest' => [
+            'transactionType' => 'authOnlyTransaction',
+            'amount' => 5,
+            'payment' => [
+                'payPal' => [
+                    'successUrl' => 'https://my.server.com/success.html',
+                    'cancelUrl' => 'https://my.server.com/cancel.html'
                 ]
             ]
         ]

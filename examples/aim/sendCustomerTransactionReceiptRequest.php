@@ -50,7 +50,7 @@ SAMPLE RESPONSE
         'transId' => '2165665581',
         'customerEmail' => 'user@example.com',
         'emailSettings' => [
-            'setting' => [
+            [
                 'settingName' => 'headerEmailReceipt',
                 'settingValue' => 'some HEADER stuff'
             ],

@@ -65,9 +65,9 @@ SAMPLE RESPONSE
 
     $request  = AuthnetApiFactory::getJsonApiHandler(AUTHNET_LOGIN, AUTHNET_TRANSKEY, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
     $response = $request->createTransactionRequest([
-        "transactionRequest" => [
-            "transactionType" => "refundTransaction",
-            "refTransId" => "138"
+        'transactionRequest' => [
+            'transactionType' => 'refundTransaction',
+            'refTransId' => '138'
         ]
     ]);
 ?>

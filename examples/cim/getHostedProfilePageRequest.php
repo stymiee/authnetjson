@@ -46,15 +46,15 @@ SAMPLE RESPONSE
     $response = $request->getHostedProfilePageRequest([
         'customerProfileId' => '31390172',
         'hostedProfileSettings' => [
-            'setting' => [
+            [
                 'settingName' => 'hostedProfileReturnUrl',
                 'settingValue' => 'https://blah.com/blah/',
             ],
-            'setting' => [
+            [
                 'settingName' => 'hostedProfileReturnUrlText',
                 'settingValue' => 'Continue to blah.',
             ],
-            'setting' => [
+            [
                 'settingName' => 'hostedProfilePageBorderVisible',
                 'settingValue' => 'true',
             ]
