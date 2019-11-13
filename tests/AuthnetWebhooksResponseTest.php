@@ -21,7 +21,7 @@ class AuthnetWebhooksResponseTest extends TestCase
      */
     public function testExceptionIsRaisedForInvalidJsonException() : void
     {
-        $this->expectException('\JohnConde\Authnet\AuthnetInvalidJsonException');
+        $this->expectException(AuthnetInvalidJsonException::class);
         new AuthnetWebhooksResponse('');
     }
 
@@ -40,8 +40,7 @@ class AuthnetWebhooksResponseTest extends TestCase
         try {
             new AuthnetWebhooksResponse($responseJson);
             $this->assertTrue(true);
-        }
-        catch (\Exception $e) {
+        } catch (\Exception $e) {
             $this->assertTrue(false);
         }
     }

@@ -12,6 +12,7 @@
 namespace JohnConde\Authnet;
 
 use PHPUnit\Framework\TestCase;
+use Curl\Curl;
 
 class AuthnetJsonAimPaypalTest extends TestCase
 {
@@ -26,7 +27,7 @@ class AuthnetJsonAimPaypalTest extends TestCase
         $this->transactionKey = 'test';
         $this->server         = AuthnetApiFactory::USE_DEVELOPMENT_SERVER;
 
-        $this->http = $this->getMockBuilder('\Curl\Curl')
+        $this->http = $this->getMockBuilder(Curl::class)
             ->setMethods(['post'])
             ->getMock();
         $this->http->error = false;

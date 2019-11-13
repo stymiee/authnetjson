@@ -12,6 +12,7 @@
 namespace JohnConde\Authnet;
 
 use PHPUnit\Framework\TestCase;
+use Curl\Curl;
 
 class AuthnetJsonRequestTest extends TestCase
 {
@@ -42,7 +43,7 @@ class AuthnetJsonRequestTest extends TestCase
      */
     public function testExceptionIsRaisedForCannotSetParamsException() : void
     {
-        $this->expectException('\JohnConde\Authnet\AuthnetCannotSetParamsException');
+        $this->expectException(AuthnetCannotSetParamsException::class);
 
         $request = new AuthnetJsonRequest('', '', AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
         $request->login = 'test';
@@ -57,13 +58,13 @@ class AuthnetJsonRequestTest extends TestCase
      */
     public function testExceptionIsRaisedForInvalidJsonException() : void
     {
-        $this->expectException('\JohnConde\Authnet\AuthnetCurlException');
+        $this->expectException(AuthnetCurlException::class);
 
         $requestJson = array(
             'customerProfileId' => '123456789'
         );
 
-        $this->http = $this->getMockBuilder('\Curl\Curl')
+        $this->http = $this->getMockBuilder(Curl::class)
             ->setMethods(['post'])
             ->getMock();
         $this->http->error = false;
@@ -80,13 +81,13 @@ class AuthnetJsonRequestTest extends TestCase
     public function testProcessorIsInstanceOfCurlWrapper() : void
     {
         $request = new AuthnetJsonRequest('', '', AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
-        $request->setProcessHandler(new \Curl\Curl());
+        $request->setProcessHandler(new Curl());
 
         $reflectionOfRequest = new \ReflectionObject($request);
         $processor = $reflectionOfRequest->getProperty('processor');
         $processor->setAccessible(true);
 
-        $this->assertInstanceOf('\Curl\Curl', $processor->getValue($request));
+        $this->assertInstanceOf(Curl::class, $processor->getValue($request));
     }
 
 
@@ -248,7 +249,7 @@ class AuthnetJsonRequestTest extends TestCase
         $apiLogin    = 'apiLogin';
         $apiTransKey = 'apiTransKey';
 
-        $http = $this->getMockBuilder('\Curl\Curl')
+        $http = $this->getMockBuilder(Curl::class)
             ->setMethods(['post'])
             ->getMock();
         $http->error = false;
@@ -289,7 +290,7 @@ class AuthnetJsonRequestTest extends TestCase
         $apiLogin    = 'apiLogin';
         $apiTransKey = 'apiTransKey';
 
-        $http = $this->getMockBuilder('\Curl\Curl')
+        $http = $this->getMockBuilder(Curl::class)
             ->setMethods(['post'])
             ->getMock();
         $http->error = false;
@@ -309,12 +310,12 @@ class AuthnetJsonRequestTest extends TestCase
      */
     public function testProcessError() : void
     {
-        $this->expectException('\JohnConde\Authnet\AuthnetCurlException');
+        $this->expectException(AuthnetCurlException::class);
 
         $apiLogin    = 'apiLogin';
         $apiTransKey = 'apiTransKey';
 
-        $http = $this->getMockBuilder('\Curl\Curl')
+        $http = $this->getMockBuilder(Curl::class)
             ->setMethods(['post'])
             ->getMock();
         $http->error         = true;
@@ -334,7 +335,7 @@ class AuthnetJsonRequestTest extends TestCase
         $apiLogin    = 'apiLogin';
         $apiTransKey = 'apiTransKey';
 
-        $http = $this->getMockBuilder('\Curl\Curl')
+        $http = $this->getMockBuilder(Curl::class)
             ->setMethods(['post'])
             ->getMock();
         $http->error         = true;
@@ -344,7 +345,7 @@ class AuthnetJsonRequestTest extends TestCase
         $request = AuthnetApiFactory::getJsonApiHandler($apiLogin, $apiTransKey, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
         $request->setProcessHandler($http);
 
-        $method = new \ReflectionMethod('\JohnConde\Authnet\AuthnetJsonRequest', 'makeRequest');
+        $method = new \ReflectionMethod(AuthnetJsonRequest::class, 'makeRequest');
         $method->setAccessible(true);
         $method->invoke($request);
 
@@ -352,7 +353,7 @@ class AuthnetJsonRequestTest extends TestCase
         $retries = $reflectionOfRequest->getProperty('retries');
         $retries->setAccessible(true);
 
-        $reflectionOfMaxRetries = new \ReflectionClassConstant('\JohnConde\Authnet\AuthnetJsonRequest', 'MAX_RETRIES');
+        $reflectionOfMaxRetries = new \ReflectionClassConstant(AuthnetJsonRequest::class, 'MAX_RETRIES');
 
         $this->assertEquals($reflectionOfMaxRetries->getValue(), $retries->getValue($request));
     }
@@ -365,7 +366,7 @@ class AuthnetJsonRequestTest extends TestCase
         $apiLogin    = 'apiLogin';
         $apiTransKey = 'apiTransKey';
 
-        $http = $this->getMockBuilder('\Curl\Curl')
+        $http = $this->getMockBuilder(Curl::class)
             ->setMethods(['post'])
             ->getMock();
         $http->error         = false;
@@ -373,7 +374,7 @@ class AuthnetJsonRequestTest extends TestCase
         $request = AuthnetApiFactory::getJsonApiHandler($apiLogin, $apiTransKey, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
         $request->setProcessHandler($http);
 
-        $method = new \ReflectionMethod('\JohnConde\Authnet\AuthnetJsonRequest', 'makeRequest');
+        $method = new \ReflectionMethod(AuthnetJsonRequest::class, 'makeRequest');
         $method->setAccessible(true);
         $method->invoke($request);
 

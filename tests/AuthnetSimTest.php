@@ -71,7 +71,7 @@ class AuthnetJsonSimTest extends TestCase
      */
     public function testGetFingerprintException() : void
     {
-        $this->expectException('\JohnConde\Authnet\AuthnetInvalidAmountException');
+        $this->expectException(AuthnetInvalidAmountException::class);
 
         $amount    = 0;
         $sim       = AuthnetApiFactory::getSimHandler($this->login, $this->transactionKey, $this->server);

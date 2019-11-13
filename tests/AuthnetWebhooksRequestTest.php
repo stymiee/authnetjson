@@ -12,6 +12,7 @@
 namespace JohnConde\Authnet;
 
 use PHPUnit\Framework\TestCase;
+use Curl\Curl;
 
 class AuthnetWebhooksRequestTest extends TestCase
 {
@@ -26,7 +27,7 @@ class AuthnetWebhooksRequestTest extends TestCase
         $this->transactionKey = 'test';
         $this->server         = AuthnetApiFactory::USE_DEVELOPMENT_SERVER;
 
-        $this->http = $this->getMockBuilder('\Curl\Curl')
+        $this->http = $this->getMockBuilder(Curl::class)
             ->setMethods(['post','get','put','delete'])
             ->getMock();
         $this->http->error = false;
@@ -96,7 +97,7 @@ class AuthnetWebhooksRequestTest extends TestCase
     public function testGetEventTypes() : void
     {
         $this->http->error = false;
-        $this->http->response = $responseJson = '[
+        $this->http->response = '[
             {
                 "name": "net.authorize.customer.created"
             },
@@ -166,7 +167,7 @@ class AuthnetWebhooksRequestTest extends TestCase
         $request->setProcessHandler($this->http);
         $response = $request->getEventTypes();
 
-        $this->assertInstanceOf('\JohnConde\Authnet\AuthnetWebhooksResponse', $response);
+        $this->assertInstanceOf(AuthnetWebhooksResponse::class, $response);
     }
 
     /**
@@ -200,7 +201,7 @@ class AuthnetWebhooksRequestTest extends TestCase
             'net.authorize.customer.subscription.expiring'
         ], 'http://requestb.in/', 'active');
 
-        $this->assertInstanceOf('\JohnConde\Authnet\AuthnetWebhooksResponse', $response);
+        $this->assertInstanceOf(AuthnetWebhooksResponse::class, $response);
     }
 
     /**
@@ -291,7 +292,7 @@ class AuthnetWebhooksRequestTest extends TestCase
         $request->setProcessHandler($this->http);
         $response = $request->getWebhooks();
 
-        $this->assertInstanceOf('\JohnConde\Authnet\AuthnetWebhooksResponse', $response);
+        $this->assertInstanceOf(AuthnetWebhooksResponse::class, $response);
     }
 
     /**
@@ -322,7 +323,7 @@ class AuthnetWebhooksRequestTest extends TestCase
         $request->setProcessHandler($this->http);
         $response = $request->getWebhook('cd2c262f-2723-4848-ae92-5d317902441c');
 
-        $this->assertInstanceOf('\JohnConde\Authnet\AuthnetWebhooksResponse', $response);
+        $this->assertInstanceOf(AuthnetWebhooksResponse::class, $response);
     }
 
     /**
@@ -351,7 +352,7 @@ class AuthnetWebhooksRequestTest extends TestCase
             'net.authorize.customer.created'
         ], 'active');
 
-        $this->assertInstanceOf('\JohnConde\Authnet\AuthnetWebhooksResponse', $response);
+        $this->assertInstanceOf(AuthnetWebhooksResponse::class, $response);
     }
 
     /**
@@ -385,7 +386,7 @@ class AuthnetWebhooksRequestTest extends TestCase
         $request->setProcessHandler($this->http);
         $response = $request->getNotificationHistory();
 
-        $this->assertInstanceOf('\JohnConde\Authnet\AuthnetWebhooksResponse', $response);
+        $this->assertInstanceOf(AuthnetWebhooksResponse::class, $response);
     }
 
     /**
@@ -399,7 +400,7 @@ class AuthnetWebhooksRequestTest extends TestCase
         $request = AuthnetApiFactory::getWebhooksHandler($this->login, $this->transactionKey, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
         $request->setProcessHandler($this->http);
 
-        $method = new \ReflectionMethod('\JohnConde\Authnet\AuthnetWebhooksRequest', 'handleResponse');
+        $method = new \ReflectionMethod(AuthnetWebhooksRequest::class, 'handleResponse');
         $method->setAccessible(true);
 
         $response = $method->invoke($request);
@@ -413,7 +414,7 @@ class AuthnetWebhooksRequestTest extends TestCase
      */
     public function testHandleResponseWithErrorMessage() : void
     {
-        $this->expectException('\JohnConde\Authnet\AuthnetCurlException');
+        $this->expectException(AuthnetCurlException::class);
 
         $this->http->error          = true;
         $this->http->error_message  = 'Error Message';
@@ -428,7 +429,7 @@ class AuthnetWebhooksRequestTest extends TestCase
         $request = AuthnetApiFactory::getWebhooksHandler($this->login, $this->transactionKey, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
         $request->setProcessHandler($this->http);
 
-        $method = new \ReflectionMethod('\JohnConde\Authnet\AuthnetWebhooksRequest', 'handleResponse');
+        $method = new \ReflectionMethod(AuthnetWebhooksRequest::class, 'handleResponse');
         $method->setAccessible(true);
 
         $method->invoke($request);
@@ -440,7 +441,7 @@ class AuthnetWebhooksRequestTest extends TestCase
      */
     public function testHandleResponseWithErrorMessageTestMessage() : void
     {
-        $this->expectException('\JohnConde\Authnet\AuthnetCurlException');
+        $this->expectException(AuthnetCurlException::class);
 
         $this->http->error          = true;
         $this->http->error_message  = 'Error Message';
@@ -455,7 +456,7 @@ class AuthnetWebhooksRequestTest extends TestCase
         $request = AuthnetApiFactory::getWebhooksHandler($this->login, $this->transactionKey, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
         $request->setProcessHandler($this->http);
 
-        $method = new \ReflectionMethod('\JohnConde\Authnet\AuthnetWebhooksRequest', 'handleResponse');
+        $method = new \ReflectionMethod(AuthnetWebhooksRequest::class, 'handleResponse');
         $method->setAccessible(true);
 
         try {
@@ -472,7 +473,7 @@ class AuthnetWebhooksRequestTest extends TestCase
      */
     public function testHandleResponseWithErrorMessageNoMessage() : void
     {
-        $this->expectException('\JohnConde\Authnet\AuthnetCurlException');
+        $this->expectException(AuthnetCurlException::class);
 
         $this->http->error          = true;
         $this->http->error_code     = 100;
@@ -485,7 +486,7 @@ class AuthnetWebhooksRequestTest extends TestCase
         $request = AuthnetApiFactory::getWebhooksHandler($this->login, $this->transactionKey, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
         $request->setProcessHandler($this->http);
 
-        $method = new \ReflectionMethod('\JohnConde\Authnet\AuthnetWebhooksRequest', 'handleResponse');
+        $method = new \ReflectionMethod(AuthnetWebhooksRequest::class, 'handleResponse');
         $method->setAccessible(true);
 
         try {
@@ -509,7 +510,7 @@ class AuthnetWebhooksRequestTest extends TestCase
         $processor = $reflectionOfRequest->getProperty('processor');
         $processor->setAccessible(true);
 
-        $this->assertInstanceOf('\Curl\Curl', $processor->getValue($request));
+        $this->assertInstanceOf(Curl::class, $processor->getValue($request));
     }
 
     /**

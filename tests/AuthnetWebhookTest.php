@@ -42,7 +42,7 @@ class AuthnetWebhookTest extends TestCase
      */
     public function testExceptionIsRaisedForNoSignature() : void
     {
-        $this->expectException('\JohnConde\Authnet\AuthnetInvalidCredentialsException');
+        $this->expectException(AuthnetInvalidCredentialsException::class);
         new AuthnetWebhook('', 'Not JSON', []);
     }
 
@@ -52,7 +52,7 @@ class AuthnetWebhookTest extends TestCase
      */
     public function testExceptionIsRaisedForCannotSetParamsException() : void
     {
-        $this->expectException('\JohnConde\Authnet\AuthnetInvalidJsonException');
+        $this->expectException(AuthnetInvalidJsonException::class);
         new AuthnetWebhook('a', 'Not JSON', []);
     }
 

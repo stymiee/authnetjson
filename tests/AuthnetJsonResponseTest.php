@@ -21,7 +21,7 @@ class AuthnetJsonResponseTest extends TestCase
      */
     public function testExceptionIsRaisedForCannotSetParamsException() : void
     {
-        $this->expectException('\JohnConde\Authnet\AuthnetCannotSetParamsException');
+        $this->expectException(AuthnetCannotSetParamsException::class);
 
         $request = new AuthnetJsonRequest('', '', AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
         $request->login = 'test';
@@ -33,7 +33,7 @@ class AuthnetJsonResponseTest extends TestCase
      */
     public function testExceptionIsRaisedForInvalidJsonException() : void
     {
-        $this->expectException('\JohnConde\Authnet\AuthnetInvalidJsonException');
+        $this->expectException(AuthnetInvalidJsonException::class);
 
         $responseJson = 'I am invalid';
         new AuthnetJsonResponse($responseJson);
@@ -122,7 +122,7 @@ class AuthnetJsonResponseTest extends TestCase
      */
     public function testTransactionResponseException() : void
     {
-        $this->expectException('\JohnConde\Authnet\AuthnetTransactionResponseCallException');
+        $this->expectException(AuthnetTransactionResponseCallException::class);
 
         $AuthnetJsonResponse = new AuthnetJsonResponse('{}');
         $method = new \ReflectionMethod($AuthnetJsonResponse, 'getTransactionResponseField');
@@ -317,7 +317,7 @@ class AuthnetJsonResponseTest extends TestCase
      */
     public function testExceptionIsRaisedForTransactionResponseCall() : void
     {
-        $this->expectException('\JohnConde\Authnet\AuthnetTransactionResponseCallException');
+        $this->expectException(AuthnetTransactionResponseCallException::class);
 
         $responseJson = '{
            "refId":"2241729",
