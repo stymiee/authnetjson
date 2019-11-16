@@ -194,14 +194,14 @@ SAMPLE RESPONSE
             ],
             'lineItems' => [
                 'lineItem' => [
-                    0 => [
+                    [
                         'itemId' => '1',
                         'name' => 'vase',
                         'description' => 'Cannes logo',
                         'quantity' => '18',
                         'unitPrice' => '45.00'
                     ],
-                    1 => [
+                    [
                         'itemId' => '2',
                         'name' => 'desk',
                         'description' => 'Big Desk',

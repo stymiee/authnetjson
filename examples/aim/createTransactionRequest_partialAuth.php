@@ -152,23 +152,22 @@ SAMPLE RESPONSE
             ],
             'transactionSettings' => [
                 [
-                    0 => [
+                    [
                         'settingName' =>'allowPartialAuth',
                         'settingValue' => 'true'
                     ],
-                    1 => [
+                    [
                         'settingName' => 'duplicateWindow',
                         'settingValue' => '0'
-                    ],
-                    2 => [
+                    ], [
                         'settingName' => 'emailCustomer',
                         'settingValue' => 'false'
                     ],
-                    3 => [
+                    [
                         'settingName' => 'recurringBilling',
                         'settingValue' => 'false'
                     ],
-                    4 => [
+                    [
                         'settingName' => 'testRequest',
                         'settingValue' => 'false'
                     ]
