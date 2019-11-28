@@ -205,7 +205,7 @@ class AuthnetJsonResponse
     /**
      * Check to see if the ResponseCode matches the expected value
      *
-     * @param  integer $status
+     * @param  int     $status
      * @return bool Check to see if the ResponseCode matches the expected value
      */
     protected function checkTransactionStatus(int $status) : bool

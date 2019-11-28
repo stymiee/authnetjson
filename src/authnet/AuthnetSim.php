@@ -41,12 +41,12 @@ class AuthnetSim
     private $url;
 
     /**
-     * @var     integer  Randomly generated number
+     * @var     int  Randomly generated number
      */
     private $sequence;
 
     /**
-     * @var     integer  Unix timestamp the request was made
+     * @var     int  Unix timestamp the request was made
      */
     private $timestamp;
 
@@ -98,7 +98,7 @@ class AuthnetSim
     /**
      * Returns the sequence generated for a transaction
      *
-     * @return  integer           Current sequence
+     * @return  int Current sequence
      */
     public function getSequence() : int
     {
@@ -108,7 +108,7 @@ class AuthnetSim
     /**
      * Returns the timestamp for a transaction
      *
-     * @return  integer           Current timestamp
+     * @return  int Current timestamp
      */
     public function getTimestamp() : int
     {

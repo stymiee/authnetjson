@@ -218,8 +218,8 @@ class AuthnetWebhooksRequest
     /**
      * Retrieve Notification History
      *
-     * @param   integer   $limit    Default: 1000
-     * @param   integer   $offset   Default: 0
+     * @param   int   $limit    Default: 1000
+     * @param   int   $offset   Default: 0
      * @return  AuthnetWebhooksResponse
      * @throws  AuthnetInvalidJsonException
      * @throws  AuthnetCurlException
