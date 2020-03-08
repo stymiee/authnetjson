@@ -1,6 +1,6 @@
 CHANGE LOG
 
-2019-XX-XX - Version 4.0.0-beta
+2020-03-08 - Version 4.0.0-beta
 --------------------------------------------
 Bumped minimum supported version of PHP to 7.2
 If trying to retrieve non-existent response value, NULL is returned in AuthnetJsonResponse::__get()
