@@ -55,7 +55,8 @@ The format of the array to be passed during the API call follows the structure o
 Authorize.Net provides a development environment for developers to test their integration against. To use this server
 (as opposed to their production endpoint) set the optional third parameter of `AuthnetApiFactory::getJsonApiHandler()` to be `1` or use the built in class constant `AuthnetApiFactory::USE_DEVELOPMENT_SERVER`:
 
-    $json = AuthnetApiFactory::getJsonApiHandler(AUTHNET_LOGIN, AUTHNET_TRANSKEY, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
+    $json = AuthnetApiFactory::getJsonApiHandler(AUTHNET_LOGIN, AUTHNET_TRANSKEY, 
+                                                    AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
 
 ## Usage Examples
 
@@ -68,7 +69,7 @@ transaction ID).
 
     $request = AuthnetApiFactory::getJsonApiHandler(AUTHNET_LOGIN, AUTHNET_TRANSKEY);
     $response = $request->createTransactionRequest([
-        'refId' => rand(1000000, 100000000],
+        'refId' => rand(1000000, 100000000),
         'transactionRequest' => [
             'transactionType' => 'authCaptureTransaction',
             'amount' => 5,
@@ -89,7 +90,7 @@ transaction ID).
 
     $request = AuthnetApiFactory::getJsonApiHandler(AUTHNET_LOGIN, AUTHNET_TRANSKEY);
     $response = $request->createTransactionRequest([
-        'refId' => rand(1000000, 100000000],
+        'refId' => rand(1000000, 100000000),
         'transactionRequest' => [
             'transactionType' => 'authCaptureTransaction',
             'amount' => 5,
@@ -285,8 +286,8 @@ transaction ID).
     $request = AuthnetApiFactory::getJsonApiHandler(AUTHNET_LOGIN, AUTHNET_TRANSKEY);
     $response = $request->getSettledBatchListRequest([
         'includeStatistics'   => 'true',
-        'firstSettlementDate' => '2015-01-01T08:15:30',
-        'lastSettlementDate'  => '2015-01-30T08:15:30',
+        'firstSettlementDate' => '2020-01-01T08:15:30',
+        'lastSettlementDate'  => '2020-01-30T08:15:30',
     ]);
 
     if ($response->isSuccessful()) {
