@@ -12,6 +12,7 @@
 namespace JohnConde\Authnet;
 
 use PHPUnit\Framework\TestCase;
+use Curl\Curl;
 
 class AuthnetApiFactoryTest extends TestCase
 {
@@ -53,9 +54,9 @@ class AuthnetApiFactoryTest extends TestCase
     /**
      * @covers            \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
      */
-    public function testGetWebServiceUrlAkamaiServer() : void
+    public function testGetWebServiceUrlCDNServer() : void
     {
-        $server           = AuthnetApiFactory::USE_AKAMAI_SERVER;
+        $server           = AuthnetApiFactory::USE_CDN_SERVER;
         $reflectionMethod = new \ReflectionMethod(AuthnetApiFactory::class, 'getWebServiceURL');
         $reflectionMethod->setAccessible(true);
         $url              = $reflectionMethod->invoke(null, $server);
@@ -70,7 +71,7 @@ class AuthnetApiFactoryTest extends TestCase
      */
     public function testGetWebServiceUrlBadServer() : void
     {
-        $this->expectException('\JohnConde\Authnet\AuthnetInvalidServerException');
+        $this->expectException(AuthnetInvalidServerException::class);
 
         $server           = 99;
         $reflectionMethod = new \ReflectionMethod(AuthnetApiFactory::class, 'getWebServiceURL');
@@ -129,7 +130,7 @@ class AuthnetApiFactoryTest extends TestCase
         $reflectionOfProcessor->setAccessible(true);
         $processor = $reflectionOfProcessor->getValue($authnet);
 
-        $this->assertInstanceOf('\Curl\Curl', $processor);
+        $this->assertInstanceOf(Curl::class, $processor);
     }
 
     /**
@@ -146,7 +147,7 @@ class AuthnetApiFactoryTest extends TestCase
         $reflectionOfProcessor->setAccessible(true);
         $processor = $reflectionOfProcessor->getValue($authnet);
 
-        $this->assertInstanceOf('\Curl\Curl', $processor);
+        $this->assertInstanceOf(Curl::class, $processor);
     }
 
     /**
@@ -260,7 +261,7 @@ class AuthnetApiFactoryTest extends TestCase
         $reflectionOfProcessor->setAccessible(true);
         $processor = $reflectionOfProcessor->getValue($authnet);
 
-        $this->assertInstanceOf('\Curl\Curl', $processor);
+        $this->assertInstanceOf(Curl::class, $processor);
     }
 
     /**
@@ -277,7 +278,7 @@ class AuthnetApiFactoryTest extends TestCase
         $reflectionOfProcessor->setAccessible(true);
         $processor = $reflectionOfProcessor->getValue($authnet);
 
-        $this->assertInstanceOf('\Curl\Curl', $processor);
+        $this->assertInstanceOf(Curl::class, $processor);
     }
 
     /**

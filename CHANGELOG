@@ -1,5 +1,9 @@
 CHANGE LOG
 
+2020-XX-XX - Version 4.0.0
+--------------------------------------------
+Changed name of Akamai endpoint to be more generic and accurate (CDN); includes tests
+
 2020-03-08 - Version 4.0.0-beta
 --------------------------------------------
 Bumped minimum supported version of PHP to 7.2

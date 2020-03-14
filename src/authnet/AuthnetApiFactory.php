@@ -40,9 +40,9 @@ class AuthnetApiFactory
     public const USE_DEVELOPMENT_SERVER = 1;
 
     /**
-     * @const Indicates use of the Akamai endpoint
+     * @const Indicates use of the CDN endpoint
      */
-    public const USE_AKAMAI_SERVER = 2;
+    public const USE_CDN_SERVER = 2;
 
     /**
      * Validates the Authorize.Net credentials and returns a Request object to be used to make an API call.
@@ -59,7 +59,7 @@ class AuthnetApiFactory
     {
         $login           = trim($login);
         $transaction_key = trim($transaction_key);
-        $server          = $server ?? self::USE_AKAMAI_SERVER;
+        $server          = $server ?? self::USE_CDN_SERVER;
         $api_url         = static::getWebServiceURL($server);
 
         if (empty($login) || empty($transaction_key)) {
@@ -90,7 +90,7 @@ class AuthnetApiFactory
         $urls = [
             static::USE_PRODUCTION_SERVER  => 'https://api.authorize.net/xml/v1/request.api',
             static::USE_DEVELOPMENT_SERVER => 'https://apitest.authorize.net/xml/v1/request.api',
-            static::USE_AKAMAI_SERVER      => 'https://api2.authorize.net/xml/v1/request.api',
+            static::USE_CDN_SERVER      => 'https://api2.authorize.net/xml/v1/request.api',
         ];
         if (array_key_exists($server, $urls)) {
             return $urls[$server];
