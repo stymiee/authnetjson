@@ -90,7 +90,7 @@ class AuthnetApiFactory
         $urls = [
             static::USE_PRODUCTION_SERVER  => 'https://api.authorize.net/xml/v1/request.api',
             static::USE_DEVELOPMENT_SERVER => 'https://apitest.authorize.net/xml/v1/request.api',
-            static::USE_CDN_SERVER      => 'https://api2.authorize.net/xml/v1/request.api',
+            static::USE_CDN_SERVER         => 'https://api2.authorize.net/xml/v1/request.api',
         ];
         if (array_key_exists($server, $urls)) {
             return $urls[$server];
