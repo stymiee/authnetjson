@@ -11,7 +11,7 @@ Library that abstracts [Authorize.Net](http://www.authorize.net/)'s [JSON APIs](
 
 ## Requirements
 
-- PHP 7.2+ (Support PHP 7.2.0 - 7.4.*)
+- PHP 7.2+ (Support for PHP 7.2.0 - 7.4.*)
 - cURL PHP Extension
 - JSON PHP Extension
 - An Authorize.Net account
@@ -52,7 +52,7 @@ The format of the array to be passed during the API call follows the structure o
 
 ## Using the Authorize.Net Development Server
 
-Authorize.Net provides a development environment for developers to test their integration against. To use this server
+Authorize.Net provides a development environment for developers to test their integration against. To use this endpoint
 (as opposed to their production endpoint) set the optional third parameter of `AuthnetApiFactory::getJsonApiHandler()` to be `1` or use the built in class constant `AuthnetApiFactory::USE_DEVELOPMENT_SERVER`:
 
     $json = AuthnetApiFactory::getJsonApiHandler(AUTHNET_LOGIN, AUTHNET_TRANSKEY, 
