@@ -11,7 +11,7 @@ Library that abstracts [Authorize.Net](http://www.authorize.net/)'s [JSON APIs](
 
 ## Requirements
 
-- PHP 7.2+
+- PHP 7.2+ (Support PHP 7.2.0 - 7.4.*)
 - cURL PHP Extension
 - JSON PHP Extension
 - An Authorize.Net account
