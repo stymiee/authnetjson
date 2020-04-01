@@ -190,12 +190,14 @@ transaction ID).
             ],
             'userFields' => [
                 'userField' => [
-                    'name' => 'MerchantDefinedFieldName1',
-                    'value' => 'MerchantDefinedFieldValue1',
-                ],
-                'userField' => [
-                    'name' => 'favorite_color',
-                    'value' => 'blue',
+                    0 => [
+                        'name' => 'MerchantDefinedFieldName1',
+                        'value' => 'MerchantDefinedFieldValue1',
+                    ],
+                    1 => [
+                        'name' => 'favorite_color',
+                        'value' => 'blue',
+                    ],
                 ],
             ],
         ],
