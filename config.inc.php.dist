@@ -11,5 +11,5 @@
     defined('AUTHNET_SIGNATURE') || define('AUTHNET_SIGNATURE', '');
 
     if (version_compare(PHP_VERSION, '7.2.0') < 0) {
-        throw new \Exception('AuthnetJson requires PHP 7.2 or greater');
+        throw new \RuntimeException('AuthnetJson requires PHP 7.2 or greater');
     }
