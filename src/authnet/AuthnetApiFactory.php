@@ -49,18 +49,18 @@ class AuthnetApiFactory
      *
      * @param  string      $login                          Authorize.Net API Login ID
      * @param  string      $transaction_key                Authorize.Net API Transaction Key
-     * @param  int         $server                         ID of which server to use (optional)
+     * @param  int         $endpoint                       ID of which endpoint to use (optional)
      * @return AuthnetJsonRequest
      * @throws ErrorException
      * @throws AuthnetInvalidCredentialsException
      * @throws AuthnetInvalidServerException
      */
-    public static function getJsonApiHandler(string $login, string $transaction_key, ?int $server = null) : object
+    public static function getJsonApiHandler(string $login, string $transaction_key, ?int $endpoint = null) : object
     {
         $login           = trim($login);
         $transaction_key = trim($transaction_key);
-        $server          = $server ?? self::USE_CDN_SERVER;
-        $api_url         = static::getWebServiceURL($server);
+        $endpoint        = $endpoint ?? self::USE_CDN_SERVER;
+        $api_url         = static::getWebServiceURL($endpoint);
 
         if (empty($login) || empty($transaction_key)) {
             throw new AuthnetInvalidCredentialsException('You have not configured your login credentials properly.');
