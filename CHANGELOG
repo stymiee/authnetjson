@@ -157,7 +157,7 @@ Fixed bug where AuthnetInvalidJsonException would not be thrown when invalid JSO
 
 2015-03-30 - Version 1.0.1
 --------------------------------------------
-Fixed bug where setting the third parameter AuthnetApiFactory::getJsonApiHandler to NULL would default to production server
+Fixed bug where setting the third parameter AuthnetApiFactory::getJsonApiHandler to NULL would default to production endpoint
 Throws AuthnetInvalidJsonException if response JSON is not valid
 Finished adding examples
 Added more unit tests
