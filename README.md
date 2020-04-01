@@ -1,6 +1,5 @@
 [![Latest Stable Version](https://poser.pugx.org/stymiee/authnetjson/v/stable.svg)](https://packagist.org/packages/stymiee/authnetjson)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/stymiee/authnetjson/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/stymiee/authnetjson/?branch=master)
-[![Build Status](https://scrutinizer-ci.com/g/stymiee/authnetjson/badges/build.png?b=master)](https://scrutinizer-ci.com/g/stymiee/authnetjson/build-status/master)
 [![Maintainability](https://api.codeclimate.com/v1/badges/5847da924af47933e25f/maintainability)](https://codeclimate.com/github/stymiee/authnetjson/maintainability)
 
 # AuthnetJSON
