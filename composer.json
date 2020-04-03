@@ -12,6 +12,7 @@
         "capture-transaction",
         "authorize-net",
         "authorizenet",
+        "authnet",
         "payment",
         "payment-gateway"
     ],
@@ -21,7 +22,7 @@
         {
             "name": "John Conde",
             "email": "stymiee@gmail.com",
-            "homepage": "http://www.johnconde.net",
+            "homepage": "https://stymiee.dev",
             "role": "Developer"
         }
     ],
@@ -38,7 +39,10 @@
     },
     "autoload": {
         "psr-4": {
-            "JohnConde\\Authnet\\": ["src/authnet/" ,"src/exceptions/"]
+            "JohnConde\\Authnet\\": [
+                "src/authnet/",
+                "src/exceptions/"
+            ]
         }
     }
 }
