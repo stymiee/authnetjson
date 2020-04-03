@@ -13,7 +13,7 @@ virtually every aspect of the Authorize.Net production APIs without incurring an
 ### Use a webhook testing site to test webhooks
 
 Having a full understanding of what a webhook looks like makes working with webhooks easier. You can inspect an 
-Authorize.Net webhook using a third party service like [RequestBin](https://requestbin.fullcontact.com/).
+Authorize.Net webhook using a third party service like [webhook.site](https://webhook.site/).
 
 ## FAQ
 
