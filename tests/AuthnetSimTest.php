@@ -13,7 +13,7 @@ namespace JohnConde\Authnet;
 
 use PHPUnit\Framework\TestCase;
 
-class AuthnetJsonSimTest extends TestCase
+class AuthnetSimTest extends TestCase
 {
     private $login;
     private $transactionKey;
