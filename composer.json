@@ -16,7 +16,7 @@
         "payment",
         "payment-gateway"
     ],
-    "homepage": "http://github.com/stymiee/authnetjson",
+    "homepage": "https://github.com/stymiee/authnetjson",
     "license": "Apache-2.0",
     "authors": [
         {
