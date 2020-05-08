@@ -16,6 +16,9 @@ Library that abstracts [Authorize.Net](http://www.authorize.net/)'s [JSON APIs](
 - JSON PHP Extension
 - An Authorize.Net account
 
+Support for PHP versions less than 7.2 has been removed from the master branch. There is a [PHP 5.6 compatible branch](https://github.com/stymiee/authnetjson/tree/php56) 
+available for development and releases for 5.6 may continue to be made as long as it is feasible to do so.
+
 ## Installation
 
 Simply add a dependency on `stymiee/authnetjson` to your project's `composer.json` file if you use [Composer](http://getcomposer.org/)
