@@ -1,10 +1,11 @@
 CHANGE LOG
 
-2020-XX-XX - Version 4.0.0
+2020-05-08 - Version 4.0.0
 --------------------------------------------
 Changed name of Akamai endpoint to be more generic and accurate (CDN); includes tests
 Minor fixes for examples
 Changed config.inc.php to throw RuntimeException
+Master branch will now support PHP 7.2+. PHP 5.6+ has been moved to its own branch.
 
 2020-03-08 - Version 4.0.0-beta
 --------------------------------------------
