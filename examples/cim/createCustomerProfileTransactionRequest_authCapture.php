@@ -76,8 +76,7 @@ SAMPLE RESPONSE
 
     namespace JohnConde\Authnet;
 
-    require('../../config.inc.php');
-    require('../../src/autoload.php');
+    require '../../config.inc.php';
 
     $request  = AuthnetApiFactory::getJsonApiHandler(AUTHNET_LOGIN, AUTHNET_TRANSKEY, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
     $response = $request->createCustomerProfileTransactionRequest([
@@ -95,14 +94,14 @@ SAMPLE RESPONSE
                     'description' => 'Ground based 5 to 10 day shipping'
                 ],
                 'lineItems' => [
-                    0 => [
+                    [
                         'itemId' => '1',
                         'name' => 'vase',
                         'description' => 'Cannes logo',
                         'quantity' => '18',
                         'unitPrice' => '45.00'
                     ],
-                    1 => [
+                    [
                         'itemId' => '2',
                         'name' => 'desk',
                         'description' => 'Big Desk',
@@ -128,48 +127,16 @@ SAMPLE RESPONSE
 ?>
 
 <!DOCTYPE html>
-<html>
 <html lang="en">
     <head>
         <title></title>
-        <style type="text/css">
-            table
-            {
-                border: 1px solid #cccccc;
-                margin: auto;
-                border-collapse: collapse;
-                max-width: 90%;
-            }
-
-            table td
-            {
-                padding: 3px 5px;
-                vertical-align: top;
-                border-top: 1px solid #cccccc;
-            }
-
-            pre
-            {
-            	overflow-x: auto; /* Use horizontal scroller if needed; for Firefox 2, not needed in Firefox 3 */
-            	white-space: pre-wrap; /* css-3 */
-            	white-space: -moz-pre-wrap !important; /* Mozilla, since 1999 */
-            	white-space: -pre-wrap; /* Opera 4-6 */
-            	white-space: -o-pre-wrap; /* Opera 7 */ /*
-            	width: 99%; */
-            	word-wrap: break-word; /* Internet Explorer 5.5+ */
-            }
-
-            table th
-            {
-                background: #e5e5e5;
-                color: #666666;
-            }
-
-            h1, h2
-            {
-                text-align: center;
-            }
-        </style>
+    <style type="text/css">
+        table { border: 1px solid #cccccc; margin: auto; border-collapse: collapse; max-width: 90%; }
+        table td { padding: 3px 5px; vertical-align: top; border-top: 1px solid #cccccc; }
+        pre { white-space: pre-wrap; }
+        table th { background: #e5e5e5; color: #666666; }
+        h1, h2 { text-align: center; }
+    </style>
     </head>
     <body>
         <h1>
@@ -189,11 +156,11 @@ SAMPLE RESPONSE
             </tr>
             <tr>
                 <th>Successful?</th>
-                <td><?php echo ($response->isSuccessful()) ? 'yes' : 'no'; ?></td>
+                <td><?php echo $response->isSuccessful() ? 'yes' : 'no'; ?></td>
             </tr>
             <tr>
                 <th>Error?</th>
-                <td><?php echo ($response->isError()) ? 'yes' : 'no'; ?></td>
+                <td><?php echo $response->isError() ? 'yes' : 'no'; ?></td>
             </tr>
             <tr>
                 <th>Transaction ID</th>

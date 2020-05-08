@@ -1,31 +1,31 @@
 [![Latest Stable Version](https://poser.pugx.org/stymiee/authnetjson/v/stable.svg)](https://packagist.org/packages/stymiee/authnetjson)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/stymiee/authnetjson/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/stymiee/authnetjson/?branch=master)
+[![Total Downloads](https://poser.pugx.org/stymiee/authnetjson/downloads)](https://packagist.org/packages/stymiee/authnetjson)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/stymiee/authnetjson/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/stymiee/authnetjson/?branch=php72)
+[![Build Status](https://scrutinizer-ci.com/g/stymiee/authnetjson/badges/build.png?b=php72)](https://scrutinizer-ci.com/g/stymiee/authnetjson/build-status/php72)
+[![Code Coverage](https://scrutinizer-ci.com/g/stymiee/authnetjson/badges/coverage.png?b=php72)](https://scrutinizer-ci.com/g/stymiee/authnetjson/?branch=php72)
 [![Maintainability](https://api.codeclimate.com/v1/badges/5847da924af47933e25f/maintainability)](https://codeclimate.com/github/stymiee/authnetjson/maintainability)
-
+[![License](https://poser.pugx.org/stymiee/authnetjson/license)](https://packagist.org/packages/stymiee/authnetjson)
 # AuthnetJSON
 
 Library that abstracts [Authorize.Net](http://www.authorize.net/)'s [JSON APIs](http://developer.authorize.net/api/reference/).
 
 ## Requirements
 
-- PHP 5.4+ (Supports PHP 5.4.0 - 7.4.*)
+- PHP 7.2+ (Support for PHP 7.2.0 - 7.4.*)
 - cURL PHP Extension
 - JSON PHP Extension
 - An Authorize.Net account
-- TLS 1.2 capable versions of libcurl and OpenSSL or equivalent
-
-**NOTE:** AuthnetJSON 4.0 will not be backwards compatible with PHP 5 and the minimum PHP version will be 7.2.
 
 ## Installation
 
 Simply add a dependency on `stymiee/authnetjson` to your project's `composer.json` file if you use [Composer](http://getcomposer.org/)
 to manage the dependencies of your project.
 
-Here is a minimal example of a `composer.json` file that just defines a dependency on AuthnetJson:
+Here is a minimal example of a `composer.json` file that just defines a dependency on AuthnetJSON:
 
     {
         "require": {
-            "stymiee/authnetjson": "3.1.*"
+            "stymiee/authnetjson": "~4.0"
         }
     }
 
@@ -52,10 +52,11 @@ The format of the array to be passed during the API call follows the structure o
 
 ## Using the Authorize.Net Development Server
 
-Authorize.Net provides a development environment for developers to test their integration against. To use this server
+Authorize.Net provides a development environment for developers to test their integration against. To use this endpoint
 (as opposed to their production endpoint) set the optional third parameter of `AuthnetApiFactory::getJsonApiHandler()` to be `1` or use the built in class constant `AuthnetApiFactory::USE_DEVELOPMENT_SERVER`:
 
-    $json = AuthnetApiFactory::getJsonApiHandler(AUTHNET_LOGIN, AUTHNET_TRANSKEY, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
+    $json = AuthnetApiFactory::getJsonApiHandler(AUTHNET_LOGIN, AUTHNET_TRANSKEY, 
+                                                    AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
 
 ## Usage Examples
 
@@ -68,14 +69,14 @@ transaction ID).
 
     $request = AuthnetApiFactory::getJsonApiHandler(AUTHNET_LOGIN, AUTHNET_TRANSKEY);
     $response = $request->createTransactionRequest([
-        'refId' => rand(1000000, 100000000],
+        'refId' => rand(1000000, 100000000),
         'transactionRequest' => [
             'transactionType' => 'authCaptureTransaction',
             'amount' => 5,
             'payment' => [
                 'creditCard' => [
                     'cardNumber' => '4111111111111111',
-                    'expirationDate' => '122016',
+                    'expirationDate' => '122026',
                     'cardCode' => '999',
                 ]
             ]
@@ -89,14 +90,14 @@ transaction ID).
 
     $request = AuthnetApiFactory::getJsonApiHandler(AUTHNET_LOGIN, AUTHNET_TRANSKEY);
     $response = $request->createTransactionRequest([
-        'refId' => rand(1000000, 100000000],
+        'refId' => rand(1000000, 100000000),
         'transactionRequest' => [
             'transactionType' => 'authCaptureTransaction',
             'amount' => 5,
             'payment' => [
                 'creditCard' => [
                     'cardNumber' => '4111111111111111',
-                    'expirationDate' => '122016',
+                    'expirationDate' => '122026',
                     'cardCode' => '999',
                 ],
             ],
@@ -189,12 +190,14 @@ transaction ID).
             ],
             'userFields' => [
                 'userField' => [
-                    'name' => 'MerchantDefinedFieldName1',
-                    'value' => 'MerchantDefinedFieldValue1',
-                ],
-                'userField' => [
-                    'name' => 'favorite_color',
-                    'value' => 'blue',
+                    0 => [
+                        'name' => 'MerchantDefinedFieldName1',
+                        'value' => 'MerchantDefinedFieldValue1',
+                    ],
+                    1 => [
+                        'name' => 'favorite_color',
+                        'value' => 'blue',
+                    ],
                 ],
             ],
         ],
@@ -224,7 +227,7 @@ transaction ID).
                 'payment' => [
                     'creditCard' => [
                     'cardNumber' => '4111111111111111',
-                    'expirationDate' => '2016-08',
+                    'expirationDate' => '2026-08',
                     ],
                 ],
             ],
@@ -257,7 +260,7 @@ transaction ID).
                     'length' => '1',
                     'unit' => 'months'
                 ],
-                'startDate' => '2015-04-18',
+                'startDate' => '2020-04-18',
                 'totalOccurrences' => '12',
                 'trialOccurrences' => '1'
             ],
@@ -285,8 +288,8 @@ transaction ID).
     $request = AuthnetApiFactory::getJsonApiHandler(AUTHNET_LOGIN, AUTHNET_TRANSKEY);
     $response = $request->getSettledBatchListRequest([
         'includeStatistics'   => 'true',
-        'firstSettlementDate' => '2015-01-01T08:15:30',
-        'lastSettlementDate'  => '2015-01-30T08:15:30',
+        'firstSettlementDate' => '2020-01-01T08:15:30',
+        'lastSettlementDate'  => '2020-01-30T08:15:30',
     ]);
 
     if ($response->isSuccessful()) {
@@ -349,7 +352,7 @@ If `apache_request_headers()`/`getallheaders()` are not available to you, you ca
 ## Debugging
 
 To assist with debugging the `__toString()` method has been overridden to output important elements pertaining to the
-usage of this library. Simple `echo` your AuthnetJson object to see:
+usage of this library. Simple `echo` your AuthnetJSON object to see:
 
 - The API Login ID used
 - The API transaction Key used
@@ -365,9 +368,12 @@ usage of this library. Simple `echo` your AuthnetJson object to see:
 
 ## Support
 
-If you require assistance using this library I can be found at Stack Overflow. Be sure when you
+If you require assistance using this library start by viewing the [HELP.md](HELP.md) file included in this package. It 
+includes common problems and their solutions.
+
+If you need additional assistance, I can be found at Stack Overflow. Be sure when you
 [ask a question](http://stackoverflow.com/questions/ask?tags=php,authorize.net) pertaining to the usage of
-this class to tag your question with the **PHP** and **Authorize.Net** tags. Make sure you follow their
+this class be sure to tag your question with the **PHP** and **Authorize.Net** tags. Make sure you follow their
 [guide for asking a good question](http://stackoverflow.com/help/how-to-ask) as poorly asked questions will be closed
 and I will not be able to assist you.
 

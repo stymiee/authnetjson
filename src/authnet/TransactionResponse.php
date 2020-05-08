@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * This file is part of the AuthnetJSON package.
  *
@@ -21,11 +23,12 @@ namespace JohnConde\Authnet;
  * @link        https://github.com/stymiee/authnetjson
  * @see         https://developer.authorize.net/api/reference/
  */
-class TransactionResponse {
+class TransactionResponse
+{
     /**
      * @var     array Transaction response fields to map to values parsed from a transaction response string
      */
-    private $fieldMap = [
+    private static $fieldMap = [
         1 => 'ResponseCode',
         2 => 'ResponseSubcode',
         3 => 'ResponseReasonCode',
@@ -76,14 +79,14 @@ class TransactionResponse {
     /**
      * @var     array Transaction response fields to map to values parsed from a transaction response string
      */
-    private $responseArray = [];
+    private $responseArray;
 
     /**
      * Creates out TransactionResponse object and assigns the response variables to an array
      *
      * @param   string  $response   Comma delimited transaction response string
      */
-    public function __construct($response)
+    public function __construct(string $response)
     {
         $this->responseArray = array_merge([null], explode(',', $response));
     }
@@ -96,15 +99,13 @@ class TransactionResponse {
      * @param   mixed  $field  Name or key of the transaction field to be retrieved
      * @return  string Transaction field to be retrieved
      */
-    public function getTransactionResponseField($field)
+    public function getTransactionResponseField($field) : ?string
     {
         $value = null;
         if (is_int($field)) {
-            $value = (isset($this->responseArray[$field])) ? $this->responseArray[$field] : $value;
-        } else {
-            if ($key = array_search($field, $this->fieldMap)) {
-                $value = $this->responseArray[$key];
-            }
+            $value = $this->responseArray[$field] ?? $value;
+        } elseif ($key = array_search($field, self::$fieldMap, true)) {
+            $value = $this->responseArray[$key];
         }
         return $value;
     }

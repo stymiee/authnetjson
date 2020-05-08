@@ -12,8 +12,7 @@
 namespace JohnConde\Authnet;
 
 use PHPUnit\Framework\TestCase;
-
-require(__DIR__ . '/../config.inc.php');
+use Curl\Curl;
 
 class AuthnetWebhooksRequestTest extends TestCase
 {
@@ -22,13 +21,13 @@ class AuthnetWebhooksRequestTest extends TestCase
     private $server;
     private $http;
 
-    protected function setUp()
+    protected function setUp() : void
     {
         $this->login          = 'test';
         $this->transactionKey = 'test';
         $this->server         = AuthnetApiFactory::USE_DEVELOPMENT_SERVER;
 
-        $this->http = $this->getMockBuilder('\Curl\Curl')
+        $this->http = $this->getMockBuilder(Curl::class)
             ->setMethods(['post','get','put','delete'])
             ->getMock();
         $this->http->error = false;
@@ -37,7 +36,7 @@ class AuthnetWebhooksRequestTest extends TestCase
     /**
      * @covers            \JohnConde\Authnet\AuthnetWebhooksRequest::__construct()
      */
-    public function testConstructor()
+    public function testConstructor() : void
     {
         $request = AuthnetApiFactory::getWebhooksHandler($this->login, $this->transactionKey, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
 
@@ -51,7 +50,7 @@ class AuthnetWebhooksRequestTest extends TestCase
     /**
      * @covers            \JohnConde\Authnet\AuthnetWebhooksRequest::__toString()
      */
-    public function testToString()
+    public function testToString() : void
     {
         $this->http->error = false;
         $this->http->response = '[{
@@ -66,14 +65,14 @@ class AuthnetWebhooksRequestTest extends TestCase
         echo $request;
         $string = ob_get_clean();
 
-        $this->assertContains('https://apitest.authorize.net/rest/v1/webhooks/871a6a11-b654-45af-b97d-da72a490d0fd', $string);
-        $this->assertContains('{"url":"http:\/\/www.example.com\/webhook","eventTypes":["net.authorize.customer.subscription.expiring"],"status":"inactive"}', $string);
+        $this->assertStringContainsString('https://apitest.authorize.net/rest/v1/webhooks/871a6a11-b654-45af-b97d-da72a490d0fd', $string);
+        $this->assertStringContainsString('{"url":"http:\/\/www.example.com\/webhook","eventTypes":["net.authorize.customer.subscription.expiring"],"status":"inactive"}', $string);
     }
 
     /**
      * @covers            \JohnConde\Authnet\AuthnetWebhooksRequest::__toString()
      */
-    public function testToStringNA()
+    public function testToStringNA() : void
     {
         $this->http->error = false;
         $this->http->response = '[{
@@ -88,16 +87,17 @@ class AuthnetWebhooksRequestTest extends TestCase
         echo $request;
         $string = ob_get_clean();
 
-        $this->assertContains('N/A', $string);
+        $this->assertStringContainsString('N/A', $string);
     }
 
     /**
      * @covers            \JohnConde\Authnet\AuthnetWebhooksRequest::getEventTypes()
+     * @covers            \JohnConde\Authnet\AuthnetWebhooksRequest::getByUrl()
      */
-    public function testGetEventTypes()
+    public function testGetEventTypes() : void
     {
         $this->http->error = false;
-        $this->http->response = $responseJson = '[
+        $this->http->response = '[
             {
                 "name": "net.authorize.customer.created"
             },
@@ -173,7 +173,7 @@ class AuthnetWebhooksRequestTest extends TestCase
     /**
      * @covers            \JohnConde\Authnet\AuthnetWebhooksRequest::createWebhooks()
      */
-    public function testCreateWebhooks()
+    public function testCreateWebhooks() : void
     {
         $this->http->error = false;
         $this->http->response = '{
@@ -207,7 +207,7 @@ class AuthnetWebhooksRequestTest extends TestCase
     /**
      * @covers            \JohnConde\Authnet\AuthnetWebhooksRequest::testWebhook()
      */
-    public function testTestWebhook()
+    public function testTestWebhook() : void
     {
         $this->http->error = false;
         $this->http->response = '';
@@ -222,7 +222,7 @@ class AuthnetWebhooksRequestTest extends TestCase
     /**
      * @covers            \JohnConde\Authnet\AuthnetWebhooksRequest::deleteWebhook()
      */
-    public function testDeleteWebhook()
+    public function testDeleteWebhook() : void
     {
         $this->http->error = false;
         $this->http->response = '';
@@ -236,8 +236,9 @@ class AuthnetWebhooksRequestTest extends TestCase
 
     /**
      * @covers            \JohnConde\Authnet\AuthnetWebhooksRequest::getWebhooks()
+     * @covers            \JohnConde\Authnet\AuthnetWebhooksRequest::getByUrl()
      */
-    public function testGetWebhooks()
+    public function testGetWebhooks() : void
     {
         $this->http->error = false;
         $this->http->response = '[{
@@ -296,8 +297,9 @@ class AuthnetWebhooksRequestTest extends TestCase
 
     /**
      * @covers            \JohnConde\Authnet\AuthnetWebhooksRequest::getWebhook()
+     * @covers            \JohnConde\Authnet\AuthnetWebhooksRequest::getByUrl()
      */
-    public function testGetWebhook()
+    public function testGetWebhook() : void
     {
         $this->http->error = false;
         $this->http->response = '{
@@ -327,7 +329,7 @@ class AuthnetWebhooksRequestTest extends TestCase
     /**
      * @covers            \JohnConde\Authnet\AuthnetWebhooksRequest::updateWebhook()
      */
-    public function testUpdateWebhook()
+    public function testUpdateWebhook() : void
     {
         $this->http->error = false;
         $this->http->response = '{
@@ -356,7 +358,7 @@ class AuthnetWebhooksRequestTest extends TestCase
     /**
      * @covers            \JohnConde\Authnet\AuthnetWebhooksRequest::getNotificationHistory()
      */
-    public function testGetNotificationHistory()
+    public function testGetNotificationHistory() : void
     {
         $this->http->error = false;
         $this->http->response = '{
@@ -390,7 +392,7 @@ class AuthnetWebhooksRequestTest extends TestCase
     /**
      * @covers            \JohnConde\Authnet\AuthnetWebhooksRequest::handleResponse()
      */
-    public function testHandleResponse()
+    public function testHandleResponse() : void
     {
         $this->http->error = false;
         $this->http->response = '{"error"}';
@@ -398,7 +400,7 @@ class AuthnetWebhooksRequestTest extends TestCase
         $request = AuthnetApiFactory::getWebhooksHandler($this->login, $this->transactionKey, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
         $request->setProcessHandler($this->http);
 
-        $method = new \ReflectionMethod('\JohnConde\Authnet\AuthnetWebhooksRequest', 'handleResponse');
+        $method = new \ReflectionMethod(AuthnetWebhooksRequest::class, 'handleResponse');
         $method->setAccessible(true);
 
         $response = $method->invoke($request);
@@ -408,10 +410,12 @@ class AuthnetWebhooksRequestTest extends TestCase
 
     /**
      * @covers            \JohnConde\Authnet\AuthnetWebhooksRequest::handleResponse()
-     * @expectedException \JohnConde\Authnet\AuthnetCurlException
+     * @covers            \JohnConde\Authnet\AuthnetCurlException::__construct()
      */
-    public function testHandleResponseWithErrorMessage()
+    public function testHandleResponseWithErrorMessage() : void
     {
+        $this->expectException(AuthnetCurlException::class);
+
         $this->http->error          = true;
         $this->http->error_message  = 'Error Message';
         $this->http->error_code     = 100;
@@ -425,7 +429,7 @@ class AuthnetWebhooksRequestTest extends TestCase
         $request = AuthnetApiFactory::getWebhooksHandler($this->login, $this->transactionKey, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
         $request->setProcessHandler($this->http);
 
-        $method = new \ReflectionMethod('\JohnConde\Authnet\AuthnetWebhooksRequest', 'handleResponse');
+        $method = new \ReflectionMethod(AuthnetWebhooksRequest::class, 'handleResponse');
         $method->setAccessible(true);
 
         $method->invoke($request);
@@ -433,10 +437,12 @@ class AuthnetWebhooksRequestTest extends TestCase
 
     /**
      * @covers            \JohnConde\Authnet\AuthnetWebhooksRequest::handleResponse()
-     * @expectedException \JohnConde\Authnet\AuthnetCurlException
+     * @covers            \JohnConde\Authnet\AuthnetCurlException::__construct()
      */
-    public function testHandleResponseWithErrorMessageTestMessage()
+    public function testHandleResponseWithErrorMessageTestMessage() : void
     {
+        $this->expectException(AuthnetCurlException::class);
+
         $this->http->error          = true;
         $this->http->error_message  = 'Error Message';
         $this->http->error_code     = 100;
@@ -450,7 +456,7 @@ class AuthnetWebhooksRequestTest extends TestCase
         $request = AuthnetApiFactory::getWebhooksHandler($this->login, $this->transactionKey, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
         $request->setProcessHandler($this->http);
 
-        $method = new \ReflectionMethod('\JohnConde\Authnet\AuthnetWebhooksRequest', 'handleResponse');
+        $method = new \ReflectionMethod(AuthnetWebhooksRequest::class, 'handleResponse');
         $method->setAccessible(true);
 
         try {
@@ -463,10 +469,12 @@ class AuthnetWebhooksRequestTest extends TestCase
 
     /**
      * @covers            \JohnConde\Authnet\AuthnetWebhooksRequest::handleResponse()
-     * @expectedException \JohnConde\Authnet\AuthnetCurlException
+     * @covers            \JohnConde\Authnet\AuthnetCurlException::__construct()
      */
-    public function testHandleResponseWithErrorMessageNoMessage()
+    public function testHandleResponseWithErrorMessageNoMessage() : void
     {
+        $this->expectException(AuthnetCurlException::class);
+
         $this->http->error          = true;
         $this->http->error_code     = 100;
         $this->http->response       = json_encode([
@@ -478,7 +486,7 @@ class AuthnetWebhooksRequestTest extends TestCase
         $request = AuthnetApiFactory::getWebhooksHandler($this->login, $this->transactionKey, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
         $request->setProcessHandler($this->http);
 
-        $method = new \ReflectionMethod('\JohnConde\Authnet\AuthnetWebhooksRequest', 'handleResponse');
+        $method = new \ReflectionMethod(AuthnetWebhooksRequest::class, 'handleResponse');
         $method->setAccessible(true);
 
         try {
@@ -493,7 +501,7 @@ class AuthnetWebhooksRequestTest extends TestCase
     /**
      * @covers            \JohnConde\Authnet\AuthnetWebhooksRequest::setProcessHandler()
      */
-    public function testProcessorIsInstanceOfCurlWrapper()
+    public function testProcessorIsInstanceOfCurlWrapper() : void
     {
         $request = new AuthnetWebhooksRequest(null, null, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
         $request->setProcessHandler(new \Curl\Curl());
@@ -502,13 +510,13 @@ class AuthnetWebhooksRequestTest extends TestCase
         $processor = $reflectionOfRequest->getProperty('processor');
         $processor->setAccessible(true);
 
-        $this->assertInstanceOf('\Curl\Curl', $processor->getValue($request));
+        $this->assertInstanceOf(Curl::class, $processor->getValue($request));
     }
 
     /**
      * @covers            \JohnConde\Authnet\AuthnetWebhooksRequest::getRawRequest()
      */
-    public function testGetRawRequest()
+    public function testGetRawRequest() : void
     {
         $this->http->response = $responseJson = '[{
             "name": "test"

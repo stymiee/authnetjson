@@ -12,15 +12,14 @@
 namespace JohnConde\Authnet;
 
 use PHPUnit\Framework\TestCase;
-
-require(__DIR__ . '/../config.inc.php');
+use Curl\Curl;
 
 class AuthnetJsonRequestTest extends TestCase
 {
     /**
      * @covers            \JohnConde\Authnet\AuthnetJsonRequest::__construct()
      */
-    public function testConstructor()
+    public function testConstructor() : void
     {
         $apiLogin    = 'apiLogin';
         $apiTransKey = 'apiTransKey';
@@ -40,28 +39,32 @@ class AuthnetJsonRequestTest extends TestCase
 
     /**
      * @covers            \JohnConde\Authnet\AuthnetJsonRequest::__set()
-     * @expectedException \JohnConde\Authnet\AuthnetCannotSetParamsException
+     * @covers            \JohnConde\Authnet\AuthnetCannotSetParamsException::__construct()
      */
-    public function testExceptionIsRaisedForCannotSetParamsException()
+    public function testExceptionIsRaisedForCannotSetParamsException() : void
     {
-        $request = new AuthnetJsonRequest(null, null, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
+        $this->expectException(AuthnetCannotSetParamsException::class);
+
+        $request = new AuthnetJsonRequest('', '', AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
         $request->login = 'test';
     }
 
 
     /**
      * @covers            \JohnConde\Authnet\AuthnetJsonRequest::process()
+     * @covers            \JohnConde\Authnet\AuthnetCurlException::__construct()
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
-     * @expectedException \JohnConde\Authnet\AuthnetInvalidJsonException
      */
-    public function testExceptionIsRaisedForInvalidJsonException()
+    public function testExceptionIsRaisedForInvalidJsonException() : void
     {
+        $this->expectException(AuthnetCurlException::class);
+
         $requestJson = array(
             'customerProfileId' => '123456789'
         );
 
-        $this->http = $this->getMockBuilder('\Curl\Curl')
+        $this->http = $this->getMockBuilder(Curl::class)
             ->setMethods(['post'])
             ->getMock();
         $this->http->error = false;
@@ -75,16 +78,16 @@ class AuthnetJsonRequestTest extends TestCase
     /**
      * @covers            \JohnConde\Authnet\AuthnetJsonRequest::setProcessHandler()
      */
-    public function testProcessorIsInstanceOfCurlWrapper()
+    public function testProcessorIsInstanceOfCurlWrapper() : void
     {
-        $request = new AuthnetJsonRequest(null, null, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
-        $request->setProcessHandler(new \Curl\Curl());
+        $request = new AuthnetJsonRequest('', '', AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
+        $request->setProcessHandler(new Curl());
 
         $reflectionOfRequest = new \ReflectionObject($request);
         $processor = $reflectionOfRequest->getProperty('processor');
         $processor->setAccessible(true);
 
-        $this->assertInstanceOf('\Curl\Curl', $processor->getValue($request));
+        $this->assertInstanceOf(Curl::class, $processor->getValue($request));
     }
 
 
@@ -92,7 +95,7 @@ class AuthnetJsonRequestTest extends TestCase
      * @covers            \JohnConde\Authnet\AuthnetJsonRequest::__toString()
      * @covers            \JohnConde\Authnet\AuthnetJsonRequest::__call()
      */
-    public function testToString()
+    public function testToString() : void
     {
         $requestJson = array(
             'refId' => '94564789',
@@ -246,7 +249,7 @@ class AuthnetJsonRequestTest extends TestCase
         $apiLogin    = 'apiLogin';
         $apiTransKey = 'apiTransKey';
 
-        $http = $this->getMockBuilder('\Curl\Curl')
+        $http = $this->getMockBuilder(Curl::class)
             ->setMethods(['post'])
             ->getMock();
         $http->error = false;
@@ -260,14 +263,14 @@ class AuthnetJsonRequestTest extends TestCase
         echo $request;
         $string = ob_get_clean();
 
-        $this->assertContains($apiLogin, $string);
-        $this->assertContains($apiTransKey, $string);
+        $this->assertStringContainsString($apiLogin, $string);
+        $this->assertStringContainsString($apiTransKey, $string);
     }
 
     /**
      * @covers            \JohnConde\Authnet\AuthnetJsonRequest::getRawRequest()
      */
-    public function testGetRawRequest()
+    public function testGetRawRequest() : void
     {
         $requestJson = array(
             'refId' => '94564789',
@@ -287,7 +290,7 @@ class AuthnetJsonRequestTest extends TestCase
         $apiLogin    = 'apiLogin';
         $apiTransKey = 'apiTransKey';
 
-        $http = $this->getMockBuilder('\Curl\Curl')
+        $http = $this->getMockBuilder(Curl::class)
             ->setMethods(['post'])
             ->getMock();
         $http->error = false;
@@ -302,23 +305,82 @@ class AuthnetJsonRequestTest extends TestCase
     }
 
     /**
-     * @covers            \JohnConde\Authnet\AuthnetJsonRequest::process()
-     * @expectedException \JohnConde\Authnet\AuthnetCurlException
+     * @covers \JohnConde\Authnet\AuthnetJsonRequest::process()
+     * @covers \JohnConde\Authnet\AuthnetCurlException::__construct()
      */
-    public function testProcessError()
+    public function testProcessError() : void
     {
+        $this->expectException(AuthnetCurlException::class);
+
         $apiLogin    = 'apiLogin';
         $apiTransKey = 'apiTransKey';
 
-        $http = $this->getMockBuilder('\Curl\Curl')
+        $http = $this->getMockBuilder(Curl::class)
             ->setMethods(['post'])
             ->getMock();
-        $http->error      = true;
-        $http->error_code = 10;
-        $http->error      = 'Test Error Message';
+        $http->error         = true;
+        $http->error_code    = 10;
+        $http->error_message = 'Test Error Message';
 
         $request = AuthnetApiFactory::getJsonApiHandler($apiLogin, $apiTransKey, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
         $request->setProcessHandler($http);
         $request->deleteCustomerProfileRequest([]);
+    }
+
+    /**
+     * @covers \JohnConde\Authnet\AuthnetJsonRequest::makeRequest()
+     */
+    public function testMakeRequestWithError() : void
+    {
+        $apiLogin    = 'apiLogin';
+        $apiTransKey = 'apiTransKey';
+
+        $http = $this->getMockBuilder(Curl::class)
+            ->setMethods(['post'])
+            ->getMock();
+        $http->error         = true;
+        $http->error_code    = 10;
+        $http->error_message = 'Test Error Message';
+
+        $request = AuthnetApiFactory::getJsonApiHandler($apiLogin, $apiTransKey, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
+        $request->setProcessHandler($http);
+
+        $method = new \ReflectionMethod(AuthnetJsonRequest::class, 'makeRequest');
+        $method->setAccessible(true);
+        $method->invoke($request);
+
+        $reflectionOfRequest = new \ReflectionObject($request);
+        $retries = $reflectionOfRequest->getProperty('retries');
+        $retries->setAccessible(true);
+
+        $reflectionOfMaxRetries = new \ReflectionClassConstant(AuthnetJsonRequest::class, 'MAX_RETRIES');
+
+        $this->assertEquals($reflectionOfMaxRetries->getValue(), $retries->getValue($request));
+    }
+
+    /**
+     * @covers \JohnConde\Authnet\AuthnetJsonRequest::makeRequest()
+     */
+    public function testMakeRequestWithNoError() : void
+    {
+        $apiLogin    = 'apiLogin';
+        $apiTransKey = 'apiTransKey';
+
+        $http = $this->getMockBuilder(Curl::class)
+            ->setMethods(['post'])
+            ->getMock();
+        $http->error         = false;
+
+        $request = AuthnetApiFactory::getJsonApiHandler($apiLogin, $apiTransKey, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
+        $request->setProcessHandler($http);
+
+        $method = new \ReflectionMethod(AuthnetJsonRequest::class, 'makeRequest');
+        $method->setAccessible(true);
+        $method->invoke($request);
+
+        $reflectionOfRequest = new \ReflectionObject($request);
+        $retries = $reflectionOfRequest->getProperty('retries');
+        $retries->setAccessible(true);
+        $this->assertEquals(0, $retries->getValue($request));
     }
 }

@@ -1,5 +1,27 @@
 CHANGE LOG
 
+2020-XX-XX - Version 4.0.0
+--------------------------------------------
+Changed name of Akamai endpoint to be more generic and accurate (CDN); includes tests
+Minor fixes for examples
+Changed config.inc.php to throw RuntimeException
+
+2020-03-08 - Version 4.0.0-beta
+--------------------------------------------
+Bumped minimum supported version of PHP to 7.2
+If trying to retrieve non-existent response value, NULL is returned in AuthnetJsonResponse::__get()
+Added AuthnetJson::BOUNDLESS_OCCURRENCES to indicate an endless subscription
+Added support for prepaid cards
+Added constructor to Authnet exceptions
+Removed unused AuthnetInvalidParameterException class
+Updated unit tests for phpunit 8
+Removed unneeded require of config file in unit tests
+Added phpunit to require-dev
+Added CONTRIBUTING.md
+Shiny badges for the README
+Cleaned up HTML and CSS in examples
+Minor formatting changes
+
 2019-06-03 - Version 3.1.9
 --------------------------------------------
 Returned better error message when creating Webhook
@@ -8,7 +30,7 @@ Removed unnecessary suppression operators by checking if a variable is set in th
 2019-01-26 - Version 3.1.8
 --------------------------------------------
 Removed not actually missing return statement to AuthnetWebhooksRequest::delete
-Reduced complexity of AuthnetApiFactory::getWebServiceURL)(
+Reduced complexity of AuthnetApiFactory::getWebServiceURL()
 Reduced complexity of AuthnetWebhooksResponse::getEventTypes()
 Reduced complexity of AuthnetWebhook::getAllHeaders()
 
@@ -135,7 +157,7 @@ Fixed bug where AuthnetInvalidJsonException would not be thrown when invalid JSO
 
 2015-03-30 - Version 1.0.1
 --------------------------------------------
-Fixed bug where setting the third parameter AuthnetApiFactory::getJsonApiHandler to NULL would default to production server
+Fixed bug where setting the third parameter AuthnetApiFactory::getJsonApiHandler to NULL would default to production endpoint
 Throws AuthnetInvalidJsonException if response JSON is not valid
 Finished adding examples
 Added more unit tests

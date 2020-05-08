@@ -91,8 +91,7 @@ SAMPLE RESPONSE
 
 namespace JohnConde\Authnet;
 
-require('../../config.inc.php');
-require('../../src/autoload.php');
+require '../../config.inc.php';
 
 $successful = false;
 $error      = true;
@@ -108,37 +107,15 @@ catch (\Exception $e) {
 
 ?>
 <!DOCTYPE html>
-<html>
 <html lang="en">
 <head>
     <title>Webhooks :: Get Event Types</title>
     <style type="text/css">
-        table {
-            border: 1px solid #cccccc;
-            margin: auto;
-            border-collapse: collapse;
-            max-width: 90%;
-        }
-
-        table td {
-            padding: 3px 5px;
-            vertical-align: top;
-            border-top: 1px solid #cccccc;
-        }
-
-        pre {
-            white-space: pre-wrap; /* css-3 */
-            word-wrap: break-word; /* Internet Explorer 5.5+ */
-        }
-
-        table th {
-            background: #e5e5e5;
-            color: #666666;
-        }
-
-        h1, h2 {
-            text-align: center;
-        }
+        table { border: 1px solid #cccccc; margin: auto; border-collapse: collapse; max-width: 90%; }
+        table td { padding: 3px 5px; vertical-align: top; border-top: 1px solid #cccccc; }
+        pre { white-space: pre-wrap; }
+        table th { background: #e5e5e5; color: #666666; }
+        h1, h2 { text-align: center; }
     </style>
 </head>
 <body>

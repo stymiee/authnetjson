@@ -11,17 +11,18 @@
 
 /*************************************************************************************************
 
-Use the AIM JSON API to process an Authorization and Capture transaction (Sale)
+Use the AIM JSON API to process a partial auth transaction
 
 SAMPLE REQUEST
 --------------------------------------------------------------------------------------------------
+
 {
    "createTransactionRequest":{
       "merchantAuthentication":{
-         "name":"",
-         "transactionKey":""
+         "name":"8zY2zT32",
+         "transactionKey":"4WDx9a97v5DKY67a"
       },
-      "refId":94564789,
+      "refId":47222105,
       "transactionRequest":{
          "transactionType":"authCaptureTransaction",
          "amount":5,
@@ -36,44 +37,6 @@ SAMPLE REQUEST
             "invoiceNumber":"1324567890",
             "description":"this is a test transaction"
          },
-         "lineItems":{
-            "lineItem":[
-               {
-                  "itemId":"1",
-                  "name":"vase",
-                  "description":"Cannes logo",
-                  "quantity":"18",
-                  "unitPrice":"45.00"
-               },
-               {
-                  "itemId":"2",
-                  "name":"desk",
-                  "description":"Big Desk",
-                  "quantity":"10",
-                  "unitPrice":"85.00"
-               }
-            ]
-         },
-         "tax":{
-            "amount":"4.26",
-            "name":"level2 tax name",
-            "description":"level2 tax"
-         },
-         "duty":{
-            "amount":"8.55",
-            "name":"duty name",
-            "description":"duty description"
-         },
-         "shipping":{
-            "amount":"4.26",
-            "name":"level2 tax name",
-            "description":"level2 tax"
-         },
-         "poNumber":"456654",
-         "customer":{
-            "id":"18",
-            "email":"someone@blackhole.tv"
-         },
          "billTo":{
             "firstName":"Ellen",
             "lastName":"Johnson",
@@ -81,25 +44,14 @@ SAMPLE REQUEST
             "address":"14 Main Street",
             "city":"Pecan Springs",
             "state":"TX",
-            "zip":"44628",
+            "zip":"46226",
             "country":"USA"
          },
-         "shipTo":{
-            "firstName":"China",
-            "lastName":"Bayles",
-            "company":"Thyme for Tea",
-            "address":"12 Main Street",
-            "city":"Pecan Springs",
-            "state":"TX",
-            "zip":"44628",
-            "country":"USA"
-         },
-         "customerIP":"192.168.1.1",
          "transactionSettings":{
             "setting":[
                {
                   "settingName":"allowPartialAuth",
-                  "settingValue":"false"
+                  "settingValue":"true"
                },
                {
                   "settingName":"duplicateWindow",
@@ -118,12 +70,6 @@ SAMPLE REQUEST
                   "settingValue":"false"
                }
             ]
-         },
-         "userFields":{
-            "userField":{
-               "name":"favorite_color",
-               "value":"blue"
-            }
          }
       }
    }
@@ -131,33 +77,35 @@ SAMPLE REQUEST
 
 SAMPLE RESPONSE
 --------------------------------------------------------------------------------------------------
+
 {
    "transactionResponse":{
       "responseCode":"1",
-      "authCode":"QWX20S",
+      "authCode":"LYTVH0",
       "avsResultCode":"Y",
       "cvvResultCode":"P",
       "cavvResultCode":"2",
-      "transId":"2228446239",
+      "transId":"40033638873",
       "refTransID":"",
-      "transHash":"56B2D50D73CAB8C6EDE7A92B9BB235BD",
+      "transHash":"",
       "testRequest":"0",
       "accountNumber":"XXXX1111",
       "accountType":"Visa",
+      "prePaidCard":{
+         "requestedAmount":"5.00",
+         "approvedAmount":"5.00",
+         "balanceOnCard":"1.23"
+      },
       "messages":[
          {
             "code":"1",
             "description":"This transaction has been approved."
          }
       ],
-      "userFields":[
-         {
-            "name":"favorite_color",
-            "value":"blue"
-         }
-      ]
+      "transHashSha2":"5B69E7D68DE994D9A60A0F684BEBA11EE5C97DC22A45BEF70C558D0D9A3476597566EAB841A7B7A63F7768B3458C0E345BACE75AA97462220E16A6DC94F6361C",
+      "SupplementalDataQualificationIndicator":0
    },
-   "refId":"94564789",
+   "refId":"47222105",
    "messages":{
       "resultCode":"Ok",
       "message":[
@@ -192,44 +140,6 @@ SAMPLE RESPONSE
                 'invoiceNumber' => '1324567890',
                 'description' => 'this is a test transaction',
             ],
-            'lineItems' => [
-                'lineItem' => [
-                    [
-                        'itemId' => '1',
-                        'name' => 'vase',
-                        'description' => 'Cannes logo',
-                        'quantity' => '18',
-                        'unitPrice' => '45.00'
-                    ],
-                    [
-                        'itemId' => '2',
-                        'name' => 'desk',
-                        'description' => 'Big Desk',
-                        'quantity' => '10',
-                        'unitPrice' => '85.00'
-                    ]
-                ]
-            ],
-            'tax' => [
-               'amount' => '4.26',
-               'name' => 'level2 tax name',
-               'description' => 'level2 tax',
-            ],
-            'duty' => [
-               'amount' => '8.55',
-               'name' => 'duty name',
-               'description' => 'duty description',
-            ],
-            'shipping' => [
-               'amount' => '4.26',
-               'name' => 'level2 tax name',
-               'description' => 'level2 tax',
-            ],
-            'poNumber' => '456654',
-            'customer' => [
-               'id' => '18',
-               'email' => 'someone@blackhole.tv',
-            ],
             'billTo' => [
                'firstName' => 'Ellen',
                'lastName' => 'Johnson',
@@ -237,20 +147,9 @@ SAMPLE RESPONSE
                'address' => '14 Main Street',
                'city' => 'Pecan Springs',
                'state' => 'TX',
-               'zip' => '44628',
+               'zip' => '46226',
                'country' => 'USA',
             ],
-            'shipTo' => [
-               'firstName' => 'China',
-               'lastName' => 'Bayles',
-               'company' => 'Thyme for Tea',
-               'address' => '12 Main Street',
-               'city' => 'Pecan Springs',
-               'state' => 'TX',
-               'zip' => '44628',
-               'country' => 'USA',
-            ],
-            'customerIP' => '192.168.1.1',
             'transactionSettings' => [
                 'setting' => [
                     0 => [
@@ -275,18 +174,6 @@ SAMPLE RESPONSE
                     ]
                 ]
             ],
-            'userFields' => [
-                'userField' => [
-                    0 => [
-                        'name' => 'MerchantDefinedFieldName1',
-                        'value' => 'MerchantDefinedFieldValue1',
-                    ],
-                    1 => [
-                        'name' => 'favorite_color',
-                        'value' => 'blue',
-                    ],
-                ],
-            ],
         ],
     ]);
 ?>
@@ -305,7 +192,7 @@ SAMPLE RESPONSE
     </head>
     <body>
         <h1>
-            AIM :: Authorize and Capture
+            AIM :: Partial Auth
         </h1>
         <h2>
             Results
@@ -325,16 +212,16 @@ SAMPLE RESPONSE
             </tr>
             <?php if ($response->isSuccessful()) : ?>
             <tr>
-                <th>Description</th>
-                <td><?php echo $response->transactionResponse->messages[0]->description; ?></td>
+                <th>Is Prepaid Card?</th>
+                <td><?php echo $response->isPrePaidCard() ? 'yes' : 'no' ; ?></td>
             </tr>
             <tr>
-                <th>authCode</th>
-                <td><?php echo $response->transactionResponse->authCode; ?></td>
+                <th>Remaining Balance</th>
+                <td><?php echo $response->transactionResponse->prePaidCard->balanceOnCard; ?></td>
             </tr>
             <tr>
-                <th>transId</th>
-                <td><?php echo $response->transactionResponse->transId; ?></td>
+                <th>Approved Amount</th>
+                <td><?php echo $response->transactionResponse->prePaidCard->approvedAmount; ?></td>
             </tr>
             <?php elseif ($response->isError()) : ?>
             <tr>

@@ -12,8 +12,7 @@
 namespace JohnConde\Authnet;
 
 use PHPUnit\Framework\TestCase;
-
-require(__DIR__ . '/../config.inc.php');
+use Curl\Curl;
 
 class AuthnetJsonReportingTest extends TestCase
 {
@@ -22,13 +21,13 @@ class AuthnetJsonReportingTest extends TestCase
     private $server;
     private $http;
 
-    protected function setUp()
+    protected function setUp() : void
     {
         $this->login          = 'test';
         $this->transactionKey = 'test';
         $this->server         = AuthnetApiFactory::USE_DEVELOPMENT_SERVER;
 
-        $this->http = $this->getMockBuilder('\Curl\Curl')
+        $this->http = $this->getMockBuilder(Curl::class)
             ->setMethods(['post'])
             ->getMock();
         $this->http->error = false;
@@ -40,7 +39,7 @@ class AuthnetJsonReportingTest extends TestCase
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
      */
-    public function testGetUnsettledTransactionListRequestSuccess()
+    public function testGetUnsettledTransactionListRequestSuccess() : void
     {
         $responseJson = '{
            "transactions":[
@@ -158,7 +157,7 @@ class AuthnetJsonReportingTest extends TestCase
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
      */
-    public function testGetTransactionListRequestSuccess()
+    public function testGetTransactionListRequestSuccess() : void
     {
         $requestJson = array(
             'batchId' => '1221577'
@@ -223,7 +222,7 @@ class AuthnetJsonReportingTest extends TestCase
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
      */
-    public function testGetSettledBatchListRequestSuccess()
+    public function testGetSettledBatchListRequestSuccess() : void
     {
         $requestJson = array(
             'includeStatistics'   => 'true',
@@ -398,7 +397,7 @@ class AuthnetJsonReportingTest extends TestCase
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
      */
-    public function testGetSettledBatchListRequestNoRecords()
+    public function testGetSettledBatchListRequestNoRecords() : void
     {
         $requestJson = array(
             'includeStatistics'   => 'true',
@@ -434,7 +433,7 @@ class AuthnetJsonReportingTest extends TestCase
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
      */
-    public function testGetBatchStatisticsRequestSuccess()
+    public function testGetBatchStatisticsRequestSuccess() : void
     {
         $requestJson = array(
             'batchId' => '1221577'
@@ -531,7 +530,7 @@ class AuthnetJsonReportingTest extends TestCase
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
      */
-    public function testGetBatchStatisticsRequestNoRecords()
+    public function testGetBatchStatisticsRequestNoRecords() : void
     {
         $requestJson = array(
             'batchId' => '999999999'
@@ -565,7 +564,7 @@ class AuthnetJsonReportingTest extends TestCase
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
      * @uses              \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
      */
-    public function testGetTransactionDetailsRequestSuccess()
+    public function testGetTransactionDetailsRequestSuccess() : void
     {
         $requestJson = array(
             'transId' => '2162566217'

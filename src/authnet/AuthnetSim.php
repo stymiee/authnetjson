@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * This file is part of the AuthnetJSON package.
  *
@@ -11,16 +13,16 @@
 
 namespace JohnConde\Authnet;
 
+use Exception;
+
 /**
  * Wrapper to simplify the creation of SIM data
  *
- * @package    AuthnetJSON
  * @author     John Conde <stymiee@gmail.com>
  * @copyright  John Conde <stymiee@gmail.com>
  * @license    http://www.apache.org/licenses/LICENSE-2.0.html Apache License, Version 2.0
  * @link       https://github.com/stymiee/authnetjson
  */
-
 class AuthnetSim
 {
     /**
@@ -39,12 +41,12 @@ class AuthnetSim
     private $url;
 
     /**
-     * @var     integer  Randomly generated number
+     * @var     int  Randomly generated number
      */
     private $sequence;
 
     /**
-     * @var     integer  Unix timestamp the request was made
+     * @var     int  Unix timestamp the request was made
      */
     private $timestamp;
 
@@ -55,6 +57,7 @@ class AuthnetSim
      * @param   string  $login         Authorize.Net API login ID
      * @param   string  $signature     Authorize.Net API Transaction Key
      * @param   string  $api_url       URL endpoint for processing a transaction
+     * @throws  Exception
      */
     public function __construct($login, $signature, $api_url)
     {
@@ -69,28 +72,35 @@ class AuthnetSim
      *
      * @param   float  $amount   The amount of the transaction
      * @return  string           Hash of five different unique transaction parameters
-     * @throws  \JohnConde\Authnet\AuthnetInvalidAmountException
+     * @throws  AuthnetInvalidAmountException
      */
-    public function getFingerprint($amount)
+    public function getFingerprint(float $amount) : string
     {
         if (!filter_var($amount, FILTER_VALIDATE_FLOAT, FILTER_FLAG_ALLOW_THOUSAND)) {
             throw new AuthnetInvalidAmountException('You must enter a valid amount greater than zero.');
         }
 
-        return strtoupper(hash_hmac('sha512', sprintf('%s^%s^%s^%s^',
-            $this->login,
-            $this->sequence,
-            $this->timestamp,
-            $amount
-        ), hex2bin($this->signature)));
+        return strtoupper(
+            hash_hmac(
+                'sha512',
+                sprintf(
+                    '%s^%s^%s^%s^',
+                    $this->login,
+                    $this->sequence,
+                    $this->timestamp,
+                    $amount
+                ),
+                hex2bin($this->signature)
+            )
+        );
     }
 
     /**
      * Returns the sequence generated for a transaction
      *
-     * @return  integer           Current sequence
+     * @return  int Current sequence
      */
-    public function getSequence()
+    public function getSequence() : int
     {
         return $this->sequence;
     }
@@ -98,9 +108,9 @@ class AuthnetSim
     /**
      * Returns the timestamp for a transaction
      *
-     * @return  integer           Current timestamp
+     * @return  int Current timestamp
      */
-    public function getTimestamp()
+    public function getTimestamp() : int
     {
         return $this->timestamp;
     }
@@ -110,7 +120,7 @@ class AuthnetSim
      *
      * @return  string           API login ID
      */
-    public function getLogin()
+    public function getLogin() : string
     {
         return $this->login;
     }
@@ -120,17 +130,18 @@ class AuthnetSim
      *
      * @return  string           url endpoint
      */
-    public function getEndpoint()
+    public function getEndpoint() : string
     {
         return $this->url;
     }
 
     /**
      * Resets the sequence and timestamp
+     * @throws Exception
      */
-    public function resetParameters()
+    public function resetParameters() : void
     {
-        $this->sequence  = rand(1, 1000);
+        $this->sequence  = random_int(1, 1000);
         $this->timestamp = time();
     }
 }

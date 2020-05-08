@@ -78,29 +78,28 @@ SAMPLE RESPONSE
 
     namespace JohnConde\Authnet;
 
-    require('../../config.inc.php');
-    require('../../src/autoload.php');
+    require '../../config.inc.php';
 
     $request  = AuthnetApiFactory::getJsonApiHandler(AUTHNET_LOGIN, AUTHNET_TRANSKEY, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
     $response = $request->createTransactionRequest([
-        "transactionRequest" => [
-            "transactionType" => "authCaptureTransaction",
-            "amount" => "80.93",
-            "payment" => [
-                "payPal" => [
-                    "successUrl" => "https://my.server.com/success.html",
-                    "cancelUrl" => "https://my.server.com/cancel.html",
-                    "paypalLc" => "",
-                    "paypalHdrImg" => "",
-                    "paypalPayflowcolor" => "FFFF00"
+        'transactionRequest' => [
+            'transactionType' => 'authCaptureTransaction',
+            'amount' => '80.93',
+            'payment' => [
+                'payPal' => [
+                    'successUrl' => 'https://my.server.com/success.html',
+                    'cancelUrl' => 'https://my.server.com/cancel.html',
+                    'paypalLc' => '',
+                    'paypalHdrImg' => '',
+                    'paypalPayflowcolor' => 'FFFF00'
                 ]
             ],
-            "lineItems" => [
-                "lineItem" => [
-                    "itemId" => "item1",
-                    "name" => "golf balls",
-                    "quantity" => "1",
-                    "unitPrice" => "18.95"
+            'lineItems' => [
+                'lineItem' => [
+                    'itemId' => 'item1',
+                    'name' => 'golf balls',
+                    'quantity' => '1',
+                    'unitPrice' => '18.95'
                 ]
             ]
         ]
@@ -111,44 +110,13 @@ SAMPLE RESPONSE
 <html lang="en">
     <head>
         <title>AIM :: Paypal :: Authorize and Capture</title>
-        <style type="text/css">
-            table
-            {
-                border: 1px solid #cccccc;
-                margin: auto;
-                border-collapse: collapse;
-                max-width: 90%;
-            }
-
-            table td
-            {
-                padding: 3px 5px;
-                vertical-align: top;
-                border-top: 1px solid #cccccc;
-            }
-
-            pre
-            {
-            	overflow-x: auto; /* Use horizontal scroller if needed; for Firefox 2, not needed in Firefox 3 */
-            	white-space: pre-wrap; /* css-3 */
-            	white-space: -moz-pre-wrap !important; /* Mozilla, since 1999 */
-            	white-space: -pre-wrap; /* Opera 4-6 */
-            	white-space: -o-pre-wrap; /* Opera 7 */ /*
-            	width: 99%; */
-            	word-wrap: break-word; /* Internet Explorer 5.5+ */
-            }
-
-            table th
-            {
-                background: #e5e5e5;
-                color: #666666;
-            }
-
-            h1, h2
-            {
-                text-align: center;
-            }
-        </style>
+    <style type="text/css">
+        table { border: 1px solid #cccccc; margin: auto; border-collapse: collapse; max-width: 90%; }
+        table td { padding: 3px 5px; vertical-align: top; border-top: 1px solid #cccccc; }
+        pre { white-space: pre-wrap; }
+        table th { background: #e5e5e5; color: #666666; }
+        h1, h2 { text-align: center; }
+    </style>
     </head>
     <body>
         <h1>
@@ -164,11 +132,11 @@ SAMPLE RESPONSE
             </tr>
             <tr>
                 <th>Successful?</th>
-                <td><?php echo ($response->isSuccessful()) ? 'yes' : 'no'; ?></td>
+                <td><?php echo $response->isSuccessful() ? 'yes' : 'no'; ?></td>
             </tr>
             <tr>
                 <th>Error?</th>
-                <td><?php echo ($response->isError()) ? 'yes' : 'no'; ?></td>
+                <td><?php echo $response->isError() ? 'yes' : 'no'; ?></td>
             </tr>
             <?php if ($response->isSuccessful()) : ?>
             <tr>

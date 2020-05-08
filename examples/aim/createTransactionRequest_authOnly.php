@@ -146,12 +146,11 @@ SAMPLE RESPONSE
 
     namespace JohnConde\Authnet;
 
-    require('../../config.inc.php');
-    require('../../src/autoload.php');
+    require '../../config.inc.php';
 
     $request  = AuthnetApiFactory::getJsonApiHandler(AUTHNET_LOGIN, AUTHNET_TRANSKEY, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
     $response = $request->createTransactionRequest([
-        'refId' => rand(1000000, 100000000),
+        'refId' => random_int(1000000, 100000000),
         'transactionRequest' => [
             'transactionType' => 'authOnlyTransaction',
             'amount' => 5,
@@ -218,34 +217,38 @@ SAMPLE RESPONSE
             'customerIP' => '192.168.1.1',
             'transactionSettings' => [
                 'setting' => [
-                    'settingName' => 'allowPartialAuth',
-                    'settingValue' => 'false',
-                ],
-                'setting' => [
-                    'settingName' => 'duplicateWindow',
-                    'settingValue' => '0',
-                ],
-                'setting' => [
-                    'settingName' => 'emailCustomer',
-                    'settingValue' => 'false',
-                ],
-                'setting' => [
-                  'settingName' => 'recurringBilling',
-                  'settingValue' => 'false',
-                ],
-                'setting' => [
-                    'settingName' => 'testRequest',
-                    'settingValue' => 'false',
-                ],
+                    0 => [
+                        'settingName' =>'allowPartialAuth',
+                        'settingValue' => 'false'
+                    ],
+                    1 => [
+                        'settingName' => 'duplicateWindow',
+                        'settingValue' => '0'
+                    ],
+                    2 => [
+                        'settingName' => 'emailCustomer',
+                        'settingValue' => 'false'
+                    ],
+                    3 => [
+                        'settingName' => 'recurringBilling',
+                        'settingValue' => 'false'
+                    ],
+                    4 => [
+                        'settingName' => 'testRequest',
+                        'settingValue' => 'false'
+                    ]
+                ]
             ],
             'userFields' => [
                 'userField' => [
-                    'name' => 'MerchantDefinedFieldName1',
-                    'value' => 'MerchantDefinedFieldValue1',
-                ],
-                'userField' => [
-                    'name' => 'favorite_color',
-                    'value' => 'blue',
+                    0 => [
+                        'name' => 'MerchantDefinedFieldName1',
+                        'value' => 'MerchantDefinedFieldValue1',
+                    ],
+                    1 => [
+                        'name' => 'favorite_color',
+                        'value' => 'blue',
+                    ],
                 ],
             ],
         ],
@@ -253,48 +256,16 @@ SAMPLE RESPONSE
 ?>
 
 <!DOCTYPE html>
-<html>
 <html lang="en">
     <head>
         <title></title>
-        <style type="text/css">
-            table
-            {
-                border: 1px solid #cccccc;
-                margin: auto;
-                border-collapse: collapse;
-                max-width: 90%;
-            }
-
-            table td
-            {
-                padding: 3px 5px;
-                vertical-align: top;
-                border-top: 1px solid #cccccc;
-            }
-
-            pre
-            {
-            	overflow-x: auto; /* Use horizontal scroller if needed; for Firefox 2, not needed in Firefox 3 */
-            	white-space: pre-wrap; /* css-3 */
-            	white-space: -moz-pre-wrap !important; /* Mozilla, since 1999 */
-            	white-space: -pre-wrap; /* Opera 4-6 */
-            	white-space: -o-pre-wrap; /* Opera 7 */ /*
-            	width: 99%; */
-            	word-wrap: break-word; /* Internet Explorer 5.5+ */
-            }
-
-            table th
-            {
-                background: #e5e5e5;
-                color: #666666;
-            }
-
-            h1, h2
-            {
-                text-align: center;
-            }
-        </style>
+    <style type="text/css">
+        table { border: 1px solid #cccccc; margin: auto; border-collapse: collapse; max-width: 90%; }
+        table td { padding: 3px 5px; vertical-align: top; border-top: 1px solid #cccccc; }
+        pre { white-space: pre-wrap; }
+        table th { background: #e5e5e5; color: #666666; }
+        h1, h2 { text-align: center; }
+    </style>
     </head>
     <body>
         <h1>
@@ -310,11 +281,11 @@ SAMPLE RESPONSE
             </tr>
             <tr>
                 <th>Successful?</th>
-                <td><?php echo ($response->isSuccessful()) ? 'yes' : 'no'; ?></td>
+                <td><?php echo $response->isSuccessful() ? 'yes' : 'no'; ?></td>
             </tr>
             <tr>
                 <th>Error?</th>
-                <td><?php echo ($response->isError()) ? 'yes' : 'no'; ?></td>
+                <td><?php echo $response->isError() ? 'yes' : 'no'; ?></td>
             </tr>
             <?php if ($response->isSuccessful()) : ?>
             <tr>

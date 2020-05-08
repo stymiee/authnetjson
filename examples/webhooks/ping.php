@@ -10,12 +10,23 @@
 
 /*************************************************************************************************
 
-Use the Webhooks API to send a test webhook
+Use the Webhooks API to send a test webhook.
+
+When a webhook is inactive, you can send a test event to the Webhooks endpoint using this method:
+
+POST https://apitest.authorize.net/rest/v1/webhooks/72a55c78-66e6-4b1e-a4d6-3f925c00561f/pings
+
+The POST request message body should be empty. Construct the request URL containing the webhook ID that you want to
+test. Then, make an HTTP POST request to that URL. Authorize.Net receives the request and sends a notification to
+the registered URL for that webhook, emulating the event for that webhook.
+
+Note: This request works only on webhooks that are inactive. To test an active webhook, you must first set the webhook
+status to inactive.
 
 SAMPLE REQUEST
 --------------------------------------------------------------------------------------------------
 
-POST https://apitest.authorize.net/rest/v1/webhooks/<webhookId>/pings
+POST https://apitest.authorize.net/rest/v1/webhooks/ba4c73f3-0808-48bf-ae2f-f49064770e60/pings
 
 
 SAMPLE RESPONSE
@@ -28,8 +39,7 @@ HTTP 500 response for connection error
 
 namespace JohnConde\Authnet;
 
-require('../../config.inc.php');
-require('../../src/autoload.php');
+require '../../config.inc.php';
 
 $successful = false;
 $error      = true;
@@ -44,37 +54,15 @@ catch (\Exception $e) {
 }
 ?>
 <!DOCTYPE html>
-<html>
 <html lang="en">
 <head>
     <title>Webhooks :: Create Webhooks</title>
     <style type="text/css">
-        table {
-            border: 1px solid #cccccc;
-            margin: auto;
-            border-collapse: collapse;
-            max-width: 90%;
-        }
-
-        table td {
-            padding: 3px 5px;
-            vertical-align: top;
-            border-top: 1px solid #cccccc;
-        }
-
-        pre {
-            white-space: pre-wrap; /* css-3 */
-            word-wrap: break-word; /* Internet Explorer 5.5+ */
-        }
-
-        table th {
-            background: #e5e5e5;
-            color: #666666;
-        }
-
-        h1, h2 {
-            text-align: center;
-        }
+        table { border: 1px solid #cccccc; margin: auto; border-collapse: collapse; max-width: 90%; }
+        table td { padding: 3px 5px; vertical-align: top; border-top: 1px solid #cccccc; }
+        pre { white-space: pre-wrap; }
+        table th { background: #e5e5e5; color: #666666; }
+        h1, h2 { text-align: center; }
     </style>
 </head>
 <body>

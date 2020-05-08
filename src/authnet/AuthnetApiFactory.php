@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * This file is part of the AuthnetJSON package.
  *
@@ -11,52 +13,54 @@
 
 namespace JohnConde\Authnet;
 
-use \Curl\Curl;
+use Curl\Curl;
+use ErrorException;
+use Exception;
 
 /**
  * Factory to instantiate an instance of an AuthnetJson object with the proper endpoint
- * URL and Processor Class
+ * URL and Processor Class.
  *
- * @package    AuthnetJSON
- * @author     John Conde <stymiee@gmail.com>
- * @copyright  John Conde <stymiee@gmail.com>
- * @license    http://www.apache.org/licenses/LICENSE-2.0.html Apache License, Version 2.0
- * @link       https://github.com/stymiee/authnetjson
+ * @author    John Conde <stymiee@gmail.com>
+ * @copyright John Conde <stymiee@gmail.com>
+ * @license   http://www.apache.org/licenses/LICENSE-2.0.html Apache License, Version 2.0
+ *
+ * @link      https://github.com/stymiee/authnetjson
  */
-
 class AuthnetApiFactory
 {
     /**
      * @const Indicates use of Authorize.Net's production server
      */
-    const USE_PRODUCTION_SERVER = 0;
+    public const USE_PRODUCTION_SERVER = 0;
 
     /**
      * @const Indicates use of the development server
      */
-    const USE_DEVELOPMENT_SERVER = 1;
+    public const USE_DEVELOPMENT_SERVER = 1;
 
     /**
-     * @const Indicates use of the Akamai endpoint
+     * @const Indicates use of the CDN endpoint
      */
-    const USE_AKAMAI_SERVER = 2;
+    public const USE_CDN_SERVER = 2;
 
     /**
-     * Validates the Authorize.Net credentials and returns a Request object to be used to make an API call
+     * Validates the Authorize.Net credentials and returns a Request object to be used to make an API call.
      *
-     * @param   string      $login                          Authorize.Net API Login ID
-     * @param   string      $transaction_key                Authorize.Net API Transaction Key
-     * @param   integer     $server                         ID of which server to use (optional)
-     * @return  \JohnConde\Authnet\AuthnetJsonRequest
-     * @throws  \ErrorException
-     * @throws  \JohnConde\Authnet\AuthnetInvalidCredentialsException
-     * @throws  \JohnConde\Authnet\AuthnetInvalidServerException
+     * @param  string      $login                          Authorize.Net API Login ID
+     * @param  string      $transaction_key                Authorize.Net API Transaction Key
+     * @param  int         $endpoint                       ID of which endpoint to use (optional)
+     * @return AuthnetJsonRequest
+     * @throws ErrorException
+     * @throws AuthnetInvalidCredentialsException
+     * @throws AuthnetInvalidServerException
      */
-    public static function getJsonApiHandler($login, $transaction_key, $server = self::USE_AKAMAI_SERVER)
+    public static function getJsonApiHandler(string $login, string $transaction_key, ?int $endpoint = null) : object
     {
         $login           = trim($login);
         $transaction_key = trim($transaction_key);
-        $api_url         = static::getWebServiceURL($server);
+        $endpoint        = $endpoint ?? self::USE_CDN_SERVER;
+        $api_url         = static::getWebServiceURL($endpoint);
 
         if (empty($login) || empty($transaction_key)) {
             throw new AuthnetInvalidCredentialsException('You have not configured your login credentials properly.');
@@ -75,18 +79,18 @@ class AuthnetApiFactory
     }
 
     /**
-     * Gets the API endpoint to be used for a JSON API call
+     * Gets the API endpoint to be used for a JSON API call.
      *
-     * @param   integer     $server     ID of which server to use
-     * @return  string                  The URL endpoint the request is to be sent to
-     * @throws  \JohnConde\Authnet\AuthnetInvalidServerException
+     * @param  int         $server     ID of which server to use
+     * @return string                  The URL endpoint the request is to be sent to
+     * @throws AuthnetInvalidServerException
      */
-    protected static function getWebServiceURL($server)
+    protected static function getWebServiceURL(int $server) : string
     {
         $urls = [
             static::USE_PRODUCTION_SERVER  => 'https://api.authorize.net/xml/v1/request.api',
             static::USE_DEVELOPMENT_SERVER => 'https://apitest.authorize.net/xml/v1/request.api',
-            static::USE_AKAMAI_SERVER      => 'https://api2.authorize.net/xml/v1/request.api'
+            static::USE_CDN_SERVER         => 'https://api2.authorize.net/xml/v1/request.api',
         ];
         if (array_key_exists($server, $urls)) {
             return $urls[$server];
@@ -95,19 +99,21 @@ class AuthnetApiFactory
     }
 
     /**
-     * Validates the Authorize.Net credentials and returns a SIM object to be used to make a SIM API call
+     * Validates the Authorize.Net credentials and returns a SIM object to be used to make a SIM API call.
      *
-     * @param   string      $login                          Authorize.Net API Login ID
-     * @param   string      $transaction_key                Authorize.Net API Transaction Key
-     * @param   integer     $server                         ID of which server to use (optional)
-     * @return  \JohnConde\Authnet\AuthnetSim
-     * @throws  \JohnConde\Authnet\AuthnetInvalidCredentialsException
-     * @throws  \JohnConde\Authnet\AuthnetInvalidServerException
+     * @param  string      $login                  Authorize.Net API Login ID
+     * @param  string      $transaction_key        Authorize.Net API Transaction Key
+     * @param  int         $server                 ID of which server to use (optional)
+     * @return AuthnetSim
+     * @throws AuthnetInvalidCredentialsException
+     * @throws AuthnetInvalidServerException
+     * @throws Exception
      */
-    public static function getSimHandler($login, $transaction_key, $server = self::USE_PRODUCTION_SERVER)
+    public static function getSimHandler(string $login, string $transaction_key, ?int $server = null) : object
     {
         $login           = trim($login);
         $transaction_key = trim($transaction_key);
+        $server          = $server ?? self::USE_PRODUCTION_SERVER;
         $api_url         = static::getSimURL($server);
 
         if (empty($login) || empty($transaction_key)) {
@@ -118,39 +124,40 @@ class AuthnetApiFactory
     }
 
     /**
-     * Gets the API endpoint to be used for a SIM API call
+     * Gets the API endpoint to be used for a SIM API call.
      *
-     * @param   integer     $server     ID of which server to use
-     * @return  string                  The URL endpoint the request is to be sent to
-     * @throws  \JohnConde\Authnet\AuthnetInvalidServerException
+     * @param  int         $server     ID of which server to use
+     * @return string                  The URL endpoint the request is to be sent to
+     * @throws AuthnetInvalidServerException
      */
-    protected static function getSimURL($server)
+    protected static function getSimURL(int $server) : string
     {
-        if ($server === static::USE_PRODUCTION_SERVER) {
-            $url = 'https://secure2.authorize.net/gateway/transact.dll';
-        } else if ($server === static::USE_DEVELOPMENT_SERVER) {
-            $url = 'https://test.authorize.net/gateway/transact.dll';
-        } else {
-            throw new AuthnetInvalidServerException('You did not provide a valid server.');
+        $urls = [
+            static::USE_PRODUCTION_SERVER  => 'https://secure2.authorize.net/gateway/transact.dll',
+            static::USE_DEVELOPMENT_SERVER => 'https://test.authorize.net/gateway/transact.dll',
+        ];
+        if (array_key_exists($server, $urls)) {
+            return $urls[$server];
         }
-        return $url;
+        throw new AuthnetInvalidServerException('You did not provide a valid server.');
     }
 
     /**
-     * Validates the Authorize.Net credentials and returns a Webhooks Request object to be used to make an Webhook call
+     * Validates the Authorize.Net credentials and returns a Webhooks Request object to be used to make an Webhook call.
      *
-     * @param   string      $login                          Authorize.Net API Login ID
-     * @param   string      $transaction_key                Authorize.Net API Transaction Key
-     * @param   integer     $server                         ID of which server to use (optional)
-     * @throws  \ErrorException
-     * @return  \JohnConde\Authnet\AuthnetWebhooksRequest
-     * @throws  \JohnConde\Authnet\AuthnetInvalidCredentialsException
-     * @throws  \JohnConde\Authnet\AuthnetInvalidServerException
+     * @param  string      $login                          Authorize.Net API Login ID
+     * @param  string      $transaction_key                Authorize.Net API Transaction Key
+     * @param  int         $server                         ID of which server to use (optional)
+     * @throws ErrorException
+     * @return AuthnetWebhooksRequest
+     * @throws AuthnetInvalidCredentialsException
+     * @throws AuthnetInvalidServerException
      */
-    public static function getWebhooksHandler($login, $transaction_key, $server = self::USE_PRODUCTION_SERVER)
+    public static function getWebhooksHandler(string $login, string $transaction_key, ?int $server = null) : object
     {
         $login           = trim($login);
         $transaction_key = trim($transaction_key);
+        $server          = $server ?? self::USE_PRODUCTION_SERVER;
         $api_url         = static::getWebhooksURL($server);
 
         if (empty($login) || empty($transaction_key)) {
@@ -173,21 +180,21 @@ class AuthnetApiFactory
     }
 
     /**
-     * Gets the API endpoint to be used for a SIM API call
+     * Gets the API endpoint to be used for a SIM API call.
      *
-     * @param   integer     $server     ID of which server to use
-     * @return  string                  The URL endpoint the request is to be sent to
-     * @throws  \JohnConde\Authnet\AuthnetInvalidServerException
+     * @param  int         $server     ID of which server to use
+     * @return string                  The URL endpoint the request is to be sent to
+     * @throws AuthnetInvalidServerException
      */
-    protected static function getWebhooksURL($server)
+    protected static function getWebhooksURL(int $server) : string
     {
-        if ($server === static::USE_PRODUCTION_SERVER) {
-            $url = 'https://api.authorize.net/rest/v1/';
-        } else if ($server === static::USE_DEVELOPMENT_SERVER) {
-            $url = 'https://apitest.authorize.net/rest/v1/';
-        } else {
-            throw new AuthnetInvalidServerException('You did not provide a valid server.');
+        $urls = [
+            static::USE_PRODUCTION_SERVER  => 'https://api.authorize.net/rest/v1/',
+            static::USE_DEVELOPMENT_SERVER => 'https://apitest.authorize.net/rest/v1/',
+        ];
+        if (array_key_exists($server, $urls)) {
+            return $urls[$server];
         }
-        return $url;
+        throw new AuthnetInvalidServerException('You did not provide a valid server.');
     }
 }
