@@ -1,8 +1,8 @@
 [![Latest Stable Version](https://poser.pugx.org/stymiee/authnetjson/v/stable.svg)](https://packagist.org/packages/stymiee/authnetjson)
 [![Total Downloads](https://poser.pugx.org/stymiee/authnetjson/downloads)](https://packagist.org/packages/stymiee/authnetjson)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/stymiee/authnetjson/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/stymiee/authnetjson/?branch=php72)
-[![Build Status](https://scrutinizer-ci.com/g/stymiee/authnetjson/badges/build.png?b=php72)](https://scrutinizer-ci.com/g/stymiee/authnetjson/build-status/php72)
-[![Code Coverage](https://scrutinizer-ci.com/g/stymiee/authnetjson/badges/coverage.png?b=php72)](https://scrutinizer-ci.com/g/stymiee/authnetjson/?branch=php72)
+[![Build Status](https://scrutinizer-ci.com/g/stymiee/authnetjson/badges/build.png?b=master)](https://scrutinizer-ci.com/g/stymiee/authnetjson/build-status/php72)
+[![Code Coverage](https://scrutinizer-ci.com/g/stymiee/authnetjson/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/stymiee/authnetjson/?branch=php72)
 [![Maintainability](https://api.codeclimate.com/v1/badges/5847da924af47933e25f/maintainability)](https://codeclimate.com/github/stymiee/authnetjson/maintainability)
 [![License](https://poser.pugx.org/stymiee/authnetjson/license)](https://packagist.org/packages/stymiee/authnetjson)
 # AuthnetJSON
@@ -35,7 +35,7 @@ Here is a minimal example of a `composer.json` file that just defines a dependen
 ## Basic Usage
 Using this library usually consists of three steps:
 
-1. Initiate the library with the login credentials for the Authorize.Net account
+1. Initiate the library with the login credentials for your Authorize.Net account
 2. Make the API call passing any required parameters as an array
 3. Check for the results and use them appropriately
 
@@ -65,7 +65,7 @@ Authorize.Net provides a development environment for developers to test their in
 
 To help make how this library is used easier to understand example API calls are provided in the `example` directory.
 Examples for all of the current APIs calls are represented. You *may* need to make adjustments to get some to work as
-they may be dependant on valid values created from other API calls (i.e. a void will not work without a valid
+they may be dependent on valid values created from other API calls (i.e. a void will not work without a valid
 transaction ID).
 
 #### Authorize and Capture (Basic)
@@ -351,6 +351,14 @@ If `apache_request_headers()`/`getallheaders()` are not available to you, you ca
         // Access notifcation values
         // echo $webhook->eventType;
     }
+
+#### Accept.js
+
+To see examples of an Accept.js powered 
+[self hosted payment form](https://github.com/stymiee/authnetjson/tree/master/examples/acceptjs/selfHostedPaymentForm.php),
+an [Authorize.Net hosted payment form](https://github.com/stymiee/authnetjson/tree/master/examples/acceptjs/getHostedPaymentPageRequest.php),
+and a [hosted customer profile page](https://github.com/stymiee/authnetjson/tree/master/examples/acceptjs/getHostedProfilePageRequest.php),
+visit the [Accept.js examples directory](https://github.com/stymiee/authnetjson/tree/master/examples/acceptjs).
 
 ## Debugging
 
