@@ -51,7 +51,6 @@ class AuthnetApiFactory
      * @param  string      $transaction_key                Authorize.Net API Transaction Key
      * @param  int         $endpoint                       ID of which endpoint to use (optional)
      * @return AuthnetJsonRequest
-     * @throws ErrorException
      * @throws AuthnetInvalidCredentialsException
      * @throws AuthnetInvalidServerException
      */
@@ -148,7 +147,6 @@ class AuthnetApiFactory
      * @param  string      $login                          Authorize.Net API Login ID
      * @param  string      $transaction_key                Authorize.Net API Transaction Key
      * @param  int         $server                         ID of which server to use (optional)
-     * @throws ErrorException
      * @return AuthnetWebhooksRequest
      * @throws AuthnetInvalidCredentialsException
      * @throws AuthnetInvalidServerException
