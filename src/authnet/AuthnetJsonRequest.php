@@ -136,7 +136,7 @@ class AuthnetJsonRequest
     }
 
     /**
-     * The __set() method should never be used as all values to be made in the APi call must be passed as an array
+     * The __set() method should never be used as all values to be made in the API call must be passed as an array
      *
      * @param   string  $name       unused
      * @param   mixed   $value      unused
@@ -157,7 +157,7 @@ class AuthnetJsonRequest
      * @throws  AuthnetCurlException
      * @throws  AuthnetInvalidJsonException
      */
-    public function __call($api_call, Array $args)
+    public function __call($api_call, array $args)
     {
         $authentication = [
             'merchantAuthentication' => [
