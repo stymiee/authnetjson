@@ -62,11 +62,18 @@ SAMPLE RESPONSE
 
  *************************************************************************************************/
 
-    namespace JohnConde\Authnet;
+namespace JohnConde\Authnet;
 
-    require '../../config.inc.php';
+use Exception;
 
-    $request = AuthnetApiFactory::getJsonApiHandler(AUTHNET_LOGIN, AUTHNET_TRANSKEY, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
+require '../../config.inc.php';
+
+try {
+    $request = AuthnetApiFactory::getJsonApiHandler(
+        AUTHNET_LOGIN,
+        AUTHNET_TRANSKEY,
+        AuthnetApiFactory::USE_DEVELOPMENT_SERVER
+    );
     $response = $request->createTransactionRequest([
         'refId' => random_int(1000000, 100000000),
         'transactionRequest' => [
@@ -81,12 +88,16 @@ SAMPLE RESPONSE
             'authCode' => '123456'
         ],
     ]);
+} catch (Exception $e) {
+    echo $e;
+    exit;
+}
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title></title>
+    <title>Payment :: Capture Only (CAPTURE_ONLY)</title>
     <style type="text/css">
         table { border: 1px solid #cccccc; margin: auto; border-collapse: collapse; max-width: 90%; }
         table td { padding: 3px 5px; vertical-align: top; border-top: 1px solid #cccccc; }
@@ -97,7 +108,7 @@ SAMPLE RESPONSE
 </head>
 <body>
 <h1>
-    AIM :: Capture Only
+    Payment :: Capture Only (CAPTURE_ONLY)
 </h1>
 <h2>
     Results
@@ -105,30 +116,28 @@ SAMPLE RESPONSE
 <table>
     <tr>
         <th>Response</th>
-        <td><?php echo $response->messages->resultCode; ?></td>
+        <td><?= $response->messages->resultCode ?></td>
     </tr>
     <tr>
         <th>code</th>
-        <td><?php echo $response->messages->message[0]->code; ?></td>
+        <td><?= $response->messages->message[0]->code ?></td>
     </tr>
     <tr>
         <th>Successful?</th>
-        <td><?php echo $response->isSuccessful() ? 'yes' : 'no'; ?></td>
+        <td><?= $response->isSuccessful() ? 'yes' : 'no' ?></td>
     </tr>
     <tr>
         <th>Error?</th>
-        <td><?php echo $response->isError() ? 'yes' : 'no'; ?></td>
+        <td><?= $response->isError() ? 'yes' : 'no' ?></td>
     </tr>
     <tr>
         <th>transId</th>
-        <td><?php echo $response->transactionResponse->transId; ?></td>
+        <td><?= $response->transactionResponse->transId ?></td>
     </tr>
 </table>
 <h2>
     Raw Input/Output
 </h2>
-<?php
-echo $request, $response;
-?>
+<?= $request, $response ?>
 </body>
 </html>

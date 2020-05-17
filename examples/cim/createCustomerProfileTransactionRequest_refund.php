@@ -73,11 +73,18 @@ SAMPLE RESPONSE
 
 *************************************************************************************************/
 
-    namespace JohnConde\Authnet;
+namespace JohnConde\Authnet;
 
-    require '../../config.inc.php';
+use Exception;
 
-    $request  = AuthnetApiFactory::getJsonApiHandler(AUTHNET_LOGIN, AUTHNET_TRANSKEY, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
+require '../../config.inc.php';
+
+try {
+    $request = AuthnetApiFactory::getJsonApiHandler(
+        AUTHNET_LOGIN,
+        AUTHNET_TRANSKEY,
+        AuthnetApiFactory::USE_DEVELOPMENT_SERVER
+    );
     $response = $request->createCustomerProfileTransactionRequest([
         'transaction' => [
             'profileTransRefund' => [
@@ -122,12 +129,16 @@ SAMPLE RESPONSE
         ],
         'extraOptions' => 'x_customer_ip=100.0.0.1'
     ]);
+} catch (Exception $e) {
+    echo $e;
+    exit;
+}
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <title></title>
+<head>
+    <title>CIM :: Refund (Credit)</title>
     <style type="text/css">
         table { border: 1px solid #cccccc; margin: auto; border-collapse: collapse; max-width: 90%; }
         table td { padding: 3px 5px; vertical-align: top; border-top: 1px solid #cccccc; }
@@ -135,37 +146,35 @@ SAMPLE RESPONSE
         table th { background: #e5e5e5; color: #666666; }
         h1, h2 { text-align: center; }
     </style>
-    </head>
-    <body>
-        <h1>
-            CIM :: Refund (Credit)
-        </h1>
-        <h2>
-            Results
-        </h2>
-        <table>
-            <tr>
-                <th>Response</th>
-                <td><?php echo $response->messages->resultCode; ?></td>
-            </tr>
-            <tr>
-                <th>code</th>
-                <td><?php echo $response->messages->message[0]->code; ?></td>
-            </tr>
-            <tr>
-                <th>Successful?</th>
-                <td><?php echo $response->isSuccessful() ? 'yes' : 'no'; ?></td>
-            </tr>
-            <tr>
-                <th>Error?</th>
-                <td><?php echo $response->isError() ? 'yes' : 'no'; ?></td>
-            </tr>
-        </table>
-        <h2>
-            Raw Input/Output
-        </h2>
-<?php
-    echo $request, $response;
-?>
-    </body>
+</head>
+<body>
+    <h1>
+        CIM :: Refund (Credit)
+    </h1>
+    <h2>
+        Results
+    </h2>
+    <table>
+        <tr>
+            <th>Response</th>
+            <td><?= $response->messages->resultCode ?></td>
+        </tr>
+        <tr>
+            <th>code</th>
+            <td><?= $response->messages->message[0]->code ?></td>
+        </tr>
+        <tr>
+            <th>Successful?</th>
+            <td><?= $response->isSuccessful() ? 'yes' : 'no' ?></td>
+        </tr>
+        <tr>
+            <th>Error?</th>
+            <td><?= $response->isError() ? 'yes' : 'no' ?></td>
+        </tr>
+    </table>
+    <h2>
+        Raw Input/Output
+    </h2>
+<?= $request, $response ?>
+</body>
 </html>

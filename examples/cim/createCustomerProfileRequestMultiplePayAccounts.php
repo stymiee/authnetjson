@@ -106,69 +106,76 @@ SAMPLE RESPONSE
 
 namespace JohnConde\Authnet;
 
+use Exception;
+
 require '../../config.inc.php';
 
-$request  = AuthnetApiFactory::getJsonApiHandler(AUTHNET_LOGIN, AUTHNET_TRANSKEY, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
-$response = $request->createCustomerProfileRequest([
-    'profile' => [
-        'merchantCustomerId' => '52353345',
-        'email' => 'user@example.com',
-        'paymentProfiles' => [
-            [
-                'customerType'=> 'individual',
-                'billTo' => [
-                    'firstName' => 'John',
-                    'lastName' => 'Smith',
-                    'address' => '12345 Main Street',
-                    'city' => 'Townsville',
-                    'state' => 'NJ',
-                    'zip' => '12345',
-                    'phoneNumber' => '800-555-1234'
+try {
+    $request  = AuthnetApiFactory::getJsonApiHandler(AUTHNET_LOGIN, AUTHNET_TRANSKEY, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
+    $response = $request->createCustomerProfileRequest([
+        'profile' => [
+            'merchantCustomerId' => '52353345',
+            'email' => 'user@example.com',
+            'paymentProfiles' => [
+                [
+                    'customerType'=> 'individual',
+                    'billTo' => [
+                        'firstName' => 'John',
+                        'lastName' => 'Smith',
+                        'address' => '12345 Main Street',
+                        'city' => 'Townsville',
+                        'state' => 'NJ',
+                        'zip' => '12345',
+                        'phoneNumber' => '800-555-1234'
+                    ],
+                    'payment' => [
+                        'creditCard' => [
+                            'cardNumber' => '5555555555554444',
+                            'expirationDate' => '2023-08',
+                        ],
+                    ],
                 ],
-                'payment' => [
-                    'creditCard' => [
-                        'cardNumber' => '5555555555554444',
-                        'expirationDate' => '2023-08',
+                [
+                    'customerType'=> 'individual',
+                    'billTo' => [
+                        'firstName' => 'John',
+                        'lastName' => 'Smithberg',
+                        'address' => '42 Main Street',
+                        'city' => 'Townsville',
+                        'state' => 'NJ',
+                        'zip' => '12345',
+                        'phoneNumber' => '800-555-1234'
+                    ],
+                    'payment' => [
+                        'creditCard' => [
+                            'cardNumber' => '5105105105105100',
+                            'expirationDate' => '2023-09',
+                        ],
                     ],
                 ],
             ],
-            [
-                'customerType'=> 'individual',
-                'billTo' => [
-                    'firstName' => 'John',
-                    'lastName' => 'Smithberg',
-                    'address' => '42 Main Street',
-                    'city' => 'Townsville',
-                    'state' => 'NJ',
-                    'zip' => '12345',
-                    'phoneNumber' => '800-555-1234'
-                ],
-                'payment' => [
-                    'creditCard' => [
-                        'cardNumber' => '5105105105105100',
-                        'expirationDate' => '2023-09',
-                    ],
-                ],
+            'shipToList' => [
+                'firstName' => 'John',
+                'lastName' => 'Smith',
+                'address' => '12345 Main Street',
+                'city' => 'Townsville',
+                'state' => 'NJ',
+                'zip' => '12345',
+                'phoneNumber' => '800-555-1234'
             ],
         ],
-        'shipToList' => [
-            'firstName' => 'John',
-            'lastName' => 'Smith',
-            'address' => '12345 Main Street',
-            'city' => 'Townsville',
-            'state' => 'NJ',
-            'zip' => '12345',
-            'phoneNumber' => '800-555-1234'
-        ],
-    ],
-    'validationMode' => 'liveMode'
-]);
+        'validationMode' => 'liveMode'
+    ]);
+} catch (Exception $e) {
+    echo $e;
+    exit;
+}
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title></title>
+    <title>CIM :: Create Customer Profile</title>
     <style type="text/css">
         table { border: 1px solid #cccccc; margin: auto; border-collapse: collapse; max-width: 90%; }
         table td { padding: 3px 5px; vertical-align: top; border-top: 1px solid #cccccc; }
@@ -178,53 +185,51 @@ $response = $request->createCustomerProfileRequest([
     </style>
 </head>
 <body>
-<h1>
-    CIM :: Create Customer Profile
-</h1>
-<h2>
-    Results
-</h2>
-<table>
-    <tr>
-        <th>Response</th>
-        <td><?php echo $response->messages->resultCode; ?></td>
-    </tr>
-    <tr>
-        <th>Successful?</th>
-        <td><?php echo $response->isSuccessful() ? 'yes' : 'no'; ?></td>
-    </tr>
-    <tr>
-        <th>Error?</th>
-        <td><?php echo $response->isError() ? 'yes' : 'no'; ?></td>
-    </tr>
-    <tr>
-        <th>Code</th>
-        <td><?php echo $response->messages->message[0]->code; ?></td>
-    </tr>
-    <tr>
-        <th>Message</th>
-        <td><?php echo $response->messages->message[0]->text; ?></td>
-    </tr>
-    <?php if ($response->isSuccessful()) : ?>
+    <h1>
+        CIM :: Create Customer Profile
+    </h1>
+    <h2>
+        Results
+    </h2>
+    <table>
         <tr>
-            <th>Customer Profile ID</th>
-            <td><?php echo $response->customerProfileId; ?></td>
+            <th>Response</th>
+            <td><?= $response->messages->resultCode ?></td>
         </tr>
         <tr>
-            <th>Customer Payment Profile IDs</th>
-            <td><?php echo implode(', ', $response->customerPaymentProfileIdList); ?></td>
+            <th>Successful?</th>
+            <td><?= $response->isSuccessful() ? 'yes' : 'no' ?></td>
         </tr>
         <tr>
-            <th>Customer Shipping Address ID</th>
-            <td><?php echo $response->customerShippingAddressIdList[0]; ?></td>
+            <th>Error?</th>
+            <td><?= $response->isError() ? 'yes' : 'no' ?></td>
         </tr>
-    <?php endif; ?>
-</table>
-<h2>
-    Raw Input/Output
-</h2>
-<?php
-echo $request, $response;
-?>
+        <tr>
+            <th>Code</th>
+            <td><?= $response->messages->message[0]->code ?></td>
+        </tr>
+        <tr>
+            <th>Message</th>
+            <td><?= $response->messages->message[0]->text ?></td>
+        </tr>
+        <?php if ($response->isSuccessful()) : ?>
+            <tr>
+                <th>Customer Profile ID</th>
+                <td><?= $response->customerProfileId ?></td>
+            </tr>
+            <tr>
+                <th>Customer Payment Profile IDs</th>
+                <td><?php echo implode(', ', $response->customerPaymentProfileIdList) ?></td>
+            </tr>
+            <tr>
+                <th>Customer Shipping Address ID</th>
+                <td><?= $response->customerShippingAddressIdList[0] ?></td>
+            </tr>
+        <?php endif; ?>
+    </table>
+    <h2>
+        Raw Input/Output
+    </h2>
+<?= $request, $response ?>
 </body>
 </html>

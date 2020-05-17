@@ -58,20 +58,31 @@ SAMPLE RESPONSE
 
 *************************************************************************************************/
 
-    namespace JohnConde\Authnet;
+namespace JohnConde\Authnet;
 
-    require '../../config.inc.php';
+use Exception;
 
-    $request  = AuthnetApiFactory::getJsonApiHandler(AUTHNET_LOGIN, AUTHNET_TRANSKEY, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
+require '../../config.inc.php';
+
+try {
+    $request = AuthnetApiFactory::getJsonApiHandler(
+        AUTHNET_LOGIN,
+        AUTHNET_TRANSKEY,
+        AuthnetApiFactory::USE_DEVELOPMENT_SERVER
+    );
     $response = $request->getTransactionListRequest([
         'batchId' => '7864228'
     ]);
+} catch (Exception $e) {
+    echo $e;
+    exit;
+}
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <title></title>
+<head>
+    <title>Transaction Detail :: Get Transactions List</title>
     <style type="text/css">
         table { border: 1px solid #cccccc; margin: auto; border-collapse: collapse; max-width: 90%; }
         table td { padding: 3px 5px; vertical-align: top; border-top: 1px solid #cccccc; }
@@ -79,49 +90,47 @@ SAMPLE RESPONSE
         table th { background: #e5e5e5; color: #666666; }
         h1, h2 { text-align: center; }
     </style>
-    </head>
-    <body>
-        <h1>
-            Transaction Detail :: Get Transactions List
-        </h1>
-        <h2>
-            Results
-        </h2>
-        <table>
-            <tr>
-                <th>Response</th>
-                <td><?php echo $response->messages->resultCode; ?></td>
-            </tr>
-            <tr>
-                <th>Successful?</th>
-                <td><?php echo $response->isSuccessful() ? 'yes' : 'no'; ?></td>
-            </tr>
-            <tr>
-                <th>Error?</th>
-                <td><?php echo $response->isError() ? 'yes' : 'no'; ?></td>
-            </tr>
-            <?php foreach ($response->transactions as $transaction) : ?>
-            <tr>
-                <th>Transaction</th>
-                <td>
-                    transId: <?php echo $transaction->transId; ?><br>
-                    submitTimeUTC: <?php echo $transaction->submitTimeUTC; ?><br>
-                    submitTimeLocal: <?php echo $transaction->submitTimeLocal; ?><br>
-                    transactionStatus: <?php echo $transaction->transactionStatus; ?><br>
-                    invoiceNumber: <?php echo $transaction->invoiceNumber; ?><br>
-                    firstName: <?php echo $transaction->firstName; ?><br>
-                    accountType: <?php echo $transaction->accountType; ?><br>
-                    accountNumber: <?php echo $transaction->accountNumber; ?><br>
-                    settleAmount: <?php echo $transaction->settleAmount; ?><br>
-                </td>
-            </tr>
-            <?php endforeach; ?>
-        </table>
-        <h2>
-            Raw Input/Output
-        </h2>
-<?php
-    echo $request, $response;
-?>
-    </body>
+</head>
+<body>
+    <h1>
+        Transaction Detail :: Get Transactions List
+    </h1>
+    <h2>
+        Results
+    </h2>
+    <table>
+        <tr>
+            <th>Response</th>
+            <td><?= $response->messages->resultCode ?></td>
+        </tr>
+        <tr>
+            <th>Successful?</th>
+            <td><?= $response->isSuccessful() ? 'yes' : 'no' ?></td>
+        </tr>
+        <tr>
+            <th>Error?</th>
+            <td><?= $response->isError() ? 'yes' : 'no' ?></td>
+        </tr>
+        <?php foreach ($response->transactions as $transaction) : ?>
+        <tr>
+            <th>Transaction</th>
+            <td>
+                transId: <?php echo $transaction->transId; ?><br>
+                submitTimeUTC: <?php echo $transaction->submitTimeUTC; ?><br>
+                submitTimeLocal: <?php echo $transaction->submitTimeLocal; ?><br>
+                transactionStatus: <?php echo $transaction->transactionStatus; ?><br>
+                invoiceNumber: <?php echo $transaction->invoiceNumber; ?><br>
+                firstName: <?php echo $transaction->firstName; ?><br>
+                accountType: <?php echo $transaction->accountType; ?><br>
+                accountNumber: <?php echo $transaction->accountNumber; ?><br>
+                settleAmount: <?php echo $transaction->settleAmount; ?><br>
+            </td>
+        </tr>
+        <?php endforeach; ?>
+    </table>
+    <h2>
+        Raw Input/Output
+    </h2>
+<?= $request, $response ?>
+</body>
 </html>

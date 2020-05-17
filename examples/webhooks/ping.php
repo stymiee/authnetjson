@@ -39,18 +39,20 @@ HTTP 500 response for connection error
 
 namespace JohnConde\Authnet;
 
+use Exception;
+
 require '../../config.inc.php';
 
-$successful = false;
-$error      = true;
 try {
-    $request    = AuthnetApiFactory::getWebhooksHandler(AUTHNET_LOGIN, AUTHNET_TRANSKEY, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
+    $request = AuthnetApiFactory::getJsonApiHandler(
+        AUTHNET_LOGIN,
+        AUTHNET_TRANSKEY,
+        AuthnetApiFactory::USE_DEVELOPMENT_SERVER
+    );
     $request->testWebhook('ba4c73f3-0808-48bf-ae2f-f49064770e60');
-    $successful = true;
-    $error      = false;
-}
-catch (\Exception $e) {
-    $errorMessage = $e->getMessage();
+} catch (Exception $e) {
+    echo $e;
+    exit;
 }
 ?>
 <!DOCTYPE html>
@@ -70,29 +72,8 @@ catch (\Exception $e) {
     Webhooks :: Ping
 </h1>
 <h2>
-    Results
-</h2>
-<table>
-    <tr>
-        <th>Successful</th>
-        <td><?= ($successful) ? 'Yes' : 'No';?></td>
-    </tr>
-    <?php
-        if ($error) {
-    ?>
-            <tr>
-                <th>Error message</th>
-                <td><?= $errorMessage; ?></td>
-            </tr>
-    <?php
-        }
-    ?>
-</table>
-<h2>
     Raw Input/Output
 </h2>
-<?php
-echo $request;
-?>
+<?= $request ?>
 </body>
 </html>

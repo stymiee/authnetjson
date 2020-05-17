@@ -53,12 +53,16 @@ SAMPLE RESPONSE
 
 namespace JohnConde\Authnet;
 
+use Exception;
+
 require '../../config.inc.php';
 
-$successful = false;
-$error      = true;
 try {
-    $request  = AuthnetApiFactory::getWebhooksHandler(AUTHNET_LOGIN, AUTHNET_TRANSKEY, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
+    $request = AuthnetApiFactory::getJsonApiHandler(
+        AUTHNET_LOGIN,
+        AUTHNET_TRANSKEY,
+        AuthnetApiFactory::USE_DEVELOPMENT_SERVER
+    );
     $response = $request->createWebhooks([
         'net.authorize.customer.created',
         'net.authorize.customer.deleted',
@@ -84,9 +88,9 @@ try {
     ], 'http://requestb.in/', 'active');
     $successful = true;
     $error      = false;
-}
-catch (\Exception $e) {
-    $errorMessage = $e->getMessage();
+} catch (Exception $e) {
+    echo $e;
+    exit;
 }
 
 ?>
@@ -101,61 +105,52 @@ catch (\Exception $e) {
         table th { background: #e5e5e5; color: #666666; }
         h1, h2 { text-align: center; }
     </style>
-    </head>
-    <body>
-        <h1>
-            Webhooks :: Create Webhooks
-        </h1>
-        <h2>
-            Results
-        </h2>
-        <table>
+</head>
+<body>
+    <h1>
+        Webhooks :: Create Webhooks
+    </h1>
+    <h2>
+        Results
+    </h2>
+    <table>
+        <tr>
+            <th>Successful</th>
+            <td><?= ($successful) ? 'Yes' : 'No';?></td>
+        </tr>
+<?php if ($successful) : ?>
             <tr>
-                <th>Successful</th>
-                <td><?= ($successful) ? 'Yes' : 'No';?></td>
+                <th>Event Types</th>
+                <td>
+                    <?php
+                    foreach ($response->getEventTypes() as $eventType) {
+                        echo $eventType, "<br>\n";
+                    }
+                    ?>
+                </td>
             </tr>
-            <?php
-            if ($successful) {
-                ?>
-                <tr>
-                    <th>Event Types</th>
-                    <td>
-                        <?php
-                        foreach ($response->getEventTypes() as $eventType) {
-                            echo $eventType, "<br>\n";
-                        }
-                        ?>
-                    </td>
-                </tr>
-                <tr>
-                    <th>Webhook ID</th>
-                    <td><?= $response->getWebhooksId(); ?></td>
-                </tr>
-                <tr>
-                    <th>Status</th>
-                    <td><?= $response->getStatus(); ?></td>
-                </tr>
-                <tr>
-                    <th>URL</th>
-                    <td><?= $response->getUrl(); ?></td>
-                </tr>
-                <?php
-            }
-            elseif ($error) {
-                ?>
-                <tr>
-                    <th>Error message</th>
-                    <td><?= $errorMessage; ?></td>
-                </tr>
-                <?php
-            }
-            ?>
-        </table>
-        <h2>
-            Raw Input/Output
-        </h2>
-<?php
-    echo $request, $response;
-?>
-    </body>
+            <tr>
+                <th>Webhook ID</th>
+                <td><?= $response->getWebhooksId() ?></td>
+            </tr>
+            <tr>
+                <th>Status</th>
+                <td><?= $response->getStatus() ?></td>
+            </tr>
+            <tr>
+                <th>URL</th>
+                <td><?= $response->getUrl() ?></td>
+            </tr>
+<?php elseif ($error) : ?>
+            <tr>
+                <th>Error message</th>
+                <td><?= $response->errorMessage ?></td>
+            </tr>
+<?php endif; ?>
+    </table>
+    <h2>
+        Raw Input/Output
+    </h2>
+<?= $request, $response ?>
+</body>
 </html>

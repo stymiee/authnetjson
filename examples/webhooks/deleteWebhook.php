@@ -28,18 +28,22 @@ HTTP response code 200 will be returned for a successful deletion
 
 namespace JohnConde\Authnet;
 
+use Exception;
+
 require '../../config.inc.php';
 
-$successful = false;
-$error      = true;
 try {
-    $request    = AuthnetApiFactory::getWebhooksHandler(AUTHNET_LOGIN, AUTHNET_TRANSKEY, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
+    $request = AuthnetApiFactory::getJsonApiHandler(
+        AUTHNET_LOGIN,
+        AUTHNET_TRANSKEY,
+        AuthnetApiFactory::USE_DEVELOPMENT_SERVER
+    );
     $request->deleteWebhook('0550f061-59a1-4f13-a9da-3e8bfc50e80b');
     $successful = true;
     $error      = false;
-}
-catch (\Exception $e) {
-    $errorMessage = $e->getMessage();
+} catch (Exception $e) {
+    echo $e;
+    exit;
 }
 
 ?>
@@ -72,7 +76,7 @@ catch (\Exception $e) {
         ?>
         <tr>
             <th>Error message</th>
-            <td><?= $errorMessage; ?></td>
+            <td><?= $response->errorMessage ?></td>
         </tr>
         <?php
     }

@@ -144,11 +144,17 @@ SAMPLE RESPONSE
 
 *************************************************************************************************/
 
-    namespace JohnConde\Authnet;
+namespace JohnConde\Authnet;
 
-    require '../../config.inc.php';
+use Exception;
 
-    $request  = AuthnetApiFactory::getJsonApiHandler(AUTHNET_LOGIN, AUTHNET_TRANSKEY, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
+require '../../config.inc.php';
+try {
+    $request = AuthnetApiFactory::getJsonApiHandler(
+        AUTHNET_LOGIN,
+        AUTHNET_TRANSKEY,
+        AuthnetApiFactory::USE_DEVELOPMENT_SERVER
+    );
     $response = $request->createTransactionRequest([
         'refId' => random_int(1000000, 100000000),
         'transactionRequest' => [
@@ -253,12 +259,16 @@ SAMPLE RESPONSE
             ],
         ],
     ]);
+} catch (Exception $e) {
+    echo $e;
+    exit;
+}
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <title></title>
+<head>
+    <title>Payment :: Authorize Only (AUTH_ONLY)</title>
     <style type="text/css">
         table { border: 1px solid #cccccc; margin: auto; border-collapse: collapse; max-width: 90%; }
         table td { padding: 3px 5px; vertical-align: top; border-top: 1px solid #cccccc; }
@@ -266,56 +276,54 @@ SAMPLE RESPONSE
         table th { background: #e5e5e5; color: #666666; }
         h1, h2 { text-align: center; }
     </style>
-    </head>
-    <body>
-        <h1>
-            AIM :: Authorization Only
-        </h1>
-        <h2>
-            Results
-        </h2>
-        <table>
-            <tr>
-                <th>Response</th>
-                <td><?php echo $response->messages->resultCode; ?></td>
-            </tr>
-            <tr>
-                <th>Successful?</th>
-                <td><?php echo $response->isSuccessful() ? 'yes' : 'no'; ?></td>
-            </tr>
-            <tr>
-                <th>Error?</th>
-                <td><?php echo $response->isError() ? 'yes' : 'no'; ?></td>
-            </tr>
-            <?php if ($response->isSuccessful()) : ?>
-            <tr>
-                <th>Description</th>
-                <td><?php echo $response->transactionResponse->messages[0]->description; ?></td>
-            </tr>
-            <tr>
-                <th>authCode</th>
-                <td><?php echo $response->transactionResponse->authCode; ?></td>
-            </tr>
-            <tr>
-                <th>transId</th>
-                <td><?php echo $response->transactionResponse->transId; ?></td>
-            </tr>
-            <?php elseif ($response->isError()) : ?>
-            <tr>
-                <th>Error Code</th>
-                <td><?php echo $response->getErrorCode(); ?></td>
-            </tr>
-            <tr>
-                <th>Error Message</th>
-                <td><?php echo  $response->getErrorText(); ?></td>
-            </tr>
-            <?php endif; ?>
-        </table>
-        <h2>
-            Raw Input/Output
-        </h2>
-<?php
-    echo $request, $response;
-?>
-    </body>
+</head>
+<body>
+    <h1>
+        Payment :: Authorize Only (AUTH_ONLY)
+    </h1>
+    <h2>
+        Results
+    </h2>
+    <table>
+        <tr>
+            <th>Response</th>
+            <td><?= $response->messages->resultCode ?></td>
+        </tr>
+        <tr>
+            <th>Successful?</th>
+            <td><?= $response->isSuccessful() ? 'yes' : 'no' ?></td>
+        </tr>
+        <tr>
+            <th>Error?</th>
+            <td><?= $response->isError() ? 'yes' : 'no' ?></td>
+        </tr>
+        <?php if ($response->isSuccessful()) : ?>
+        <tr>
+            <th>Description</th>
+            <td><?= $response->transactionResponse->messages[0]->description ?></td>
+        </tr>
+        <tr>
+            <th>authCode</th>
+            <td><?= $response->transactionResponse->authCode ?></td>
+        </tr>
+        <tr>
+            <th>transId</th>
+            <td><?= $response->transactionResponse->transId ?></td>
+        </tr>
+        <?php elseif ($response->isError()) : ?>
+        <tr>
+            <th>Error Code</th>
+            <td><?= $response->getErrorCode() ?></td>
+        </tr>
+        <tr>
+            <th>Error Message</th>
+            <td><?=  $response->getErrorText() ?></td>
+        </tr>
+        <?php endif; ?>
+    </table>
+    <h2>
+        Raw Input/Output
+    </h2>
+<?= $request, $response ?>
+</body>
 </html>

@@ -163,22 +163,33 @@ SAMPLE RESPONSE
 
 *************************************************************************************************/
 
-    namespace JohnConde\Authnet;
+namespace JohnConde\Authnet;
 
-    require '../../config.inc.php';
+use Exception;
 
-    $request  = AuthnetApiFactory::getJsonApiHandler(AUTHNET_LOGIN, AUTHNET_TRANSKEY, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
+require '../../config.inc.php';
+
+try {
+    $request = AuthnetApiFactory::getJsonApiHandler(
+        AUTHNET_LOGIN,
+        AUTHNET_TRANSKEY,
+        AuthnetApiFactory::USE_DEVELOPMENT_SERVER
+    );
     $response = $request->getSettledBatchListRequest([
         'includeStatistics'   => 'true',
         'firstSettlementDate' => '2018-01-01T08:15:30',
         'lastSettlementDate'  => '2018-01-30T08:15:30',
     ]);
+} catch (Exception $e) {
+    echo $e;
+    exit;
+}
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <title></title>
+<head>
+    <title>Transaction Detail :: Get Settled Batch List</title>
     <style type="text/css">
         table { border: 1px solid #cccccc; margin: auto; border-collapse: collapse; max-width: 90%; }
         table td { padding: 3px 5px; vertical-align: top; border-top: 1px solid #cccccc; }
@@ -186,55 +197,53 @@ SAMPLE RESPONSE
         table th { background: #e5e5e5; color: #666666; }
         h1, h2 { text-align: center; }
     </style>
-    </head>
-    <body>
-        <h1>
-            Transaction Detail :: Get Settled Batch List
-        </h1>
-        <h2>
-            Results
-        </h2>
-        <table>
-            <tr>
-                <th>Response</th>
-                <td><?php echo $response->messages->resultCode; ?></td>
-            </tr>
-            <tr>
-                <th>Successful?</th>
-                <td><?php echo $response->isSuccessful() ? 'yes' : 'no'; ?></td>
-            </tr>
-            <tr>
-                <th>Error?</th>
-                <td><?php echo $response->isError() ? 'yes' : 'no'; ?></td>
-            </tr>
-            <?php foreach ($response->batchList as $batch) : ?>
-            <tr>
-                <th>Batch</th>
-                <td>
-                    batchId: <?php echo $batch->batchId; ?><br>
-                    settlementTimeUTC: <?php echo $batch->settlementTimeUTC; ?><br>
-                    settlementTimeLocal: <?php echo $batch->settlementTimeLocal; ?><br>
-                    settlementState: <?php echo $batch->settlementState; ?><br>
-                    paymentMethod: <?php echo $batch->paymentMethod; ?><br>
-                    <?php foreach ($batch->statistics as $statistic) : ?>
-                    accountType: <?php echo $statistic->accountType; ?><br>
-                    chargeAmount: <?php echo $statistic->chargeAmount; ?><br>
-                    chargeCount: <?php echo $statistic->chargeCount; ?><br>
-                    refundAmount: <?php echo $statistic->refundAmount; ?><br>
-                    refundCount: <?php echo $statistic->refundCount; ?><br>
-                    voidCount: <?php echo $statistic->voidCount; ?><br>
-                    declineCount: <?php echo $statistic->declineCount; ?><br>
-                    errorCount: <?php echo $statistic->errorCount; ?>
-                    <?php endforeach; ?>
-                </td>
-            </tr>
-            <?php endforeach; ?>
-        </table>
-        <h2>
-            Raw Input/Output
-        </h2>
-<?php
-    echo $request, $response;
-?>
-    </body>
+</head>
+<body>
+    <h1>
+        Transaction Detail :: Get Settled Batch List
+    </h1>
+    <h2>
+        Results
+    </h2>
+    <table>
+        <tr>
+            <th>Response</th>
+            <td><?= $response->messages->resultCode ?></td>
+        </tr>
+        <tr>
+            <th>Successful?</th>
+            <td><?= $response->isSuccessful() ? 'yes' : 'no' ?></td>
+        </tr>
+        <tr>
+            <th>Error?</th>
+            <td><?= $response->isError() ? 'yes' : 'no' ?></td>
+        </tr>
+        <?php foreach ($response->batchList as $batch) : ?>
+        <tr>
+            <th>Batch</th>
+            <td>
+                batchId: <?php echo $batch->batchId; ?><br>
+                settlementTimeUTC: <?php echo $batch->settlementTimeUTC; ?><br>
+                settlementTimeLocal: <?php echo $batch->settlementTimeLocal; ?><br>
+                settlementState: <?php echo $batch->settlementState; ?><br>
+                paymentMethod: <?php echo $batch->paymentMethod; ?><br>
+                <?php foreach ($batch->statistics as $statistic) : ?>
+                accountType: <?php echo $statistic->accountType; ?><br>
+                chargeAmount: <?php echo $statistic->chargeAmount; ?><br>
+                chargeCount: <?php echo $statistic->chargeCount; ?><br>
+                refundAmount: <?php echo $statistic->refundAmount; ?><br>
+                refundCount: <?php echo $statistic->refundCount; ?><br>
+                voidCount: <?php echo $statistic->voidCount; ?><br>
+                declineCount: <?php echo $statistic->declineCount; ?><br>
+                errorCount: <?php echo $statistic->errorCount; ?>
+                <?php endforeach; ?>
+            </td>
+        </tr>
+        <?php endforeach; ?>
+    </table>
+    <h2>
+        Raw Input/Output
+    </h2>
+<?= $request, $response ?>
+</body>
 </html>

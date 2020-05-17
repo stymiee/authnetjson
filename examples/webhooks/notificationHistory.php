@@ -47,18 +47,22 @@ SAMPLE RESPONSE
 
 namespace JohnConde\Authnet;
 
+use Exception;
+
 require '../../config.inc.php';
 
-$successful = false;
-$error      = true;
 try {
-    $request    = AuthnetApiFactory::getWebhooksHandler(AUTHNET_LOGIN, AUTHNET_TRANSKEY, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
+    $request = AuthnetApiFactory::getJsonApiHandler(
+        AUTHNET_LOGIN,
+        AUTHNET_TRANSKEY,
+        AuthnetApiFactory::USE_DEVELOPMENT_SERVER
+    );
     $response   = $request->getNotificationHistory();
     $successful = true;
     $error      = false;
-}
-catch (\Exception $e) {
-    $errorMessage = $e->getMessage();
+} catch (Exception $e) {
+    echo $e;
+    exit;
 }
 
 ?>
@@ -97,19 +101,19 @@ catch (\Exception $e) {
             </tr>
             <tr>
                 <th>Notification ID</th>
-                <td><?= $notification->getNotificationId(); ?></td>
+                <td><?= $notification->getNotificationId() ?></td>
             </tr>
             <tr>
                 <th>Delivery Status</th>
-                <td><?= $notification->getDeliveryStatus(); ?></td>
+                <td><?= $notification->getDeliveryStatus() ?></td>
             </tr>
             <tr>
                 <th>Event Type</th>
-                <td><?= $notification->getEventType(); ?></td>
+                <td><?= $notification->getEventType() ?></td>
             </tr>
             <tr>
                 <th>Event Date</th>
-                <td><?= $notification->getEventDate(); ?></td>
+                <td><?= $notification->getEventDate() ?></td>
             </tr>
             <?php
         }
@@ -118,7 +122,7 @@ catch (\Exception $e) {
         ?>
         <tr>
             <th>Error message</th>
-            <td><?= $errorMessage; ?></td>
+            <td><?= $response->errorMessage ?></td>
         </tr>
         <?php
     }
@@ -127,8 +131,6 @@ catch (\Exception $e) {
 <h2>
     Raw Input/Output
 </h2>
-<?php
-echo $request, $response;
-?>
+<?= $request, $response ?>
 </body>
 </html>

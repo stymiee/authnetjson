@@ -73,18 +73,22 @@ SAMPLE RESPONSE
 
 namespace JohnConde\Authnet;
 
+use Exception;
+
 require '../../config.inc.php';
 
-$successful = false;
-$error      = true;
 try {
-    $request    = AuthnetApiFactory::getWebhooksHandler(AUTHNET_LOGIN, AUTHNET_TRANSKEY, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
+    $request = AuthnetApiFactory::getJsonApiHandler(
+        AUTHNET_LOGIN,
+        AUTHNET_TRANSKEY,
+        AuthnetApiFactory::USE_DEVELOPMENT_SERVER
+    );
     $response   = $request->getWebhooks();
     $successful = true;
     $error      = false;
-}
-catch (\Exception $e) {
-    $errorMessage = $e->getMessage();
+} catch (Exception $e) {
+    echo $e;
+    exit;
 }
 
 ?>
@@ -133,15 +137,15 @@ catch (\Exception $e) {
             </tr>
             <tr>
                 <th>Webhook ID</th>
-                <td><?= $webhook->getWebhooksId(); ?></td>
+                <td><?= $webhook->getWebhooksId() ?></td>
             </tr>
             <tr>
                 <th>Status</th>
-                <td><?= $webhook->getStatus(); ?></td>
+                <td><?= $webhook->getStatus() ?></td>
             </tr>
             <tr>
                 <th>URL</th>
-                <td><?= $webhook->getUrl(); ?></td>
+                <td><?= $webhook->getUrl() ?></td>
             </tr>
             <?php
         }
@@ -150,7 +154,7 @@ catch (\Exception $e) {
         ?>
         <tr>
             <th>Error message</th>
-            <td><?= $errorMessage; ?></td>
+            <td><?= $response->errorMessage ?></td>
         </tr>
         <?php
     }
@@ -159,8 +163,6 @@ catch (\Exception $e) {
 <h2>
     Raw Input/Output
 </h2>
-<?php
-echo $request, $response;
-?>
+<?= $request, $response ?>
 </body>
 </html>
