@@ -46,6 +46,8 @@
         }
     },
     "scripts": {
-        "test": "phpunit"
+        "test": "phpunit",
+        "phpcs": "php vendor/squizlabs/php_codesniffer/bin/phpcs ./src --report-file=build/phpcs/report.txt",
+        "phpmd": "php vendor/phpmd/phpmd/src/bin/phpmd src/ html cleancode --reportfile build/phpmd/report.html"
     }
 }
