@@ -18,10 +18,10 @@ use Throwable;
 /**
  * Exception that is throw when invalid Authorize.Net API credentials are provided
  *
- * @author     John Conde <stymiee@gmail.com>
- * @copyright  John Conde <stymiee@gmail.com>
- * @license    http://www.apache.org/licenses/LICENSE-2.0.html Apache License, Version 2.0
- * @link       https://github.com/stymiee/authnetjson
+ * @author    John Conde <stymiee@gmail.com>
+ * @copyright John Conde <stymiee@gmail.com>
+ * @license   http://www.apache.org/licenses/LICENSE-2.0.html Apache License, Version 2.0
+ * @link      https://github.com/stymiee/authnetjson
  */
 class AuthnetInvalidCredentialsException extends AuthnetException
 {

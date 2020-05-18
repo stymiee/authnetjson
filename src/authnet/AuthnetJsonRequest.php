@@ -18,12 +18,12 @@ use \Curl\Curl;
 /**
  * Creates a request to the Authorize.Net JSON endpoints.
  *
- * @package     AuthnetJSON
- * @author      John Conde <stymiee@gmail.com>
- * @copyright   John Conde <stymiee@gmail.com>
- * @license     http://www.apache.org/licenses/LICENSE-2.0.html Apache License, Version 2.0
- * @link        https://github.com/stymiee/authnetjson
- * @see         https://developer.authorize.net/api/reference/
+ * @package   AuthnetJSON
+ * @author    John Conde <stymiee@gmail.com>
+ * @copyright John Conde <stymiee@gmail.com>
+ * @license   http://www.apache.org/licenses/LICENSE-2.0.html Apache License, Version 2.0
+ * @link      https://github.com/stymiee/authnetjson
+ * @see       https://developer.authorize.net/api/reference/
  *
  * @method AuthnetJsonResponse createTransactionRequest(array $array)                                 process a payment
  * @method AuthnetJsonResponse sendCustomerTransactionReceiptRequest(array $array)                    get a list of unsettled transactions
@@ -62,37 +62,37 @@ use \Curl\Curl;
 class AuthnetJsonRequest
 {
     /**
-     * @var     int     Maximum number of retires making HTTP request before failure
+     * @var int     Maximum number of retires making HTTP request before failure
      */
     private const MAX_RETRIES = 3;
 
     /**
-     * @var     string  Authorize.Net API login ID
+     * @var string  Authorize.Net API login ID
      */
     private $login;
 
     /**
-     * @var     string  Authorize.Net API Transaction Key
+     * @var string  Authorize.Net API Transaction Key
      */
     private $transactionKey;
 
     /**
-     * @var     string  URL endpoint for processing a transaction
+     * @var string  URL endpoint for processing a transaction
      */
     private $url;
 
     /**
-     * @var     string  JSON formatted API request
+     * @var string  JSON formatted API request
      */
     private $requestJson;
 
     /**
-     * @var     object  Wrapper object representing an endpoint
+     * @var object  Wrapper object representing an endpoint
      */
     private $processor;
 
     /**
-     * @var     int  Number of attempts to make an HTTP request
+     * @var int  Number of attempts to make an HTTP request
      */
     private $retries;
 
@@ -100,9 +100,9 @@ class AuthnetJsonRequest
      * Creates the request object by setting the Authorize.Net credentials and URL of the endpoint to be used
      * for the API call.
      *
-     * @param   string  $login              Authorize.Net API login ID
-     * @param   string  $transactionKey     Authorize.Net API Transaction Key
-     * @param   string  $api_url            URL endpoint for processing a transaction
+     * @param string $login          Authorize.Net API login ID
+     * @param string $transactionKey Authorize.Net API Transaction Key
+     * @param string $api_url        URL endpoint for processing a transaction
      */
     public function __construct(string $login, string $transactionKey, string $api_url)
     {
@@ -114,7 +114,7 @@ class AuthnetJsonRequest
     /**
      * Outputs the account credentials, endpoint URL, and request JSON in a human readable format
      *
-     * @return  string  HTML table containing debugging information
+     * @return string  HTML table containing debugging information
      */
     public function __toString()
     {
@@ -138,9 +138,9 @@ class AuthnetJsonRequest
     /**
      * The __set() method should never be used as all values to be made in the API call must be passed as an array
      *
-     * @param   string  $name       unused
-     * @param   mixed   $value      unused
-     * @throws  AuthnetCannotSetParamsException
+     * @param  string $name  unused
+     * @param  mixed  $value unused
+     * @throws AuthnetCannotSetParamsException
      */
     public function __set($name, $value)
     {
@@ -151,11 +151,11 @@ class AuthnetJsonRequest
      * Magic method that dynamically creates our API call based on the name of the method in the client code and
      * the array passed as its parameter.
      *
-     * @param   string  $api_call   name of the API call to be made
-     * @param   array   $args       the array to be passed to the API
-     * @return  AuthnetJsonResponse
-     * @throws  AuthnetCurlException
-     * @throws  AuthnetInvalidJsonException
+     * @param  string $api_call name of the API call to be made
+     * @param  array  $args     the array to be passed to the API
+     * @return AuthnetJsonResponse
+     * @throws AuthnetCurlException
+     * @throws AuthnetInvalidJsonException
      */
     public function __call($api_call, array $args)
     {
@@ -196,8 +196,8 @@ class AuthnetJsonRequest
     /**
      * Tells the handler to make the API call to Authorize.Net.
      *
-     * @return  string  JSON string containing API response
-     * @throws  AuthnetCurlException
+     * @return string  JSON string containing API response
+     * @throws AuthnetCurlException
      */
     private function process() : string
     {
@@ -217,7 +217,7 @@ class AuthnetJsonRequest
     /**
      * Sets the handler to be used to handle our API call. Mainly used for unit testing as Curl is used by default.
      *
-     * @param   Curl  $processor
+     * @param Curl $processor
      */
     public function setProcessHandler($processor) : void
     {
@@ -227,7 +227,7 @@ class AuthnetJsonRequest
     /**
      * Gets the request sent to Authorize.Net in JSON format for logging purposes.
      *
-     * @return  string transaction request sent to Authorize.Net in JSON format
+     * @return string transaction request sent to Authorize.Net in JSON format
      */
     public function getRawRequest() : string
     {

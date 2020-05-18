@@ -16,30 +16,30 @@ namespace JohnConde\Authnet;
 /**
  * Adapter for the Authorize.Net Webhooks API
  *
- * @package     AuthnetJSON
- * @author      John Conde <stymiee@gmail.com>
- * @copyright   John Conde <stymiee@gmail.com>
- * @license     http://www.apache.org/licenses/LICENSE-2.0.html Apache License, Version 2.0
- * @link        https://github.com/stymiee/authnetjson
- * @see         https://developer.authorize.net/api/reference/
+ * @package   AuthnetJSON
+ * @author    John Conde <stymiee@gmail.com>
+ * @copyright John Conde <stymiee@gmail.com>
+ * @license   http://www.apache.org/licenses/LICENSE-2.0.html Apache License, Version 2.0
+ * @link      https://github.com/stymiee/authnetjson
+ * @see       https://developer.authorize.net/api/reference/
  */
 class AuthnetWebhooksResponse
 {
     /**
-     * @var     object  SimpleXML object representing the API response
+     * @var object  SimpleXML object representing the API response
      */
     private $response;
 
     /**
-     * @var     string  JSON string that is the response sent by Authorize.Net
+     * @var string  JSON string that is the response sent by Authorize.Net
      */
     private $responseJson;
 
     /**
      * Creates the response object with the response json returned from the API call
      *
-     * @param   string      $responseJson   Response from Authorize.Net
-     * @throws  AuthnetInvalidJsonException
+     * @param  string $responseJson Response from Authorize.Net
+     * @throws AuthnetInvalidJsonException
      */
     public function __construct(string $responseJson)
     {
@@ -52,7 +52,7 @@ class AuthnetWebhooksResponse
     /**
      * Outputs the response JSON in a human readable format
      *
-     * @return  string  HTML table containing debugging information
+     * @return string  HTML table containing debugging information
      */
     public function __toString()
     {
@@ -92,7 +92,7 @@ class AuthnetWebhooksResponse
      * net.authorize.payment.refund.created
      * net.authorize.payment.void.created
      *
-     * @return  array   Array of event types supported by Webhooks API
+     * @return array   Array of event types supported by Webhooks API
      */
     public function getEventTypes() : array
     {
@@ -110,7 +110,7 @@ class AuthnetWebhooksResponse
     /**
      * Gets the webhooks ID
      *
-     * @return  string  Webhooks ID
+     * @return string  Webhooks ID
      */
     public function getWebhooksId() : string
     {
@@ -120,7 +120,7 @@ class AuthnetWebhooksResponse
     /**
      * Gets the status of the Webhooks
      *
-     * @return  string  Staus of the webhooks [active|inactive]
+     * @return string  Staus of the webhooks [active|inactive]
      */
     public function getStatus() : string
     {
@@ -130,7 +130,7 @@ class AuthnetWebhooksResponse
     /**
      * Gets the URL the Webhooks API will use for these Webhooks
      *
-     * @return  string
+     * @return string
      */
     public function getUrl() : string
     {
@@ -140,8 +140,8 @@ class AuthnetWebhooksResponse
     /**
      * Gets a list of webhooks
      *
-     * @return  array
-     * @throws  AuthnetInvalidJsonException
+     * @return array
+     * @throws AuthnetInvalidJsonException
      */
     public function getWebhooks() : array
     {
@@ -155,8 +155,8 @@ class AuthnetWebhooksResponse
     /**
      * Gets a list of webhooks
      *
-     * @return  array
-     * @throws  AuthnetInvalidJsonException
+     * @return array
+     * @throws AuthnetInvalidJsonException
      */
     public function getNotificationHistory() : array
     {
@@ -172,7 +172,7 @@ class AuthnetWebhooksResponse
     /**
      * Gets the notification ID of a notification
      *
-     * @return  string
+     * @return string
      */
     public function getNotificationId() : string
     {
@@ -182,7 +182,7 @@ class AuthnetWebhooksResponse
     /**
      * Gets the delivery status of a notification
      *
-     * @return  string
+     * @return string
      */
     public function getDeliveryStatus() : string
     {
@@ -192,7 +192,7 @@ class AuthnetWebhooksResponse
     /**
      * Gets the event type of a notification
      *
-     * @return  string
+     * @return string
      */
     public function getEventType() : string
     {
@@ -202,7 +202,7 @@ class AuthnetWebhooksResponse
     /**
      * Gets the event date of a notification
      *
-     * @return  string
+     * @return string
      */
     public function getEventDate() : string
     {

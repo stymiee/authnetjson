@@ -16,12 +16,12 @@ namespace JohnConde\Authnet;
 /**
  * Contains constant values.
  *
- * @package     AuthnetJSON
- * @author      John Conde <stymiee@gmail.com>
- * @copyright   John Conde <stymiee@gmail.com>
- * @license     http://www.apache.org/licenses/LICENSE-2.0.html Apache License, Version 2.0
- * @link        https://github.com/stymiee/authnetjson
- * @see         https://developer.authorize.net/api/reference/
+ * @package   AuthnetJSON
+ * @author    John Conde <stymiee@gmail.com>
+ * @copyright John Conde <stymiee@gmail.com>
+ * @license   http://www.apache.org/licenses/LICENSE-2.0.html Apache License, Version 2.0
+ * @link      https://github.com/stymiee/authnetjson
+ * @see       https://developer.authorize.net/api/reference/
  */
 class AuthnetJson
 {

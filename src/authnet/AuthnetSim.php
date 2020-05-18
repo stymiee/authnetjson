@@ -18,35 +18,35 @@ use Exception;
 /**
  * Wrapper to simplify the creation of SIM data
  *
- * @author     John Conde <stymiee@gmail.com>
- * @copyright  John Conde <stymiee@gmail.com>
- * @license    http://www.apache.org/licenses/LICENSE-2.0.html Apache License, Version 2.0
- * @link       https://github.com/stymiee/authnetjson
+ * @author    John Conde <stymiee@gmail.com>
+ * @copyright John Conde <stymiee@gmail.com>
+ * @license   http://www.apache.org/licenses/LICENSE-2.0.html Apache License, Version 2.0
+ * @link      https://github.com/stymiee/authnetjson
  */
 class AuthnetSim
 {
     /**
-     * @var     string  Authorize.Net API login ID
+     * @var string  Authorize.Net API login ID
      */
     private $login;
 
     /**
-     * @var     string  Authorize.Net API signature key
+     * @var string  Authorize.Net API signature key
      */
     private $signature;
 
     /**
-     * @var     string  URL endpoint for processing a transaction
+     * @var string  URL endpoint for processing a transaction
      */
     private $url;
 
     /**
-     * @var     int  Randomly generated number
+     * @var int  Randomly generated number
      */
     private $sequence;
 
     /**
-     * @var     int  Unix timestamp the request was made
+     * @var int  Unix timestamp the request was made
      */
     private $timestamp;
 
@@ -54,10 +54,10 @@ class AuthnetSim
      * Creates a SIM wrapper by setting the Authorize.Net credentials and URL of the endpoint to be used
      * for the API call
      *
-     * @param   string  $login         Authorize.Net API login ID
-     * @param   string  $signature     Authorize.Net API Transaction Key
-     * @param   string  $api_url       URL endpoint for processing a transaction
-     * @throws  Exception
+     * @param  string $login     Authorize.Net API login ID
+     * @param  string $signature Authorize.Net API Transaction Key
+     * @param  string $api_url   URL endpoint for processing a transaction
+     * @throws Exception
      */
     public function __construct($login, $signature, $api_url)
     {
@@ -70,9 +70,9 @@ class AuthnetSim
     /**
      * Returns the hash for the SIM transaction
      *
-     * @param   float  $amount   The amount of the transaction
-     * @return  string           Hash of five different unique transaction parameters
-     * @throws  AuthnetInvalidAmountException
+     * @param  float $amount The amount of the transaction
+     * @return string           Hash of five different unique transaction parameters
+     * @throws AuthnetInvalidAmountException
      */
     public function getFingerprint(float $amount) : string
     {
@@ -98,7 +98,7 @@ class AuthnetSim
     /**
      * Returns the sequence generated for a transaction
      *
-     * @return  int Current sequence
+     * @return int Current sequence
      */
     public function getSequence() : int
     {
@@ -108,7 +108,7 @@ class AuthnetSim
     /**
      * Returns the timestamp for a transaction
      *
-     * @return  int Current timestamp
+     * @return int Current timestamp
      */
     public function getTimestamp() : int
     {
@@ -118,7 +118,7 @@ class AuthnetSim
     /**
      * Returns the account login ID
      *
-     * @return  string           API login ID
+     * @return string           API login ID
      */
     public function getLogin() : string
     {
@@ -128,7 +128,7 @@ class AuthnetSim
     /**
      * Returns the url endpoint for the transaction
      *
-     * @return  string           url endpoint
+     * @return string           url endpoint
      */
     public function getEndpoint() : string
     {
@@ -137,6 +137,7 @@ class AuthnetSim
 
     /**
      * Resets the sequence and timestamp
+     *
      * @throws Exception
      */
     public function resetParameters() : void

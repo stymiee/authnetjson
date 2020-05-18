@@ -16,17 +16,17 @@ namespace JohnConde\Authnet;
 /**
  * Adapter for the Authorize.Net JSON API
  *
- * @package     AuthnetJSON
- * @author      John Conde <stymiee@gmail.com>
- * @copyright   John Conde <stymiee@gmail.com>
- * @license     http://www.apache.org/licenses/LICENSE-2.0.html Apache License, Version 2.0
- * @link        https://github.com/stymiee/authnetjson
- * @see         https://developer.authorize.net/api/reference/
+ * @package   AuthnetJSON
+ * @author    John Conde <stymiee@gmail.com>
+ * @copyright John Conde <stymiee@gmail.com>
+ * @license   http://www.apache.org/licenses/LICENSE-2.0.html Apache License, Version 2.0
+ * @link      https://github.com/stymiee/authnetjson
+ * @see       https://developer.authorize.net/api/reference/
  */
 class TransactionResponse
 {
     /**
-     * @var     array Transaction response fields to map to values parsed from a transaction response string
+     * @var array Transaction response fields to map to values parsed from a transaction response string
      */
     private static $fieldMap = [
         1 => 'ResponseCode',
@@ -77,14 +77,14 @@ class TransactionResponse
     ];
 
     /**
-     * @var     array Transaction response fields to map to values parsed from a transaction response string
+     * @var array Transaction response fields to map to values parsed from a transaction response string
      */
     private $responseArray;
 
     /**
      * Creates out TransactionResponse object and assigns the response variables to an array
      *
-     * @param   string  $response   Comma delimited transaction response string
+     * @param string $response Comma delimited transaction response string
      */
     public function __construct(string $response)
     {
@@ -96,8 +96,8 @@ class TransactionResponse
      * can be accessed via it's numerical location in the array (starting at zero) or using the key for that field
      * as defined by Authorize.Net and mapped in self::$fieldMap.
      *
-     * @param   mixed  $field  Name or key of the transaction field to be retrieved
-     * @return  string Transaction field to be retrieved
+     * @param  mixed $field Name or key of the transaction field to be retrieved
+     * @return string Transaction field to be retrieved
      */
     public function getTransactionResponseField($field) : ?string
     {

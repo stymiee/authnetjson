@@ -18,32 +18,32 @@ use Curl\Curl;
 /**
  * Creates a request to the Authorize.Net Webhooks endpoints
  *
- * @package     AuthnetJSON
- * @author      John Conde <stymiee@gmail.com>
- * @copyright   John Conde <stymiee@gmail.com>
- * @license     http://www.apache.org/licenses/LICENSE-2.0.html Apache License, Version 2.0
- * @link        https://github.com/stymiee/authnetjson
- * @see         https://developer.authorize.net/api/reference/features/webhooks.html
+ * @package   AuthnetJSON
+ * @author    John Conde <stymiee@gmail.com>
+ * @copyright John Conde <stymiee@gmail.com>
+ * @license   http://www.apache.org/licenses/LICENSE-2.0.html Apache License, Version 2.0
+ * @link      https://github.com/stymiee/authnetjson
+ * @see       https://developer.authorize.net/api/reference/features/webhooks.html
  */
 class AuthnetWebhooksRequest
 {
     /**
-     * @var     string  Base URL for processing a webhook
+     * @var string  Base URL for processing a webhook
      */
     private $url;
 
     /**
-     * @var     string  Endpoint for processing a webhook
+     * @var string  Endpoint for processing a webhook
      */
     private $endpoint;
 
     /**
-     * @var     string  JSON formatted API request
+     * @var string  JSON formatted API request
      */
     private $requestJson;
 
     /**
-     * @var     object  Wrapper object representing an endpoint
+     * @var object  Wrapper object representing an endpoint
      */
     private $processor;
 
@@ -51,7 +51,7 @@ class AuthnetWebhooksRequest
      * Creates the request object by setting the Authorize.Net credentials and URL of the endpoint to be used
      * for the API call
      *
-     * @param   string  $api_url            URL endpoint for processing a transaction
+     * @param string $api_url URL endpoint for processing a transaction
      */
     public function __construct($api_url)
     {
@@ -61,7 +61,7 @@ class AuthnetWebhooksRequest
     /**
      * Outputs the account credentials, endpoint URL, and request JSON in a human readable format
      *
-     * @return  string  HTML table containing debugging information
+     * @return string  HTML table containing debugging information
      */
     public function __toString()
     {
@@ -85,12 +85,12 @@ class AuthnetWebhooksRequest
     /**
      * Creates a new webhook
      *
-     * @param   array   $webhooks   Array of webhooks to be created or modified
-     * @param   string  $webhookUrl URL of where webhook notifications will be sent
-     * @param   string  $status     Status of webhooks to be created or modified [active/inactive]
-     * @return  AuthnetWebhooksResponse
-     * @throws  AuthnetInvalidJsonException
-     * @throws  AuthnetCurlException
+     * @param  array  $webhooks   Array of webhooks to be created or modified
+     * @param  string $webhookUrl URL of where webhook notifications will be sent
+     * @param  string $status     Status of webhooks to be created or modified [active/inactive]
+     * @return AuthnetWebhooksResponse
+     * @throws AuthnetInvalidJsonException
+     * @throws AuthnetCurlException
      */
     public function createWebhooks(array $webhooks, string $webhookUrl, string $status = 'active') : object
     {
@@ -109,8 +109,8 @@ class AuthnetWebhooksRequest
     /**
      * Sends a test ping to a URL for (a) designated webhook(s)
      *
-     * @param   string   $webhookId   Webhook ID to be tested
-     * @throws  AuthnetCurlException
+     * @param  string $webhookId Webhook ID to be tested
+     * @throws AuthnetCurlException
      */
     public function testWebhook(string $webhookId) : void
     {
@@ -123,9 +123,9 @@ class AuthnetWebhooksRequest
     /**
      * Gets all of the available event types
      *
-     * @return  AuthnetWebhooksResponse
-     * @throws  AuthnetCurlException
-     * @throws  AuthnetInvalidJsonException
+     * @return AuthnetWebhooksResponse
+     * @throws AuthnetCurlException
+     * @throws AuthnetInvalidJsonException
      */
     public function getEventTypes() : object
     {
@@ -137,9 +137,9 @@ class AuthnetWebhooksRequest
     /**
      * List all of your webhooks
      *
-     * @return  AuthnetWebhooksResponse
-     * @throws  AuthnetCurlException
-     * @throws  AuthnetInvalidJsonException
+     * @return AuthnetWebhooksResponse
+     * @throws AuthnetCurlException
+     * @throws AuthnetInvalidJsonException
      */
     public function getWebhooks() : object
     {
@@ -151,10 +151,10 @@ class AuthnetWebhooksRequest
     /**
      * Get a webhook
      *
-     * @param   string   $webhookId   Webhook ID to be retrieved
-     * @return  AuthnetWebhooksResponse
-     * @throws  AuthnetCurlException
-     * @throws  AuthnetInvalidJsonException
+     * @param  string $webhookId Webhook ID to be retrieved
+     * @return AuthnetWebhooksResponse
+     * @throws AuthnetCurlException
+     * @throws AuthnetInvalidJsonException
      */
     public function getWebhook(string $webhookId) : object
     {
@@ -166,10 +166,10 @@ class AuthnetWebhooksRequest
     /**
      * GET API request
      *
-     * @param   string $url API endpoint to hit
-     * @return  object
-     * @throws  AuthnetCurlException
-     * @throws  AuthnetInvalidJsonException
+     * @param  string $url API endpoint to hit
+     * @return object
+     * @throws AuthnetCurlException
+     * @throws AuthnetInvalidJsonException
      */
     private function getByUrl(string $url) : object
     {
@@ -180,13 +180,13 @@ class AuthnetWebhooksRequest
     /**
      * Updates webhook event types
      *
-     * @param   string  $webhookId      Webhook ID to be modified
-     * @param   string  $webhookUrl     URL of where webhook notifications will be sent
-     * @param   array   $eventTypes     Array of event types to be added/removed
-     * @param   string  $status         Status of webhooks to be modified [active/inactive]
-     * @return  AuthnetWebhooksResponse
-     * @throws  AuthnetInvalidJsonException
-     * @throws  AuthnetCurlException
+     * @param  string $webhookId  Webhook ID to be modified
+     * @param  string $webhookUrl URL of where webhook notifications will be sent
+     * @param  array  $eventTypes Array of event types to be added/removed
+     * @param  string $status     Status of webhooks to be modified [active/inactive]
+     * @return AuthnetWebhooksResponse
+     * @throws AuthnetInvalidJsonException
+     * @throws AuthnetCurlException
      */
     public function updateWebhook(string $webhookId, string $webhookUrl, array $eventTypes, string $status = 'active') : object
     {
@@ -205,8 +205,8 @@ class AuthnetWebhooksRequest
     /**
      * Delete a webhook
      *
-     * @param   string   $webhookId   Webhook ID to be deleted
-     * @throws  AuthnetCurlException
+     * @param  string $webhookId Webhook ID to be deleted
+     * @throws AuthnetCurlException
      */
     public function deleteWebhook(string $webhookId) : void
     {
@@ -218,28 +218,30 @@ class AuthnetWebhooksRequest
     /**
      * Retrieve Notification History
      *
-     * @param   int   $limit    Default: 1000
-     * @param   int   $offset   Default: 0
-     * @return  AuthnetWebhooksResponse
-     * @throws  AuthnetInvalidJsonException
-     * @throws  AuthnetCurlException
+     * @param  int $limit  Default: 1000
+     * @param  int $offset Default: 0
+     * @return AuthnetWebhooksResponse
+     * @throws AuthnetInvalidJsonException
+     * @throws AuthnetCurlException
      */
     public function getNotificationHistory(int $limit = 1000, int $offset = 0) : object
     {
         $this->endpoint = 'notifications';
         $this->url = sprintf('%s%s', $this->url, $this->endpoint);
-        $response = $this->get($this->url, [
+        $response = $this->get(
+            $this->url, [
             'offset' => $offset,
             'limit'  => $limit
-        ]);
+            ]
+        );
         return new AuthnetWebhooksResponse($response);
     }
 
     /**
      * Tells the handler to make the API call to Authorize.Net
      *
-     * @return  string
-     * @throws  AuthnetCurlException
+     * @return string
+     * @throws AuthnetCurlException
      */
     private function handleResponse() : string
     {
@@ -255,10 +257,10 @@ class AuthnetWebhooksRequest
     /**
      * Make GET request via Curl
      *
-     * @param   string  $url
-     * @param   array   $params
-     * @return  string
-     * @throws  AuthnetCurlException
+     * @param  string $url
+     * @param  array  $params
+     * @return string
+     * @throws AuthnetCurlException
      *
      * @codeCoverageIgnore
      */
@@ -271,10 +273,10 @@ class AuthnetWebhooksRequest
     /**
      * Make POST request via Curl
      *
-     * @param   string  $url        API endpoint
-     * @param   string  $request    JSON request payload
-     * @return  string
-     * @throws  AuthnetCurlException
+     * @param  string $url     API endpoint
+     * @param  string $request JSON request payload
+     * @return string
+     * @throws AuthnetCurlException
      *
      * @codeCoverageIgnore
      */
@@ -287,10 +289,10 @@ class AuthnetWebhooksRequest
     /**
      * Make PUT request via Curl
      *
-     * @param   string  $url        API endpoint
-     * @param   string  $request    JSON request payload
-     * @return  string
-     * @throws  AuthnetCurlException
+     * @param  string $url     API endpoint
+     * @param  string $request JSON request payload
+     * @return string
+     * @throws AuthnetCurlException
      *
      * @codeCoverageIgnore
      */
@@ -303,9 +305,9 @@ class AuthnetWebhooksRequest
     /**
      * Make DELETE request via Curl
      *
-     * @param   string  $url        API endpoint
-     * @return  string
-     * @throws  AuthnetCurlException
+     * @param  string $url API endpoint
+     * @return string
+     * @throws AuthnetCurlException
      *
      * @codeCoverageIgnore
      */
@@ -318,7 +320,7 @@ class AuthnetWebhooksRequest
     /**
      * Sets the handler to be used to handle our API call. Mainly used for unit testing as Curl is used by default.
      *
-     * @param   Curl  $processor
+     * @param Curl $processor
      */
     public function setProcessHandler(Curl $processor) : void
     {
@@ -328,7 +330,7 @@ class AuthnetWebhooksRequest
     /**
      * Gets the request sent to Authorize.Net in JSON format for logging purposes
      *
-     * @return  string transaction request sent to Authorize.Net in JSON format
+     * @return string transaction request sent to Authorize.Net in JSON format
      */
     public function getRawRequest() : string
     {

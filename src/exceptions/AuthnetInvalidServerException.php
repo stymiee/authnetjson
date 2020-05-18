@@ -19,10 +19,10 @@ use Throwable;
  * Exception that is throw when an invalid value is given for the $server paramater when
  * initiating an instance of the AuthnetJson class
  *
- * @author     John Conde <stymiee@gmail.com>
- * @copyright  John Conde <stymiee@gmail.com>
- * @license    http://www.apache.org/licenses/LICENSE-2.0.html Apache License, Version 2.0
- * @link       https://github.com/stymiee/authnetjson
+ * @author    John Conde <stymiee@gmail.com>
+ * @copyright John Conde <stymiee@gmail.com>
+ * @license   http://www.apache.org/licenses/LICENSE-2.0.html Apache License, Version 2.0
+ * @link      https://github.com/stymiee/authnetjson
  */
 class AuthnetInvalidServerException extends AuthnetException
 {

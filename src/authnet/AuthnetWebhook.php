@@ -16,43 +16,43 @@ namespace JohnConde\Authnet;
 /**
  * Handles a Webhook notification from the Authorize.Net Webhooks API
  *
- * @package     AuthnetJSON
- * @author      John Conde <stymiee@gmail.com>
- * @copyright   John Conde <stymiee@gmail.com>
- * @license     http://www.apache.org/licenses/LICENSE-2.0.html Apache License, Version 2.0
- * @link        https://github.com/stymiee/authnetjson
- * @see         https://developer.authorize.net/api/reference/
+ * @package   AuthnetJSON
+ * @author    John Conde <stymiee@gmail.com>
+ * @copyright John Conde <stymiee@gmail.com>
+ * @license   http://www.apache.org/licenses/LICENSE-2.0.html Apache License, Version 2.0
+ * @link      https://github.com/stymiee/authnetjson
+ * @see       https://developer.authorize.net/api/reference/
  */
 class AuthnetWebhook
 {
     /**
-     * @var     object  SimpleXML object representing the Webhook notification
+     * @var object  SimpleXML object representing the Webhook notification
      */
     private $webhook;
 
     /**
-     * @var     string  JSON string that is the Webhook notification sent by Authorize.Net
+     * @var string  JSON string that is the Webhook notification sent by Authorize.Net
      */
     private $webhookJson;
 
     /**
-     * @var     array  HTTP headers sent with the notification
+     * @var array  HTTP headers sent with the notification
      */
     private $headers;
 
     /**
-     * @var     string  Authorize.Net Signature Key
+     * @var string  Authorize.Net Signature Key
      */
     private $signature;
 
     /**
      * Creates the response object with the response json returned from the API call
      *
-     * @param   string   $signature    Authorize.Net Signature Key
-     * @param   string   $payload      Webhook Notification sent by Authorize.Net
-     * @param   array    $headers      HTTP headers sent with Webhook. Optional if PHP is run as an Apache module
-     * @throws  AuthnetInvalidCredentialsException
-     * @throws  AuthnetInvalidJsonException
+     * @param  string $signature Authorize.Net Signature Key
+     * @param  string $payload   Webhook Notification sent by Authorize.Net
+     * @param  array  $headers   HTTP headers sent with Webhook. Optional if PHP is run as an Apache module
+     * @throws AuthnetInvalidCredentialsException
+     * @throws AuthnetInvalidJsonException
      */
     public function __construct(string $signature, string $payload, array $headers = [])
     {
@@ -74,7 +74,7 @@ class AuthnetWebhook
     /**
      * Outputs the response JSON in a human readable format
      *
-     * @return  string  HTML table containing debugging information
+     * @return string  HTML table containing debugging information
      */
     public function __toString()
     {
@@ -96,8 +96,8 @@ class AuthnetWebhook
     /**
      * Gets a response variable from the Webhook notification
      *
-     * @param   string  $var
-     * @return  string          requested variable from the API call response
+     * @param  string $var
+     * @return string          requested variable from the API call response
      */
     public function __get($var)
     {

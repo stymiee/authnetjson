@@ -25,7 +25,7 @@ use Exception;
  * @copyright John Conde <stymiee@gmail.com>
  * @license   http://www.apache.org/licenses/LICENSE-2.0.html Apache License, Version 2.0
  *
- * @link      https://github.com/stymiee/authnetjson
+ * @link https://github.com/stymiee/authnetjson
  */
 class AuthnetApiFactory
 {
@@ -47,9 +47,9 @@ class AuthnetApiFactory
     /**
      * Validates the Authorize.Net credentials and returns a Request object to be used to make an API call.
      *
-     * @param  string      $login                          Authorize.Net API Login ID
-     * @param  string      $transaction_key                Authorize.Net API Transaction Key
-     * @param  int         $endpoint                       ID of which endpoint to use (optional)
+     * @param  string $login           Authorize.Net API Login ID
+     * @param  string $transaction_key Authorize.Net API Transaction Key
+     * @param  int    $endpoint        ID of which endpoint to use (optional)
      * @return AuthnetJsonRequest
      * @throws AuthnetInvalidCredentialsException
      * @throws AuthnetInvalidServerException
@@ -80,7 +80,7 @@ class AuthnetApiFactory
     /**
      * Gets the API endpoint to be used for a JSON API call.
      *
-     * @param  int         $server     ID of which server to use
+     * @param  int $server ID of which server to use
      * @return string                  The URL endpoint the request is to be sent to
      * @throws AuthnetInvalidServerException
      */
@@ -100,9 +100,9 @@ class AuthnetApiFactory
     /**
      * Validates the Authorize.Net credentials and returns a SIM object to be used to make a SIM API call.
      *
-     * @param  string      $login                  Authorize.Net API Login ID
-     * @param  string      $transaction_key        Authorize.Net API Transaction Key
-     * @param  int         $server                 ID of which server to use (optional)
+     * @param  string $login           Authorize.Net API Login ID
+     * @param  string $transaction_key Authorize.Net API Transaction Key
+     * @param  int    $server          ID of which server to use (optional)
      * @return AuthnetSim
      * @throws AuthnetInvalidCredentialsException
      * @throws AuthnetInvalidServerException
@@ -125,7 +125,7 @@ class AuthnetApiFactory
     /**
      * Gets the API endpoint to be used for a SIM API call.
      *
-     * @param  int         $server     ID of which server to use
+     * @param  int $server ID of which server to use
      * @return string                  The URL endpoint the request is to be sent to
      * @throws AuthnetInvalidServerException
      */
@@ -144,9 +144,9 @@ class AuthnetApiFactory
     /**
      * Validates the Authorize.Net credentials and returns a Webhooks Request object to be used to make an Webhook call.
      *
-     * @param  string      $login                          Authorize.Net API Login ID
-     * @param  string      $transaction_key                Authorize.Net API Transaction Key
-     * @param  int         $server                         ID of which server to use (optional)
+     * @param  string $login           Authorize.Net API Login ID
+     * @param  string $transaction_key Authorize.Net API Transaction Key
+     * @param  int    $server          ID of which server to use (optional)
      * @return AuthnetWebhooksRequest
      * @throws AuthnetInvalidCredentialsException
      * @throws AuthnetInvalidServerException
@@ -180,7 +180,7 @@ class AuthnetApiFactory
     /**
      * Gets the API endpoint to be used for a SIM API call.
      *
-     * @param  int         $server     ID of which server to use
+     * @param  int $server ID of which server to use
      * @return string                  The URL endpoint the request is to be sent to
      * @throws AuthnetInvalidServerException
      */

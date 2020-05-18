@@ -16,17 +16,17 @@ namespace JohnConde\Authnet;
 /**
  * Adapter for the Authorize.Net JSON API
  *
- * @package     AuthnetJSON
- * @author      John Conde <stymiee@gmail.com>
- * @copyright   John Conde <stymiee@gmail.com>
- * @license     http://www.apache.org/licenses/LICENSE-2.0.html Apache License, Version 2.0
- * @link        https://github.com/stymiee/authnetjson
- * @see         https://developer.authorize.net/api/reference/
+ * @package   AuthnetJSON
+ * @author    John Conde <stymiee@gmail.com>
+ * @copyright John Conde <stymiee@gmail.com>
+ * @license   http://www.apache.org/licenses/LICENSE-2.0.html Apache License, Version 2.0
+ * @link      https://github.com/stymiee/authnetjson
+ * @see       https://developer.authorize.net/api/reference/
  *
- * @property    object  $messages
- * @property    string  $directResponse
- * @property    string  $validationDirectResponse
- * @property    object  $transactionResponse
+ * @property object  $messages
+ * @property string  $directResponse
+ * @property string  $validationDirectResponse
+ * @property object  $transactionResponse
  *
  * @method null createTransactionRequest(array $array)                                 process a payment
  * @method null sendCustomerTransactionReceiptRequest(array $array)                    get a list of unsettled transactions
@@ -90,25 +90,25 @@ class AuthnetJsonResponse
     public const STATUS_PAYPAL_NEED_CONSENT = 5;
 
     /**
-     * @var     object  SimpleXML object representing the API response
+     * @var object  SimpleXML object representing the API response
      */
     private $response;
 
     /**
-     * @var     string  JSON string that is the response sent by Authorize.Net
+     * @var string  JSON string that is the response sent by Authorize.Net
      */
     private $responseJson;
 
     /**
-     * @var     object  TransactionResponse
+     * @var object  TransactionResponse
      */
     private $transactionInfo;
 
     /**
      * Creates the response object with the response json returned from the API call
      *
-     * @param   string  $responseJson   Response from Authorize.Net
-     * @throws  AuthnetInvalidJsonException
+     * @param  string $responseJson Response from Authorize.Net
+     * @throws AuthnetInvalidJsonException
      */
     public function __construct(string $responseJson)
     {
@@ -126,7 +126,7 @@ class AuthnetJsonResponse
     /**
      * Outputs the response JSON in a human readable format
      *
-     * @return  string  HTML table containing debugging information
+     * @return string  HTML table containing debugging information
      */
     public function __toString()
     {
@@ -144,8 +144,8 @@ class AuthnetJsonResponse
     /**
      * Gets a response variable from the API response
      *
-     * @param   string  $var    unused
-     * @return  string          requested variable from the API call response
+     * @param  string $var unused
+     * @return string          requested variable from the API call response
      */
     public function __get(string $var)
     {
@@ -155,7 +155,7 @@ class AuthnetJsonResponse
     /**
      * Checks if the API call is not in an error state
      *
-     * @return  bool    Whether the transaction was in an successful state
+     * @return bool    Whether the transaction was in an successful state
      */
     public function isSuccessful() : bool
     {
@@ -165,7 +165,7 @@ class AuthnetJsonResponse
     /**
      * Checks if the API is reporting an error with the API call
      *
-     * @return  bool    Whether the transaction was in an error state
+     * @return bool    Whether the transaction was in an error state
      */
     public function isError() : bool
     {
@@ -205,7 +205,7 @@ class AuthnetJsonResponse
     /**
      * Check to see if the ResponseCode matches the expected value
      *
-     * @param  int     $status
+     * @param  int $status
      * @return bool Check to see if the ResponseCode matches the expected value
      */
     protected function checkTransactionStatus(int $status) : bool
@@ -221,9 +221,9 @@ class AuthnetJsonResponse
     /**
      * Gets the transaction response field for AIM and CIM transactions.
      *
-     * @param   mixed  $field  Name or key of the transaction field to be retrieved
-     * @return  string Transaction field to be retrieved
-     * @throws  AuthnetTransactionResponseCallException
+     * @param  mixed $field Name or key of the transaction field to be retrieved
+     * @return string Transaction field to be retrieved
+     * @throws AuthnetTransactionResponseCallException
      */
     public function getTransactionResponseField($field) : string
     {
@@ -236,7 +236,7 @@ class AuthnetJsonResponse
     /**
      * Gets the transaction response from Authorize.Net in JSON format for logging purposes
      *
-     * @return  string transaction response from Authorize.Net in JSON format
+     * @return string transaction response from Authorize.Net in JSON format
      */
     public function getRawResponse() : string
     {
@@ -246,7 +246,7 @@ class AuthnetJsonResponse
     /**
      * An alias of self::getErrorText()
      *
-     * @return  string Error response from Authorize.Net
+     * @return string Error response from Authorize.Net
      */
     public function getErrorMessage() : string
     {
@@ -256,7 +256,7 @@ class AuthnetJsonResponse
     /**
      * If an error has occurred, returns the error message
      *
-     * @return  string Error response from Authorize.Net
+     * @return string Error response from Authorize.Net
      */
     public function getErrorText() : string
     {
@@ -266,7 +266,7 @@ class AuthnetJsonResponse
     /**
      * If an error has occurred, returns the error message
      *
-     * @return  string Error response from Authorize.Net
+     * @return string Error response from Authorize.Net
      */
     public function getErrorCode() : string
     {
@@ -274,7 +274,7 @@ class AuthnetJsonResponse
     }
 
     /**
-     * @param  string   $type     Whether to get the error code or text
+     * @param  string $type Whether to get the error code or text
      * @return string
      */
     private function getError(string $type) : string
