@@ -25,39 +25,44 @@ use \Curl\Curl;
  * @link      https://github.com/stymiee/authnetjson
  * @see       https://developer.authorize.net/api/reference/
  *
- * @method AuthnetJsonResponse createTransactionRequest(array $array)                                 process a payment
- * @method AuthnetJsonResponse sendCustomerTransactionReceiptRequest(array $array)                    get a list of unsettled transactions
- * @method AuthnetJsonResponse ARBCancelSubscriptionRequest(array $array)                             cancel a subscription
- * @method AuthnetJsonResponse ARBCreateSubscriptionRequest(array $array)                             create a subscription
- * @method AuthnetJsonResponse ARBGetSubscriptionStatusRequest(array $array)                          get a subscription's status
- * @method AuthnetJsonResponse ARBUpdateSubscriptionRequest(array $array)                             update a subscription
- * @method AuthnetJsonResponse createCustomerPaymentProfileRequest(array $array)                      create a payment profile
- * @method AuthnetJsonResponse createCustomerProfileRequest(array $array)                             create a customer profile
- * @method AuthnetJsonResponse createCustomerProfileTransactionRequest_authCapture(array $array)      process an Authorization and Capture transaction (Sale)
- * @method AuthnetJsonResponse createCustomerProfileTransactionRequest_authOnly(array $array)         process an Authorization Only transaction
- * @method AuthnetJsonResponse createCustomerProfileTransactionRequest_captureOnly(array $array)      process a Capture Only transaction
- * @method AuthnetJsonResponse createCustomerProfileTransactionRequest_priorAuthCapture(array $array) process a Prior Authorization Capture transaction
- * @method AuthnetJsonResponse createCustomerProfileTransactionRequest_refund(array $array)           process a Refund (credit)
- * @method AuthnetJsonResponse createCustomerProfileTransactionRequest_void(array $array)             void a transaction
- * @method AuthnetJsonResponse createCustomerShippingAddressRequest(array $array)                     create a shipping profile
- * @method AuthnetJsonResponse deleteCustomerPaymentProfileRequest(array $array)                      delete a payment profile
- * @method AuthnetJsonResponse deleteCustomerProfileRequest(array $array)                             delete a customer profile
- * @method AuthnetJsonResponse deleteCustomerShippingAddressRequest(array $array)                     delete a shipping profile
- * @method AuthnetJsonResponse getCustomerPaymentProfileRequest(array $array)                         retrieve a payment profile
- * @method AuthnetJsonResponse getCustomerProfileIdsRequest(array $array)                             retrieve a list of profile IDs
- * @method AuthnetJsonResponse getCustomerProfileRequest(array $array)                                retrieve a customer profile
- * @method AuthnetJsonResponse getCustomerShippingAddressRequest(array $array)                        retrieve a shipping address
- * @method AuthnetJsonResponse getHostedProfilePageRequest(array $array)                              retrieve a hosted payment page token
- * @method AuthnetJsonResponse updateCustomerPaymentProfileRequest(array $array)                      update a customer profile
- * @method AuthnetJsonResponse updateCustomerProfileRequest(array $array)                             update a customer profile
- * @method AuthnetJsonResponse updateCustomerShippingAddressRequest(array $array)                     update a shipping address
- * @method AuthnetJsonResponse updateSplitTenderGroupRequest(array $array)                            update a split tender transaction
- * @method AuthnetJsonResponse validateCustomerPaymentProfileRequest(array $array)                    validate a payment profile
- * @method AuthnetJsonResponse getBatchStatisticsRequest(array $array)                                get a summary of a settled batch
- * @method AuthnetJsonResponse getSettledBatchListRequest(array $array)                               get a list of settled batches
- * @method AuthnetJsonResponse getTransactionDetailsRequest(array $array)                             get the details of a transaction
- * @method AuthnetJsonResponse getTransactionListRequest(array $array)                                get a list of transaction in a batch
- * @method AuthnetJsonResponse getUnsettledTransactionListRequest(array $array)                       get a list of unsettled transactions
+ * @method AuthnetJsonResponse createTransactionRequest(array $array)
+ * @method AuthnetJsonResponse sendCustomerTransactionReceiptRequest(array $array)
+ * @method AuthnetJsonResponse ARBCancelSubscriptionRequest(array $array)
+ * @method AuthnetJsonResponse ARBCreateSubscriptionRequest(array $array)
+ * @method AuthnetJsonResponse ARBGetSubscriptionStatusRequest(array $array)
+ * @method AuthnetJsonResponse ARBUpdateSubscriptionRequest(array $array)
+ * @method AuthnetJsonResponse getAUJobDetailsRequest(array $array)
+ * @method AuthnetJsonResponse getAUJobSummaryRequest(array $array)
+ * @method AuthnetJsonResponse createCustomerPaymentProfileRequest(array $array)
+ * @method AuthnetJsonResponse createCustomerProfileRequest(array $array)
+ * @method AuthnetJsonResponse createCustomerProfileTransactionRequest_authCapture(array $array)
+ * @method AuthnetJsonResponse createCustomerProfileTransactionRequest_authOnly(array $array)
+ * @method AuthnetJsonResponse createCustomerProfileTransactionRequest_captureOnly(array $array)
+ * @method AuthnetJsonResponse createCustomerProfileTransactionRequest_priorAuthCapture(array $array)
+ * @method AuthnetJsonResponse createCustomerProfileTransactionRequest_refund(array $array)
+ * @method AuthnetJsonResponse createCustomerProfileTransactionRequest_void(array $array)
+ * @method AuthnetJsonResponse createCustomerShippingAddressRequest(array $array)
+ * @method AuthnetJsonResponse deleteCustomerPaymentProfileRequest(array $array)
+ * @method AuthnetJsonResponse deleteCustomerProfileRequest(array $array)
+ * @method AuthnetJsonResponse deleteCustomerShippingAddressRequest(array $array)
+ * @method AuthnetJsonResponse getCustomerPaymentProfileRequest(array $array)
+ * @method AuthnetJsonResponse getCustomerProfileIdsRequest(array $array)
+ * @method AuthnetJsonResponse getCustomerProfileRequest(array $array)
+ * @method AuthnetJsonResponse getCustomerShippingAddressRequest(array $array)
+ * @method AuthnetJsonResponse getHostedPaymentPageRequest(array $array)
+ * @method AuthnetJsonResponse getHostedProfilePageRequest(array $array)
+ * @method AuthnetJsonResponse getMerchantDetailsRequest(array $array)
+ * @method AuthnetJsonResponse getUnsettledTransactionListRequest(array $array)
+ * @method AuthnetJsonResponse updateCustomerPaymentProfileRequest(array $array)
+ * @method AuthnetJsonResponse updateCustomerProfileRequest(array $array)
+ * @method AuthnetJsonResponse updateCustomerShippingAddressRequest(array $array)
+ * @method AuthnetJsonResponse updateHeldTransactionRequest(array $array)
+ * @method AuthnetJsonResponse updateSplitTenderGroupRequest(array $array)
+ * @method AuthnetJsonResponse validateCustomerPaymentProfileRequest(array $array)
+ * @method AuthnetJsonResponse getBatchStatisticsRequest(array $array)
+ * @method AuthnetJsonResponse getSettledBatchListRequest(array $array)
+ * @method AuthnetJsonResponse getTransactionDetailsRequest(array $array)
+ * @method AuthnetJsonResponse getTransactionListRequest(array $array)
  */
 class AuthnetJsonRequest
 {
