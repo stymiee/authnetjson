@@ -1,5 +1,10 @@
 CHANGE LOG
 
+2020-06-XX - Version 4.1.1
+--------------------------------------------
+Fixed HTTP headers being incorrect and causing isValid() to incorrectly fail
+Added examples for ARBGetSubscriptionListRequest, ARBGetSubscriptionRequest, ARBCreateSubscriptionRequest (from Profile)
+
 2020-05-29 - Version 4.1.0
 --------------------------------------------
 Added support for Accept.js and Accept Hosted APIs
