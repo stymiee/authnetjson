@@ -136,13 +136,12 @@ class AuthnetWebhook
         if (function_exists('apache_request_headers')) {
             $headers = apache_request_headers();
         } else {
-            $headers = array_filter(
-                $_SERVER,
-                static function ($key) {
-                    return strpos($key, 'HTTP_') === 0;
-                },
-                ARRAY_FILTER_USE_KEY
-            );
+            $headers = [];
+            foreach ($_SERVER as $key => $value) {
+                if (strpos($key, 'HTTP_') === 0) {
+                    $headers[str_replace('_', '-', substr($key, 5))] = $value;
+                }
+            }
         }
         return $headers;
     }
