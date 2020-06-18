@@ -135,7 +135,7 @@ class AuthnetWebhook
             $headers = [];
             foreach ($_SERVER as $key => $value) {
                 if (strpos($key, 'HTTP_') === 0) {
-                    $headers[ str_replace('_', '-', substr($key, 5)) ] = $value;
+                    $headers[str_replace('_', '-', substr($key, 5))] = $value;
                 }
             }
         }
