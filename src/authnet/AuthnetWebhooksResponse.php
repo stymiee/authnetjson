@@ -120,7 +120,7 @@ class AuthnetWebhooksResponse
     /**
      * Gets the status of the Webhooks
      *
-     * @return string  Staus of the webhooks [active|inactive]
+     * @return string  Status of the webhooks [active|inactive]
      */
     public function getStatus() : string
     {
