@@ -97,11 +97,6 @@ class AuthnetJsonRequest
     private $processor;
 
     /**
-     * @var int  Number of attempts to make an HTTP request
-     */
-    private $retries;
-
-    /**
      * Creates the request object by setting the Authorize.Net credentials and URL of the endpoint to be used
      * for the API call.
      *
@@ -188,13 +183,13 @@ class AuthnetJsonRequest
      */
     private function makeRequest() : void
     {
-        $this->retries = 0;
-        while ($this->retries < self::MAX_RETRIES) {
+        $retries = 0;
+        while ($retries < self::MAX_RETRIES) {
             $this->processor->post($this->url, $this->requestJson);
             if (!$this->processor->error) {
                 break;
             }
-            $this->retries++;
+            $retries++;
         }
     }
 
