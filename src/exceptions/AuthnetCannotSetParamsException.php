@@ -13,8 +13,6 @@ declare(strict_types=1);
 
 namespace JohnConde\Authnet;
 
-use Throwable;
-
 /**
  * Exception that is throw when when client code attempts to set a parameter directly (i.e. using __set())
  *
@@ -27,8 +25,5 @@ use Throwable;
  */
 class AuthnetCannotSetParamsException extends AuthnetException
 {
-    public function __construct(string $message = '', int $code = 0, Throwable $previous = null)
-    {
-        parent::__construct($message, $code, $previous);
-    }
+
 }

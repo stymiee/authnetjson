@@ -16,7 +16,7 @@ namespace JohnConde\Authnet;
 use Throwable;
 
 /**
- * Exception that is throw when an invalid value is given for the $server paramater when
+ * Exception that is throw when an invalid value is given for the $server parameter when
  * initiating an instance of the AuthnetJson class
  *
  * @author    John Conde <stymiee@gmail.com>
@@ -26,8 +26,5 @@ use Throwable;
  */
 class AuthnetInvalidServerException extends AuthnetException
 {
-    public function __construct(string $message = '', int $code = 0, Throwable $previous = null)
-    {
-        parent::__construct($message, $code, $previous);
-    }
+
 }

@@ -13,8 +13,6 @@ declare(strict_types=1);
 
 namespace JohnConde\Authnet;
 
-use Throwable;
-
 /**
  * Exception that is throw when transaction response data is requested on an API call that does not return any
  *
@@ -25,8 +23,5 @@ use Throwable;
  */
 class AuthnetTransactionResponseCallException extends AuthnetException
 {
-    public function __construct(string $message = '', int $code = 0, Throwable $previous = null)
-    {
-        parent::__construct($message, $code, $previous);
-    }
+
 }

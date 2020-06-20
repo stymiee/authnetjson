@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace JohnConde\Authnet;
 
+use Exception;
 use Throwable;
 
 /**
@@ -23,7 +24,7 @@ use Throwable;
  * @license   http://www.apache.org/licenses/LICENSE-2.0.html Apache License, Version 2.0
  * @link      https://github.com/stymiee/authnetjson
  */
-class AuthnetException extends \Exception
+class AuthnetException extends Exception
 {
     public function __construct(string $message = '', int $code = 0, Throwable $previous = null)
     {
