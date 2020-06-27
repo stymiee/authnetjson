@@ -155,12 +155,28 @@ try {
             <td><?= $response->transactionResponse->messages[0]->description ?></td>
         </tr>
         <tr>
-            <th>authCode</th>
+            <th>Authorization Code</th>
             <td><?= $response->transactionResponse->authCode ?></td>
         </tr>
         <tr>
-            <th>transId</th>
+            <th>Transaction ID</th>
             <td><?= $response->transactionResponse->transId ?></td>
+        </tr>
+        <tr>
+            <th>Reference Transaction ID</th>
+            <td><?= $response->transactionResponse->refTransID ?></td>
+        </tr>
+        <tr>
+            <th>Transaction Hash</th>
+            <td><?= $response->transactionResponse->transHash ?></td>
+        </tr>
+        <tr>
+            <th>Is Test Request?</th>
+            <td><?= $response->transactionResponse->testRequest ? 'yes' : 'no' ?></td>
+        </tr>
+        <tr>
+            <th>Account Type</th>
+            <td><?= $response->transactionResponse->accountType ?></td>
         </tr>
         <?php elseif ($response->isError()) : ?>
         <tr>
