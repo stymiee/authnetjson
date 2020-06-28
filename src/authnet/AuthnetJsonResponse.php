@@ -25,7 +25,7 @@ namespace JohnConde\Authnet;
  *
  * @property object  $messages
  * @property string  $directResponse
- * @property string  $validationDirectResponse
+ * @property string  $validationDirectResponseList
  * @property object  $transactionResponse
  *
  * @method null createTransactionRequest(array $array)                                 process a payment
@@ -105,6 +105,11 @@ class AuthnetJsonResponse
     private $transactionInfo;
 
     /**
+     * @var array  TransactionResponse
+     */
+    private $transactionInfoArray;
+
+    /**
      * Creates the response object with the response json returned from the API call
      *
      * @param  string $responseJson Response from Authorize.Net
@@ -117,9 +122,16 @@ class AuthnetJsonResponse
             throw new AuthnetInvalidJsonException('Invalid JSON returned by the API');
         }
 
-        if ($this->directResponse || $this->validationDirectResponse) {
-            $dr = $this->directResponse ?: $this->validationDirectResponse;
-            $this->transactionInfo = new TransactionResponse($dr);
+        if ($this->directResponse || $this->validationDirectResponseList) {
+            $response = $this->directResponse ?: $this->validationDirectResponseList;
+            if (is_array($response)) {
+                $this->transactionInfoArray = array_map(static function ($r) {
+                    return new TransactionResponse($r);
+                }, $response);
+            } else {
+                $this->transactionInfo = new TransactionResponse($response);
+                $this->transactionInfoArray = [$this->transactionInfo];
+            }
         }
     }
 
@@ -145,7 +157,7 @@ class AuthnetJsonResponse
      * Gets a response variable from the API response
      *
      * @param  string $var unused
-     * @return string          requested variable from the API call response
+     * @return string requested variable from the API call response
      */
     public function __get(string $var)
     {
@@ -231,6 +243,16 @@ class AuthnetJsonResponse
             return $this->transactionInfo->getTransactionResponseField($field);
         }
         throw new AuthnetTransactionResponseCallException('This API call does not have any transaction response data');
+    }
+
+    /**
+     * Returns the results of a test charge for each payment account provided when created a customer profile
+     *
+     * @return array
+     */
+    public function getTransactionResponses() : array
+    {
+        return $this->transactionInfoArray;
     }
 
     /**
