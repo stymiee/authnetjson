@@ -93,6 +93,29 @@ try {
             <th>Response</th>
             <td><?= $response->messages->resultCode ?></td>
         </tr>
+        <tr>
+            <th>Successful?</th>
+            <td><?= $response->isSuccessful() ? 'yes' : 'no' ?></td>
+        </tr>
+        <tr>
+            <th>Error?</th>
+            <td><?= $response->isError() ? 'yes' : 'no' ?></td>
+        </tr>
+        <?php if ($response->isSuccessful()) : ?>
+        <tr>
+            <th>Reference Transaction ID</th>
+            <td><?= $response->transactionResponse->refTransID ?></td>
+        </tr>
+        <?php elseif ($response->isError()) : ?>
+        <tr>
+            <th>Error Code</th>
+            <td><?= $response->getErrorCode() ?></td>
+        </tr>
+        <tr>
+            <th>Error Message</th>
+            <td><?= $response->getErrorText() ?></td>
+        </tr>
+        <?php endif; ?>
     </table>
     <h2>
         Raw Input/Output
