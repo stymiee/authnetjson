@@ -95,8 +95,12 @@ try {
             <td><?= $response->messages->resultCode ?></td>
         </tr>
         <tr>
-            <th>code</th>
+            <th>Message Code</th>
             <td><?= $response->messages->message[0]->code ?></td>
+        </tr>
+        <tr>
+            <th>Message Text</th>
+            <td><?= $response->messages->message[0]->text ?></td>
         </tr>
         <tr>
             <th>Successful?</th>
@@ -107,8 +111,16 @@ try {
             <td><?= $response->isError() ? 'yes' : 'no' ?></td>
         </tr>
         <tr>
+            <th>Reference ID</th>
+            <td><?= $response->refId ?></td>
+        </tr>
+        <tr>
             <th>Status</th>
             <td><?= $response->status ?></td>
+        </tr>
+        <tr>
+            <th>Status Specified</th>
+            <td><?= $response->statusSpecified ?></td>
         </tr>
     </table>
     <h2>
