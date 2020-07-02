@@ -177,11 +177,27 @@ try {
             <td><?= $response->totalNumInResultSet ?></td>
         </tr>
         <tr>
-            <th>Profile IDs</th>
+            <th>Subscription Details</th>
             <td>
-                <?php foreach ($response->subscriptionDetails as $subscription) : ?>
-                    <?php printf('ID: %u Status: %s %s', $subscription->id, $subscription->status, '<br/>') ?>
-                <?php endforeach; ?>
+                <table>
+                    <?php foreach ($response->subscriptionDetails as $subscription) : ?>
+                    <tr>
+                        <th>ID:</th><td><?= $subscription->id ?></td>
+                        <th>Name:</th><td><?= $subscription->name ?></td>
+                        <th>Status:</th><td><?= $subscription->status ?></td>
+                        <th>Created Timestamp:</th><td><?= $subscription->createTimeStampUTC ?></td>
+                        <th>First Name:</th><td><?= $subscription->firstName ?></td>
+                        <th>Last Name:</th><td><?= $subscription->lastName ?></td>
+                        <th>Total Occurrences:</th><td><?= $subscription->totalOccurrences ?></td>
+                        <th>Past Occurrences:</th><td><?= $subscription->pastOccurrences ?></td>
+                        <th>Payment Method:</th><td><?= $subscription->paymentMethod ?></td>
+                        <th>Account Number:</th><td><?= $subscription->accountNumber ?></td>
+                        <th>Invoice:</th><td><?= $subscription->invoice ?></td>
+                        <th>Amount:</th><td><?= $subscription->amount ?></td>
+                        <th>Currency Code:</th><td><?= $subscription->currencyCode ?></td>
+                    </tr>
+                    <?php endforeach; ?>
+                </table>
             </td>
         </tr>
     </table>
