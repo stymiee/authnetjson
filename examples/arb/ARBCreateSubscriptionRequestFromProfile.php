@@ -153,6 +153,14 @@ try {
             <th>Subscription ID</th>
             <td><?= $response->subscriptionId ?></td>
         </tr>
+        <tr>
+            <th>Profile</th>
+            <td>
+                Customer Profile Id: <?= $response->profile->customerProfileId ?><br>
+                Customer PaymentProfile Id: <?= $response->profile->customerPaymentProfileId ?><br>
+                Customer Address Id: <?= $response->profile->customerAddressId ?><br>
+            </td>
+        </tr>
     </table>
     <h2>
         Raw Input/Output
