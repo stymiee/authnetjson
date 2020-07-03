@@ -165,7 +165,7 @@ try {
             <td><?= $response->isError() ? 'yes' : 'no' ?></td>
         </tr>
         <tr>
-            <th>Code</th>
+            <th>Message Code</th>
             <td><?= $response->messages->message[0]->code ?></td>
         </tr>
         <tr>
