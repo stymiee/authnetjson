@@ -120,6 +120,30 @@ try {
             <th>Error?</th>
             <td><?= $response->isError() ? 'yes' : 'no' ?></td>
         </tr>
+        <tr>
+            <th>Code</th>
+            <td><?= $response->messages->message[0]->code ?></td>
+        </tr>
+        <tr>
+            <th>Message</th>
+            <td><?= $response->messages->message[0]->text ?></td>
+        </tr>
+        <tr>
+            <th>Reference ID</th>
+            <td><?= $response->refId ?></td>
+        </tr>
+        <?php if (count($response->auSummary)) : ?>
+            <?php foreach ($response->auSummary->auResponse as $aujob) : ?>
+            <tr>
+                <th>Response</th>
+                <td>
+                    AU Reason Code: <?= $aujob->auReasonCode ?><br>
+                    Profile Count: <?= $aujob->profileCount ?><br>
+                    Reason Description: <?= $aujob->reasonDescription ?>
+                </td>
+            </tr>
+            <?php endforeach; ?>
+        <?php endif; ?>
     </table>
     <h2>
         Raw Input/Output
