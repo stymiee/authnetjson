@@ -114,7 +114,7 @@ try {
     $request  = AuthnetApiFactory::getJsonApiHandler(AUTHNET_LOGIN, AUTHNET_TRANSKEY, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
     $response = $request->createCustomerProfileRequest([
         'profile' => [
-            'merchantCustomerId' => '52353345',
+            'merchantCustomerId' => '745374563',
             'email' => 'user@example.com',
             'paymentProfiles' => [
                 [
@@ -131,7 +131,7 @@ try {
                     'payment' => [
                         'creditCard' => [
                             'cardNumber' => '5555555555554444',
-                            'expirationDate' => '2023-08',
+                            'expirationDate' => '2026-08',
                         ],
                     ],
                 ],
@@ -149,7 +149,7 @@ try {
                     'payment' => [
                         'creditCard' => [
                             'cardNumber' => '5105105105105100',
-                            'expirationDate' => '2023-09',
+                            'expirationDate' => '2026-09',
                         ],
                     ],
                 ],
@@ -222,9 +222,17 @@ try {
                 <td><?php echo implode(', ', $response->customerPaymentProfileIdList) ?></td>
             </tr>
             <tr>
-                <th>Customer Shipping Address ID</th>
-                <td><?= $response->customerShippingAddressIdList[0] ?></td>
+                <th>Customer Shipping Address IDs</th>
+                <td><?php echo implode(', ', $response->customerShippingAddressIdList) ?></td>
             </tr>
+            <?php foreach ($response->getTransactionResponses() as $key => $result) : ?>
+            <tr>
+                <th>Payment Method #<?= ++$key ?></th>
+                <td>
+                    <?= $result->getTransactionResponseField('ResponseReasonText') ?>
+                </td>
+            </tr>
+            <?php endforeach; ?>
         <?php endif; ?>
     </table>
     <h2>
