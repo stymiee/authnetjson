@@ -94,14 +94,6 @@ try {
     </h2>
     <table>
         <tr>
-            <th>Response</th>
-            <td><?= $response->messages->resultCode ?></td>
-        </tr>
-        <tr>
-            <th>code</th>
-            <td><?= $response->messages->message[0]->code ?></td>
-        </tr>
-        <tr>
             <th>Successful?</th>
             <td><?= $response->isSuccessful() ? 'yes' : 'no' ?></td>
         </tr>
@@ -110,43 +102,55 @@ try {
             <td><?= $response->isError() ? 'yes' : 'no' ?></td>
         </tr>
         <tr>
-            <th>firstName</th>
+            <th>Result Code</th>
+            <td><?= $response->messages->resultCode ?></td>
+        </tr>
+        <tr>
+            <th>Message Code</th>
+            <td><?= $response->messages->message[0]->code ?></td>
+        </tr>
+        <tr>
+            <th>Message</th>
+            <td><?= $response->messages->message[0]->text ?></td>
+        </tr>
+        <tr>
+            <th>First Name</th>
             <td><?= $response->paymentProfile->billTo->firstName ?></td>
         </tr>
         <tr>
-            <th>lastName</th>
+            <th>Last Name</th>
             <td><?= $response->paymentProfile->billTo->lastName ?></td>
         </tr>
         <tr>
-            <th>address</th>
+            <th>Address</th>
             <td><?= $response->paymentProfile->billTo->address ?></td>
         </tr>
         <tr>
-            <th>city</th>
+            <th>City</th>
             <td><?= $response->paymentProfile->billTo->city ?></td>
         </tr>
         <tr>
-            <th>state</th>
+            <th>State</th>
             <td><?= $response->paymentProfile->billTo->state ?></td>
         </tr>
         <tr>
-            <th>zip</th>
+            <th>Zip</th>
             <td><?= $response->paymentProfile->billTo->zip ?></td>
         </tr>
         <tr>
-            <th>phoneNumber</th>
+            <th>Phone Number</th>
             <td><?= $response->paymentProfile->billTo->phoneNumber ?></td>
         </tr>
         <tr>
-            <th>customerPaymentProfileId</th>
+            <th>Customer Payment ProfileId</th>
             <td><?= $response->paymentProfile->customerPaymentProfileId ?></td>
         </tr>
         <tr>
-            <th>cardNumber</th>
+            <th>Card Number</th>
             <td><?= $response->paymentProfile->payment->creditCard->cardNumber ?></td>
         </tr>
         <tr>
-            <th>expirationDate</th>
+            <th>Expiration Date</th>
             <td><?= $response->paymentProfile->payment->creditCard->expirationDate ?></td>
         </tr>
     </table>
