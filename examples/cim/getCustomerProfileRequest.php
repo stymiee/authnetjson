@@ -124,14 +124,6 @@ try {
     </h2>
     <table>
         <tr>
-            <th>Response</th>
-            <td><?= $response->messages->resultCode ?></td>
-        </tr>
-        <tr>
-            <th>code</th>
-            <td><?= $response->messages->message[0]->code ?></td>
-        </tr>
-        <tr>
             <th>Successful?</th>
             <td><?= $response->isSuccessful() ? 'yes' : 'no' ?></td>
         </tr>
@@ -140,21 +132,70 @@ try {
             <td><?= $response->isError() ? 'yes' : 'no' ?></td>
         </tr>
         <tr>
-            <th>merchantCustomerId</th>
+            <th>Result Code</th>
+            <td><?= $response->messages->resultCode ?></td>
+        </tr>
+        <tr>
+            <th>Message Code</th>
+            <td><?= $response->messages->message[0]->code ?></td>
+        </tr>
+        <tr>
+            <th>Message</th>
+            <td><?= $response->messages->message[0]->text ?></td>
+        </tr>
+        <?php if ($response->isSuccessful()) : ?>
+        <tr>
+            <th>Customer Profile Id</th>
+            <td><?= $response->profile->customerProfileId ?></td>
+        </tr>
+        <tr>
+            <th>Merchant Customer Id</th>
             <td><?= $response->profile->merchantCustomerId ?></td>
         </tr>
         <tr>
-            <th>email</th>
+            <th>Email</th>
             <td><?= $response->profile->email ?></td>
         </tr>
         <tr>
-            <th>Payment Profile IDs</th>
+            <th>Payment Profiles</th>
             <td>
-<?php foreach ($json->profile->paymentProfiles as $profile) : ?>
-    <?= $profile->customerPaymentProfileId, ', ' ?>
-<?php endforeach; ?>
+                <table>
+                    <?php foreach ($response->paymentProfiles as $paymentProfile) : ?>
+                    <tr>
+                        <td>Customer Payment Profile Id</td><td><?= $paymentProfile->customerPaymentProfileId ?></td>
+                        <td>Card Number</td><td><?= $paymentProfile->payment->creditCard->cardNumber ?></td>
+                        <td>Expiration Date</td><td><?= $paymentProfile->payment->creditCard->expirationDate ?></td>
+                        <td>Phone Number</td><td><?= $paymentProfile->billTo->phoneNumber ?></td>
+                        <td>First Name</td><td><?= $paymentProfile->billTo->firstName ?></td>
+                        <td>Last Name</td><td><?= $paymentProfile->billTo->lastName ?></td>
+                        <td>Address</td><td><?= $paymentProfile->billTo->address ?></td>
+                        <td>City</td><td><?= $paymentProfile->billTo->city ?></td>
+                        <td>State</td><td><?= $paymentProfile->billTo->state ?></td>
+                        <td>Zip</td><td><?= $paymentProfile->billTo->zip ?></td>
+                    </tr>
+                    <?php endforeach; ?>
+                </table>
             </td>
         </tr>
+        <tr>
+            <th>Ship To List</th>
+            <td>
+                <?php foreach ($response->shipToList as $shipTo) : ?>
+                    Customer Address Id: <?= $shipTo->customerAddressId ?? '' ?><br>
+                    Phone Number: <?= $shipTo->phoneNumber ?? '' ?> <br>
+                    Fax Number: <?= $shipTo->faxNumber ?? '' ?> <br>
+                    First Name: <?= $shipTo->firstName ?? '' ?> <br>
+                    Last Name: <?= $shipTo->lastName ?? '' ?> <br>
+                    Company: <?= $shipTo->company ?? '' ?> <br>
+                    Address: <?= $shipTo->address ?? '' ?> <br>
+                    City: <?= $shipTo->city ?? '' ?> <br>
+                    State: <?= $shipTo->state ?? '' ?> <br>
+                    Zip: <?= $shipTo->zip ?? '' ?> <br>
+                    Country: <?= $shipTo->country ?? '' ?> <br>
+                <?php endforeach; ?>
+            </td>
+        </tr>
+        <?php endif; ?>
     </table>
     <h2>
         Raw Input/Output
