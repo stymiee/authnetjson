@@ -85,14 +85,6 @@ try {
     </h2>
     <table>
         <tr>
-            <th>Response</th>
-            <td><?= $response->messages->resultCode ?></td>
-        </tr>
-        <tr>
-            <th>code</th>
-            <td><?= $response->messages->message[0]->code ?></td>
-        </tr>
-        <tr>
             <th>Successful?</th>
             <td><?= $response->isSuccessful() ? 'yes' : 'no' ?></td>
         </tr>
@@ -101,35 +93,47 @@ try {
             <td><?= $response->isError() ? 'yes' : 'no' ?></td>
         </tr>
         <tr>
-            <th>firstName</th>
+            <th>Result Code</th>
+            <td><?= $response->messages->resultCode ?></td>
+        </tr>
+        <tr>
+            <th>Message Code</th>
+            <td><?= $response->messages->message[0]->code ?></td>
+        </tr>
+        <tr>
+            <th>Message</th>
+            <td><?= $response->messages->message[0]->text ?></td>
+        </tr>
+        <tr>
+            <th>First Name</th>
             <td><?= $response->address->firstName ?></td>
         </tr>
         <tr>
-            <th>lastName</th>
+            <th>Last Name</th>
             <td><?= $response->address->lastName ?></td>
         </tr>
         <tr>
-            <th>address</th>
+            <th>Address</th>
             <td><?= $response->address->address ?></td>
         </tr>
         <tr>
-            <th>city</th>
+            <th>City</th>
             <td><?= $response->address->city ?></td>
         </tr>
         <tr>
-            <th>state</th>
+            <th>State</th>
             <td><?= $response->address->state ?></td>
         </tr>
         <tr>
-            <th>zip</th>
+            <th>Zip</th>
             <td><?= $response->address->zip ?></td>
         </tr>
         <tr>
-            <th>phoneNumber</th>
+            <th>Phone Number</th>
             <td><?= $response->address->phoneNumber ?></td>
         </tr>
         <tr>
-            <th>customerAddressId</th>
+            <th>Customer Address Id</th>
             <td><?= $response->address->customerAddressId ?></td>
         </tr>
     </table>
