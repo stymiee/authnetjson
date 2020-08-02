@@ -122,8 +122,8 @@ class AuthnetJsonResponse
             throw new AuthnetInvalidJsonException('Invalid JSON returned by the API');
         }
 
-        if ($this->directResponse || $this->validationDirectResponseList) {
-            $response = $this->directResponse ?: $this->validationDirectResponseList;
+        if ($this->directResponse || $this->validationDirectResponseList || isset($this->response->validationDirectResponse)) {
+            $response = $this->directResponse ?: $this->validationDirectResponseList ?: $this->response->validationDirectResponse;
             if (is_array($response)) {
                 $this->transactionInfoArray = array_map(static function ($r) {
                     return new TransactionResponse($r);
