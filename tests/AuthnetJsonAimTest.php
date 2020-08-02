@@ -28,7 +28,6 @@ class AuthnetJsonAimTest extends TestCase
         $this->server         = AuthnetApiFactory::USE_DEVELOPMENT_SERVER;
 
         $this->http = $this->getMockBuilder(Curl::class)
-            ->setMethods(['post'])
             ->getMock();
         $this->http->error = false;
     }
@@ -141,11 +140,11 @@ class AuthnetJsonAimTest extends TestCase
                     )
                 ),
                 'userFields' => array(
-                    'userField' => array(
+                    0 => array(
                         'name' => 'MerchantDefinedFieldName1',
                         'value' => 'MerchantDefinedFieldValue1',
                     ),
-                    'userField' => array(
+                    1 => array(
                         'name' => 'favorite_color',
                         'value' => 'blue',
                     ),
@@ -196,26 +195,26 @@ class AuthnetJsonAimTest extends TestCase
         $request->setProcessHandler($this->http);
         $response = $request->createTransactionRequest($requestJson);
 
-        $this->assertEquals('Ok', $response->messages->resultCode);
-        $this->assertEquals('This transaction has been approved.', $response->transactionResponse->messages[0]->description);
-        $this->assertTrue($response->isSuccessful());
-        $this->assertFalse($response->isError());
-        $this->assertEquals('QWX20S', $response->transactionResponse->authCode);
-        $this->assertEquals('2228446239', $response->transactionResponse->transId);
-        $this->assertEquals('1', $response->transactionResponse->responseCode);
-        $this->assertEquals('Y', $response->transactionResponse->avsResultCode);
-        $this->assertEquals('P', $response->transactionResponse->cvvResultCode);
-        $this->assertEquals('2', $response->transactionResponse->cavvResultCode);
-        $this->assertEquals('56B2D50D73CAB8C6EDE7A92B9BB235BD', $response->transactionResponse->transHash);
-        $this->assertEquals('0', $response->transactionResponse->testRequest);
-        $this->assertEquals('XXXX1111', $response->transactionResponse->accountNumber);
-        $this->assertEquals('Visa', $response->transactionResponse->accountType);
-        $this->assertEquals('1', $response->transactionResponse->messages[0]->code);
-        $this->assertEquals('favorite_color', $response->transactionResponse->userFields[0]->name);
-        $this->assertEquals('blue', $response->transactionResponse->userFields[0]->value);
-        $this->assertEquals('94564789', $response->refId);
-        $this->assertEquals('I00001', $response->messages->message[0]->code);
-        $this->assertEquals('Successful.', $response->messages->message[0]->text);
+        self::assertEquals('Ok', $response->messages->resultCode);
+        self::assertEquals('This transaction has been approved.', $response->transactionResponse->messages[0]->description);
+        self::assertTrue($response->isSuccessful());
+        self::assertFalse($response->isError());
+        self::assertEquals('QWX20S', $response->transactionResponse->authCode);
+        self::assertEquals('2228446239', $response->transactionResponse->transId);
+        self::assertEquals('1', $response->transactionResponse->responseCode);
+        self::assertEquals('Y', $response->transactionResponse->avsResultCode);
+        self::assertEquals('P', $response->transactionResponse->cvvResultCode);
+        self::assertEquals('2', $response->transactionResponse->cavvResultCode);
+        self::assertEquals('56B2D50D73CAB8C6EDE7A92B9BB235BD', $response->transactionResponse->transHash);
+        self::assertEquals('0', $response->transactionResponse->testRequest);
+        self::assertEquals('XXXX1111', $response->transactionResponse->accountNumber);
+        self::assertEquals('Visa', $response->transactionResponse->accountType);
+        self::assertEquals('1', $response->transactionResponse->messages[0]->code);
+        self::assertEquals('favorite_color', $response->transactionResponse->userFields[0]->name);
+        self::assertEquals('blue', $response->transactionResponse->userFields[0]->value);
+        self::assertEquals('94564789', $response->refId);
+        self::assertEquals('I00001', $response->messages->message[0]->code);
+        self::assertEquals('Successful.', $response->messages->message[0]->text);
     }
 
     /**
@@ -293,33 +292,33 @@ class AuthnetJsonAimTest extends TestCase
                 ),
                 'customerIP' => '192.168.1.1',
                 'transactionSettings' => array(
-                    'setting' => array(
+                    0 => array(
                         'settingName' => 'allowPartialAuth',
                         'settingValue' => 'false',
                     ),
-                    'setting' => array(
+                    1 => array(
                         'settingName' => 'duplicateWindow',
                         'settingValue' => '0',
                     ),
-                    'setting' => array(
+                    2 => array(
                         'settingName' => 'emailCustomer',
                         'settingValue' => 'false',
                     ),
-                    'setting' => array(
+                    3 => array(
                         'settingName' => 'recurringBilling',
                         'settingValue' => 'false',
                     ),
-                    'setting' => array(
+                    4 => array(
                         'settingName' => 'testRequest',
                         'settingValue' => 'false',
                     ),
                 ),
                 'userFields' => array(
-                    'userField' => array(
+                    0 => array(
                         'name' => 'MerchantDefinedFieldName1',
                         'value' => 'MerchantDefinedFieldValue1',
                     ),
-                    'userField' => array(
+                    1 => array(
                         'name' => 'favorite_color',
                         'value' => 'blue',
                     ),
@@ -370,26 +369,26 @@ class AuthnetJsonAimTest extends TestCase
         $request->setProcessHandler($this->http);
         $response = $request->createTransactionRequest($requestJson);
 
-        $this->assertEquals('Ok', $response->messages->resultCode);
-        $this->assertEquals('This transaction has been approved.', $response->transactionResponse->messages[0]->description);
-        $this->assertTrue($response->isSuccessful());
-        $this->assertFalse($response->isError());
-        $this->assertEquals('7M6LIT', $response->transactionResponse->authCode);
-        $this->assertEquals('2228545782', $response->transactionResponse->transId);
-        $this->assertEquals('1', $response->transactionResponse->responseCode);
-        $this->assertEquals('Y', $response->transactionResponse->avsResultCode);
-        $this->assertEquals('P', $response->transactionResponse->cvvResultCode);
-        $this->assertEquals('2', $response->transactionResponse->cavvResultCode);
-        $this->assertEquals('6210B3AEC49FC269036D42F9681459A9', $response->transactionResponse->transHash);
-        $this->assertEquals('0', $response->transactionResponse->testRequest);
-        $this->assertEquals('XXXX0015', $response->transactionResponse->accountNumber);
-        $this->assertEquals('MasterCard', $response->transactionResponse->accountType);
-        $this->assertEquals('1', $response->transactionResponse->messages[0]->code);
-        $this->assertEquals('favorite_color', $response->transactionResponse->userFields[0]->name);
-        $this->assertEquals('blue', $response->transactionResponse->userFields[0]->value);
-        $this->assertEquals('65376587', $response->refId);
-        $this->assertEquals('I00001', $response->messages->message[0]->code);
-        $this->assertEquals('Successful.', $response->messages->message[0]->text);
+        self::assertEquals('Ok', $response->messages->resultCode);
+        self::assertEquals('This transaction has been approved.', $response->transactionResponse->messages[0]->description);
+        self::assertTrue($response->isSuccessful());
+        self::assertFalse($response->isError());
+        self::assertEquals('7M6LIT', $response->transactionResponse->authCode);
+        self::assertEquals('2228545782', $response->transactionResponse->transId);
+        self::assertEquals('1', $response->transactionResponse->responseCode);
+        self::assertEquals('Y', $response->transactionResponse->avsResultCode);
+        self::assertEquals('P', $response->transactionResponse->cvvResultCode);
+        self::assertEquals('2', $response->transactionResponse->cavvResultCode);
+        self::assertEquals('6210B3AEC49FC269036D42F9681459A9', $response->transactionResponse->transHash);
+        self::assertEquals('0', $response->transactionResponse->testRequest);
+        self::assertEquals('XXXX0015', $response->transactionResponse->accountNumber);
+        self::assertEquals('MasterCard', $response->transactionResponse->accountType);
+        self::assertEquals('1', $response->transactionResponse->messages[0]->code);
+        self::assertEquals('favorite_color', $response->transactionResponse->userFields[0]->name);
+        self::assertEquals('blue', $response->transactionResponse->userFields[0]->value);
+        self::assertEquals('65376587', $response->refId);
+        self::assertEquals('I00001', $response->messages->message[0]->code);
+        self::assertEquals('Successful.', $response->messages->message[0]->text);
     }
 
     /**
@@ -500,11 +499,11 @@ class AuthnetJsonAimTest extends TestCase
                     )
                 ),
                 'userFields' => array(
-                    'userField' => array(
+                    0 => array(
                         'name' => 'MerchantDefinedFieldName1',
                         'value' => 'MerchantDefinedFieldValue1',
                     ),
-                    'userField' => array(
+                    1 => array(
                         'name' => 'favorite_color',
                         'value' => 'blue',
                     ),
@@ -555,27 +554,27 @@ class AuthnetJsonAimTest extends TestCase
         $request->setProcessHandler($this->http);
         $response = $request->createTransactionRequest($requestJson);
 
-        $this->assertEquals('Error', $response->messages->resultCode);
-        $this->assertFalse($response->isSuccessful());
-        $this->assertTrue($response->isError());
-        $this->assertEquals(AuthnetJsonResponse::STATUS_ERROR, $response->transactionResponse->responseCode);
-        $this->assertEquals('P', $response->transactionResponse->avsResultCode);
-        $this->assertEquals('0', $response->transactionResponse->transId);
-        $this->assertEquals('0', $response->transactionResponse->testRequest);
-        $this->assertEquals('9F18DE7ABDD09076F9BADB594EFC4611', $response->transactionResponse->transHash);
-        $this->assertEquals('XXXX0015', $response->transactionResponse->accountNumber);
-        $this->assertEquals('MasterCard', $response->transactionResponse->accountType);
-        $this->assertEmpty($response->transactionResponse->authCode);
-        $this->assertEmpty($response->transactionResponse->cvvResultCode);
-        $this->assertEmpty($response->transactionResponse->cavvResultCode);
-        $this->assertEmpty($response->transactionResponse->refTransID);
-        $this->assertEquals('11', $response->transactionResponse->errors[0]->errorCode);
-        $this->assertEquals('A duplicate transaction has been submitted.', $response->transactionResponse->errors[0]->errorText);
-        $this->assertEquals('favorite_color', $response->transactionResponse->userFields[0]->name);
-        $this->assertEquals('blue', $response->transactionResponse->userFields[0]->value);
-        $this->assertEquals('14290435', $response->refId);
-        $this->assertEquals('E00027', $response->messages->message[0]->code);
-        $this->assertEquals('The transaction was unsuccessful.', $response->messages->message[0]->text);
+        self::assertEquals('Error', $response->messages->resultCode);
+        self::assertFalse($response->isSuccessful());
+        self::assertTrue($response->isError());
+        self::assertEquals(AuthnetJsonResponse::STATUS_ERROR, $response->transactionResponse->responseCode);
+        self::assertEquals('P', $response->transactionResponse->avsResultCode);
+        self::assertEquals('0', $response->transactionResponse->transId);
+        self::assertEquals('0', $response->transactionResponse->testRequest);
+        self::assertEquals('9F18DE7ABDD09076F9BADB594EFC4611', $response->transactionResponse->transHash);
+        self::assertEquals('XXXX0015', $response->transactionResponse->accountNumber);
+        self::assertEquals('MasterCard', $response->transactionResponse->accountType);
+        self::assertEmpty($response->transactionResponse->authCode);
+        self::assertEmpty($response->transactionResponse->cvvResultCode);
+        self::assertEmpty($response->transactionResponse->cavvResultCode);
+        self::assertEmpty($response->transactionResponse->refTransID);
+        self::assertEquals('11', $response->transactionResponse->errors[0]->errorCode);
+        self::assertEquals('A duplicate transaction has been submitted.', $response->transactionResponse->errors[0]->errorText);
+        self::assertEquals('favorite_color', $response->transactionResponse->userFields[0]->name);
+        self::assertEquals('blue', $response->transactionResponse->userFields[0]->value);
+        self::assertEquals('14290435', $response->refId);
+        self::assertEquals('E00027', $response->messages->message[0]->code);
+        self::assertEquals('The transaction was unsuccessful.', $response->messages->message[0]->text);
     }
 
 
@@ -639,9 +638,9 @@ class AuthnetJsonAimTest extends TestCase
         $request->setProcessHandler($this->http);
         $response = $request->createTransactionRequest($requestJson);
 
-        $this->assertEquals('Ok', $response->messages->resultCode);
-        $this->assertTrue($response->isSuccessful());
-        $this->assertFalse($response->isError());
+        self::assertEquals('Ok', $response->messages->resultCode);
+        self::assertTrue($response->isSuccessful());
+        self::assertFalse($response->isError());
     }
 
     /**
@@ -697,23 +696,23 @@ class AuthnetJsonAimTest extends TestCase
         $request->setProcessHandler($this->http);
         $response = $request->createTransactionRequest($requestJson);
 
-        $this->assertEquals('Ok', $response->messages->resultCode);
-        $this->assertTrue($response->isSuccessful());
-        $this->assertFalse($response->isError());
-        $this->assertEquals('1VT65S', $response->transactionResponse->authCode);
-        $this->assertEquals('2230581333', $response->transactionResponse->transId);
-        $this->assertEquals('1', $response->transactionResponse->responseCode);
-        $this->assertEquals('P', $response->transactionResponse->avsResultCode);
-        $this->assertEquals('', $response->transactionResponse->cvvResultCode);
-        $this->assertEquals('', $response->transactionResponse->cavvResultCode);
-        $this->assertEquals('414220CECDB539F68435A4830246BDA5', $response->transactionResponse->transHash);
-        $this->assertEquals('0', $response->transactionResponse->testRequest);
-        $this->assertEquals('XXXX0015', $response->transactionResponse->accountNumber);
-        $this->assertEquals('MasterCard', $response->transactionResponse->accountType);
-        $this->assertEquals('1', $response->transactionResponse->messages[0]->code);
-        $this->assertEquals('34913421', $response->refId);
-        $this->assertEquals('I00001', $response->messages->message[0]->code);
-        $this->assertEquals('Successful.', $response->messages->message[0]->text);
+        self::assertEquals('Ok', $response->messages->resultCode);
+        self::assertTrue($response->isSuccessful());
+        self::assertFalse($response->isError());
+        self::assertEquals('1VT65S', $response->transactionResponse->authCode);
+        self::assertEquals('2230581333', $response->transactionResponse->transId);
+        self::assertEquals('1', $response->transactionResponse->responseCode);
+        self::assertEquals('P', $response->transactionResponse->avsResultCode);
+        self::assertEquals('', $response->transactionResponse->cvvResultCode);
+        self::assertEquals('', $response->transactionResponse->cavvResultCode);
+        self::assertEquals('414220CECDB539F68435A4830246BDA5', $response->transactionResponse->transHash);
+        self::assertEquals('0', $response->transactionResponse->testRequest);
+        self::assertEquals('XXXX0015', $response->transactionResponse->accountNumber);
+        self::assertEquals('MasterCard', $response->transactionResponse->accountType);
+        self::assertEquals('1', $response->transactionResponse->messages[0]->code);
+        self::assertEquals('34913421', $response->refId);
+        self::assertEquals('I00001', $response->messages->message[0]->code);
+        self::assertEquals('Successful.', $response->messages->message[0]->text);
     }
 
     /**
@@ -769,24 +768,24 @@ class AuthnetJsonAimTest extends TestCase
         $request->setProcessHandler($this->http);
         $response = $request->createTransactionRequest($requestJson);
 
-        $this->assertEquals('Error', $response->messages->resultCode);
-        $this->assertFalse($response->isSuccessful());
-        $this->assertTrue($response->isError());
-        $this->assertEquals('', $response->transactionResponse->authCode);
-        $this->assertEquals('2165665234', $response->transactionResponse->refTransID);
-        $this->assertEquals(AuthnetJsonResponse::STATUS_ERROR, $response->transactionResponse->responseCode);
-        $this->assertEquals('P', $response->transactionResponse->avsResultCode);
-        $this->assertEquals('', $response->transactionResponse->cvvResultCode);
-        $this->assertEquals('', $response->transactionResponse->cavvResultCode);
-        $this->assertEquals('06D737C28ECD531129DC59EF0548D7FA', $response->transactionResponse->transHash);
-        $this->assertEquals('0', $response->transactionResponse->testRequest);
-        $this->assertEquals('', $response->transactionResponse->accountNumber);
-        $this->assertEquals('MasterCard', $response->transactionResponse->accountType);
-        $this->assertEquals('16', $response->transactionResponse->errors[0]->errorCode);
-        $this->assertEquals('The transaction cannot be found.', $response->transactionResponse->errors[0]->errorText);
-        $this->assertEquals('14254181', $response->refId);
-        $this->assertEquals('E00027', $response->messages->message[0]->code);
-        $this->assertEquals('The transaction was unsuccessful.', $response->messages->message[0]->text);
+        self::assertEquals('Error', $response->messages->resultCode);
+        self::assertFalse($response->isSuccessful());
+        self::assertTrue($response->isError());
+        self::assertEquals('', $response->transactionResponse->authCode);
+        self::assertEquals('2165665234', $response->transactionResponse->refTransID);
+        self::assertEquals(AuthnetJsonResponse::STATUS_ERROR, $response->transactionResponse->responseCode);
+        self::assertEquals('P', $response->transactionResponse->avsResultCode);
+        self::assertEquals('', $response->transactionResponse->cvvResultCode);
+        self::assertEquals('', $response->transactionResponse->cavvResultCode);
+        self::assertEquals('06D737C28ECD531129DC59EF0548D7FA', $response->transactionResponse->transHash);
+        self::assertEquals('0', $response->transactionResponse->testRequest);
+        self::assertEquals('', $response->transactionResponse->accountNumber);
+        self::assertEquals('MasterCard', $response->transactionResponse->accountType);
+        self::assertEquals('16', $response->transactionResponse->errors[0]->errorCode);
+        self::assertEquals('The transaction cannot be found.', $response->transactionResponse->errors[0]->errorText);
+        self::assertEquals('14254181', $response->refId);
+        self::assertEquals('E00027', $response->messages->message[0]->code);
+        self::assertEquals('The transaction was unsuccessful.', $response->messages->message[0]->text);
     }
 
     /**
@@ -849,25 +848,25 @@ class AuthnetJsonAimTest extends TestCase
         $request->setProcessHandler($this->http);
         $response = $request->createTransactionRequest($requestJson);
 
-        $this->assertEquals('Ok', $response->messages->resultCode);
-        $this->assertTrue($response->isSuccessful());
-        $this->assertFalse($response->isError());
-        $this->assertEquals('', $response->transactionResponse->authCode);
-        $this->assertEquals('2230581367', $response->transactionResponse->transId);
-        $this->assertEquals('', $response->transactionResponse->refTransID);
-        $this->assertEquals('1', $response->transactionResponse->responseCode);
-        $this->assertEquals('P', $response->transactionResponse->avsResultCode);
-        $this->assertEquals('', $response->transactionResponse->cvvResultCode);
-        $this->assertEquals('', $response->transactionResponse->cavvResultCode);
-        $this->assertEquals('E659A47D6DCC71D618533E17A80E818A', $response->transactionResponse->transHash);
-        $this->assertEquals('0', $response->transactionResponse->testRequest);
-        $this->assertEquals('XXXX1111', $response->transactionResponse->accountNumber);
-        $this->assertEquals('Visa', $response->transactionResponse->accountType);
-        $this->assertEquals('1', $response->transactionResponse->messages[0]->code);
-        $this->assertEquals('This transaction has been approved.', $response->transactionResponse->messages[0]->description);
-        $this->assertEquals('95063294', $response->refId);
-        $this->assertEquals('I00001', $response->messages->message[0]->code);
-        $this->assertEquals('Successful.', $response->messages->message[0]->text);
+        self::assertEquals('Ok', $response->messages->resultCode);
+        self::assertTrue($response->isSuccessful());
+        self::assertFalse($response->isError());
+        self::assertEquals('', $response->transactionResponse->authCode);
+        self::assertEquals('2230581367', $response->transactionResponse->transId);
+        self::assertEquals('', $response->transactionResponse->refTransID);
+        self::assertEquals('1', $response->transactionResponse->responseCode);
+        self::assertEquals('P', $response->transactionResponse->avsResultCode);
+        self::assertEquals('', $response->transactionResponse->cvvResultCode);
+        self::assertEquals('', $response->transactionResponse->cavvResultCode);
+        self::assertEquals('E659A47D6DCC71D618533E17A80E818A', $response->transactionResponse->transHash);
+        self::assertEquals('0', $response->transactionResponse->testRequest);
+        self::assertEquals('XXXX1111', $response->transactionResponse->accountNumber);
+        self::assertEquals('Visa', $response->transactionResponse->accountType);
+        self::assertEquals('1', $response->transactionResponse->messages[0]->code);
+        self::assertEquals('This transaction has been approved.', $response->transactionResponse->messages[0]->description);
+        self::assertEquals('95063294', $response->refId);
+        self::assertEquals('I00001', $response->messages->message[0]->code);
+        self::assertEquals('Successful.', $response->messages->message[0]->text);
     }
 
     /**
@@ -923,25 +922,25 @@ class AuthnetJsonAimTest extends TestCase
         $request->setProcessHandler($this->http);
         $response = $request->createTransactionRequest($requestJson);
 
-        $this->assertEquals('Ok', $response->messages->resultCode);
-        $this->assertTrue($response->isSuccessful());
-        $this->assertFalse($response->isError());
-        $this->assertEquals('QCG7TB', $response->transactionResponse->authCode);
-        $this->assertEquals('2230581408', $response->transactionResponse->transId);
-        $this->assertEquals('2230581408', $response->transactionResponse->refTransID);
-        $this->assertEquals('1', $response->transactionResponse->responseCode);
-        $this->assertEquals('P', $response->transactionResponse->avsResultCode);
-        $this->assertEquals('', $response->transactionResponse->cvvResultCode);
-        $this->assertEquals('', $response->transactionResponse->cavvResultCode);
-        $this->assertEquals('39C62AE0EC82B749CC6D3324BE263CC6', $response->transactionResponse->transHash);
-        $this->assertEquals('0', $response->transactionResponse->testRequest);
-        $this->assertEquals('XXXX1111', $response->transactionResponse->accountNumber);
-        $this->assertEquals('Visa', $response->transactionResponse->accountType);
-        $this->assertEquals('1', $response->transactionResponse->messages[0]->code);
-        $this->assertEquals('This transaction has been approved.', $response->transactionResponse->messages[0]->description);
-        $this->assertEquals('35481415', $response->refId);
-        $this->assertEquals('I00001', $response->messages->message[0]->code);
-        $this->assertEquals('Successful.', $response->messages->message[0]->text);
+        self::assertEquals('Ok', $response->messages->resultCode);
+        self::assertTrue($response->isSuccessful());
+        self::assertFalse($response->isError());
+        self::assertEquals('QCG7TB', $response->transactionResponse->authCode);
+        self::assertEquals('2230581408', $response->transactionResponse->transId);
+        self::assertEquals('2230581408', $response->transactionResponse->refTransID);
+        self::assertEquals('1', $response->transactionResponse->responseCode);
+        self::assertEquals('P', $response->transactionResponse->avsResultCode);
+        self::assertEquals('', $response->transactionResponse->cvvResultCode);
+        self::assertEquals('', $response->transactionResponse->cavvResultCode);
+        self::assertEquals('39C62AE0EC82B749CC6D3324BE263CC6', $response->transactionResponse->transHash);
+        self::assertEquals('0', $response->transactionResponse->testRequest);
+        self::assertEquals('XXXX1111', $response->transactionResponse->accountNumber);
+        self::assertEquals('Visa', $response->transactionResponse->accountType);
+        self::assertEquals('1', $response->transactionResponse->messages[0]->code);
+        self::assertEquals('This transaction has been approved.', $response->transactionResponse->messages[0]->description);
+        self::assertEquals('35481415', $response->refId);
+        self::assertEquals('I00001', $response->messages->message[0]->code);
+        self::assertEquals('Successful.', $response->messages->message[0]->text);
     }
 
     /**
@@ -997,25 +996,25 @@ class AuthnetJsonAimTest extends TestCase
         $request->setProcessHandler($this->http);
         $response = $request->createTransactionRequest($requestJson);
 
-        $this->assertEquals('Error', $response->messages->resultCode);
-        $this->assertFalse($response->isSuccessful());
-        $this->assertTrue($response->isError());
-        $this->assertEquals('', $response->transactionResponse->authCode);
-        $this->assertEquals('0', $response->transactionResponse->transId);
-        $this->assertEquals('2165665483', $response->transactionResponse->refTransID);
-        $this->assertEquals(AuthnetJsonResponse::STATUS_ERROR, $response->transactionResponse->responseCode);
-        $this->assertEquals('P', $response->transactionResponse->avsResultCode);
-        $this->assertEquals('', $response->transactionResponse->cvvResultCode);
-        $this->assertEquals('', $response->transactionResponse->cavvResultCode);
-        $this->assertEquals('06D737C28ECD531129DC59EF0548D7FA', $response->transactionResponse->transHash);
-        $this->assertEquals('0', $response->transactionResponse->testRequest);
-        $this->assertEquals('', $response->transactionResponse->accountNumber);
-        $this->assertEquals('MasterCard', $response->transactionResponse->accountType);
-        $this->assertEquals('16', $response->transactionResponse->errors[0]->errorCode);
-        $this->assertEquals('The transaction cannot be found.', $response->transactionResponse->errors[0]->errorText);
-        $this->assertEquals('23039947', $response->refId);
-        $this->assertEquals('E00027', $response->messages->message[0]->code);
-        $this->assertEquals('The transaction was unsuccessful.', $response->messages->message[0]->text);
+        self::assertEquals('Error', $response->messages->resultCode);
+        self::assertFalse($response->isSuccessful());
+        self::assertTrue($response->isError());
+        self::assertEquals('', $response->transactionResponse->authCode);
+        self::assertEquals('0', $response->transactionResponse->transId);
+        self::assertEquals('2165665483', $response->transactionResponse->refTransID);
+        self::assertEquals(AuthnetJsonResponse::STATUS_ERROR, $response->transactionResponse->responseCode);
+        self::assertEquals('P', $response->transactionResponse->avsResultCode);
+        self::assertEquals('', $response->transactionResponse->cvvResultCode);
+        self::assertEquals('', $response->transactionResponse->cavvResultCode);
+        self::assertEquals('06D737C28ECD531129DC59EF0548D7FA', $response->transactionResponse->transHash);
+        self::assertEquals('0', $response->transactionResponse->testRequest);
+        self::assertEquals('', $response->transactionResponse->accountNumber);
+        self::assertEquals('MasterCard', $response->transactionResponse->accountType);
+        self::assertEquals('16', $response->transactionResponse->errors[0]->errorCode);
+        self::assertEquals('The transaction cannot be found.', $response->transactionResponse->errors[0]->errorText);
+        self::assertEquals('23039947', $response->refId);
+        self::assertEquals('E00027', $response->messages->message[0]->code);
+        self::assertEquals('The transaction was unsuccessful.', $response->messages->message[0]->text);
     }
 
     /**
@@ -1031,11 +1030,11 @@ class AuthnetJsonAimTest extends TestCase
             'transId' => '2165665581',
             'customerEmail' => 'user@example.com',
             'emailSettings' => array(
-                'setting' => array(
+                0 => array(
                     'settingName' => 'headerEmailReceipt',
                     'settingValue' => 'some HEADER stuff'
                 ),
-                'setting' => array(
+                1 => array(
                     'settingName' => 'footerEmailReceipt',
                     'settingValue' => 'some FOOTER stuff'
                 ),
@@ -1060,12 +1059,12 @@ class AuthnetJsonAimTest extends TestCase
         $request->setProcessHandler($this->http);
         $response = $request->createTransactionRequest($requestJson);
 
-        $this->assertEquals('Ok', $response->messages->resultCode);
-        $this->assertTrue($response->isSuccessful());
-        $this->assertFalse($response->isError());
-        $this->assertEquals('2241729', $response->refId);
-        $this->assertEquals('I00001', $response->messages->message[0]->code);
-        $this->assertEquals('Successful.', $response->messages->message[0]->text);
+        self::assertEquals('Ok', $response->messages->resultCode);
+        self::assertTrue($response->isSuccessful());
+        self::assertFalse($response->isError());
+        self::assertEquals('2241729', $response->refId);
+        self::assertEquals('I00001', $response->messages->message[0]->code);
+        self::assertEquals('Successful.', $response->messages->message[0]->text);
     }
 
 
@@ -1130,20 +1129,20 @@ class AuthnetJsonAimTest extends TestCase
         $request->setProcessHandler($this->http);
         $response = $request->createTransactionRequest($requestJson);
 
-        $this->assertEquals('Ok', $response->messages->resultCode);
-        $this->assertTrue($response->isSuccessful());
-        $this->assertFalse($response->isError());
-        $this->assertEquals('1', $response->transactionResponse->responseCode);
-        $this->assertEquals('C1E3I6', $response->transactionResponse->authCode);
-        $this->assertEquals('Y', $response->transactionResponse->avsResultCode);
-        $this->assertEquals('S', $response->transactionResponse->cvvResultCode);
-        $this->assertEquals('9', $response->transactionResponse->cavvResultCode);
-        $this->assertEquals('2149186775', $response->transactionResponse->transId);
-        $this->assertEquals('', $response->transactionResponse->refTransID);
-        $this->assertEquals('C85B15CED28462974F1114DB07A16C39', $response->transactionResponse->transHash);
-        $this->assertEquals('0', $response->transactionResponse->testRequest);
-        $this->assertEquals('XXXX0015', $response->transactionResponse->accountNumber);
-        $this->assertEquals('MasterCard', $response->transactionResponse->accountType);
+        self::assertEquals('Ok', $response->messages->resultCode);
+        self::assertTrue($response->isSuccessful());
+        self::assertFalse($response->isError());
+        self::assertEquals('1', $response->transactionResponse->responseCode);
+        self::assertEquals('C1E3I6', $response->transactionResponse->authCode);
+        self::assertEquals('Y', $response->transactionResponse->avsResultCode);
+        self::assertEquals('S', $response->transactionResponse->cvvResultCode);
+        self::assertEquals('9', $response->transactionResponse->cavvResultCode);
+        self::assertEquals('2149186775', $response->transactionResponse->transId);
+        self::assertEquals('', $response->transactionResponse->refTransID);
+        self::assertEquals('C85B15CED28462974F1114DB07A16C39', $response->transactionResponse->transHash);
+        self::assertEquals('0', $response->transactionResponse->testRequest);
+        self::assertEquals('XXXX0015', $response->transactionResponse->accountNumber);
+        self::assertEquals('MasterCard', $response->transactionResponse->accountType);
     }
 
 
@@ -1215,33 +1214,33 @@ class AuthnetJsonAimTest extends TestCase
         $request->setProcessHandler($this->http);
         $response = $request->createTransactionRequest($requestJson);
 
-        $this->assertEquals('Ok', $response->messages->resultCode);
-        $this->assertTrue($response->isSuccessful());
-        $this->assertFalse($response->isError());
-        $this->assertEquals('John', $response->shippingInfo->firstName);
-        $this->assertEquals('Doe', $response->shippingInfo->lastName);
-        $this->assertEquals('5100 Main St', $response->shippingInfo->address);
-        $this->assertEquals('Bellevue', $response->shippingInfo->city);
-        $this->assertEquals('CA', $response->shippingInfo->state);
-        $this->assertEquals('98104', $response->shippingInfo->zip);
-        $this->assertEquals('US', $response->shippingInfo->country);
-        $this->assertEquals('bmcmanus@visa.com', $response->billingInfo->email);
-        $this->assertEquals('John', $response->billingInfo->firstName);
-        $this->assertEquals('Doe', $response->billingInfo->lastName);
-        $this->assertEquals('5100 Main St', $response->billingInfo->address);
-        $this->assertEquals('Bellevue', $response->billingInfo->city);
-        $this->assertEquals('CA', $response->billingInfo->state);
-        $this->assertEquals('98104', $response->billingInfo->zip);
-        $this->assertEquals('US', $response->billingInfo->country);
-        $this->assertEquals('XXXX4242', $response->cardInfo->cardNumber);
-        $this->assertEquals('12/2018', $response->cardInfo->expirationDate);
-        $this->assertEquals('VISA', $response->cardInfo->cardArt->cardBrand);
-        $this->assertEquals('50', $response->cardInfo->cardArt->cardImageHeight);
-        $this->assertEquals('https://sandbox.secure.checkout.visa.com/VmeCardArts/wv87HR3X3jqlNXNJu_6YtLQyyO7mpu2aU6Yo3VWGKKM.png', $response->cardInfo->cardArt->cardImageUrl);
-        $this->assertEquals('77', $response->cardInfo->cardArt->cardImageWidth);
-        $this->assertEquals('DEBIT', $response->cardInfo->cardArt->cardType);
-        $this->assertEquals('USD', $response->paymentDetails->currency);
-        $this->assertEquals('16.00', $response->paymentDetails->amount);
+        self::assertEquals('Ok', $response->messages->resultCode);
+        self::assertTrue($response->isSuccessful());
+        self::assertFalse($response->isError());
+        self::assertEquals('John', $response->shippingInfo->firstName);
+        self::assertEquals('Doe', $response->shippingInfo->lastName);
+        self::assertEquals('5100 Main St', $response->shippingInfo->address);
+        self::assertEquals('Bellevue', $response->shippingInfo->city);
+        self::assertEquals('CA', $response->shippingInfo->state);
+        self::assertEquals('98104', $response->shippingInfo->zip);
+        self::assertEquals('US', $response->shippingInfo->country);
+        self::assertEquals('bmcmanus@visa.com', $response->billingInfo->email);
+        self::assertEquals('John', $response->billingInfo->firstName);
+        self::assertEquals('Doe', $response->billingInfo->lastName);
+        self::assertEquals('5100 Main St', $response->billingInfo->address);
+        self::assertEquals('Bellevue', $response->billingInfo->city);
+        self::assertEquals('CA', $response->billingInfo->state);
+        self::assertEquals('98104', $response->billingInfo->zip);
+        self::assertEquals('US', $response->billingInfo->country);
+        self::assertEquals('XXXX4242', $response->cardInfo->cardNumber);
+        self::assertEquals('12/2018', $response->cardInfo->expirationDate);
+        self::assertEquals('VISA', $response->cardInfo->cardArt->cardBrand);
+        self::assertEquals('50', $response->cardInfo->cardArt->cardImageHeight);
+        self::assertEquals('https://sandbox.secure.checkout.visa.com/VmeCardArts/wv87HR3X3jqlNXNJu_6YtLQyyO7mpu2aU6Yo3VWGKKM.png', $response->cardInfo->cardArt->cardImageUrl);
+        self::assertEquals('77', $response->cardInfo->cardArt->cardImageWidth);
+        self::assertEquals('DEBIT', $response->cardInfo->cardArt->cardType);
+        self::assertEquals('USD', $response->paymentDetails->currency);
+        self::assertEquals('16.00', $response->paymentDetails->amount);
     }
 
     /**
@@ -1278,9 +1277,9 @@ class AuthnetJsonAimTest extends TestCase
         $request->setProcessHandler($this->http);
         $response = $request->createTransactionRequest($requestJson);
 
-        $this->assertEquals('Error', $response->messages->resultCode);
-        $this->assertFalse($response->isSuccessful());
-        $this->assertTrue($response->isError());
-        $this->assertEquals('Unable to process decryption', $response->messages->message[0]->text);
+        self::assertEquals('Error', $response->messages->resultCode);
+        self::assertFalse($response->isSuccessful());
+        self::assertTrue($response->isError());
+        self::assertEquals('Unable to process decryption', $response->messages->message[0]->text);
     }
 }

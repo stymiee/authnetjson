@@ -28,7 +28,6 @@ class AuthnetWebhooksRequestTest extends TestCase
         $this->server         = AuthnetApiFactory::USE_DEVELOPMENT_SERVER;
 
         $this->http = $this->getMockBuilder(Curl::class)
-            ->setMethods(['post','get','put','delete'])
             ->getMock();
         $this->http->error = false;
     }
@@ -38,13 +37,13 @@ class AuthnetWebhooksRequestTest extends TestCase
      */
     public function testConstructor() : void
     {
-        $request = AuthnetApiFactory::getWebhooksHandler($this->login, $this->transactionKey, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
+        $request = AuthnetApiFactory::getWebhooksHandler($this->login, $this->transactionKey, $this->server);
 
         $reflectionOfRequest = new \ReflectionObject($request);
         $property = $reflectionOfRequest->getProperty('url');
         $property->setAccessible(true);
 
-        $this->assertEquals($property->getValue($request), 'https://apitest.authorize.net/rest/v1/');
+        self::assertEquals($property->getValue($request), 'https://apitest.authorize.net/rest/v1/');
     }
 
     /**
@@ -57,7 +56,7 @@ class AuthnetWebhooksRequestTest extends TestCase
             "name": "test"
         }]';
 
-        $request = AuthnetApiFactory::getWebhooksHandler($this->login, $this->transactionKey, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
+        $request = AuthnetApiFactory::getWebhooksHandler($this->login, $this->transactionKey, $this->server);
         $request->setProcessHandler($this->http);
         $request->updateWebhook('871a6a11-b654-45af-b97d-da72a490d0fd', 'http://www.example.com/webhook', ['net.authorize.customer.subscription.expiring'], 'inactive');
 
@@ -65,8 +64,8 @@ class AuthnetWebhooksRequestTest extends TestCase
         echo $request;
         $string = ob_get_clean();
 
-        $this->assertStringContainsString('https://apitest.authorize.net/rest/v1/webhooks/871a6a11-b654-45af-b97d-da72a490d0fd', $string);
-        $this->assertStringContainsString('{"url":"http:\/\/www.example.com\/webhook","eventTypes":["net.authorize.customer.subscription.expiring"],"status":"inactive"}', $string);
+        self::assertStringContainsString('https://apitest.authorize.net/rest/v1/webhooks/871a6a11-b654-45af-b97d-da72a490d0fd', $string);
+        self::assertStringContainsString('{"url":"http:\/\/www.example.com\/webhook","eventTypes":["net.authorize.customer.subscription.expiring"],"status":"inactive"}', $string);
     }
 
     /**
@@ -79,7 +78,7 @@ class AuthnetWebhooksRequestTest extends TestCase
             "name": "test"
         }]';
 
-        $request = AuthnetApiFactory::getWebhooksHandler($this->login, $this->transactionKey, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
+        $request = AuthnetApiFactory::getWebhooksHandler($this->login, $this->transactionKey, $this->server);
         $request->setProcessHandler($this->http);
         $request->getEventTypes();
 
@@ -87,7 +86,7 @@ class AuthnetWebhooksRequestTest extends TestCase
         echo $request;
         $string = ob_get_clean();
 
-        $this->assertStringContainsString('N/A', $string);
+        self::assertStringContainsString('N/A', $string);
     }
 
     /**
@@ -163,11 +162,11 @@ class AuthnetWebhooksRequestTest extends TestCase
             }
         ]';
 
-        $request = AuthnetApiFactory::getWebhooksHandler($this->login, $this->transactionKey, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
+        $request = AuthnetApiFactory::getWebhooksHandler($this->login, $this->transactionKey, $this->server);
         $request->setProcessHandler($this->http);
         $response = $request->getEventTypes();
 
-        $this->assertInstanceOf(AuthnetWebhooksResponse::class, $response);
+        self::assertInstanceOf(AuthnetWebhooksResponse::class, $response);
     }
 
     /**
@@ -193,7 +192,7 @@ class AuthnetWebhooksRequestTest extends TestCase
             "url": "http://localhost:55950/api/webhooks"
         }';
 
-        $request = AuthnetApiFactory::getWebhooksHandler($this->login, $this->transactionKey, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
+        $request = AuthnetApiFactory::getWebhooksHandler($this->login, $this->transactionKey, $this->server);
         $request->setProcessHandler($this->http);
         $response = $request->createWebhooks([
             'net.authorize.customer.created',
@@ -201,7 +200,7 @@ class AuthnetWebhooksRequestTest extends TestCase
             'net.authorize.customer.subscription.expiring'
         ], 'http://requestb.in/', 'active');
 
-        $this->assertInstanceOf(AuthnetWebhooksResponse::class, $response);
+        self::assertInstanceOf(AuthnetWebhooksResponse::class, $response);
     }
 
     /**
@@ -212,11 +211,11 @@ class AuthnetWebhooksRequestTest extends TestCase
         $this->http->error = false;
         $this->http->response = '';
 
-        $request = AuthnetApiFactory::getWebhooksHandler($this->login, $this->transactionKey, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
+        $request = AuthnetApiFactory::getWebhooksHandler($this->login, $this->transactionKey, $this->server);
         $request->setProcessHandler($this->http);
         $response = $request->testWebhook('ba4c73f3-0808-48bf-ae2f-f49064770e60');
 
-        $this->assertNull($response);
+        self::assertNull($response);
     }
 
     /**
@@ -227,11 +226,11 @@ class AuthnetWebhooksRequestTest extends TestCase
         $this->http->error = false;
         $this->http->response = '';
 
-        $request = AuthnetApiFactory::getWebhooksHandler($this->login, $this->transactionKey, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
+        $request = AuthnetApiFactory::getWebhooksHandler($this->login, $this->transactionKey, $this->server);
         $request->setProcessHandler($this->http);
         $response = $request->deleteWebhook('ba4c73f3-0808-48bf-ae2f-f49064770e60');
 
-        $this->assertNull($response);
+        self::assertNull($response);
     }
 
     /**
@@ -288,11 +287,11 @@ class AuthnetWebhooksRequestTest extends TestCase
                 "url": "http://localhost:55950/api/webhooks"
         }]';
 
-        $request = AuthnetApiFactory::getWebhooksHandler($this->login, $this->transactionKey, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
+        $request = AuthnetApiFactory::getWebhooksHandler($this->login, $this->transactionKey, $this->server);
         $request->setProcessHandler($this->http);
         $response = $request->getWebhooks();
 
-        $this->assertInstanceOf(AuthnetWebhooksResponse::class, $response);
+        self::assertInstanceOf(AuthnetWebhooksResponse::class, $response);
     }
 
     /**
@@ -319,11 +318,11 @@ class AuthnetWebhooksRequestTest extends TestCase
             "url": "http://localhost:55950/api/webhooks"
         }';
 
-        $request = AuthnetApiFactory::getWebhooksHandler($this->login, $this->transactionKey, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
+        $request = AuthnetApiFactory::getWebhooksHandler($this->login, $this->transactionKey, $this->server);
         $request->setProcessHandler($this->http);
         $response = $request->getWebhook('cd2c262f-2723-4848-ae92-5d317902441c');
 
-        $this->assertInstanceOf(AuthnetWebhooksResponse::class, $response);
+        self::assertInstanceOf(AuthnetWebhooksResponse::class, $response);
     }
 
     /**
@@ -346,13 +345,13 @@ class AuthnetWebhooksRequestTest extends TestCase
             "url": "http://requestb.in/19okx6x1"
         }';
 
-        $request = AuthnetApiFactory::getWebhooksHandler($this->login, $this->transactionKey, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
+        $request = AuthnetApiFactory::getWebhooksHandler($this->login, $this->transactionKey, $this->server);
         $request->setProcessHandler($this->http);
         $response = $request->updateWebhook('ba4c73f3-0808-48bf-ae2f-f49064770e60', 'http://requestb.in/', [
             'net.authorize.customer.created'
         ], 'active');
 
-        $this->assertInstanceOf(AuthnetWebhooksResponse::class, $response);
+        self::assertInstanceOf(AuthnetWebhooksResponse::class, $response);
     }
 
     /**
@@ -382,11 +381,11 @@ class AuthnetWebhooksRequestTest extends TestCase
             ]
         }';
 
-        $request = AuthnetApiFactory::getWebhooksHandler($this->login, $this->transactionKey, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
+        $request = AuthnetApiFactory::getWebhooksHandler($this->login, $this->transactionKey, $this->server);
         $request->setProcessHandler($this->http);
         $response = $request->getNotificationHistory();
 
-        $this->assertInstanceOf(AuthnetWebhooksResponse::class, $response);
+        self::assertInstanceOf(AuthnetWebhooksResponse::class, $response);
     }
 
     /**
@@ -397,7 +396,7 @@ class AuthnetWebhooksRequestTest extends TestCase
         $this->http->error = false;
         $this->http->response = '{"error"}';
 
-        $request = AuthnetApiFactory::getWebhooksHandler($this->login, $this->transactionKey, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
+        $request = AuthnetApiFactory::getWebhooksHandler($this->login, $this->transactionKey, $this->server);
         $request->setProcessHandler($this->http);
 
         $method = new \ReflectionMethod(AuthnetWebhooksRequest::class, 'handleResponse');
@@ -405,7 +404,7 @@ class AuthnetWebhooksRequestTest extends TestCase
 
         $response = $method->invoke($request);
 
-        $this->assertEquals($this->http->response, $response);
+        self::assertEquals($this->http->response, $response);
     }
 
     /**
@@ -426,7 +425,7 @@ class AuthnetWebhooksRequestTest extends TestCase
   "correlationId": "xxxxxxx"
 }';
 
-        $request = AuthnetApiFactory::getWebhooksHandler($this->login, $this->transactionKey, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
+        $request = AuthnetApiFactory::getWebhooksHandler($this->login, $this->transactionKey, $this->server);
         $request->setProcessHandler($this->http);
 
         $method = new \ReflectionMethod(AuthnetWebhooksRequest::class, 'handleResponse');
@@ -453,7 +452,7 @@ class AuthnetWebhooksRequestTest extends TestCase
   "correlationId": "xxxxxxx"
 }';
 
-        $request = AuthnetApiFactory::getWebhooksHandler($this->login, $this->transactionKey, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
+        $request = AuthnetApiFactory::getWebhooksHandler($this->login, $this->transactionKey, $this->server);
         $request->setProcessHandler($this->http);
 
         $method = new \ReflectionMethod(AuthnetWebhooksRequest::class, 'handleResponse');
@@ -463,7 +462,7 @@ class AuthnetWebhooksRequestTest extends TestCase
             $method->invoke($request);
         }
         catch (\AuthnetCurlException $e) {
-            $this->assertEquals(sprintf('Connection error: %s (%s)', $this->http->error_message, $this->http->error_code), $e->getMessage());
+            self::assertEquals(sprintf('Connection error: %s (%s)', $this->http->error_message, $this->http->error_code), $e->getMessage());
         }
     }
 
@@ -483,7 +482,7 @@ class AuthnetWebhooksRequestTest extends TestCase
             'message' => 'not good',
         ]);
 
-        $request = AuthnetApiFactory::getWebhooksHandler($this->login, $this->transactionKey, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
+        $request = AuthnetApiFactory::getWebhooksHandler($this->login, $this->transactionKey, $this->server);
         $request->setProcessHandler($this->http);
 
         $method = new \ReflectionMethod(AuthnetWebhooksRequest::class, 'handleResponse');
@@ -494,7 +493,7 @@ class AuthnetWebhooksRequestTest extends TestCase
         }
         catch (\AuthnetCurlException $e) {
             $error_message = sprintf('(%u) %s: %s', $this->http->response->status, $this->http->response->reason, $this->http->response->message);
-            $this->assertEquals(sprintf('Connection error: %s (%s)', $error_message, $this->http->error_code), $e->getMessage());
+            self::assertEquals(sprintf('Connection error: %s (%s)', $error_message, $this->http->error_code), $e->getMessage());
         }
     }
 
@@ -503,14 +502,14 @@ class AuthnetWebhooksRequestTest extends TestCase
      */
     public function testProcessorIsInstanceOfCurlWrapper() : void
     {
-        $request = new AuthnetWebhooksRequest(null, null, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
-        $request->setProcessHandler(new \Curl\Curl());
+        $request = new AuthnetWebhooksRequest(null, null, $this->server);
+        $request->setProcessHandler(new Curl());
 
         $reflectionOfRequest = new \ReflectionObject($request);
         $processor = $reflectionOfRequest->getProperty('processor');
         $processor->setAccessible(true);
 
-        $this->assertInstanceOf(Curl::class, $processor->getValue($request));
+        self::assertInstanceOf(Curl::class, $processor->getValue($request));
     }
 
     /**
@@ -522,10 +521,10 @@ class AuthnetWebhooksRequestTest extends TestCase
             "name": "test"
         }]';
 
-        $request = AuthnetApiFactory::getWebhooksHandler($this->login, $this->transactionKey, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
+        $request = AuthnetApiFactory::getWebhooksHandler($this->login, $this->transactionKey, $this->server);
         $request->setProcessHandler($this->http);
         $request->updateWebhook('871a6a11-b654-45af-b97d-da72a490d0fd', 'http://www.example.com/webhook', ['net.authorize.customer.subscription.expiring'], 'inactive');
 
-        $this->assertEquals('{"url":"http:\/\/www.example.com\/webhook","eventTypes":["net.authorize.customer.subscription.expiring"],"status":"inactive"}', $request->getRawRequest());
+        self::assertEquals('{"url":"http:\/\/www.example.com\/webhook","eventTypes":["net.authorize.customer.subscription.expiring"],"status":"inactive"}', $request->getRawRequest());
     }
 }

@@ -41,8 +41,8 @@ class AuthnetSimTest extends TestCase
         $key = $reflectionOfSim->getProperty('signature');
         $key->setAccessible(true);
 
-        $this->assertEquals($login->getValue($request), $this->login);
-        $this->assertEquals($key->getValue($request), $this->signature);
+        self::assertEquals($login->getValue($request), $this->login);
+        self::assertEquals($key->getValue($request), $this->signature);
     }
 
     /**
@@ -57,7 +57,7 @@ class AuthnetSimTest extends TestCase
         $sequence  = $sim->getSequence();
         $timestamp = $sim->getTimestamp();
 
-        $this->assertEquals($hash, strtoupper(hash_hmac('sha512', sprintf('%s^%s^%s^%s^',
+        self::assertEquals($hash, strtoupper(hash_hmac('sha512', sprintf('%s^%s^%s^%s^',
             $this->login,
             $sequence,
             $timestamp,
@@ -90,7 +90,7 @@ class AuthnetSimTest extends TestCase
         $sequenceReflection = $reflectionOfRequest->getProperty('sequence');
         $sequenceReflection->setAccessible(true);
 
-        $this->assertEquals($sequence, $sequenceReflection->getValue($sim));
+        self::assertEquals($sequence, $sequenceReflection->getValue($sim));
     }
 
     /**
@@ -105,7 +105,7 @@ class AuthnetSimTest extends TestCase
         $timestampReflection = $reflectionOfRequest->getProperty('timestamp');
         $timestampReflection->setAccessible(true);
 
-        $this->assertEquals($timestamp, $timestampReflection->getValue($sim));
+        self::assertEquals($timestamp, $timestampReflection->getValue($sim));
     }
 
     /**
@@ -120,7 +120,7 @@ class AuthnetSimTest extends TestCase
         $loginReflection = $reflectionOfRequest->getProperty('login');
         $loginReflection->setAccessible(true);
 
-        $this->assertEquals($login, $loginReflection->getValue($sim));
+        self::assertEquals($login, $loginReflection->getValue($sim));
     }
 
     /**
@@ -135,7 +135,7 @@ class AuthnetSimTest extends TestCase
         $endpointReflection = $reflectionOfRequest->getProperty('url');
         $endpointReflection->setAccessible(true);
 
-        $this->assertEquals($url, $endpointReflection->getValue($sim));
+        self::assertEquals($url, $endpointReflection->getValue($sim));
     }
 
     /**
@@ -155,7 +155,7 @@ class AuthnetSimTest extends TestCase
         $sequenceReflection = $reflectionOfRequest->getProperty('sequence');
         $sequenceReflection->setAccessible(true);
 
-        $this->assertNotEquals($timestamp, $timestampReflection->getValue($sim));
-        $this->assertNotEquals($timestamp, $sequenceReflection->getValue($sim));
+        self::assertNotEquals($timestamp, $timestampReflection->getValue($sim));
+        self::assertNotEquals($timestamp, $sequenceReflection->getValue($sim));
     }
 }

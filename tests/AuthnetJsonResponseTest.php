@@ -59,11 +59,11 @@ class AuthnetJsonResponseTest extends TestCase
 
         $response = new AuthnetJsonResponse($responseJson);
 
-        $this->assertTrue($response->isSuccessful());
-        $this->assertFalse($response->isError());
-        $this->assertEquals('Ok', $response->messages->resultCode);
-        $this->assertEquals('I00004', $response->messages->message[0]->code);
-        $this->assertEquals('No records found.', $response->messages->message[0]->text);
+        self::assertTrue($response->isSuccessful());
+        self::assertFalse($response->isError());
+        self::assertEquals('Ok', $response->messages->resultCode);
+        self::assertEquals('I00004', $response->messages->message[0]->code);
+        self::assertEquals('No records found.', $response->messages->message[0]->text);
     }
 
     /**
@@ -86,11 +86,11 @@ class AuthnetJsonResponseTest extends TestCase
 
         $response = new AuthnetJsonResponse($responseJson);
 
-        $this->assertFalse($response->isSuccessful());
-        $this->assertTrue($response->isError());
-        $this->assertEquals('Error', $response->messages->resultCode);
-        $this->assertEquals('E00027', $response->messages->message[0]->code);
-        $this->assertEquals('The transaction was unsuccessful.', $response->messages->message[0]->text);
+        self::assertFalse($response->isSuccessful());
+        self::assertTrue($response->isError());
+        self::assertEquals('Error', $response->messages->resultCode);
+        self::assertEquals('E00027', $response->messages->message[0]->code);
+        self::assertEquals('The transaction was unsuccessful.', $response->messages->message[0]->text);
     }
 
     /**
@@ -114,7 +114,7 @@ class AuthnetJsonResponseTest extends TestCase
 
         $response = new AuthnetJsonResponse($responseJson);
 
-        $this->assertEquals('2230582306', $response->getTransactionResponseField('TransactionID'));
+        self::assertEquals('2230582306', $response->getTransactionResponseField('TransactionID'));
     }
 
     /**
@@ -150,8 +150,8 @@ class AuthnetJsonResponseTest extends TestCase
 
         $response = new AuthnetJsonResponse($responseJson);
 
-        $this->assertEquals(AuthnetJsonResponse::STATUS_APPROVED, $response->getTransactionResponseField('ResponseCode'));
-        $this->assertTrue($response->isApproved());
+        self::assertEquals(AuthnetJsonResponse::STATUS_APPROVED, $response->getTransactionResponseField('ResponseCode'));
+        self::assertTrue($response->isApproved());
     }
 
 
@@ -176,8 +176,8 @@ class AuthnetJsonResponseTest extends TestCase
 
         $response = new AuthnetJsonResponse($responseJson);
 
-        $this->assertEquals(AuthnetJsonResponse::STATUS_DECLINED, $response->getTransactionResponseField('ResponseCode'));
-        $this->assertTrue($response->isDeclined());
+        self::assertEquals(AuthnetJsonResponse::STATUS_DECLINED, $response->getTransactionResponseField('ResponseCode'));
+        self::assertTrue($response->isDeclined());
     }
 
     /**
@@ -226,7 +226,7 @@ class AuthnetJsonResponseTest extends TestCase
 
         $response = new AuthnetJsonResponse($responseJson);
 
-        $this->assertTrue($response->isPrePaidCard());
+        self::assertTrue($response->isPrePaidCard());
     }
 
 
@@ -255,10 +255,10 @@ class AuthnetJsonResponseTest extends TestCase
         echo $response;
         $string = ob_get_clean();
 
-        $this->assertStringContainsString('validationDirectResponse":"2,2,205,This transaction has been declined,902R0T,Y,2230582306,INV000001,description of transaction,10.95,CC,auth_capture,12345,John,Smith,Company Name,123 Main Street,Townsville,NJ,12345,United States,800-555-1234,800-555-1235,user@example.com,John,Smith,Other Company Name,123 Main Street,Townsville,NJ,12345,United States,1.00,2.00,3.00,FALSE,PONUM000001,D3B20D6194B0E86C03A18987300E781C,P,2,,,,,,,,,,,XXXX1111,Visa,,,,,,,,,,,,,,,,,29366174', $string);
-        $this->assertStringContainsString('28821903', $string);
-        $this->assertStringContainsString('I00001', $string);
-        $this->assertStringContainsString('Successful', $string);
+        self::assertStringContainsString('validationDirectResponse":"2,2,205,This transaction has been declined,902R0T,Y,2230582306,INV000001,description of transaction,10.95,CC,auth_capture,12345,John,Smith,Company Name,123 Main Street,Townsville,NJ,12345,United States,800-555-1234,800-555-1235,user@example.com,John,Smith,Other Company Name,123 Main Street,Townsville,NJ,12345,United States,1.00,2.00,3.00,FALSE,PONUM000001,D3B20D6194B0E86C03A18987300E781C,P,2,,,,,,,,,,,XXXX1111,Visa,,,,,,,,,,,,,,,,,29366174', $string);
+        self::assertStringContainsString('28821903', $string);
+        self::assertStringContainsString('I00001', $string);
+        self::assertStringContainsString('Successful', $string);
     }
 
     /**
@@ -284,7 +284,7 @@ class AuthnetJsonResponseTest extends TestCase
         $response = new AuthnetJsonResponse($responseJson);
         $response = json_encode(json_decode($response->getRawResponse(), false));
 
-        $this->assertSame($responseJson, $response);
+        self::assertSame($responseJson, $response);
     }
 
 
@@ -309,7 +309,7 @@ class AuthnetJsonResponseTest extends TestCase
 
         $response = new AuthnetJsonResponse($responseJson);
 
-        $this->assertEquals(28821903, $response->customerPaymentProfileId);
+        self::assertEquals(28821903, $response->customerPaymentProfileId);
     }
 
     /**
@@ -360,7 +360,7 @@ class AuthnetJsonResponseTest extends TestCase
         $reflectionMethod->setAccessible(true);
         $match    = $reflectionMethod->invoke($response, AuthnetJsonResponse::STATUS_DECLINED);
 
-        $this->assertTrue($match);
+        self::assertTrue($match);
     }
 
     /**
@@ -411,7 +411,7 @@ class AuthnetJsonResponseTest extends TestCase
         $reflectionMethod->setAccessible(true);
         $match    = $reflectionMethod->invoke($response, AuthnetJsonResponse::STATUS_APPROVED);
 
-        $this->assertTrue($match);
+        self::assertTrue($match);
     }
 
     /**
@@ -434,9 +434,9 @@ class AuthnetJsonResponseTest extends TestCase
 
         $response = new AuthnetJsonResponse($responseJson);
 
-        $this->assertTrue($response->isError());
-        $this->assertEquals('E00027', $response->getErrorCode());
-        $this->assertEquals('The transaction was unsuccessful.', $response->getErrorText());
+        self::assertTrue($response->isError());
+        self::assertEquals('E00027', $response->getErrorCode());
+        self::assertEquals('The transaction was unsuccessful.', $response->getErrorText());
     }
 
     /**
@@ -486,9 +486,9 @@ class AuthnetJsonResponseTest extends TestCase
 
         $response = new AuthnetJsonResponse($responseJson);
 
-        $this->assertTrue($response->isError());
-        $this->assertEquals('11', $response->getErrorCode());
-        $this->assertEquals('A duplicate transaction has been submitted.', $response->getErrorText());
+        self::assertTrue($response->isError());
+        self::assertEquals('11', $response->getErrorCode());
+        self::assertEquals('A duplicate transaction has been submitted.', $response->getErrorText());
     }
 
     /**
@@ -511,6 +511,6 @@ class AuthnetJsonResponseTest extends TestCase
 
         $response = new AuthnetJsonResponse($responseJson);
 
-        $this->assertEquals($response->getErrorText(), $response->getErrorMessage());
+        self::assertEquals($response->getErrorText(), $response->getErrorMessage());
     }
 }

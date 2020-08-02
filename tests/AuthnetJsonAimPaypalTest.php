@@ -28,7 +28,6 @@ class AuthnetJsonAimPaypalTest extends TestCase
         $this->server         = AuthnetApiFactory::USE_DEVELOPMENT_SERVER;
 
         $this->http = $this->getMockBuilder(Curl::class)
-            ->setMethods(['post'])
             ->getMock();
         $this->http->error = false;
     }
@@ -97,11 +96,11 @@ class AuthnetJsonAimPaypalTest extends TestCase
         $request->setProcessHandler($this->http);
         $response = $request->createTransactionRequest($requestJson);
 
-        $this->assertEquals('Ok', $response->messages->resultCode);
-        $this->assertTrue($response->isSuccessful());
-        $this->assertFalse($response->isError());
+        self::assertEquals('Ok', $response->messages->resultCode);
+        self::assertTrue($response->isSuccessful());
+        self::assertFalse($response->isError());
 
-        $this->assertEquals('PayPal', $response->transactionResponse->accountType);
+        self::assertEquals('PayPal', $response->transactionResponse->accountType);
     }
 
     /**
@@ -161,11 +160,11 @@ class AuthnetJsonAimPaypalTest extends TestCase
         $request->setProcessHandler($this->http);
         $response = $request->createTransactionRequest($requestJson);
 
-        $this->assertEquals('Ok', $response->messages->resultCode);
-        $this->assertTrue($response->isSuccessful());
-        $this->assertFalse($response->isError());
+        self::assertEquals('Ok', $response->messages->resultCode);
+        self::assertTrue($response->isSuccessful());
+        self::assertFalse($response->isError());
 
-        $this->assertEquals('MasterCard', $response->transactionResponse->accountType);
+        self::assertEquals('MasterCard', $response->transactionResponse->accountType);
     }
 
     /**
@@ -224,15 +223,15 @@ class AuthnetJsonAimPaypalTest extends TestCase
         $request->setProcessHandler($this->http);
         $response = $request->createTransactionRequest($requestJson);
 
-        $this->assertEquals('Ok', $response->messages->resultCode);
-        $this->assertTrue($response->isSuccessful());
-        $this->assertFalse($response->isError());
+        self::assertEquals('Ok', $response->messages->resultCode);
+        self::assertTrue($response->isSuccessful());
+        self::assertFalse($response->isError());
 
-        $this->assertEquals(AuthnetJsonResponse::STATUS_PAYPAL_NEED_CONSENT, $response->transactionResponse->responseCode);
-        $this->assertEquals('PayPal', $response->transactionResponse->accountType);
-        $this->assertEquals('2000', $response->transactionResponse->messages[0]->code);
-        $this->assertEquals('Need payer consent.', $response->transactionResponse->messages[0]->description);
-        $this->assertEquals('https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_express-checkout&token=EC-C506B0LGTG2J800OK', $response->transactionResponse->secureAcceptance->SecureAcceptanceUrl);
+        self::assertEquals(AuthnetJsonResponse::STATUS_PAYPAL_NEED_CONSENT, $response->transactionResponse->responseCode);
+        self::assertEquals('PayPal', $response->transactionResponse->accountType);
+        self::assertEquals('2000', $response->transactionResponse->messages[0]->code);
+        self::assertEquals('Need payer consent.', $response->transactionResponse->messages[0]->description);
+        self::assertEquals('https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_express-checkout&token=EC-C506B0LGTG2J800OK', $response->transactionResponse->secureAcceptance->SecureAcceptanceUrl);
     }
 
 
@@ -293,11 +292,11 @@ class AuthnetJsonAimPaypalTest extends TestCase
         $request->setProcessHandler($this->http);
         $response = $request->createTransactionRequest($requestJson);
 
-        $this->assertEquals('Ok', $response->messages->resultCode);
-        $this->assertTrue($response->isSuccessful());
-        $this->assertFalse($response->isError());
+        self::assertEquals('Ok', $response->messages->resultCode);
+        self::assertTrue($response->isSuccessful());
+        self::assertFalse($response->isError());
 
-        $this->assertEquals('MasterCard', $response->transactionResponse->accountType);
+        self::assertEquals('MasterCard', $response->transactionResponse->accountType);
     }
 
     /**
@@ -352,11 +351,11 @@ class AuthnetJsonAimPaypalTest extends TestCase
         $request->setProcessHandler($this->http);
         $response = $request->createTransactionRequest($requestJson);
 
-        $this->assertEquals('Ok', $response->messages->resultCode);
-        $this->assertTrue($response->isSuccessful());
-        $this->assertFalse($response->isError());
+        self::assertEquals('Ok', $response->messages->resultCode);
+        self::assertTrue($response->isSuccessful());
+        self::assertFalse($response->isError());
 
-        $this->assertEquals('MasterCard', $response->transactionResponse->accountType);
+        self::assertEquals('MasterCard', $response->transactionResponse->accountType);
     }
 
     /**
@@ -411,11 +410,11 @@ class AuthnetJsonAimPaypalTest extends TestCase
         $request->setProcessHandler($this->http);
         $response = $request->createTransactionRequest($requestJson);
 
-        $this->assertEquals('Ok', $response->messages->resultCode);
-        $this->assertTrue($response->isSuccessful());
-        $this->assertFalse($response->isError());
+        self::assertEquals('Ok', $response->messages->resultCode);
+        self::assertTrue($response->isSuccessful());
+        self::assertFalse($response->isError());
 
-        $this->assertEquals('MasterCard', $response->transactionResponse->accountType);
+        self::assertEquals('MasterCard', $response->transactionResponse->accountType);
     }
 
     /**
@@ -465,11 +464,11 @@ class AuthnetJsonAimPaypalTest extends TestCase
         $request->setProcessHandler($this->http);
         $response = $request->createTransactionRequest($requestJson);
 
-        $this->assertEquals('Ok', $response->messages->resultCode);
-        $this->assertTrue($response->isSuccessful());
-        $this->assertFalse($response->isError());
+        self::assertEquals('Ok', $response->messages->resultCode);
+        self::assertTrue($response->isSuccessful());
+        self::assertFalse($response->isError());
 
-        $this->assertEquals('PayPal', $response->transactionResponse->accountType);
+        self::assertEquals('PayPal', $response->transactionResponse->accountType);
     }
 
     /**
@@ -524,11 +523,11 @@ class AuthnetJsonAimPaypalTest extends TestCase
         $request->setProcessHandler($this->http);
         $response = $request->createTransactionRequest($requestJson);
 
-        $this->assertEquals('Ok', $response->messages->resultCode);
-        $this->assertTrue($response->isSuccessful());
-        $this->assertFalse($response->isError());
+        self::assertEquals('Ok', $response->messages->resultCode);
+        self::assertTrue($response->isSuccessful());
+        self::assertFalse($response->isError());
 
-        $this->assertEquals('MasterCard', $response->transactionResponse->accountType);
+        self::assertEquals('MasterCard', $response->transactionResponse->accountType);
     }
 
 
@@ -596,14 +595,14 @@ class AuthnetJsonAimPaypalTest extends TestCase
         $request->setProcessHandler($this->http);
         $response = $request->createTransactionRequest($requestJson);
 
-        $this->assertEquals('Error', $response->messages->resultCode);
-        $this->assertFalse($response->isSuccessful());
-        $this->assertTrue($response->isError());
+        self::assertEquals('Error', $response->messages->resultCode);
+        self::assertFalse($response->isSuccessful());
+        self::assertTrue($response->isError());
 
-        $this->assertEquals(AuthnetJsonResponse::STATUS_ERROR, $response->transactionResponse->responseCode);
-        $this->assertEquals('PayPal', $response->transactionResponse->accountType);
-        $this->assertEquals('2001', $response->transactionResponse->errors[0]->errorCode);
-        $this->assertEquals('PayPal transactions are not accepted by this merchant.', $response->transactionResponse->errors[0]->errorText);
+        self::assertEquals(AuthnetJsonResponse::STATUS_ERROR, $response->transactionResponse->responseCode);
+        self::assertEquals('PayPal', $response->transactionResponse->accountType);
+        self::assertEquals('2001', $response->transactionResponse->errors[0]->errorCode);
+        self::assertEquals('PayPal transactions are not accepted by this merchant.', $response->transactionResponse->errors[0]->errorText);
     }
 
 
@@ -660,14 +659,14 @@ class AuthnetJsonAimPaypalTest extends TestCase
         $request->setProcessHandler($this->http);
         $response = $request->createTransactionRequest($requestJson);
 
-        $this->assertEquals('Error', $response->messages->resultCode);
-        $this->assertFalse($response->isSuccessful());
-        $this->assertTrue($response->isError());
+        self::assertEquals('Error', $response->messages->resultCode);
+        self::assertFalse($response->isSuccessful());
+        self::assertTrue($response->isError());
 
-        $this->assertEquals(AuthnetJsonResponse::STATUS_ERROR, $response->transactionResponse->responseCode);
-        $this->assertEquals('', $response->transactionResponse->accountType);
-        $this->assertEquals('16', $response->transactionResponse->errors[0]->errorCode);
-        $this->assertEquals('The transaction cannot be found.', $response->transactionResponse->errors[0]->errorText);
+        self::assertEquals(AuthnetJsonResponse::STATUS_ERROR, $response->transactionResponse->responseCode);
+        self::assertEquals('', $response->transactionResponse->accountType);
+        self::assertEquals('16', $response->transactionResponse->errors[0]->errorCode);
+        self::assertEquals('The transaction cannot be found.', $response->transactionResponse->errors[0]->errorText);
     }
 
 
@@ -718,13 +717,13 @@ class AuthnetJsonAimPaypalTest extends TestCase
         $request->setProcessHandler($this->http);
         $response = $request->createTransactionRequest($requestJson);
 
-        $this->assertEquals('Error', $response->messages->resultCode);
-        $this->assertFalse($response->isSuccessful());
-        $this->assertTrue($response->isError());
+        self::assertEquals('Error', $response->messages->resultCode);
+        self::assertFalse($response->isSuccessful());
+        self::assertTrue($response->isError());
 
-        $this->assertEquals(AuthnetJsonResponse::STATUS_ERROR, $response->transactionResponse->responseCode);
-        $this->assertEquals('PayPal', $response->transactionResponse->accountType);
-        $this->assertEquals('54', $response->transactionResponse->errors[0]->errorCode);
-        $this->assertEquals('The referenced transaction does not meet the criteria for issuing a credit.', $response->transactionResponse->errors[0]->errorText);
+        self::assertEquals(AuthnetJsonResponse::STATUS_ERROR, $response->transactionResponse->responseCode);
+        self::assertEquals('PayPal', $response->transactionResponse->accountType);
+        self::assertEquals('54', $response->transactionResponse->errors[0]->errorCode);
+        self::assertEquals('The referenced transaction does not meet the criteria for issuing a credit.', $response->transactionResponse->errors[0]->errorText);
     }
 }

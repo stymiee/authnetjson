@@ -13,6 +13,8 @@ namespace JohnConde\Authnet;
 
 use PHPUnit\Framework\TestCase;
 use Curl\Curl;
+use ReflectionClass;
+use ReflectionMethod;
 
 class AuthnetApiFactoryTest extends TestCase
 {
@@ -31,11 +33,11 @@ class AuthnetApiFactoryTest extends TestCase
     public function testGetWebServiceUrlProductionServer() : void
     {
         $endpoint         = AuthnetApiFactory::USE_PRODUCTION_SERVER;
-        $reflectionMethod = new \ReflectionMethod(AuthnetApiFactory::class, 'getWebServiceURL');
+        $reflectionMethod = new ReflectionMethod(AuthnetApiFactory::class, 'getWebServiceURL');
         $reflectionMethod->setAccessible(true);
         $url              = $reflectionMethod->invoke(null, $endpoint);
 
-        $this->assertEquals($url, 'https://api.authorize.net/xml/v1/request.api');
+        self::assertEquals('https://api.authorize.net/xml/v1/request.api', $url);
     }
 
     /**
@@ -44,11 +46,11 @@ class AuthnetApiFactoryTest extends TestCase
     public function testGetWebServiceUrlDevelopmentServer() : void
     {
         $endpoint         = AuthnetApiFactory::USE_DEVELOPMENT_SERVER;
-        $reflectionMethod = new \ReflectionMethod(AuthnetApiFactory::class, 'getWebServiceURL');
+        $reflectionMethod = new ReflectionMethod(AuthnetApiFactory::class, 'getWebServiceURL');
         $reflectionMethod->setAccessible(true);
         $url              = $reflectionMethod->invoke(null, $endpoint);
 
-        $this->assertEquals($url, 'https://apitest.authorize.net/xml/v1/request.api');
+        self::assertEquals('https://apitest.authorize.net/xml/v1/request.api', $url);
     }
 
     /**
@@ -57,11 +59,11 @@ class AuthnetApiFactoryTest extends TestCase
     public function testGetWebServiceUrlCDNServer() : void
     {
         $endpoint         = AuthnetApiFactory::USE_CDN_SERVER;
-        $reflectionMethod = new \ReflectionMethod(AuthnetApiFactory::class, 'getWebServiceURL');
+        $reflectionMethod = new ReflectionMethod(AuthnetApiFactory::class, 'getWebServiceURL');
         $reflectionMethod->setAccessible(true);
         $url              = $reflectionMethod->invoke(null, $endpoint);
 
-        $this->assertEquals($url, 'https://api2.authorize.net/xml/v1/request.api');
+        self::assertEquals('https://api2.authorize.net/xml/v1/request.api', $url);
     }
 
     /**
@@ -74,7 +76,7 @@ class AuthnetApiFactoryTest extends TestCase
         $this->expectException(AuthnetInvalidServerException::class);
 
         $endpoint         = 99;
-        $reflectionMethod = new \ReflectionMethod(AuthnetApiFactory::class, 'getWebServiceURL');
+        $reflectionMethod = new ReflectionMethod(AuthnetApiFactory::class, 'getWebServiceURL');
         $reflectionMethod->setAccessible(true);
         $reflectionMethod->invoke(null, $endpoint);
     }
@@ -125,12 +127,12 @@ class AuthnetApiFactoryTest extends TestCase
         $endpoint = AuthnetApiFactory::USE_PRODUCTION_SERVER;
         $authnet  = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $endpoint);
 
-        $reflectionClass = new \ReflectionClass(AuthnetJsonRequest::class);
+        $reflectionClass = new ReflectionClass(AuthnetJsonRequest::class);
         $reflectionOfProcessor = $reflectionClass->getProperty('processor');
         $reflectionOfProcessor->setAccessible(true);
         $processor = $reflectionOfProcessor->getValue($authnet);
 
-        $this->assertInstanceOf(Curl::class, $processor);
+        self::assertInstanceOf(Curl::class, $processor);
     }
 
     /**
@@ -142,12 +144,12 @@ class AuthnetApiFactoryTest extends TestCase
         $endpoint = AuthnetApiFactory::USE_DEVELOPMENT_SERVER;
         $authnet  = AuthnetApiFactory::getJsonApiHandler($this->login, $this->transactionKey, $endpoint);
 
-        $reflectionClass = new \ReflectionClass(AuthnetJsonRequest::class);
+        $reflectionClass = new ReflectionClass(AuthnetJsonRequest::class);
         $reflectionOfProcessor = $reflectionClass->getProperty('processor');
         $reflectionOfProcessor->setAccessible(true);
         $processor = $reflectionOfProcessor->getValue($authnet);
 
-        $this->assertInstanceOf(Curl::class, $processor);
+        self::assertInstanceOf(Curl::class, $processor);
     }
 
     /**
@@ -158,7 +160,7 @@ class AuthnetApiFactoryTest extends TestCase
         $endpoint = AuthnetApiFactory::USE_DEVELOPMENT_SERVER;
         $sim    = AuthnetApiFactory::getSimHandler($this->login, $this->transactionKey, $endpoint);
 
-        $this->assertInstanceOf(AuthnetSim::class, $sim);
+        self::assertInstanceOf(AuthnetSim::class, $sim);
     }
 
     /**
@@ -179,11 +181,11 @@ class AuthnetApiFactoryTest extends TestCase
     public function testGetSimServerTest() : void
     {
         $endpoint         = AuthnetApiFactory::USE_DEVELOPMENT_SERVER;
-        $reflectionMethod = new \ReflectionMethod(AuthnetApiFactory::class, 'getSimURL');
+        $reflectionMethod = new ReflectionMethod(AuthnetApiFactory::class, 'getSimURL');
         $reflectionMethod->setAccessible(true);
         $url              = $reflectionMethod->invoke($reflectionMethod, $endpoint);
 
-        $this->assertEquals($url, 'https://test.authorize.net/gateway/transact.dll');
+        self::assertEquals('https://test.authorize.net/gateway/transact.dll', $url);
     }
 
     /**
@@ -192,11 +194,11 @@ class AuthnetApiFactoryTest extends TestCase
     public function testGetSimServerProduction() : void
     {
         $endpoint         = AuthnetApiFactory::USE_PRODUCTION_SERVER;
-        $reflectionMethod = new \ReflectionMethod(AuthnetApiFactory::class, 'getSimURL');
+        $reflectionMethod = new ReflectionMethod(AuthnetApiFactory::class, 'getSimURL');
         $reflectionMethod->setAccessible(true);
         $url              = $reflectionMethod->invoke($reflectionMethod, $endpoint);
 
-        $this->assertEquals($url, 'https://secure2.authorize.net/gateway/transact.dll');
+        self::assertEquals('https://secure2.authorize.net/gateway/transact.dll', $url);
     }
 
     /**
@@ -256,12 +258,12 @@ class AuthnetApiFactoryTest extends TestCase
         $endpoint = AuthnetApiFactory::USE_PRODUCTION_SERVER;
         $authnet  = AuthnetApiFactory::getWebhooksHandler($this->login, $this->transactionKey, $endpoint);
 
-        $reflectionClass = new \ReflectionClass(AuthnetWebhooksRequest::class);
+        $reflectionClass = new ReflectionClass(AuthnetWebhooksRequest::class);
         $reflectionOfProcessor = $reflectionClass->getProperty('processor');
         $reflectionOfProcessor->setAccessible(true);
         $processor = $reflectionOfProcessor->getValue($authnet);
 
-        $this->assertInstanceOf(Curl::class, $processor);
+        self::assertInstanceOf(Curl::class, $processor);
     }
 
     /**
@@ -273,12 +275,12 @@ class AuthnetApiFactoryTest extends TestCase
         $endpoint = AuthnetApiFactory::USE_DEVELOPMENT_SERVER;
         $authnet  = AuthnetApiFactory::getWebhooksHandler($this->login, $this->transactionKey, $endpoint);
 
-        $reflectionClass = new \ReflectionClass(AuthnetWebhooksRequest::class);
+        $reflectionClass = new ReflectionClass(AuthnetWebhooksRequest::class);
         $reflectionOfProcessor = $reflectionClass->getProperty('processor');
         $reflectionOfProcessor->setAccessible(true);
         $processor = $reflectionOfProcessor->getValue($authnet);
 
-        $this->assertInstanceOf(Curl::class, $processor);
+        self::assertInstanceOf(Curl::class, $processor);
     }
 
     /**
@@ -287,11 +289,11 @@ class AuthnetApiFactoryTest extends TestCase
     public function testGetWebhooksUrlProductionServer() : void
     {
         $endpoint         = AuthnetApiFactory::USE_PRODUCTION_SERVER;
-        $reflectionMethod = new \ReflectionMethod(AuthnetApiFactory::class, 'getWebhooksURL');
+        $reflectionMethod = new ReflectionMethod(AuthnetApiFactory::class, 'getWebhooksURL');
         $reflectionMethod->setAccessible(true);
         $url              = $reflectionMethod->invoke(null, $endpoint);
 
-        $this->assertEquals($url, 'https://api.authorize.net/rest/v1/');
+        self::assertEquals('https://api.authorize.net/rest/v1/', $url);
     }
 
     /**
@@ -300,11 +302,11 @@ class AuthnetApiFactoryTest extends TestCase
     public function testGetWebhooksUrlDevelopmentServer() : void
     {
         $endpoint         = AuthnetApiFactory::USE_DEVELOPMENT_SERVER;
-        $reflectionMethod = new \ReflectionMethod(AuthnetApiFactory::class, 'getWebhooksURL');
+        $reflectionMethod = new ReflectionMethod(AuthnetApiFactory::class, 'getWebhooksURL');
         $reflectionMethod->setAccessible(true);
         $url              = $reflectionMethod->invoke(null, $endpoint);
 
-        $this->assertEquals($url, 'https://apitest.authorize.net/rest/v1/');
+        self::assertEquals('https://apitest.authorize.net/rest/v1/', $url);
     }
 
     /**
@@ -316,7 +318,7 @@ class AuthnetApiFactoryTest extends TestCase
         $this->expectException(AuthnetInvalidServerException::class);
 
         $endpoint         = 99;
-        $reflectionMethod = new \ReflectionMethod(AuthnetApiFactory::class, 'getWebhooksURL');
+        $reflectionMethod = new ReflectionMethod(AuthnetApiFactory::class, 'getWebhooksURL');
         $reflectionMethod->setAccessible(true);
         $reflectionMethod->invoke(null, $endpoint);
     }

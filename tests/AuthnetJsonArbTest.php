@@ -28,7 +28,6 @@ class AuthnetJsonArbTest extends TestCase
         $this->server         = AuthnetApiFactory::USE_DEVELOPMENT_SERVER;
 
         $this->http = $this->getMockBuilder(Curl::class)
-            ->setMethods(['post'])
             ->getMock();
         $this->http->error = false;
     }
@@ -88,11 +87,11 @@ class AuthnetJsonArbTest extends TestCase
         $request->setProcessHandler($this->http);
         $response = $request->createTransactionRequest($requestJson);
 
-        $this->assertEquals('Ok', $response->messages->resultCode);
-        $this->assertEquals('2341621', $response->subscriptionId);
-        $this->assertEquals('Sample', $response->refId);
-        $this->assertEquals('I00001', $response->messages->message[0]->code);
-        $this->assertEquals('Successful.', $response->messages->message[0]->text);
+        self::assertEquals('Ok', $response->messages->resultCode);
+        self::assertEquals('2341621', $response->subscriptionId);
+        self::assertEquals('Sample', $response->refId);
+        self::assertEquals('I00001', $response->messages->message[0]->code);
+        self::assertEquals('Successful.', $response->messages->message[0]->text);
     }
 
     /**
@@ -150,10 +149,10 @@ class AuthnetJsonArbTest extends TestCase
         $request->setProcessHandler($this->http);
         $response = $request->createTransactionRequest($requestJson);
 
-        $this->assertEquals('Error', $response->messages->resultCode);
-        $this->assertEquals('Sample', $response->refId);
-        $this->assertEquals('E00012', $response->messages->message[0]->code);
-        $this->assertEquals('You have submitted a duplicate of Subscription 2341621. A duplicate subscription will not be created.', $response->messages->message[0]->text);
+        self::assertEquals('Error', $response->messages->resultCode);
+        self::assertEquals('Sample', $response->refId);
+        self::assertEquals('E00012', $response->messages->message[0]->code);
+        self::assertEquals('You have submitted a duplicate of Subscription 2341621. A duplicate subscription will not be created.', $response->messages->message[0]->text);
     }
 
     /**
@@ -210,10 +209,10 @@ class AuthnetJsonArbTest extends TestCase
         $request->setProcessHandler($this->http);
         $response = $request->createTransactionRequest($requestJson);
 
-        $this->assertEquals('Error', $response->messages->resultCode);
-        $this->assertEquals('Sample', $response->refId);
-        $this->assertEquals('E00017', $response->messages->message[0]->code);
-        $this->assertEquals('Start Date must not occur before the submission date.', $response->messages->message[0]->text);
+        self::assertEquals('Error', $response->messages->resultCode);
+        self::assertEquals('Sample', $response->refId);
+        self::assertEquals('E00017', $response->messages->message[0]->code);
+        self::assertEquals('Start Date must not occur before the submission date.', $response->messages->message[0]->text);
     }
 
     /**
@@ -252,12 +251,12 @@ class AuthnetJsonArbTest extends TestCase
         $request->setProcessHandler($this->http);
         $response = $request->ARBGetSubscriptionStatusRequest($requestJson);
 
-        $this->assertEquals('Ok', $response->messages->resultCode);
-        $this->assertEquals('Sample', $response->refId);
-        $this->assertEquals('I00001', $response->messages->message[0]->code);
-        $this->assertEquals('Successful.', $response->messages->message[0]->text);
-        $this->assertEquals('active', $response->status);
-        $this->assertTrue($response->statusSpecified);
+        self::assertEquals('Ok', $response->messages->resultCode);
+        self::assertEquals('Sample', $response->refId);
+        self::assertEquals('I00001', $response->messages->message[0]->code);
+        self::assertEquals('Successful.', $response->messages->message[0]->text);
+        self::assertEquals('active', $response->status);
+        self::assertTrue($response->statusSpecified);
     }
 
     /**
@@ -296,12 +295,12 @@ class AuthnetJsonArbTest extends TestCase
         $request->setProcessHandler($this->http);
         $response = $request->ARBGetSubscriptionStatusRequest($requestJson);
 
-        $this->assertEquals('Ok', $response->messages->resultCode);
-        $this->assertEquals('Sample', $response->refId);
-        $this->assertEquals('I00001', $response->messages->message[0]->code);
-        $this->assertEquals('Successful.', $response->messages->message[0]->text);
-        $this->assertEquals('canceled', $response->status);
-        $this->assertTrue($response->statusSpecified);
+        self::assertEquals('Ok', $response->messages->resultCode);
+        self::assertEquals('Sample', $response->refId);
+        self::assertEquals('I00001', $response->messages->message[0]->code);
+        self::assertEquals('Successful.', $response->messages->message[0]->text);
+        self::assertEquals('canceled', $response->status);
+        self::assertTrue($response->statusSpecified);
     }
 
     /**
@@ -335,10 +334,10 @@ class AuthnetJsonArbTest extends TestCase
         $request->setProcessHandler($this->http);
         $response = $request->ARBGetSubscriptionStatusRequest($requestJson);
 
-        $this->assertEquals('Ok', $response->messages->resultCode);
-        $this->assertEquals('Sample', $response->refId);
-        $this->assertEquals('I00001', $response->messages->message[0]->code);
-        $this->assertEquals('Successful.', $response->messages->message[0]->text);
+        self::assertEquals('Ok', $response->messages->resultCode);
+        self::assertEquals('Sample', $response->refId);
+        self::assertEquals('I00001', $response->messages->message[0]->code);
+        self::assertEquals('Successful.', $response->messages->message[0]->text);
     }
 
     /**
@@ -372,10 +371,10 @@ class AuthnetJsonArbTest extends TestCase
         $request->setProcessHandler($this->http);
         $response = $request->ARBGetSubscriptionStatusRequest($requestJson);
 
-        $this->assertEquals('Ok', $response->messages->resultCode);
-        $this->assertEquals('Sample', $response->refId);
-        $this->assertEquals('I00002', $response->messages->message[0]->code);
-        $this->assertEquals('The subscription has already been canceled.', $response->messages->message[0]->text);
+        self::assertEquals('Ok', $response->messages->resultCode);
+        self::assertEquals('Sample', $response->refId);
+        self::assertEquals('I00002', $response->messages->message[0]->code);
+        self::assertEquals('The subscription has already been canceled.', $response->messages->message[0]->text);
     }
 
     /**
@@ -417,10 +416,10 @@ class AuthnetJsonArbTest extends TestCase
         $request->setProcessHandler($this->http);
         $response = $request->ARBGetSubscriptionStatusRequest($requestJson);
 
-        $this->assertEquals('Ok', $response->messages->resultCode);
-        $this->assertEquals('Sample', $response->refId);
-        $this->assertEquals('I00001', $response->messages->message[0]->code);
-        $this->assertEquals('Successful.', $response->messages->message[0]->text);
+        self::assertEquals('Ok', $response->messages->resultCode);
+        self::assertEquals('Sample', $response->refId);
+        self::assertEquals('I00001', $response->messages->message[0]->code);
+        self::assertEquals('Successful.', $response->messages->message[0]->text);
     }
 
     /**
@@ -462,9 +461,9 @@ class AuthnetJsonArbTest extends TestCase
         $request->setProcessHandler($this->http);
         $response = $request->ARBGetSubscriptionStatusRequest($requestJson);
 
-        $this->assertEquals('Error', $response->messages->resultCode);
-        $this->assertEquals('Sample', $response->refId);
-        $this->assertEquals('E00037', $response->messages->message[0]->code);
-        $this->assertEquals('Subscriptions that are canceled cannot be updated.', $response->messages->message[0]->text);
+        self::assertEquals('Error', $response->messages->resultCode);
+        self::assertEquals('Sample', $response->refId);
+        self::assertEquals('E00037', $response->messages->message[0]->code);
+        self::assertEquals('Subscriptions that are canceled cannot be updated.', $response->messages->message[0]->text);
     }
 }

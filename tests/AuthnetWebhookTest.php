@@ -33,7 +33,7 @@ class AuthnetWebhookTest extends TestCase
         $signature = $reflectionOfWebhook->getProperty('signature');
         $signature->setAccessible(true);
 
-        $this->assertEquals($signatureKey, $signature->getValue($webhook));
+        self::assertEquals($signatureKey, $signature->getValue($webhook));
     }
 
     /**
@@ -74,8 +74,8 @@ class AuthnetWebhookTest extends TestCase
         echo $webhook;
         $string = ob_get_clean();
 
-        $this->assertStringContainsString('{"notificationId":"182cbbff-cab2-4080-931d-80e5d818f23a",', $string);
-        $this->assertStringContainsString('ae3b39b1-c58e-4a78-859b-1b4e6c62c5b7', $string);
+        self::assertStringContainsString('{"notificationId":"182cbbff-cab2-4080-931d-80e5d818f23a",', $string);
+        self::assertStringContainsString('ae3b39b1-c58e-4a78-859b-1b4e6c62c5b7', $string);
     }
 
     /**
@@ -92,7 +92,7 @@ class AuthnetWebhookTest extends TestCase
 
         $webhook = new AuthnetWebhook($signatureKey, $webhookJson, $headers);
 
-        $this->assertEquals('182cbbff-cab2-4080-931d-80e5d818f23a', $webhook->notificationId);
+        self::assertEquals('182cbbff-cab2-4080-931d-80e5d818f23a', $webhook->notificationId);
     }
 
     /**
@@ -108,7 +108,7 @@ class AuthnetWebhookTest extends TestCase
 
         $isValid = $webhook->isValid();
 
-        $this->assertTrue($isValid);
+        self::assertTrue($isValid);
     }
 
     /**
@@ -124,7 +124,7 @@ class AuthnetWebhookTest extends TestCase
 
         $isValid = $webhook->isValid();
 
-        $this->assertTrue($isValid);
+        self::assertTrue($isValid);
     }
 
     /**
@@ -140,7 +140,7 @@ class AuthnetWebhookTest extends TestCase
 
         $isValid = $webhook->isValid();
 
-        $this->assertFalse($isValid);
+        self::assertFalse($isValid);
     }
 
     /**
@@ -157,7 +157,7 @@ class AuthnetWebhookTest extends TestCase
 
         $webhook = new AuthnetWebhook($signatureKey, $webhookJson, $headers);
 
-        $this->assertEquals('ae3b39b1-c58e-4a78-859b-1b4e6c62c5b7', $webhook->getRequestId());
+        self::assertEquals('ae3b39b1-c58e-4a78-859b-1b4e6c62c5b7', $webhook->getRequestId());
     }
 
     /**
@@ -176,6 +176,6 @@ class AuthnetWebhookTest extends TestCase
         $headers = $reflectionOfWebhook->getProperty('headers');
         $headers->setAccessible(true);
 
-        $this->assertNotEmpty($headers->getValue($webhook));
+        self::assertNotEmpty($headers->getValue($webhook));
     }
 }

@@ -32,8 +32,8 @@ class AuthnetJsonRequestTest extends TestCase
         $key = $reflectionOfRequest->getProperty('transactionKey');
         $key->setAccessible(true);
 
-        $this->assertEquals($login->getValue($request), $apiLogin);
-        $this->assertEquals($key->getValue($request), $apiTransKey);
+        self::assertEquals($login->getValue($request), $apiLogin);
+        self::assertEquals($key->getValue($request), $apiTransKey);
     }
 
 
@@ -65,7 +65,6 @@ class AuthnetJsonRequestTest extends TestCase
         );
 
         $this->http = $this->getMockBuilder(Curl::class)
-            ->setMethods(['post'])
             ->getMock();
         $this->http->error = false;
 
@@ -87,7 +86,7 @@ class AuthnetJsonRequestTest extends TestCase
         $processor = $reflectionOfRequest->getProperty('processor');
         $processor->setAccessible(true);
 
-        $this->assertInstanceOf(Curl::class, $processor->getValue($request));
+        self::assertInstanceOf(Curl::class, $processor->getValue($request));
     }
 
 
@@ -197,11 +196,11 @@ class AuthnetJsonRequestTest extends TestCase
                     )
                 ),
                 'userFields' => array(
-                    'userField' => array(
+                    0 => array(
                         'name' => 'MerchantDefinedFieldName1',
                         'value' => 'MerchantDefinedFieldValue1',
                     ),
-                    'userField' => array(
+                    1 => array(
                         'name' => 'favorite_color',
                         'value' => 'blue',
                     ),
@@ -250,7 +249,6 @@ class AuthnetJsonRequestTest extends TestCase
         $apiTransKey = 'apiTransKey';
 
         $http = $this->getMockBuilder(Curl::class)
-            ->setMethods(['post'])
             ->getMock();
         $http->error = false;
         $http->response = $responseJson;
@@ -263,8 +261,8 @@ class AuthnetJsonRequestTest extends TestCase
         echo $request;
         $string = ob_get_clean();
 
-        $this->assertStringContainsString($apiLogin, $string);
-        $this->assertStringContainsString($apiTransKey, $string);
+        self::assertStringContainsString($apiLogin, $string);
+        self::assertStringContainsString($apiTransKey, $string);
     }
 
     /**
@@ -291,7 +289,6 @@ class AuthnetJsonRequestTest extends TestCase
         $apiTransKey = 'apiTransKey';
 
         $http = $this->getMockBuilder(Curl::class)
-            ->setMethods(['post'])
             ->getMock();
         $http->error = false;
         $http->response = '{}';
@@ -301,7 +298,7 @@ class AuthnetJsonRequestTest extends TestCase
         $request->deleteCustomerProfileRequest($requestJson);
 
         $response = '{"deleteCustomerProfileRequest":{"merchantAuthentication":{"name":"apiLogin","transactionKey":"apiTransKey"},"refId":"94564789","transactionRequest":{"transactionType":"authCaptureTransaction","amount":5,"payment":{"creditCard":{"cardNumber":"4111111111111111","expirationDate":"122016","cardCode":"999"}}}}}';
-        $this->assertSame($response, $request->getRawRequest());
+        self::assertSame($response, $request->getRawRequest());
     }
 
     /**
@@ -316,7 +313,6 @@ class AuthnetJsonRequestTest extends TestCase
         $apiTransKey = 'apiTransKey';
 
         $http = $this->getMockBuilder(Curl::class)
-            ->setMethods(['post'])
             ->getMock();
         $http->error         = true;
         $http->error_code    = 10;
@@ -336,7 +332,6 @@ class AuthnetJsonRequestTest extends TestCase
         $apiTransKey = 'apiTransKey';
 
         $http = $this->getMockBuilder(Curl::class)
-            ->setMethods(['post'])
             ->getMock();
         $http->error         = true;
         $http->error_code    = 10;
@@ -355,7 +350,7 @@ class AuthnetJsonRequestTest extends TestCase
 
         $reflectionOfMaxRetries = new \ReflectionClassConstant(AuthnetJsonRequest::class, 'MAX_RETRIES');
 
-        $this->assertEquals($reflectionOfMaxRetries->getValue(), $retries->getValue($request));
+        self::assertEquals($reflectionOfMaxRetries->getValue(), $retries->getValue($request));
     }
 
     /**
@@ -367,7 +362,6 @@ class AuthnetJsonRequestTest extends TestCase
         $apiTransKey = 'apiTransKey';
 
         $http = $this->getMockBuilder(Curl::class)
-            ->setMethods(['post'])
             ->getMock();
         $http->error         = false;
 
@@ -381,6 +375,6 @@ class AuthnetJsonRequestTest extends TestCase
         $reflectionOfRequest = new \ReflectionObject($request);
         $retries = $reflectionOfRequest->getProperty('retries');
         $retries->setAccessible(true);
-        $this->assertEquals(0, $retries->getValue($request));
+        self::assertEquals(0, $retries->getValue($request));
     }
 }

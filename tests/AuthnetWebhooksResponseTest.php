@@ -39,9 +39,9 @@ class AuthnetWebhooksResponseTest extends TestCase
         }';
         try {
             new AuthnetWebhooksResponse($responseJson);
-            $this->assertTrue(true);
+            self::assertTrue(true);
         } catch (\Exception $e) {
-            $this->assertTrue(false);
+            self::assertTrue(false);
         }
     }
 
@@ -64,9 +64,9 @@ class AuthnetWebhooksResponseTest extends TestCase
         echo $response;
         $string = ob_get_clean();
 
-        $this->assertStringContainsString('example.com', $string);
-        $this->assertStringContainsString('net.authorize.payment.authorization.created', $string);
-        $this->assertStringContainsString('active', $string);
+        self::assertStringContainsString('example.com', $string);
+        self::assertStringContainsString('net.authorize.payment.authorization.created', $string);
+        self::assertStringContainsString('active', $string);
     }
 
     /**
@@ -84,10 +84,10 @@ class AuthnetWebhooksResponseTest extends TestCase
 
         $eventTypes = (new AuthnetWebhooksResponse($responseJson))->getEventTypes();
 
-        $this->assertCount(3, $eventTypes);
-        $this->assertEquals('net.authorize.payment.authcapture.created', $eventTypes[0]);
-        $this->assertEquals('net.authorize.customer.subscription.cancelled', $eventTypes[1]);
-        $this->assertEquals('net.authorize.payment.authorization.created', $eventTypes[2]);
+        self::assertCount(3, $eventTypes);
+        self::assertEquals('net.authorize.payment.authcapture.created', $eventTypes[0]);
+        self::assertEquals('net.authorize.customer.subscription.cancelled', $eventTypes[1]);
+        self::assertEquals('net.authorize.payment.authorization.created', $eventTypes[2]);
     }
 
     /**
@@ -114,11 +114,11 @@ class AuthnetWebhooksResponseTest extends TestCase
 
         $eventTypes = (new AuthnetWebhooksResponse($responseJson))->getEventTypes();
 
-        $this->assertCount(4, $eventTypes);
-        $this->assertEquals('net.authorize.payment.authcapture.created', $eventTypes[0]);
-        $this->assertEquals('net.authorize.customer.created', $eventTypes[1]);
-        $this->assertEquals('net.authorize.customer.paymentProfile.created', $eventTypes[2]);
-        $this->assertEquals('net.authorize.customer.subscription.expiring', $eventTypes[3]);
+        self::assertCount(4, $eventTypes);
+        self::assertEquals('net.authorize.payment.authcapture.created', $eventTypes[0]);
+        self::assertEquals('net.authorize.customer.created', $eventTypes[1]);
+        self::assertEquals('net.authorize.customer.paymentProfile.created', $eventTypes[2]);
+        self::assertEquals('net.authorize.customer.subscription.expiring', $eventTypes[3]);
     }
 
     /**
@@ -145,7 +145,7 @@ class AuthnetWebhooksResponseTest extends TestCase
 
         $id = (new AuthnetWebhooksResponse($responseJson))->getWebhooksId();
 
-        $this->assertEquals('72a55c78-66e6-4b1e-a4d6-3f925c00561f', $id);
+        self::assertEquals('72a55c78-66e6-4b1e-a4d6-3f925c00561f', $id);
     }
 
     /**
@@ -172,7 +172,7 @@ class AuthnetWebhooksResponseTest extends TestCase
 
         $status = (new AuthnetWebhooksResponse($responseJson))->getStatus();
 
-        $this->assertEquals('active', $status);
+        self::assertEquals('active', $status);
     }
 
     /**
@@ -199,7 +199,7 @@ class AuthnetWebhooksResponseTest extends TestCase
 
         $url = (new AuthnetWebhooksResponse($responseJson))->getUrl();
 
-        $this->assertEquals('http://example.com', $url);
+        self::assertEquals('http://example.com', $url);
     }
 
     /**
@@ -256,12 +256,12 @@ class AuthnetWebhooksResponseTest extends TestCase
 
         $webhooks = (new AuthnetWebhooksResponse($responseJson))->getWebhooks();
 
-        $this->assertCount(3, $webhooks);
-        $this->assertcount(4, $webhooks[0]->getEventTypes());
-        $this->assertEquals('net.authorize.payment.authcapture.created', $webhooks[0]->getEventTypes()[0]);
-        $this->assertEquals('72a55c78-66e6-4b1e-a4d6-3f925c00561f', $webhooks[0]->getWebhooksId());
-        $this->assertEquals('active', $webhooks[0]->getStatus());
-        $this->assertEquals('http://example.com', $webhooks[0]->getUrl());
+        self::assertCount(3, $webhooks);
+        self::assertcount(4, $webhooks[0]->getEventTypes());
+        self::assertEquals('net.authorize.payment.authcapture.created', $webhooks[0]->getEventTypes()[0]);
+        self::assertEquals('72a55c78-66e6-4b1e-a4d6-3f925c00561f', $webhooks[0]->getWebhooksId());
+        self::assertEquals('active', $webhooks[0]->getStatus());
+        self::assertEquals('http://example.com', $webhooks[0]->getUrl());
     }
 
     /**
@@ -296,10 +296,10 @@ class AuthnetWebhooksResponseTest extends TestCase
 
         $history = (new AuthnetWebhooksResponse($responseJson))->getNotificationHistory();
 
-        $this->assertCount(1, $history);
-        $this->assertEquals('e35d5ede-27c5-46cc-aabb-131f10154ed3', $history[0]->getNotificationId());
-        $this->assertEquals('Delivered', $history[0]->getDeliveryStatus());
-        $this->assertEquals('net.authorize.payment.authcapture.created', $history[0]->getEventType());
-        $this->assertEquals('2017-02-09T19:18:42.167', $history[0]->getEventDate());
+        self::assertCount(1, $history);
+        self::assertEquals('e35d5ede-27c5-46cc-aabb-131f10154ed3', $history[0]->getNotificationId());
+        self::assertEquals('Delivered', $history[0]->getDeliveryStatus());
+        self::assertEquals('net.authorize.payment.authcapture.created', $history[0]->getEventType());
+        self::assertEquals('2017-02-09T19:18:42.167', $history[0]->getEventDate());
     }
 }
