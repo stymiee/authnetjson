@@ -11,6 +11,7 @@
 
 namespace Authnetjson;
 
+use Curl\Curl;
 use PHPUnit\Framework\TestCase;
 
 class AuthnetJsonResponseTest extends TestCase
@@ -19,7 +20,7 @@ class AuthnetJsonResponseTest extends TestCase
      * @covers            \Authnetjson\AuthnetJsonRequest::__set()
      * @covers            \Authnetjson\AuthnetCannotSetParamsException::__construct()
      */
-    public function testExceptionIsRaisedForCannotSetParamsException() : void
+    public function testExceptionIsRaisedForCannotSetParamsException(): void
     {
         $this->expectException(AuthnetCannotSetParamsException::class);
 
@@ -31,7 +32,7 @@ class AuthnetJsonResponseTest extends TestCase
      * @covers            \Authnetjson\AuthnetJsonResponse::__construct()
      * @covers            \Authnetjson\AuthnetInvalidJsonException::__construct()
      */
-    public function testExceptionIsRaisedForInvalidJsonException() : void
+    public function testExceptionIsRaisedForInvalidJsonException(): void
     {
         $this->expectException(AuthnetInvalidJsonException::class);
 
@@ -43,7 +44,7 @@ class AuthnetJsonResponseTest extends TestCase
      * @covers            \Authnetjson\AuthnetJsonResponse::isSuccessful()
      * @covers            \Authnetjson\AuthnetJsonResponse::isError()
      */
-    public function testSuccessfulApiCall() : void
+    public function testSuccessfulApiCall(): void
     {
         $responseJson = '{
            "messages":{
@@ -70,7 +71,7 @@ class AuthnetJsonResponseTest extends TestCase
      * @covers            \Authnetjson\AuthnetJsonResponse::isSuccessful()
      * @covers            \Authnetjson\AuthnetJsonResponse::isError()
      */
-    public function testFailedApiCall() : void
+    public function testFailedApiCall(): void
     {
         $responseJson = '{
            "messages":{
@@ -97,7 +98,7 @@ class AuthnetJsonResponseTest extends TestCase
      * @covers            \Authnetjson\AuthnetJsonResponse::getTransactionResponseField()
      * @covers            \Authnetjson\TransactionResponse::getTransactionResponseField()
      */
-    public function testTransactionResponse() : void
+    public function testTransactionResponse(): void
     {
         $responseJson = '{
            "directResponse":"1,1,1,This transaction has been approved.,902R0T,Y,2230582306,INV000001,description of transaction,10.95,CC,auth_capture,12345,John,Smith,,123 Main Street,Townsville,NJ,12345,,800-555-1234,,user@example.com,John,Smith,,123 Main Street,Townsville,NJ,12345,,1.00,,2.00,FALSE,PONUM000001,D3B20D6194B0E86C03A18987300E781C,P,2,,,,,,,,,,,XXXX1111,Visa,,,,,,,,,,,,,,,,,29366174",
@@ -120,7 +121,7 @@ class AuthnetJsonResponseTest extends TestCase
     /**
      * @covers            \Authnetjson\AuthnetJsonResponse::getTransactionResponseField()
      */
-    public function testTransactionResponseException() : void
+    public function testTransactionResponseException(): void
     {
         $this->expectException(AuthnetTransactionResponseCallException::class);
 
@@ -132,7 +133,7 @@ class AuthnetJsonResponseTest extends TestCase
     /**
      * @covers            \Authnetjson\AuthnetJsonResponse::isApproved()
      */
-    public function testIsApproved() : void
+    public function testIsApproved(): void
     {
         $responseJson = '{
            "customerPaymentProfileId":"28821903",
@@ -158,7 +159,7 @@ class AuthnetJsonResponseTest extends TestCase
     /**
      * @covers            \Authnetjson\AuthnetJsonResponse::isDeclined()
      */
-    public function testIsDeclined() : void
+    public function testIsDeclined(): void
     {
         $responseJson = '{
            "customerPaymentProfileId":"28821903",
@@ -183,7 +184,7 @@ class AuthnetJsonResponseTest extends TestCase
     /**
      * @covers            \Authnetjson\AuthnetJsonResponse::isPrePaidCard()
      */
-    public function testIsPrePaidCard() : void
+    public function testIsPrePaidCard(): void
     {
         $responseJson = '{
            "transactionResponse":{
@@ -233,7 +234,7 @@ class AuthnetJsonResponseTest extends TestCase
     /**
      * @covers            \Authnetjson\AuthnetJsonResponse::__toString()
      */
-    public function testToString() : void
+    public function testToString(): void
     {
         $responseJson = '{
            "customerPaymentProfileId":"28821903",
@@ -264,7 +265,7 @@ class AuthnetJsonResponseTest extends TestCase
     /**
      * @covers            \Authnetjson\AuthnetJsonResponse::getRawResponse()
      */
-    public function testGetRawResponse() : void
+    public function testGetRawResponse(): void
     {
         $responseJson = '{
            "customerPaymentProfileId":"28821903",
@@ -291,7 +292,7 @@ class AuthnetJsonResponseTest extends TestCase
     /**
      * @covers            \Authnetjson\AuthnetJsonResponse::__get()
      */
-    public function testGet() : void
+    public function testGet(): void
     {
         $responseJson = '{
            "customerPaymentProfileId":"28821903",
@@ -315,7 +316,7 @@ class AuthnetJsonResponseTest extends TestCase
     /**
      * @covers            \Authnetjson\AuthnetTransactionResponseCallException::__construct()
      */
-    public function testExceptionIsRaisedForTransactionResponseCall() : void
+    public function testExceptionIsRaisedForTransactionResponseCall(): void
     {
         $this->expectException(AuthnetTransactionResponseCallException::class);
 
@@ -339,7 +340,7 @@ class AuthnetJsonResponseTest extends TestCase
     /**
      * @covers            \Authnetjson\AuthnetJsonResponse::checkTransactionStatus()
      */
-    public function testCheckTransactionStatusCim() : void
+    public function testCheckTransactionStatusCim(): void
     {
         $responseJson = '{
            "customerPaymentProfileId":"28821903",
@@ -366,7 +367,7 @@ class AuthnetJsonResponseTest extends TestCase
     /**
      * @covers            \Authnetjson\AuthnetJsonResponse::checkTransactionStatus()
      */
-    public function testCheckTransactionStatusAim() : void
+    public function testCheckTransactionStatusAim(): void
     {
         $responseJson = '{
            "transactionResponse":{
@@ -418,7 +419,7 @@ class AuthnetJsonResponseTest extends TestCase
      * @covers            \Authnetjson\AuthnetJsonResponse::getErrorText()
      * @covers            \Authnetjson\AuthnetJsonResponse::getErrorCode()
      */
-    public function testGetErrorMethods() : void
+    public function testGetErrorMethods(): void
     {
         $responseJson = '{
            "messages":{
@@ -444,7 +445,7 @@ class AuthnetJsonResponseTest extends TestCase
      * @covers            \Authnetjson\AuthnetJsonResponse::getErrorCode()
      * @covers            \Authnetjson\AuthnetJsonResponse::getError()
      */
-    public function testGetErrorTextAim() : void
+    public function testGetErrorTextAim(): void
     {
         $responseJson = '{
            "transactionResponse":{
@@ -495,7 +496,7 @@ class AuthnetJsonResponseTest extends TestCase
      * @covers \Authnetjson\AuthnetJsonResponse::getErrorMessage()
      * @covers \Authnetjson\AuthnetJsonResponse::getError()
      */
-    public function testGetErrorMessage() : void
+    public function testGetErrorMessage(): void
     {
         $responseJson = '{
            "messages":{
@@ -512,5 +513,77 @@ class AuthnetJsonResponseTest extends TestCase
         $response = new AuthnetJsonResponse($responseJson);
 
         self::assertEquals($response->getErrorText(), $response->getErrorMessage());
+    }
+
+    public function testGetTransactionResponses(): void
+    {
+        $http = $this->getMockBuilder(Curl::class)
+            ->getMock();
+        $http->error = false;
+
+        $requestJson = array(
+            'profile' => array(
+                'merchantCustomerId' => '12345',
+                'email' => 'user@example.com',
+                'paymentProfiles' => array(
+                    'billTo' => array(
+                        'firstName' => 'John',
+                        'lastName' => 'Smith',
+                        'address' => '123 Main Street',
+                        'city' => 'Townsville',
+                        'state' => 'NJ',
+                        'zip' => '12345',
+                        'phoneNumber' => '800-555-1234'
+                    ),
+                    'payment' => array(
+                        'creditCard' => array(
+                            'cardNumber' => '4111111111111111',
+                            'expirationDate' => '2016-08',
+                        ),
+                    ),
+                ),
+                'shipToList' => array(
+                    'firstName' => 'John',
+                    'lastName' => 'Smith',
+                    'address' => '123 Main Street',
+                    'city' => 'Townsville',
+                    'state' => 'NJ',
+                    'zip' => '12345',
+                    'phoneNumber' => '800-555-1234'
+                ),
+            ),
+            'validationMode' => 'liveMode'
+        );
+        $transactionInfoArray = '"1,1,1,This transaction has been approved.,1VQHEI,Y,2228580111,none,Test transaction for ValidateCustomerPaymentProfile.,0.00,CC,auth_only,12345,John,Smith,,123 Main Street,Townsville,NJ,12345,,800-555-1234,,user@example.com,,,,,,,,,0.00,0.00,0.00,FALSE,none,317FCDBBCBABB2C7442766267D4C099C,,2,,,,,,,,,,,XXXX1111,Visa,,,,,,,,,,,,,,,,"';
+        $responseJson = '{
+           "customerProfileId":"31390172",
+           "customerPaymentProfileIdList":[
+              "28393490"
+           ],
+           "customerShippingAddressIdList":[
+              "29366174"
+           ],
+           "validationDirectResponseList":[
+               '. $transactionInfoArray . '
+           ],
+           "messages":{
+              "resultCode":"Ok",
+              "message":[
+                 {
+                    "code":"I00001",
+                    "text":"Successful."
+                 }
+              ]
+           }
+        }';
+
+        $http->response = $responseJson;
+        $request = AuthnetApiFactory::getJsonApiHandler('test', 'test', AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
+        $request->setProcessHandler($http);
+        $response = $request->createCustomerProfileRequest($requestJson);
+
+        $transactionResponses = $response->getTransactionResponses();
+        self::assertIsArray($transactionResponses);
+        self::assertInstanceOf(TransactionResponse::class, $transactionResponses[0]);
     }
 }
