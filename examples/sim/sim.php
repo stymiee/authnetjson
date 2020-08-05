@@ -15,7 +15,7 @@ Use the SIM tools to create a SIM transaction form
 
 *************************************************************************************************/
 
-namespace JohnConde\Authnet;
+namespace Authnetjson;
 
 use Exception;
 

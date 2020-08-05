@@ -26,7 +26,7 @@ HTTP response code 200 will be returned for a successful deletion
 
  *************************************************************************************************/
 
-namespace JohnConde\Authnet;
+namespace Authnetjson;
 
 use Exception;
 
