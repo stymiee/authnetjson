@@ -21,7 +21,7 @@ class AuthnetJsonAimTest extends TestCase
     private $server;
     private $http;
 
-    protected function setUp() : void
+    protected function setUp(): void
     {
         $this->login          = 'test';
         $this->transactionKey = 'test';
@@ -38,7 +38,7 @@ class AuthnetJsonAimTest extends TestCase
      * @uses              \Authnetjson\AuthnetApiFactory::getJsonApiHandler
      * @uses              \Authnetjson\AuthnetApiFactory::getWebServiceURL
      */
-    public function testCreateTransactionRequestAuthCaptureSuccess() : void
+    public function testCreateTransactionRequestAuthCaptureSuccess(): void
     {
         $requestJson = array(
             'refId' => '94564789',
@@ -223,7 +223,7 @@ class AuthnetJsonAimTest extends TestCase
      * @uses              \Authnetjson\AuthnetApiFactory::getJsonApiHandler
      * @uses              \Authnetjson\AuthnetApiFactory::getWebServiceURL
      */
-    public function testCreateTransactionRequestAuthOnlySuccess() : void
+    public function testCreateTransactionRequestAuthOnlySuccess(): void
     {
         $requestJson = array(
             'refId' => '65376587',
@@ -397,7 +397,7 @@ class AuthnetJsonAimTest extends TestCase
      * @uses              \Authnetjson\AuthnetApiFactory::getJsonApiHandler
      * @uses              \Authnetjson\AuthnetApiFactory::getWebServiceURL
      */
-    public function testCreateTransactionRequestAuthOnlyError() : void
+    public function testCreateTransactionRequestAuthOnlyError(): void
     {
         $requestJson = array(
             'refId' => '14290435',
@@ -584,7 +584,7 @@ class AuthnetJsonAimTest extends TestCase
      * @uses              \Authnetjson\AuthnetApiFactory::getJsonApiHandler
      * @uses              \Authnetjson\AuthnetApiFactory::getWebServiceURL
      */
-    public function testCreateTransactionRequestCaptureOnly() : void
+    public function testCreateTransactionRequestCaptureOnly(): void
     {
         $requestJson = array(
             'refId' => '99120820',
@@ -649,7 +649,7 @@ class AuthnetJsonAimTest extends TestCase
      * @uses              \Authnetjson\AuthnetApiFactory::getJsonApiHandler
      * @uses              \Authnetjson\AuthnetApiFactory::getWebServiceURL
      */
-    public function testCreateTransactionRequestPriorAuthCapture() : void
+    public function testCreateTransactionRequestPriorAuthCapture(): void
     {
         $requestJson = array(
             'refId' => '34913421',
@@ -721,7 +721,7 @@ class AuthnetJsonAimTest extends TestCase
      * @uses              \Authnetjson\AuthnetApiFactory::getJsonApiHandler
      * @uses              \Authnetjson\AuthnetApiFactory::getWebServiceURL
      */
-    public function testCreateTransactionRequestPriorAuthCaptureError() : void
+    public function testCreateTransactionRequestPriorAuthCaptureError(): void
     {
         $requestJson = array(
             'refId' => '14254181',
@@ -794,7 +794,7 @@ class AuthnetJsonAimTest extends TestCase
      * @uses              \Authnetjson\AuthnetApiFactory::getJsonApiHandler
      * @uses              \Authnetjson\AuthnetApiFactory::getWebServiceURL
      */
-    public function testCreateTransactionRequestRefund() : void
+    public function testCreateTransactionRequestRefund(): void
     {
         $requestJson = array(
             'refId' => '95063294',
@@ -875,7 +875,7 @@ class AuthnetJsonAimTest extends TestCase
      * @uses              \Authnetjson\AuthnetApiFactory::getJsonApiHandler
      * @uses              \Authnetjson\AuthnetApiFactory::getWebServiceURL
      */
-    public function testCreateTransactionRequestVoid() : void
+    public function testCreateTransactionRequestVoid(): void
     {
         $requestJson = array(
             'refId' => '35481415',
@@ -949,7 +949,7 @@ class AuthnetJsonAimTest extends TestCase
      * @uses              \Authnetjson\AuthnetApiFactory::getJsonApiHandler
      * @uses              \Authnetjson\AuthnetApiFactory::getWebServiceURL
      */
-    public function testCreateTransactionRequestVoidError() : void
+    public function testCreateTransactionRequestVoidError(): void
     {
         $requestJson = array(
             'refId' => '23039947',
@@ -1023,7 +1023,7 @@ class AuthnetJsonAimTest extends TestCase
      * @uses              \Authnetjson\AuthnetApiFactory::getJsonApiHandler
      * @uses              \Authnetjson\AuthnetApiFactory::getWebServiceURL
      */
-    public function testSendCustomerTransactionReceiptRequest() : void
+    public function testSendCustomerTransactionReceiptRequest(): void
     {
         $requestJson = array(
             'refId' => "2241729",
@@ -1074,7 +1074,7 @@ class AuthnetJsonAimTest extends TestCase
      * @uses              \Authnetjson\AuthnetApiFactory::getJsonApiHandler
      * @uses              \Authnetjson\AuthnetApiFactory::getWebServiceURL
      */
-    public function testCreateTransactionRequestVisaCheckout() : void
+    public function testCreateTransactionRequestVisaCheckout(): void
     {
         $requestJson = array(
             "refId" => random_int(1000000, 100000000),
@@ -1152,7 +1152,7 @@ class AuthnetJsonAimTest extends TestCase
      * @uses              \Authnetjson\AuthnetApiFactory::getJsonApiHandler
      * @uses              \Authnetjson\AuthnetApiFactory::getWebServiceURL
      */
-    public function testDecryptPaymentDataRequest() : void
+    public function testDecryptPaymentDataRequest(): void
     {
         $requestJson = array(
             "opaqueData" => array(
@@ -1249,7 +1249,7 @@ class AuthnetJsonAimTest extends TestCase
      * @uses              \Authnetjson\AuthnetApiFactory::getJsonApiHandler
      * @uses              \Authnetjson\AuthnetApiFactory::getWebServiceURL
      */
-    public function testDecryptPaymentDataRequestError() : void
+    public function testDecryptPaymentDataRequestError(): void
     {
         $requestJson = array(
             "opaqueData" => array(

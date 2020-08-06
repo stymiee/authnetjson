@@ -109,7 +109,7 @@ class AuthnetWebhook
      *
      * @return bool
      */
-    public function isValid() : bool
+    public function isValid(): bool
     {
         $hashedBody = strtoupper(hash_hmac('sha512', $this->webhookJson, $this->signature));
         return (isset($this->headers['X-ANET-SIGNATURE']) &&
@@ -121,7 +121,7 @@ class AuthnetWebhook
      *
      * @return string|null
      */
-    public function getRequestId() : ?string
+    public function getRequestId(): ?string
     {
         return $this->headers['X-REQUEST-ID'] ?? null;
     }
@@ -131,7 +131,7 @@ class AuthnetWebhook
      *
      * @return array
      */
-    protected function getAllHeaders() : array
+    protected function getAllHeaders(): array
     {
         if (function_exists('apache_request_headers')) {
             $headers = apache_request_headers();

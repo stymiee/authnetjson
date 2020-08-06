@@ -18,7 +18,7 @@ class AuthnetWebhookTest extends TestCase
     /**
      * @covers            \Authnetjson\AuthnetWebhook::__construct()
      */
-    public function testConstructor() : void
+    public function testConstructor(): void
     {
         $signatureKey = '52CB4A002C634B84E397DC8A218E1A160BA7CAB7CBE4C05B35E9CBB05E14FE4A2385812E980CCF97D177F17863CE214D1BE6CE8E1E894487AACF3609C1A5FE17';
         $webhookJson = '{"notificationId":"182cbbff-cab2-4080-931d-80e5d818f23a","eventType":"net.authorize.payment.authcapture.created","eventDate":"2017-08-18T20:40:52.7722007Z","webhookId":"849eb87e-078a-4169-a34b-c0bded5019a8","payload":{"responseCode":0,"authCode":"Z3PV5H","avsResponse":"Y","authAmount":0.0,"entityName":"transaction","id":"40005915599"}}';
@@ -40,7 +40,7 @@ class AuthnetWebhookTest extends TestCase
      * @covers            \Authnetjson\AuthnetWebhook::__construct()
      * @covers            \Authnetjson\AuthnetInvalidCredentialsException::__construct()
      */
-    public function testExceptionIsRaisedForNoSignature() : void
+    public function testExceptionIsRaisedForNoSignature(): void
     {
         $this->expectException(AuthnetInvalidCredentialsException::class);
         new AuthnetWebhook('', 'Not JSON', []);
@@ -50,7 +50,7 @@ class AuthnetWebhookTest extends TestCase
      * @covers            \Authnetjson\AuthnetWebhook::__construct()
      * @covers            \Authnetjson\AuthnetInvalidJsonException::__construct()
      */
-    public function testExceptionIsRaisedForCannotSetParamsException() : void
+    public function testExceptionIsRaisedForCannotSetParamsException(): void
     {
         $this->expectException(AuthnetInvalidJsonException::class);
         new AuthnetWebhook('a', 'Not JSON', []);
@@ -59,7 +59,7 @@ class AuthnetWebhookTest extends TestCase
     /**
      * @covers            \Authnetjson\AuthnetWebhook::__toString()
      */
-    public function testToString() : void
+    public function testToString(): void
     {
         $signatureKey = '52CB4A002C634B84E397DC8A218E1A160BA7CAB7CBE4C05B35E9CBB05E14FE4A2385812E980CCF97D177F17863CE214D1BE6CE8E1E894487AACF3609C1A5FE17';
         $webhookJson = '{"notificationId":"182cbbff-cab2-4080-931d-80e5d818f23a","eventType":"net.authorize.payment.authcapture.created","eventDate":"2017-08-18T20:40:52.7722007Z","webhookId":"849eb87e-078a-4169-a34b-c0bded5019a8","payload":{"responseCode":0,"authCode":"Z3PV5H","avsResponse":"Y","authAmount":0.0,"entityName":"transaction","id":"40005915599"}}';
@@ -81,7 +81,7 @@ class AuthnetWebhookTest extends TestCase
     /**
      * @covers            \Authnetjson\AuthnetWebhook::__get()
      */
-    public function testGet() : void
+    public function testGet(): void
     {
         $signatureKey = '52CB4A002C634B84E397DC8A218E1A160BA7CAB7CBE4C05B35E9CBB05E14FE4A2385812E980CCF97D177F17863CE214D1BE6CE8E1E894487AACF3609C1A5FE17';
         $webhookJson = '{"notificationId":"182cbbff-cab2-4080-931d-80e5d818f23a","eventType":"net.authorize.payment.authcapture.created","eventDate":"2017-08-18T20:40:52.7722007Z","webhookId":"849eb87e-078a-4169-a34b-c0bded5019a8","payload":{"responseCode":0,"authCode":"Z3PV5H","avsResponse":"Y","authAmount":0.0,"entityName":"transaction","id":"40005915599"}}';
@@ -98,7 +98,7 @@ class AuthnetWebhookTest extends TestCase
     /**
      * @covers            \Authnetjson\AuthnetWebhook::isValid()
      */
-    public function testIsValidCamelCase() : void
+    public function testIsValidCamelCase(): void
     {
         $signatureKey = '52CB4A002C634B84E397DC8A218E1A160BA7CAB7CBE4C05B35E9CBB05E14FE4A2385812E980CCF97D177F17863CE214D1BE6CE8E1E894487AACF3609C1A5FE17';
         $webhookJson = '{"notificationId":"182cbbff-cab2-4080-931d-80e5d818f23a","eventType":"net.authorize.payment.authcapture.created","eventDate":"2017-08-18T20:40:52.7722007Z","webhookId":"849eb87e-078a-4169-a34b-c0bded5019a8","payload":{"responseCode":0,"authCode":"Z3PV5H","avsResponse":"Y","authAmount":0.0,"entityName":"transaction","id":"40005915599"}}';
@@ -114,7 +114,7 @@ class AuthnetWebhookTest extends TestCase
     /**
      * @covers            \Authnetjson\AuthnetWebhook::isValid()
      */
-    public function testIsValidUpperCase() : void
+    public function testIsValidUpperCase(): void
     {
         $signatureKey = '52CB4A002C634B84E397DC8A218E1A160BA7CAB7CBE4C05B35E9CBB05E14FE4A2385812E980CCF97D177F17863CE214D1BE6CE8E1E894487AACF3609C1A5FE17';
         $webhookJson = '{"notificationId":"182cbbff-cab2-4080-931d-80e5d818f23a","eventType":"net.authorize.payment.authcapture.created","eventDate":"2017-08-18T20:40:52.7722007Z","webhookId":"849eb87e-078a-4169-a34b-c0bded5019a8","payload":{"responseCode":0,"authCode":"Z3PV5H","avsResponse":"Y","authAmount":0.0,"entityName":"transaction","id":"40005915599"}}';
@@ -130,7 +130,7 @@ class AuthnetWebhookTest extends TestCase
     /**
      * @covers            \Authnetjson\AuthnetWebhook::isValid()
      */
-    public function testIsValidFailure() : void
+    public function testIsValidFailure(): void
     {
         $signatureKey = '52CB4A002C634B84E397DC8A218E1A160BA7CAB7CBE4C05B35E9CBB05E14FE4A2385812E980CCF97D177F17863CE214D1BE6CE8E1E894487AACF3609C1A5FE17';
         $webhookJson = '{"notificationId":"182cbbff-cab2-4080-931d-80e5d818f23a","eventType":"net.authorize.payment.authcapture.created","eventDate":"2017-08-18T20:40:52.7722007Z","webhookId":"849eb87e-078a-4169-a34b-c0bded5019a8","payload":{"responseCode":0,"authCode":"Z3PV5H","avsResponse":"Y","authAmount":0.0,"entityName":"transaction","id":"40005915599"}}';
@@ -146,7 +146,7 @@ class AuthnetWebhookTest extends TestCase
     /**
      * @covers            \Authnetjson\AuthnetWebhook::getRequestId()
      */
-    public function testGetRequestId() : void
+    public function testGetRequestId(): void
     {
         $signatureKey = '52CB4A002C634B84E397DC8A218E1A160BA7CAB7CBE4C05B35E9CBB05E14FE4A2385812E980CCF97D177F17863CE214D1BE6CE8E1E894487AACF3609C1A5FE17';
         $webhookJson = '{"notificationId":"182cbbff-cab2-4080-931d-80e5d818f23a","eventType":"net.authorize.payment.authcapture.created","eventDate":"2017-08-18T20:40:52.7722007Z","webhookId":"849eb87e-078a-4169-a34b-c0bded5019a8","payload":{"responseCode":0,"authCode":"Z3PV5H","avsResponse":"Y","authAmount":0.0,"entityName":"transaction","id":"40005915599"}}';
@@ -163,7 +163,7 @@ class AuthnetWebhookTest extends TestCase
     /**
      * @covers            \Authnetjson\AuthnetWebhook::getAllHeaders()
      */
-    public function testGetAllHeaders() : void
+    public function testGetAllHeaders(): void
     {
         $_SERVER += [
             'HTTP_TEST' => 'test'

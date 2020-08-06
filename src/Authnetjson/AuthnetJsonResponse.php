@@ -169,7 +169,7 @@ class AuthnetJsonResponse
      *
      * @return bool    Whether the transaction was in an successful state
      */
-    public function isSuccessful() : bool
+    public function isSuccessful(): bool
     {
         return strtolower($this->messages->resultCode) === 'ok';
     }
@@ -179,7 +179,7 @@ class AuthnetJsonResponse
      *
      * @return bool    Whether the transaction was in an error state
      */
-    public function isError() : bool
+    public function isError(): bool
     {
         return strtolower($this->messages->resultCode) === 'error';
     }
@@ -189,7 +189,7 @@ class AuthnetJsonResponse
      *
      * @return bool     true if the transaction is approved
      */
-    public function isApproved() : bool
+    public function isApproved(): bool
     {
         return $this->isSuccessful() && $this->checkTransactionStatus(self::STATUS_APPROVED);
     }
@@ -199,7 +199,7 @@ class AuthnetJsonResponse
      *
      * @return bool     true if the transaction was completed using a prepaid card
      */
-    public function isPrePaidCard() : bool
+    public function isPrePaidCard(): bool
     {
         return isset($this->transactionResponse->prePaidCard);
     }
@@ -209,7 +209,7 @@ class AuthnetJsonResponse
      *
      * @return bool     true if the transaction is declined
      */
-    public function isDeclined() : bool
+    public function isDeclined(): bool
     {
         return $this->isSuccessful() && $this->checkTransactionStatus(self::STATUS_DECLINED);
     }
@@ -220,7 +220,7 @@ class AuthnetJsonResponse
      * @param  int $status
      * @return bool Check to see if the ResponseCode matches the expected value
      */
-    protected function checkTransactionStatus(int $status) : bool
+    protected function checkTransactionStatus(int $status): bool
     {
         if ($this->transactionInfo instanceof TransactionResponse) {
             $match = (int) $this->transactionInfo->getTransactionResponseField('ResponseCode') === $status;
@@ -237,7 +237,7 @@ class AuthnetJsonResponse
      * @return string Transaction field to be retrieved
      * @throws AuthnetTransactionResponseCallException
      */
-    public function getTransactionResponseField($field) : string
+    public function getTransactionResponseField($field): string
     {
         if ($this->transactionInfo instanceof TransactionResponse) {
             return $this->transactionInfo->getTransactionResponseField($field);
@@ -250,7 +250,7 @@ class AuthnetJsonResponse
      *
      * @return array
      */
-    public function getTransactionResponses() : array
+    public function getTransactionResponses(): array
     {
         return $this->transactionInfoArray;
     }
@@ -260,7 +260,7 @@ class AuthnetJsonResponse
      *
      * @return string transaction response from Authorize.Net in JSON format
      */
-    public function getRawResponse() : string
+    public function getRawResponse(): string
     {
         return $this->responseJson;
     }
@@ -270,7 +270,7 @@ class AuthnetJsonResponse
      *
      * @return string Error response from Authorize.Net
      */
-    public function getErrorMessage() : string
+    public function getErrorMessage(): string
     {
         return $this->getErrorText();
     }
@@ -280,7 +280,7 @@ class AuthnetJsonResponse
      *
      * @return string Error response from Authorize.Net
      */
-    public function getErrorText() : string
+    public function getErrorText(): string
     {
         return $this->getError('text');
     }
@@ -290,7 +290,7 @@ class AuthnetJsonResponse
      *
      * @return string Error response from Authorize.Net
      */
-    public function getErrorCode() : string
+    public function getErrorCode(): string
     {
         return $this->getError('code');
     }
@@ -299,7 +299,7 @@ class AuthnetJsonResponse
      * @param  string $type Whether to get the error code or text
      * @return string
      */
-    private function getError(string $type) : string
+    private function getError(string $type): string
     {
         $msg = '';
         if ($this->isError()) {

@@ -21,7 +21,7 @@ class AuthnetWebhooksRequestTest extends TestCase
     private $server;
     private $http;
 
-    protected function setUp() : void
+    protected function setUp(): void
     {
         $this->login          = 'test';
         $this->transactionKey = 'test';
@@ -35,7 +35,7 @@ class AuthnetWebhooksRequestTest extends TestCase
     /**
      * @covers            \Authnetjson\AuthnetWebhooksRequest::__construct()
      */
-    public function testConstructor() : void
+    public function testConstructor(): void
     {
         $request = AuthnetApiFactory::getWebhooksHandler($this->login, $this->transactionKey, $this->server);
 
@@ -49,7 +49,7 @@ class AuthnetWebhooksRequestTest extends TestCase
     /**
      * @covers            \Authnetjson\AuthnetWebhooksRequest::__toString()
      */
-    public function testToString() : void
+    public function testToString(): void
     {
         $this->http->error = false;
         $this->http->response = '[{
@@ -71,7 +71,7 @@ class AuthnetWebhooksRequestTest extends TestCase
     /**
      * @covers            \Authnetjson\AuthnetWebhooksRequest::__toString()
      */
-    public function testToStringNA() : void
+    public function testToStringNA(): void
     {
         $this->http->error = false;
         $this->http->response = '[{
@@ -93,7 +93,7 @@ class AuthnetWebhooksRequestTest extends TestCase
      * @covers            \Authnetjson\AuthnetWebhooksRequest::getEventTypes()
      * @covers            \Authnetjson\AuthnetWebhooksRequest::getByUrl()
      */
-    public function testGetEventTypes() : void
+    public function testGetEventTypes(): void
     {
         $this->http->error = false;
         $this->http->response = '[
@@ -172,7 +172,7 @@ class AuthnetWebhooksRequestTest extends TestCase
     /**
      * @covers            \Authnetjson\AuthnetWebhooksRequest::createWebhooks()
      */
-    public function testCreateWebhooks() : void
+    public function testCreateWebhooks(): void
     {
         $this->http->error = false;
         $this->http->response = '{
@@ -206,7 +206,7 @@ class AuthnetWebhooksRequestTest extends TestCase
     /**
      * @covers            \Authnetjson\AuthnetWebhooksRequest::testWebhook()
      */
-    public function testTestWebhook() : void
+    public function testTestWebhook(): void
     {
         $this->http->error = false;
         $this->http->response = '';
@@ -221,7 +221,7 @@ class AuthnetWebhooksRequestTest extends TestCase
     /**
      * @covers            \Authnetjson\AuthnetWebhooksRequest::deleteWebhook()
      */
-    public function testDeleteWebhook() : void
+    public function testDeleteWebhook(): void
     {
         $this->http->error = false;
         $this->http->response = '';
@@ -237,7 +237,7 @@ class AuthnetWebhooksRequestTest extends TestCase
      * @covers            \Authnetjson\AuthnetWebhooksRequest::getWebhooks()
      * @covers            \Authnetjson\AuthnetWebhooksRequest::getByUrl()
      */
-    public function testGetWebhooks() : void
+    public function testGetWebhooks(): void
     {
         $this->http->error = false;
         $this->http->response = '[{
@@ -298,7 +298,7 @@ class AuthnetWebhooksRequestTest extends TestCase
      * @covers            \Authnetjson\AuthnetWebhooksRequest::getWebhook()
      * @covers            \Authnetjson\AuthnetWebhooksRequest::getByUrl()
      */
-    public function testGetWebhook() : void
+    public function testGetWebhook(): void
     {
         $this->http->error = false;
         $this->http->response = '{
@@ -328,7 +328,7 @@ class AuthnetWebhooksRequestTest extends TestCase
     /**
      * @covers            \Authnetjson\AuthnetWebhooksRequest::updateWebhook()
      */
-    public function testUpdateWebhook() : void
+    public function testUpdateWebhook(): void
     {
         $this->http->error = false;
         $this->http->response = '{
@@ -357,7 +357,7 @@ class AuthnetWebhooksRequestTest extends TestCase
     /**
      * @covers            \Authnetjson\AuthnetWebhooksRequest::getNotificationHistory()
      */
-    public function testGetNotificationHistory() : void
+    public function testGetNotificationHistory(): void
     {
         $this->http->error = false;
         $this->http->response = '{
@@ -391,7 +391,7 @@ class AuthnetWebhooksRequestTest extends TestCase
     /**
      * @covers            \Authnetjson\AuthnetWebhooksRequest::handleResponse()
      */
-    public function testHandleResponse() : void
+    public function testHandleResponse(): void
     {
         $this->http->error = false;
         $this->http->response = '{"error"}';
@@ -411,7 +411,7 @@ class AuthnetWebhooksRequestTest extends TestCase
      * @covers            \Authnetjson\AuthnetWebhooksRequest::handleResponse()
      * @covers            \Authnetjson\AuthnetCurlException::__construct()
      */
-    public function testHandleResponseWithErrorMessage() : void
+    public function testHandleResponseWithErrorMessage(): void
     {
         $this->expectException(AuthnetCurlException::class);
 
@@ -438,7 +438,7 @@ class AuthnetWebhooksRequestTest extends TestCase
      * @covers            \Authnetjson\AuthnetWebhooksRequest::handleResponse()
      * @covers            \Authnetjson\AuthnetCurlException::__construct()
      */
-    public function testHandleResponseWithErrorMessageTestMessage() : void
+    public function testHandleResponseWithErrorMessageTestMessage(): void
     {
         $this->expectException(AuthnetCurlException::class);
 
@@ -470,7 +470,7 @@ class AuthnetWebhooksRequestTest extends TestCase
      * @covers            \Authnetjson\AuthnetWebhooksRequest::handleResponse()
      * @covers            \Authnetjson\AuthnetCurlException::__construct()
      */
-    public function testHandleResponseWithErrorMessageNoMessage() : void
+    public function testHandleResponseWithErrorMessageNoMessage(): void
     {
         $this->expectException(AuthnetCurlException::class);
 
@@ -500,7 +500,7 @@ class AuthnetWebhooksRequestTest extends TestCase
     /**
      * @covers            \Authnetjson\AuthnetWebhooksRequest::setProcessHandler()
      */
-    public function testProcessorIsInstanceOfCurlWrapper() : void
+    public function testProcessorIsInstanceOfCurlWrapper(): void
     {
         $request = new AuthnetWebhooksRequest(null, null, $this->server);
         $request->setProcessHandler(new Curl());
@@ -515,7 +515,7 @@ class AuthnetWebhooksRequestTest extends TestCase
     /**
      * @covers            \Authnetjson\AuthnetWebhooksRequest::getRawRequest()
      */
-    public function testGetRawRequest() : void
+    public function testGetRawRequest(): void
     {
         $this->http->response = $responseJson = '[{
             "name": "test"

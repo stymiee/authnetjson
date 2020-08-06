@@ -99,7 +99,7 @@ class TransactionResponse
      * @param  mixed $field Name or key of the transaction field to be retrieved
      * @return string Transaction field to be retrieved
      */
-    public function getTransactionResponseField($field) : ?string
+    public function getTransactionResponseField($field): ?string
     {
         $value = null;
         if (is_int($field)) {

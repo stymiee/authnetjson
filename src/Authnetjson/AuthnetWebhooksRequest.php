@@ -92,7 +92,7 @@ class AuthnetWebhooksRequest
      * @throws AuthnetInvalidJsonException
      * @throws AuthnetCurlException
      */
-    public function createWebhooks(array $webhooks, string $webhookUrl, string $status = 'active') : object
+    public function createWebhooks(array $webhooks, string $webhookUrl, string $status = 'active'): object
     {
         $this->endpoint = 'webhooks';
         $this->url = sprintf('%s%s', $this->url, $this->endpoint);
@@ -112,7 +112,7 @@ class AuthnetWebhooksRequest
      * @param  string $webhookId Webhook ID to be tested
      * @throws AuthnetCurlException
      */
-    public function testWebhook(string $webhookId) : void
+    public function testWebhook(string $webhookId): void
     {
         $this->endpoint = 'webhooks';
         $this->url = sprintf('%s%s/%s/pings', $this->url, $this->endpoint, $webhookId);
@@ -127,7 +127,7 @@ class AuthnetWebhooksRequest
      * @throws AuthnetCurlException
      * @throws AuthnetInvalidJsonException
      */
-    public function getEventTypes() : object
+    public function getEventTypes(): object
     {
         $this->endpoint = 'eventtypes';
         $this->url = sprintf('%s%s', $this->url, $this->endpoint);
@@ -141,7 +141,7 @@ class AuthnetWebhooksRequest
      * @throws AuthnetCurlException
      * @throws AuthnetInvalidJsonException
      */
-    public function getWebhooks() : object
+    public function getWebhooks(): object
     {
         $this->endpoint = 'webhooks';
         $this->url = sprintf('%s%s', $this->url, $this->endpoint);
@@ -156,7 +156,7 @@ class AuthnetWebhooksRequest
      * @throws AuthnetCurlException
      * @throws AuthnetInvalidJsonException
      */
-    public function getWebhook(string $webhookId) : object
+    public function getWebhook(string $webhookId): object
     {
         $this->endpoint = 'webhooks';
         $this->url = sprintf('%s%s/%s', $this->url, $this->endpoint, $webhookId);
@@ -171,7 +171,7 @@ class AuthnetWebhooksRequest
      * @throws AuthnetCurlException
      * @throws AuthnetInvalidJsonException
      */
-    private function getByUrl(string $url) : object
+    private function getByUrl(string $url): object
     {
         $response = $this->get($url);
         return new AuthnetWebhooksResponse($response);
@@ -188,7 +188,7 @@ class AuthnetWebhooksRequest
      * @throws AuthnetInvalidJsonException
      * @throws AuthnetCurlException
      */
-    public function updateWebhook(string $webhookId, string $webhookUrl, array $eventTypes, string $status = 'active') : object
+    public function updateWebhook(string $webhookId, string $webhookUrl, array $eventTypes, string $status = 'active'): object
     {
         $this->endpoint = 'webhooks';
         $this->url = sprintf('%s%s/%s', $this->url, $this->endpoint, $webhookId);
@@ -208,7 +208,7 @@ class AuthnetWebhooksRequest
      * @param  string $webhookId Webhook ID to be deleted
      * @throws AuthnetCurlException
      */
-    public function deleteWebhook(string $webhookId) : void
+    public function deleteWebhook(string $webhookId): void
     {
         $this->endpoint = 'webhooks';
         $this->url = sprintf('%s%s/%s', $this->url, $this->endpoint, $webhookId);
@@ -224,7 +224,7 @@ class AuthnetWebhooksRequest
      * @throws AuthnetInvalidJsonException
      * @throws AuthnetCurlException
      */
-    public function getNotificationHistory(int $limit = 1000, int $offset = 0) : object
+    public function getNotificationHistory(int $limit = 1000, int $offset = 0): object
     {
         $this->endpoint = 'notifications';
         $this->url = sprintf('%s%s', $this->url, $this->endpoint);
@@ -243,7 +243,7 @@ class AuthnetWebhooksRequest
      * @return string
      * @throws AuthnetCurlException
      */
-    private function handleResponse() : string
+    private function handleResponse(): string
     {
         if (!$this->processor->error) {
             return $this->processor->response;
@@ -264,7 +264,7 @@ class AuthnetWebhooksRequest
      *
      * @codeCoverageIgnore
      */
-    private function get(string $url, array $params = []) : string
+    private function get(string $url, array $params = []): string
     {
         $this->processor->get($url, $params);
         return $this->handleResponse();
@@ -280,7 +280,7 @@ class AuthnetWebhooksRequest
      *
      * @codeCoverageIgnore
      */
-    private function post(string $url, string $request) : string
+    private function post(string $url, string $request): string
     {
         $this->processor->post($url, $request);
         return $this->handleResponse();
@@ -296,7 +296,7 @@ class AuthnetWebhooksRequest
      *
      * @codeCoverageIgnore
      */
-    private function put(string $url, string $request) : string
+    private function put(string $url, string $request): string
     {
         $this->processor->put($url, $request, true);
         return $this->handleResponse();
@@ -311,7 +311,7 @@ class AuthnetWebhooksRequest
      *
      * @codeCoverageIgnore
      */
-    private function delete(string $url) : string
+    private function delete(string $url): string
     {
         $this->processor->delete($url, [], true);
         return $this->handleResponse();
@@ -322,7 +322,7 @@ class AuthnetWebhooksRequest
      *
      * @param Curl $processor
      */
-    public function setProcessHandler(Curl $processor) : void
+    public function setProcessHandler(Curl $processor): void
     {
         $this->processor = $processor;
     }
@@ -332,7 +332,7 @@ class AuthnetWebhooksRequest
      *
      * @return string transaction request sent to Authorize.Net in JSON format
      */
-    public function getRawRequest() : string
+    public function getRawRequest(): string
     {
         return $this->requestJson;
     }

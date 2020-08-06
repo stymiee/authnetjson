@@ -186,7 +186,7 @@ class AuthnetJsonRequest
     /**
      * Makes POST request with retry logic.
      */
-    private function makeRequest() : void
+    private function makeRequest(): void
     {
         $this->retries = 0;
         while ($this->retries < self::MAX_RETRIES) {
@@ -204,7 +204,7 @@ class AuthnetJsonRequest
      * @return string  JSON string containing API response
      * @throws AuthnetCurlException
      */
-    private function process() : string
+    private function process(): string
     {
         $this->makeRequest();
         if (!$this->processor->error && isset($this->processor->response)) {
@@ -224,7 +224,7 @@ class AuthnetJsonRequest
      *
      * @param Curl $processor
      */
-    public function setProcessHandler($processor) : void
+    public function setProcessHandler($processor): void
     {
         $this->processor = $processor;
     }
@@ -234,7 +234,7 @@ class AuthnetJsonRequest
      *
      * @return string transaction request sent to Authorize.Net in JSON format
      */
-    public function getRawRequest() : string
+    public function getRawRequest(): string
     {
         return $this->requestJson;
     }

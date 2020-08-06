@@ -53,7 +53,7 @@ class AuthnetApiFactory
      * @throws AuthnetInvalidCredentialsException
      * @throws AuthnetInvalidServerException
      */
-    public static function getJsonApiHandler(string $login, string $transaction_key, ?int $endpoint = null) : object
+    public static function getJsonApiHandler(string $login, string $transaction_key, ?int $endpoint = null): object
     {
         $login           = trim($login);
         $transaction_key = trim($transaction_key);
@@ -83,7 +83,7 @@ class AuthnetApiFactory
      * @return string                  The URL endpoint the request is to be sent to
      * @throws AuthnetInvalidServerException
      */
-    protected static function getWebServiceURL(int $server) : string
+    protected static function getWebServiceURL(int $server): string
     {
         $urls = [
             static::USE_PRODUCTION_SERVER  => 'https://api.authorize.net/xml/v1/request.api',
@@ -107,7 +107,7 @@ class AuthnetApiFactory
      * @throws AuthnetInvalidServerException
      * @throws Exception
      */
-    public static function getSimHandler(string $login, string $transaction_key, ?int $server = null) : object
+    public static function getSimHandler(string $login, string $transaction_key, ?int $server = null): object
     {
         $login           = trim($login);
         $transaction_key = trim($transaction_key);
@@ -128,7 +128,7 @@ class AuthnetApiFactory
      * @return string                  The URL endpoint the request is to be sent to
      * @throws AuthnetInvalidServerException
      */
-    protected static function getSimURL(int $server) : string
+    protected static function getSimURL(int $server): string
     {
         $urls = [
             static::USE_PRODUCTION_SERVER  => 'https://secure2.authorize.net/gateway/transact.dll',
@@ -150,7 +150,7 @@ class AuthnetApiFactory
      * @throws AuthnetInvalidCredentialsException
      * @throws AuthnetInvalidServerException
      */
-    public static function getWebhooksHandler(string $login, string $transaction_key, ?int $server = null) : object
+    public static function getWebhooksHandler(string $login, string $transaction_key, ?int $server = null): object
     {
         $login           = trim($login);
         $transaction_key = trim($transaction_key);
@@ -183,7 +183,7 @@ class AuthnetApiFactory
      * @return string                  The URL endpoint the request is to be sent to
      * @throws AuthnetInvalidServerException
      */
-    protected static function getWebhooksURL(int $server) : string
+    protected static function getWebhooksURL(int $server): string
     {
         $urls = [
             static::USE_PRODUCTION_SERVER  => 'https://api.authorize.net/rest/v1/',

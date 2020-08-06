@@ -94,7 +94,7 @@ class AuthnetWebhooksResponse
      *
      * @return array   Array of event types supported by Webhooks API
      */
-    public function getEventTypes() : array
+    public function getEventTypes(): array
     {
         $events = [];
         if (isset($this->response->eventTypes)) {
@@ -112,7 +112,7 @@ class AuthnetWebhooksResponse
      *
      * @return string  Webhooks ID
      */
-    public function getWebhooksId() : string
+    public function getWebhooksId(): string
     {
         return $this->response->webhookId;
     }
@@ -122,7 +122,7 @@ class AuthnetWebhooksResponse
      *
      * @return string  Status of the webhooks [active|inactive]
      */
-    public function getStatus() : string
+    public function getStatus(): string
     {
         return $this->response->status;
     }
@@ -132,7 +132,7 @@ class AuthnetWebhooksResponse
      *
      * @return string
      */
-    public function getUrl() : string
+    public function getUrl(): string
     {
         return $this->response->url;
     }
@@ -143,7 +143,7 @@ class AuthnetWebhooksResponse
      * @return array
      * @throws AuthnetInvalidJsonException
      */
-    public function getWebhooks() : array
+    public function getWebhooks(): array
     {
         $webhooks = [];
         foreach ($this->response as $webhook) {
@@ -158,7 +158,7 @@ class AuthnetWebhooksResponse
      * @return array
      * @throws AuthnetInvalidJsonException
      */
-    public function getNotificationHistory() : array
+    public function getNotificationHistory(): array
     {
         $notifications = [];
         if (count($this->response->notifications)) {
@@ -174,7 +174,7 @@ class AuthnetWebhooksResponse
      *
      * @return string
      */
-    public function getNotificationId() : string
+    public function getNotificationId(): string
     {
         return $this->response->notificationId;
     }
@@ -184,7 +184,7 @@ class AuthnetWebhooksResponse
      *
      * @return string
      */
-    public function getDeliveryStatus() : string
+    public function getDeliveryStatus(): string
     {
         return $this->response->deliveryStatus;
     }
@@ -194,7 +194,7 @@ class AuthnetWebhooksResponse
      *
      * @return string
      */
-    public function getEventType() : string
+    public function getEventType(): string
     {
         return $this->response->eventType;
     }
@@ -204,7 +204,7 @@ class AuthnetWebhooksResponse
      *
      * @return string
      */
-    public function getEventDate() : string
+    public function getEventDate(): string
     {
         return $this->response->eventDate;
     }
