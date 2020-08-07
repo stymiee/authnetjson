@@ -33,7 +33,7 @@ class AuthnetSimTest extends TestCase
      */
     public function testConstructor(): void
     {
-        $request = AuthnetApiFactory::getSimHandler($this->login, $this->signature, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
+        $request = AuthnetApiFactory::getSimHandler($this->login, $this->signature, $this->server);
 
         $reflectionOfSim = new \ReflectionObject($request);
         $login = $reflectionOfSim->getProperty('login');
