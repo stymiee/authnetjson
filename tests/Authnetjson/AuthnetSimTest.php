@@ -12,6 +12,7 @@
 namespace Authnetjson;
 
 use PHPUnit\Framework\TestCase;
+use ReflectionObject;
 
 class AuthnetSimTest extends TestCase
 {
@@ -35,7 +36,7 @@ class AuthnetSimTest extends TestCase
     {
         $request = AuthnetApiFactory::getSimHandler($this->login, $this->signature, $this->server);
 
-        $reflectionOfSim = new \ReflectionObject($request);
+        $reflectionOfSim = new ReflectionObject($request);
         $login = $reflectionOfSim->getProperty('login');
         $login->setAccessible(true);
         $key = $reflectionOfSim->getProperty('signature');
@@ -57,12 +58,22 @@ class AuthnetSimTest extends TestCase
         $sequence  = $sim->getSequence();
         $timestamp = $sim->getTimestamp();
 
-        self::assertEquals($hash, strtoupper(hash_hmac('sha512', sprintf('%s^%s^%s^%s^',
-            $this->login,
-            $sequence,
-            $timestamp,
-            $amount
-        ), hex2bin($this->signature))));
+        self::assertEquals(
+            $hash,
+            strtoupper(
+                hash_hmac(
+                    'sha512',
+                    sprintf(
+                        '%s^%s^%s^%s^',
+                        $this->login,
+                        $sequence,
+                        $timestamp,
+                        $amount
+                    ),
+                    hex2bin($this->signature)
+                )
+            )
+        );
     }
 
     /**
@@ -86,7 +97,7 @@ class AuthnetSimTest extends TestCase
         $sim = AuthnetApiFactory::getSimHandler($this->login, $this->transactionKey, $this->server);
         $sequence = $sim->getSequence();
 
-        $reflectionOfRequest = new \ReflectionObject($sim);
+        $reflectionOfRequest = new ReflectionObject($sim);
         $sequenceReflection = $reflectionOfRequest->getProperty('sequence');
         $sequenceReflection->setAccessible(true);
 
@@ -101,7 +112,7 @@ class AuthnetSimTest extends TestCase
         $sim = AuthnetApiFactory::getSimHandler($this->login, $this->transactionKey, $this->server);
         $timestamp = $sim->getTimestamp();
 
-        $reflectionOfRequest = new \ReflectionObject($sim);
+        $reflectionOfRequest = new ReflectionObject($sim);
         $timestampReflection = $reflectionOfRequest->getProperty('timestamp');
         $timestampReflection->setAccessible(true);
 
@@ -116,7 +127,7 @@ class AuthnetSimTest extends TestCase
         $sim   = AuthnetApiFactory::getSimHandler($this->login, $this->transactionKey, $this->server);
         $login = $sim->getLogin();
 
-        $reflectionOfRequest = new \ReflectionObject($sim);
+        $reflectionOfRequest = new ReflectionObject($sim);
         $loginReflection = $reflectionOfRequest->getProperty('login');
         $loginReflection->setAccessible(true);
 
@@ -131,7 +142,7 @@ class AuthnetSimTest extends TestCase
         $sim = AuthnetApiFactory::getSimHandler($this->login, $this->transactionKey, $this->server);
         $url = $sim->getEndpoint();
 
-        $reflectionOfRequest = new \ReflectionObject($sim);
+        $reflectionOfRequest = new ReflectionObject($sim);
         $endpointReflection = $reflectionOfRequest->getProperty('url');
         $endpointReflection->setAccessible(true);
 
@@ -149,7 +160,7 @@ class AuthnetSimTest extends TestCase
         sleep(1);
         $sim->resetParameters();
 
-        $reflectionOfRequest = new \ReflectionObject($sim);
+        $reflectionOfRequest = new ReflectionObject($sim);
         $timestampReflection = $reflectionOfRequest->getProperty('timestamp');
         $timestampReflection->setAccessible(true);
         $sequenceReflection = $reflectionOfRequest->getProperty('sequence');
