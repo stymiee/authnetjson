@@ -1,6 +1,6 @@
 CHANGE LOG
 
-2020-XX-XX - Version 4.1.2
+2020-08-28 - Version 4.1.2
 --------------------------------------------
 Fixed: Added ability to get results from multiple payment results as may be possible when creating multiple payment profiles
 Fixed potential bug where getting a transaction response would fail and cause transactions appear to not be approved.
