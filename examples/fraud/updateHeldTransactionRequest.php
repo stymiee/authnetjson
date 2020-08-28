@@ -61,7 +61,7 @@ SAMPLE RESPONSE
 
 *************************************************************************************************/
 
-namespace JohnConde\Authnet;
+namespace Authnetjson;
 
 use Exception;
 
@@ -107,16 +107,76 @@ try {
     </h2>
     <table>
         <tr>
-            <th>Response</th>
-            <td><?= $response->messages->resultCode ?></td>
-        </tr>
-        <tr>
             <th>Successful?</th>
             <td><?= $response->isSuccessful() ? 'yes' : 'no' ?></td>
         </tr>
         <tr>
             <th>Error?</th>
             <td><?= $response->isError() ? 'yes' : 'no' ?></td>
+        </tr>
+        <tr>
+            <th>Result Code</th>
+            <td><?= $response->messages->resultCode ?></td>
+        </tr>
+        <tr>
+            <th>Message Code</th>
+            <td><?= $response->messages->message[0]->code ?></td>
+        </tr>
+        <tr>
+            <th>Message</th>
+            <td><?= $response->messages->message[0]->text ?></td>
+        </tr>
+        <tr>
+            <th>Response Code</th>
+            <td><?= $response->responseCode ?></td>
+        </tr>
+        <tr>
+            <th>Authorization Code</th>
+            <td><?= $response->authCode ?></td>
+        </tr>
+        <tr>
+            <th>AVS Result Code</th>
+            <td><?= $response->avsResultCode ?></td>
+        </tr>
+        <tr>
+            <th>CVV Result Code</th>
+            <td><?= $response->cvvResultCode ?></td>
+        </tr>
+        <tr>
+            <th>CAVV Result Code</th>
+            <td><?= $response->cavvResultCode ?></td>
+        </tr>
+        <tr>
+            <th>Transaction Id</th>
+            <td><?= $response->transId ?></td>
+        </tr>
+        <tr>
+            <th>Reference Transaction ID</th>
+            <td><?= $response->refTransID ?></td>
+        </tr>
+        <tr>
+            <th>Transaction Hash</th>
+            <td><?= $response->transHash ?></td>
+        </tr>
+        <tr>
+            <th>Account Number</th>
+            <td><?= $response->accountNumber ?></td>
+        </tr>
+        <tr>
+            <th>Account Type</th>
+            <td><?= $response->accountType ?></td>
+        </tr>
+        <tr>
+            <th>Trans Hash Sha2</th>
+            <td><?= $response->transHashSha2 ?></td>
+        </tr>
+        <tr>
+            <th>Message Code</th>
+            <td><?= $response->messages->code ?></td>
+        </tr>
+        <tr>
+            <th>Message Description</th>
+            <td><?= $response->messages->description ?></td>
         </tr>
     </table>
     <h2>

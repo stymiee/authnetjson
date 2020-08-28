@@ -1,5 +1,5 @@
 <?php
-namespace JohnConde\Authnet;
+namespace Authnetjson;
 
 use Exception;
 

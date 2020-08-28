@@ -72,7 +72,7 @@ SAMPLE RESPONSE
 
 *************************************************************************************************/
 
-namespace JohnConde\Authnet;
+namespace Authnetjson;
 
 use Exception;
 
@@ -123,10 +123,6 @@ try {
     </h2>
     <table>
         <tr>
-            <th>Response</th>
-            <td><?= $response->messages->resultCode ?></td>
-        </tr>
-        <tr>
             <th>Successful?</th>
             <td><?= $response->isSuccessful() ? 'yes' : 'no' ?></td>
         </tr>
@@ -135,9 +131,41 @@ try {
             <td><?= $response->isError() ? 'yes' : 'no' ?></td>
         </tr>
         <tr>
+            <th>Result Code</th>
+            <td><?= $response->messages->resultCode ?></td>
+        </tr>
+        <tr>
+            <th>Message Code</th>
+            <td><?= $response->messages->message[0]->code ?></td>
+        </tr>
+        <tr>
+            <th>Message</th>
+            <td><?= $response->messages->message[0]->text ?></td>
+        </tr>
+        <tr>
             <th>Number of Results</th>
             <td><?= $response->totalNumInResultSet ?></td>
         </tr>
+        <?php foreach ($response->transactions as $transaction) : ?>
+        <tr>
+            <th>Transaction ID: <?= $transaction->transId ?></th>
+            <td>
+                Submit Time UTC: <?= $transaction->submitTimeUTC ?><br>
+                Submit Time Local: <?= $transaction->submitTimeLocal ?><br>
+                Transaction Status: <?= $transaction->transactionStatus ?><br>
+                Invoice Number: <?= $transaction->invoiceNumber ?><br>
+                First Name: <?= $transaction->firstName ?><br>
+                Last Name: <?= $transaction->lastName ?><br>
+                Account Type: <?= $transaction->accountType ?><br>
+                Account Number: <?= $transaction->accountNumber ?><br>
+                Settle Amount: <?= $transaction->settleAmount ?><br>
+                Market Type: <?= $transaction->marketType ?><br>
+                Product: <?= $transaction->product ?><br>
+                Fraud Action: <?= $transaction->fraudInformation->fraudAction ?><br>
+                Fraud Reasons: <?= implode(', ', $transaction->fraudInformation->fraudFilterList) ?><br>
+            </td>
+        </tr>
+        <?php endforeach; ?>
     </table>
     <h2>
         Raw Input/Output

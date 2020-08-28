@@ -144,7 +144,7 @@ SAMPLE RESPONSE
 
 *************************************************************************************************/
 
-namespace JohnConde\Authnet;
+namespace Authnetjson;
 
 use Exception;
 
@@ -298,27 +298,57 @@ try {
             <td><?= $response->isError() ? 'yes' : 'no' ?></td>
         </tr>
         <?php if ($response->isSuccessful()) : ?>
-        <tr>
-            <th>Description</th>
-            <td><?= $response->transactionResponse->messages[0]->description ?></td>
-        </tr>
-        <tr>
-            <th>authCode</th>
-            <td><?= $response->transactionResponse->authCode ?></td>
-        </tr>
-        <tr>
-            <th>transId</th>
-            <td><?= $response->transactionResponse->transId ?></td>
-        </tr>
+            <tr>
+                <th>Description</th>
+                <td><?= $response->transactionResponse->messages[0]->description ?></td>
+            </tr>
+            <tr>
+                <th>Authorization Code</th>
+                <td><?= $response->transactionResponse->authCode ?></td>
+            </tr>
+            <tr>
+                <th>Transaction ID</th>
+                <td><?= $response->transactionResponse->transId ?></td>
+            </tr>
+            <tr>
+                <th>AVS Result Code</th>
+                <td><?= $response->transactionResponse->avsResultCode ?></td>
+            </tr>
+            <tr>
+                <th>CVV Result Code</th>
+                <td><?= $response->transactionResponse->cvvResultCode ?></td>
+            </tr>
+            <tr>
+                <th>CAVV Result Code</th>
+                <td><?= $response->transactionResponse->cavvResultCode ?></td>
+            </tr>
+            <tr>
+                <th>Account Number</th>
+                <td><?= $response->transactionResponse->accountNumber ?></td>
+            </tr>
+            <tr>
+                <th>Account Type</th>
+                <td><?= $response->transactionResponse->accountType ?></td>
+            </tr>
+            <tr>
+                <th>refId</th>
+                <td><?= $response->refId ?></td>
+            </tr>
+            <?php foreach ($response->transactionResponse->userFields as $userField) : ?>
+                <tr>
+                    <th><?= $userField->name ?></th>
+                    <td><?= $userField->value ?></td>
+                </tr>
+            <?php endforeach; ?>
         <?php elseif ($response->isError()) : ?>
-        <tr>
-            <th>Error Code</th>
-            <td><?= $response->getErrorCode() ?></td>
-        </tr>
-        <tr>
-            <th>Error Message</th>
-            <td><?=  $response->getErrorText() ?></td>
-        </tr>
+            <tr>
+                <th>Error Code</th>
+                <td><?= $response->getErrorCode() ?></td>
+            </tr>
+            <tr>
+                <th>Error Message</th>
+                <td><?=  $response->getErrorText() ?></td>
+            </tr>
         <?php endif; ?>
     </table>
     <h2>

@@ -58,7 +58,7 @@ SAMPLE RESPONSE
 
 *************************************************************************************************/
 
-namespace JohnConde\Authnet;
+namespace Authnetjson;
 
 use Exception;
 
@@ -110,6 +110,14 @@ try {
         <tr>
             <th>Error?</th>
             <td><?= $response->isError() ? 'yes' : 'no' ?></td>
+        </tr>
+        <tr>
+            <th>Code</th>
+            <td><?= $response->messages->message[0]->code ?></td>
+        </tr>
+        <tr>
+            <th>Message</th>
+            <td><?= $response->messages->message[0]->text ?></td>
         </tr>
         <?php foreach ($response->transactions as $transaction) : ?>
         <tr>

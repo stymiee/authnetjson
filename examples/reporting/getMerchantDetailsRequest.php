@@ -69,7 +69,7 @@ SAMPLE RESPONSE
 
 *************************************************************************************************/
 
-namespace JohnConde\Authnet;
+namespace Authnetjson;
 
 use Exception;
 
@@ -119,6 +119,46 @@ try {
         <tr>
             <th>Error?</th>
             <td><?= $response->isError() ? 'yes' : 'no' ?></td>
+        </tr>
+        <tr>
+            <th>Code</th>
+            <td><?= $response->messages->message[0]->code ?></td>
+        </tr>
+        <tr>
+            <th>Message</th>
+            <td><?= $response->messages->message[0]->text ?></td>
+        </tr>
+        <tr>
+            <th>Merchant Name</th>
+            <td><?= $response->merchantName ?></td>
+        </tr>
+        <tr>
+            <th>Gateway Id</th>
+            <td><?= $response->gatewayId ?></td>
+        </tr>
+        <tr>
+            <th>Processors</th>
+            <td>
+                <?php foreach ($response->processors as $processor) : ?>
+                    <?php printf('%s<br>', $processor->name) ?>
+                <?php endforeach; ?>
+            </td>
+        </tr>
+        <tr>
+            <th>Market Types</th>
+            <td><?= implode(', ', $response->marketTypes) ?></td>
+        </tr>
+        <tr>
+            <th>Product Codes</th>
+            <td><?= implode(', ', $response->productCodes) ?></td>
+        </tr>
+        <tr>
+            <th>Payment Methods</th>
+            <td><?= implode(', ', $response->paymentMethods) ?></td>
+        </tr>
+        <tr>
+            <th>Currencies</th>
+            <td><?= implode(', ', $response->currencies) ?></td>
         </tr>
         <tr>
             <th>Public Client Key</th>

@@ -31,7 +31,7 @@ SAMPLE RESPONSE
 
 *************************************************************************************************/
 
-namespace JohnConde\Authnet;
+namespace Authnetjson;
 
 use Exception;
 
@@ -73,14 +73,6 @@ try {
     </h2>
     <table>
         <tr>
-            <th>Response</th>
-            <td><?= $response->messages->resultCode ?></td>
-        </tr>
-        <tr>
-            <th>code</th>
-            <td><?= $response->messages->message[0]->code ?></td>
-        </tr>
-        <tr>
             <th>Successful?</th>
             <td><?= $response->isSuccessful() ? 'yes' : 'no' ?></td>
         </tr>
@@ -88,10 +80,22 @@ try {
             <th>Error?</th>
             <td><?= $response->isError() ? 'yes' : 'no' ?></td>
         </tr>
+        <tr>
+            <th>Result Code</th>
+            <td><?= $response->messages->resultCode ?></td>
+        </tr>
+        <tr>
+            <th>Message Code</th>
+            <td><?= $response->messages->message[0]->code ?></td>
+        </tr>
+        <tr>
+            <th>Message</th>
+            <td><?= $response->messages->message[0]->text ?></td>
+        </tr>
     </table>
     <h2>
         Raw Input/Output
     </h2>
-<?= $request, $response ?>
+    <?= $request, $response ?>
 </body>
 </html>

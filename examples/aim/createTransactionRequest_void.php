@@ -55,7 +55,7 @@ SAMPLE RESPONSE
 
 **************************************************************************************************/
 
-namespace JohnConde\Authnet;
+namespace Authnetjson;
 
 use Exception;
 
@@ -105,10 +105,6 @@ try {
             <td><?= $response->messages->resultCode ?></td>
         </tr>
         <tr>
-            <th>code</th>
-            <td><?= $response->messages->message[0]->code ?></td>
-        </tr>
-        <tr>
             <th>Successful?</th>
             <td><?= $response->isSuccessful() ? 'yes' : 'no' ?></td>
         </tr>
@@ -116,10 +112,57 @@ try {
             <th>Error?</th>
             <td><?= $response->isError() ? 'yes' : 'no' ?></td>
         </tr>
+        <?php if ($response->isSuccessful()) : ?>
         <tr>
-            <th>transId</th>
+            <th>Description</th>
+            <td><?= $response->transactionResponse->messages[0]->description ?></td>
+        </tr>
+        <tr>
+            <th>Authorization Code</th>
+            <td><?= $response->transactionResponse->authCode ?></td>
+        </tr>
+        <tr>
+            <th>Transaction ID</th>
             <td><?= $response->transactionResponse->transId ?></td>
         </tr>
+        <tr>
+            <th>Reference Transaction ID</th>
+            <td><?= $response->transactionResponse->refTransID ?></td>
+        </tr>
+        <tr>
+            <th>Transaction Hash</th>
+            <td><?= $response->transactionResponse->transHash ?></td>
+        </tr>
+        <tr>
+            <th>AVS Result Code</th>
+            <td><?= $response->transactionResponse->avsResultCode ?></td>
+        </tr>
+        <tr>
+            <th>CVV Result Code</th>
+            <td><?= $response->transactionResponse->cvvResultCode ?></td>
+        </tr>
+        <tr>
+            <th>CAVV Result Code</th>
+            <td><?= $response->transactionResponse->cavvResultCode ?></td>
+        </tr>
+        <tr>
+            <th>Is Test Request?</th>
+            <td><?= $response->transactionResponse->testRequest ? 'yes' : 'no' ?></td>
+        </tr>
+        <tr>
+            <th>Account Type</th>
+            <td><?= $response->transactionResponse->accountType ?></td>
+        </tr>
+        <?php elseif ($response->isError()) : ?>
+        <tr>
+            <th>Error Code</th>
+            <td><?= $response->getErrorCode() ?></td>
+        </tr>
+        <tr>
+            <th>Error Message</th>
+            <td><?= $response->getErrorText() ?></td>
+        </tr>
+        <?php endif; ?>
     </table>
     <h2>
         Raw Input/Output

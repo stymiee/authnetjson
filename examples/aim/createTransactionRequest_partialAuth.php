@@ -119,7 +119,7 @@ SAMPLE RESPONSE
 
 *************************************************************************************************/
 
-namespace JohnConde\Authnet;
+namespace Authnetjson;
 
 use Exception;
 
@@ -223,17 +223,55 @@ try {
         </tr>
         <?php if ($response->isSuccessful()) : ?>
         <tr>
+            <th>Authorization Code</th>
+            <td><?= $response->transactionResponse->authCode ?></td>
+        </tr>
+        <tr>
+            <th>Transaction ID</th>
+            <td><?= $response->transactionResponse->transId ?></td>
+        </tr>
+        <tr>
+            <th>AVS Result Code</th>
+            <td><?= $response->transactionResponse->avsResultCode ?></td>
+        </tr>
+        <tr>
+            <th>CVV Result Code</th>
+            <td><?= $response->transactionResponse->cvvResultCode ?></td>
+        </tr>
+        <tr>
+            <th>CAVV Result Code</th>
+            <td><?= $response->transactionResponse->cavvResultCode ?></td>
+        </tr>
+        <tr>
+            <th>Account Number</th>
+            <td><?= $response->transactionResponse->accountNumber ?></td>
+        </tr>
+        <tr>
+            <th>Account Type</th>
+            <td><?= $response->transactionResponse->accountType ?></td>
+        </tr>
+        <tr>
+            <th>refId</th>
+            <td><?= $response->refId ?></td>
+        </tr>
+        <tr>
             <th>Is Prepaid Card?</th>
             <td><?= $response->isPrePaidCard() ? 'yes' : 'no' ?></td>
         </tr>
-        <tr>
-            <th>Remaining Balance</th>
-            <td><?= $response->transactionResponse->prePaidCard->balanceOnCard ?></td>
-        </tr>
-        <tr>
-            <th>Approved Amount</th>
-            <td><?= $response->transactionResponse->prePaidCard->approvedAmount ?></td>
-        </tr>
+            <?php if ($response->isPrePaidCard()) : ?>
+            <tr>
+                <th>Requested Amount</th>
+                <td><?= $response->transactionResponse->prePaidCard->requestedAmount ?></td>
+            </tr>
+            <tr>
+                <th>Approved Amount</th>
+                <td><?= $response->transactionResponse->prePaidCard->approvedAmount ?></td>
+            </tr>
+            <tr>
+                <th>Remaining Balance</th>
+                <td><?= $response->transactionResponse->prePaidCard->balanceOnCard ?></td>
+            </tr>
+            <?php endif; ?>
         <?php elseif ($response->isError()) : ?>
         <tr>
             <th>Error Code</th>

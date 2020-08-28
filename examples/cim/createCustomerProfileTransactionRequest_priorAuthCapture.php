@@ -67,7 +67,7 @@ SAMPLE RESPONSE
 
 *************************************************************************************************/
 
-namespace JohnConde\Authnet;
+namespace Authnetjson;
 
 use Exception;
 
@@ -144,20 +144,40 @@ try {
     </h2>
     <table>
         <tr>
-            <th>Response</th>
-            <td><?= $response->messages->resultCode ?></td>
-        </tr>
-        <tr>
-            <th>code</th>
-            <td><?= $response->messages->message[0]->code ?></td>
-        </tr>
-        <tr>
             <th>Successful?</th>
             <td><?= $response->isSuccessful() ? 'yes' : 'no' ?></td>
         </tr>
         <tr>
             <th>Error?</th>
             <td><?= $response->isError() ? 'yes' : 'no' ?></td>
+        </tr>
+        <tr>
+            <th>Result Code</th>
+            <td><?= $response->messages->resultCode ?></td>
+        </tr>
+        <tr>
+            <th>Message Code</th>
+            <td><?= $response->messages->message[0]->code ?></td>
+        </tr>
+        <tr>
+            <th>Message</th>
+            <td><?= $response->messages->message[0]->text ?></td>
+        </tr>
+        <tr>
+            <th>Transaction Approved?</th>
+            <td><?php echo ($response->isApproved()) ? 'yes' : 'no' ?></td>
+        </tr>
+        <tr>
+            <th>Authorization Code</th>
+            <td><?= $response->getTransactionResponseField('AuthorizationCode') ?></td>
+        </tr>
+        <tr>
+            <th>AVS Response</th>
+            <td><?= $response->getTransactionResponseField('AVSResponse') ?></td>
+        </tr>
+        <tr>
+            <th>Transaction ID</th>
+            <td><?= $response->getTransactionResponseField('TransactionID') ?></td>
         </tr>
     </table>
     <h2>
