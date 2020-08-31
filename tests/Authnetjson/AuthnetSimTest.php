@@ -9,8 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Authnetjson;
+namespace Authnetjson\tests;
 
+use Authnetjson\AuthnetApiFactory;
+use Authnetjson\Exception\AuthnetInvalidAmountException;
 use PHPUnit\Framework\TestCase;
 use ReflectionObject;
 
@@ -78,7 +80,7 @@ class AuthnetSimTest extends TestCase
 
     /**
      * @covers            \Authnetjson\AuthnetSim::getFingerprint()
-     * @covers            \Authnetjson\AuthnetInvalidAmountException::__construct()
+     * @covers            \Authnetjson\Exception\AuthnetInvalidAmountException::__construct()
      */
     public function testGetFingerprintException(): void
     {

@@ -9,8 +9,12 @@
  * file that was distributed with this source code.
  */
 
-namespace Authnetjson;
+namespace Authnetjson\tests;
 
+use Authnetjson\AuthnetApiFactory;
+use Authnetjson\AuthnetJsonRequest;
+use Authnetjson\Exception\AuthnetCannotSetParamsException;
+use Authnetjson\Exception\AuthnetCurlException;
 use PHPUnit\Framework\TestCase;
 use Curl\Curl;
 
@@ -39,7 +43,7 @@ class AuthnetJsonRequestTest extends TestCase
 
     /**
      * @covers            \Authnetjson\AuthnetJsonRequest::__set()
-     * @covers            \Authnetjson\AuthnetCannotSetParamsException::__construct()
+     * @covers            \Authnetjson\Exception\AuthnetCannotSetParamsException::__construct()
      */
     public function testExceptionIsRaisedForCannotSetParamsException(): void
     {
@@ -52,7 +56,7 @@ class AuthnetJsonRequestTest extends TestCase
 
     /**
      * @covers            \Authnetjson\AuthnetJsonRequest::process()
-     * @covers            \Authnetjson\AuthnetCurlException::__construct()
+     * @covers            \Authnetjson\Exception\AuthnetCurlException::__construct()
      * @uses              \Authnetjson\AuthnetApiFactory::getJsonApiHandler
      * @uses              \Authnetjson\AuthnetApiFactory::getWebServiceURL
      */
@@ -303,7 +307,7 @@ class AuthnetJsonRequestTest extends TestCase
 
     /**
      * @covers \Authnetjson\AuthnetJsonRequest::process()
-     * @covers \Authnetjson\AuthnetCurlException::__construct()
+     * @covers \Authnetjson\Exception\AuthnetCurlException::__construct()
      */
     public function testProcessError(): void
     {

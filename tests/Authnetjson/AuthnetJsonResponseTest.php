@@ -9,8 +9,15 @@
  * file that was distributed with this source code.
  */
 
-namespace Authnetjson;
+namespace Authnetjson\tests;
 
+use Authnetjson\AuthnetApiFactory;
+use Authnetjson\AuthnetJsonRequest;
+use Authnetjson\AuthnetJsonResponse;
+use Authnetjson\Exception\AuthnetCannotSetParamsException;
+use Authnetjson\Exception\AuthnetInvalidJsonException;
+use Authnetjson\Exception\AuthnetTransactionResponseCallException;
+use Authnetjson\TransactionResponse;
 use Curl\Curl;
 use PHPUnit\Framework\TestCase;
 
@@ -18,7 +25,7 @@ class AuthnetJsonResponseTest extends TestCase
 {
     /**
      * @covers            \Authnetjson\AuthnetJsonRequest::__set()
-     * @covers            \Authnetjson\AuthnetCannotSetParamsException::__construct()
+     * @covers            \Authnetjson\Exception\AuthnetCannotSetParamsException::__construct()
      */
     public function testExceptionIsRaisedForCannotSetParamsException(): void
     {
@@ -30,7 +37,7 @@ class AuthnetJsonResponseTest extends TestCase
 
     /**
      * @covers            \Authnetjson\AuthnetJsonResponse::__construct()
-     * @covers            \Authnetjson\AuthnetInvalidJsonException::__construct()
+     * @covers            \Authnetjson\Exception\AuthnetInvalidJsonException::__construct()
      */
     public function testExceptionIsRaisedForInvalidJsonException(): void
     {
@@ -120,6 +127,7 @@ class AuthnetJsonResponseTest extends TestCase
 
     /**
      * @covers            \Authnetjson\AuthnetJsonResponse::getTransactionResponseField()
+     * @covers            \Authnetjson\Exception\AuthnetTransactionResponseCallException::__construct()
      */
     public function testTransactionResponseException(): void
     {
@@ -314,7 +322,7 @@ class AuthnetJsonResponseTest extends TestCase
     }
 
     /**
-     * @covers            \Authnetjson\AuthnetTransactionResponseCallException::__construct()
+     * @covers            \Authnetjson\Exception\AuthnetTransactionResponseCallException::__construct()
      */
     public function testExceptionIsRaisedForTransactionResponseCall(): void
     {

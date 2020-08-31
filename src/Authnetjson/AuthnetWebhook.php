@@ -13,6 +13,9 @@ declare(strict_types=1);
 
 namespace Authnetjson;
 
+use Authnetjson\Exception\AuthnetInvalidCredentialsException;
+use Authnetjson\Exception\AuthnetInvalidJsonException;
+
 /**
  * Handles a Webhook notification from the Authorize.Net Webhooks API
  *

@@ -9,8 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Authnetjson;
+namespace Authnetjson\tests;
 
+use Authnetjson\AuthnetApiFactory;
+use Authnetjson\AuthnetJsonResponse;
 use PHPUnit\Framework\TestCase;
 use Curl\Curl;
 

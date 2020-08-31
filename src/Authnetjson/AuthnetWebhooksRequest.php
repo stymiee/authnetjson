@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Authnetjson;
 
+use Authnetjson\Exception\AuthnetCurlException;
 use Curl\Curl;
 
 /**

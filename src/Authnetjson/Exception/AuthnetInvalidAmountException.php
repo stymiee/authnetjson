@@ -11,7 +11,7 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Authnetjson;
+namespace Authnetjson\Exception;
 
 /**
  * Exception that is thrown when invalid amount to pay is provided for a SIM transaction

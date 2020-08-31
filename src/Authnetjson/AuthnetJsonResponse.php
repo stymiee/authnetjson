@@ -13,6 +13,9 @@ declare(strict_types=1);
 
 namespace Authnetjson;
 
+use Authnetjson\Exception\AuthnetInvalidJsonException;
+use Authnetjson\Exception\AuthnetTransactionResponseCallException;
+
 /**
  * Adapter for the Authorize.Net JSON API
  *
