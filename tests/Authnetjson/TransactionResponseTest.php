@@ -9,8 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Authnetjson;
+namespace Authnetjson\tests;
 
+use Authnetjson\AuthnetJsonResponse;
+use Authnetjson\TransactionResponse;
 use PHPUnit\Framework\TestCase;
 
 class TransactionResponseTest extends TestCase

@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Authnetjson;
 
+use Authnetjson\Exception\AuthnetCannotSetParamsException;
+use Authnetjson\Exception\AuthnetCurlException;
 use \Curl\Curl;
 
 /**
@@ -160,7 +162,6 @@ class AuthnetJsonRequest
      * @param  array  $args     the array to be passed to the API
      * @return AuthnetJsonResponse
      * @throws AuthnetCurlException
-     * @throws AuthnetInvalidJsonException
      */
     public function __call($api_call, array $args)
     {

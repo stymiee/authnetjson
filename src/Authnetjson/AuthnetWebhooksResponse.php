@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Authnetjson;
 
+use Authnetjson\Exception\AuthnetInvalidJsonException;
+
 /**
  * Adapter for the Authorize.Net Webhooks API
  *

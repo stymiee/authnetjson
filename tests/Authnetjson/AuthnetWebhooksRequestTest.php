@@ -9,8 +9,12 @@
  * file that was distributed with this source code.
  */
 
-namespace Authnetjson;
+namespace Authnetjson\tests;
 
+use Authnetjson\AuthnetApiFactory;
+use Authnetjson\AuthnetWebhooksRequest;
+use Authnetjson\AuthnetWebhooksResponse;
+use Authnetjson\Exception\AuthnetCurlException;
 use PHPUnit\Framework\TestCase;
 use Curl\Curl;
 
@@ -409,7 +413,7 @@ class AuthnetWebhooksRequestTest extends TestCase
 
     /**
      * @covers            \Authnetjson\AuthnetWebhooksRequest::handleResponse()
-     * @covers            \Authnetjson\AuthnetCurlException::__construct()
+     * @covers            \Authnetjson\Exception\AuthnetCurlException::__construct()
      */
     public function testHandleResponseWithErrorMessage(): void
     {
@@ -436,7 +440,7 @@ class AuthnetWebhooksRequestTest extends TestCase
 
     /**
      * @covers            \Authnetjson\AuthnetWebhooksRequest::handleResponse()
-     * @covers            \Authnetjson\AuthnetCurlException::__construct()
+     * @covers            \Authnetjson\Exception\AuthnetCurlException::__construct()
      */
     public function testHandleResponseWithErrorMessageTestMessage(): void
     {
@@ -468,7 +472,7 @@ class AuthnetWebhooksRequestTest extends TestCase
 
     /**
      * @covers            \Authnetjson\AuthnetWebhooksRequest::handleResponse()
-     * @covers            \Authnetjson\AuthnetCurlException::__construct()
+     * @covers            \Authnetjson\Exception\AuthnetCurlException::__construct()
      */
     public function testHandleResponseWithErrorMessageNoMessage(): void
     {

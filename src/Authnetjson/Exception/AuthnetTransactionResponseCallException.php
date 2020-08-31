@@ -11,7 +11,7 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Authnetjson;
+namespace Authnetjson\Exception;
 
 /**
  * Exception that is throw when transaction response data is requested on an API call that does not return any

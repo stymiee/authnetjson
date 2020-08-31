@@ -9,15 +9,17 @@
  * file that was distributed with this source code.
  */
 
-namespace Authnetjson;
+namespace Authnetjson\tests;
 
+use Authnetjson\AuthnetWebhooksResponse;
+use Authnetjson\Exception\AuthnetInvalidJsonException;
 use PHPUnit\Framework\TestCase;
 
 class AuthnetWebhooksResponseTest extends TestCase
 {
     /**
      * @covers            \Authnetjson\AuthnetWebhooksResponse::__construct()
-     * @covers            \Authnetjson\AuthnetInvalidJsonException::__construct()
+     * @covers            \Authnetjson\Exception\AuthnetInvalidJsonException::__construct()
      */
     public function testExceptionIsRaisedForInvalidJsonException(): void
     {

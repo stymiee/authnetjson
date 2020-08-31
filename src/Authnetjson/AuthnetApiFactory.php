@@ -13,6 +13,8 @@ declare(strict_types=1);
 
 namespace Authnetjson;
 
+use Authnetjson\Exception\AuthnetInvalidCredentialsException;
+use Authnetjson\Exception\AuthnetInvalidServerException;
 use Curl\Curl;
 use Exception;
 

@@ -9,8 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace Authnetjson;
+namespace Authnetjson\tests;
 
+use Authnetjson\AuthnetWebhook;
+use Authnetjson\Exception\AuthnetInvalidCredentialsException;
+use Authnetjson\Exception\AuthnetInvalidJsonException;
 use PHPUnit\Framework\TestCase;
 
 class AuthnetWebhookTest extends TestCase
@@ -38,7 +41,7 @@ class AuthnetWebhookTest extends TestCase
 
     /**
      * @covers            \Authnetjson\AuthnetWebhook::__construct()
-     * @covers            \Authnetjson\AuthnetInvalidCredentialsException::__construct()
+     * @covers            \Authnetjson\Exception\AuthnetInvalidCredentialsException::__construct()
      */
     public function testExceptionIsRaisedForNoSignature(): void
     {
@@ -48,7 +51,7 @@ class AuthnetWebhookTest extends TestCase
 
     /**
      * @covers            \Authnetjson\AuthnetWebhook::__construct()
-     * @covers            \Authnetjson\AuthnetInvalidJsonException::__construct()
+     * @covers            \Authnetjson\Exception\AuthnetInvalidJsonException::__construct()
      */
     public function testExceptionIsRaisedForCannotSetParamsException(): void
     {
