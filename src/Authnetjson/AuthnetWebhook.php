@@ -99,10 +99,10 @@ class AuthnetWebhook
     /**
      * Gets a response variable from the Webhook notification
      *
-     * @param  string $var
+     * @param string $var
      * @return string          requested variable from the API call response
      */
-    public function __get($var)
+    public function __get(string $var)
     {
         return $this->webhook->{$var};
     }

@@ -55,12 +55,12 @@ class AuthnetSim
      * Creates a SIM wrapper by setting the Authorize.Net credentials and URL of the endpoint to be used
      * for the API call
      *
-     * @param  string $login     Authorize.Net API login ID
-     * @param  string $signature Authorize.Net API Transaction Key
-     * @param  string $api_url   URL endpoint for processing a transaction
+     * @param string $login Authorize.Net API login ID
+     * @param string $signature Authorize.Net API Transaction Key
+     * @param string $api_url URL endpoint for processing a transaction
      * @throws Exception
      */
-    public function __construct($login, $signature, $api_url)
+    public function __construct(string $login, string $signature, string $api_url)
     {
         $this->login     = $login;
         $this->signature = $signature;
