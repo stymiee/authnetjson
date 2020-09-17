@@ -14,6 +14,7 @@ declare(strict_types=1);
 namespace Authnetjson;
 
 use Authnetjson\Exception\AuthnetCurlException;
+use Authnetjson\Exception\AuthnetInvalidJsonException;
 use Curl\Curl;
 
 /**
@@ -54,7 +55,7 @@ class AuthnetWebhooksRequest
      *
      * @param string $api_url URL endpoint for processing a transaction
      */
-    public function __construct($api_url)
+    public function __construct(string $api_url)
     {
         $this->url = $api_url;
     }
