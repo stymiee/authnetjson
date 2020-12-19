@@ -506,7 +506,7 @@ class AuthnetWebhooksRequestTest extends TestCase
      */
     public function testProcessorIsInstanceOfCurlWrapper(): void
     {
-        $request = new AuthnetWebhooksRequest(null, null, $this->server);
+        $request = new AuthnetWebhooksRequest('', '', $this->server);
         $request->setProcessHandler(new Curl());
 
         $reflectionOfRequest = new \ReflectionObject($request);
