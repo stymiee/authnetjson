@@ -146,6 +146,6 @@ class AuthnetWebhook
                 }
             }
         }
-        return $headers;
+        return $headers ?: [];
     }
 }
