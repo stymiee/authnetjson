@@ -96,7 +96,7 @@ use Exception;
 require '../../config.inc.php';
 
 try {
-    $request = AuthnetApiFactory::getJsonApiHandler(
+    $request = AuthnetApiFactory::getWebhooksHandler(
         AUTHNET_LOGIN,
         AUTHNET_TRANSKEY,
         AuthnetApiFactory::USE_DEVELOPMENT_SERVER

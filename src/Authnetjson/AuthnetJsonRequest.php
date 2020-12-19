@@ -15,6 +15,7 @@ namespace Authnetjson;
 
 use Authnetjson\Exception\AuthnetCannotSetParamsException;
 use Authnetjson\Exception\AuthnetCurlException;
+use Authnetjson\Exception\AuthnetInvalidJsonException;
 use \Curl\Curl;
 
 /**
@@ -145,11 +146,11 @@ class AuthnetJsonRequest
     /**
      * The __set() method should never be used as all values to be made in the API call must be passed as an array
      *
-     * @param  string $name  unused
-     * @param  mixed  $value unused
+     * @param string $name unused
+     * @param mixed $value unused
      * @throws AuthnetCannotSetParamsException
      */
-    public function __set($name, $value)
+    public function __set(string $name, $value)
     {
         throw new AuthnetCannotSetParamsException(sprintf('You cannot set parameters directly in %s.', __CLASS__));
     }
@@ -158,12 +159,13 @@ class AuthnetJsonRequest
      * Magic method that dynamically creates our API call based on the name of the method in the client code and
      * the array passed as its parameter.
      *
-     * @param  string $api_call name of the API call to be made
-     * @param  array  $args     the array to be passed to the API
+     * @param string $api_call name of the API call to be made
+     * @param array $args the array to be passed to the API
      * @return AuthnetJsonResponse
+     * @throws AuthnetInvalidJsonException
      * @throws AuthnetCurlException
      */
-    public function __call($api_call, array $args)
+    public function __call(string $api_call, array $args)
     {
         $authentication = [
             'merchantAuthentication' => [
@@ -225,7 +227,7 @@ class AuthnetJsonRequest
      *
      * @param Curl $processor
      */
-    public function setProcessHandler($processor): void
+    public function setProcessHandler(Curl $processor): void
     {
         $this->processor = $processor;
     }

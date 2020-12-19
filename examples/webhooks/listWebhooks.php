@@ -78,7 +78,7 @@ use Exception;
 require '../../config.inc.php';
 
 try {
-    $request = AuthnetApiFactory::getJsonApiHandler(
+    $request = AuthnetApiFactory::getWebhooksHandler(
         AUTHNET_LOGIN,
         AUTHNET_TRANSKEY,
         AuthnetApiFactory::USE_DEVELOPMENT_SERVER
@@ -114,11 +114,11 @@ try {
 <table>
     <tr>
         <th>Successful</th>
-        <td><?= ($successful) ? 'Yes' : 'No';?></td>
+        <td><?= ($successful) ? 'Yes' : 'No' ?></td>
     </tr>
     <?php
     if ($successful) {
-        foreach($response->getWebhooks() as $webhook) {
+        foreach ($response->getWebhooks() as $webhook) {
             ?>
             <tr>
                 <td colspan="2">
@@ -149,8 +149,7 @@ try {
             </tr>
             <?php
         }
-    }
-    elseif ($error) {
+    } elseif ($error) {
         ?>
         <tr>
             <th>Error message</th>

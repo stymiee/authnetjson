@@ -237,10 +237,10 @@ class AuthnetJsonResponse
      * Gets the transaction response field for AIM and CIM transactions.
      *
      * @param  mixed $field Name or key of the transaction field to be retrieved
-     * @return string Transaction field to be retrieved
+     * @return null|string Transaction field to be retrieved
      * @throws AuthnetTransactionResponseCallException
      */
-    public function getTransactionResponseField($field): string
+    public function getTransactionResponseField($field): ?string
     {
         if ($this->transactionInfo instanceof TransactionResponse) {
             return $this->transactionInfo->getTransactionResponseField($field);
