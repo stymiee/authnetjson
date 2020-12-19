@@ -65,7 +65,7 @@ class AuthnetWebhooksRequest
      *
      * @return string  HTML table containing debugging information
      */
-    public function __toString()
+    public function __toString(): string
     {
         $output  = '<table id="authnet-request">'."\n";
         $output .= '<caption>Authorize.Net Request</caption>'."\n";
