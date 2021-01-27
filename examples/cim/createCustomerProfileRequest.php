@@ -109,8 +109,8 @@ try {
                 ],
                 'payment' => [
                     'creditCard' => [
-                    'cardNumber' => '4111111111111111',
-                    'expirationDate' => '2020-08',
+                        'cardNumber' => '4111111111111111',
+                        'expirationDate' => '2020-08',
                     ],
                 ],
             ],
