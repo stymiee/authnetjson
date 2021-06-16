@@ -231,9 +231,10 @@ class AuthnetWebhooksRequest
         $this->endpoint = 'notifications';
         $this->url = sprintf('%s%s', $this->url, $this->endpoint);
         $response = $this->get(
-            $this->url, [
-            'offset' => $offset,
-            'limit'  => $limit
+            $this->url,
+            [
+                'offset' => $offset,
+                'limit'  => $limit
             ]
         );
         return new AuthnetWebhooksResponse($response);

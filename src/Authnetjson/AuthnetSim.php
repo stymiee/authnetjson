@@ -62,16 +62,16 @@ class AuthnetSim
      */
     public function __construct(string $login, string $signature, string $api_url)
     {
-        $this->login     = $login;
+        $this->login = $login;
         $this->signature = $signature;
-        $this->url       = $api_url;
+        $this->url = $api_url;
         $this->resetParameters();
     }
 
     /**
      * Returns the hash for the SIM transaction
      *
-     * @param  float $amount The amount of the transaction
+     * @param float $amount The amount of the transaction
      * @return string           Hash of five different unique transaction parameters
      * @throws AuthnetInvalidAmountException
      */
@@ -82,8 +82,10 @@ class AuthnetSim
         }
 
         return strtoupper(
-            hash_hmac('sha512',
-                sprintf('%s^%s^%s^%s^',
+            hash_hmac(
+                'sha512',
+                sprintf(
+                    '%s^%s^%s^%s^',
                     $this->login,
                     $this->sequence,
                     $this->timestamp,
@@ -141,7 +143,7 @@ class AuthnetSim
      */
     public function resetParameters(): void
     {
-        $this->sequence  = random_int(1, 1000);
+        $this->sequence = random_int(1, 1000);
         $this->timestamp = time();
     }
 }

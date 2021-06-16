@@ -16,7 +16,7 @@ namespace Authnetjson;
 use Authnetjson\Exception\AuthnetCannotSetParamsException;
 use Authnetjson\Exception\AuthnetCurlException;
 use Authnetjson\Exception\AuthnetInvalidJsonException;
-use \Curl\Curl;
+use Curl\Curl;
 
 /**
  * Creates a request to the Authorize.Net JSON endpoints.
