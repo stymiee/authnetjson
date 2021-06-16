@@ -109,7 +109,7 @@ try {
         AuthnetApiFactory::USE_DEVELOPMENT_SERVER
     );
     $response = $request->getTransactionDetailsRequest([
-        'transId' => '2162566217'
+        'transId' => '40067511400'
     ]);
 } catch (Exception $e) {
     echo $e;
@@ -165,7 +165,6 @@ try {
                 <b>Status</b>: <?php echo $response->transaction->transactionStatus; ?><br>
                 <b>Authorization Code</b>: <?php echo $response->transaction->authCode; ?><br>
                 <b>AVS Response</b>: <?php echo $response->transaction->AVSResponse; ?><br>
-                <b>Batch Id</b>: <?php echo $response->transaction->batch->batchId; ?>
             </td>
         </tr>
     </table>
