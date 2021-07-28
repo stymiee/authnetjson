@@ -70,6 +70,8 @@ class AuthnetApiFactory
         $curl->setOpt(CURLOPT_RETURNTRANSFER, true);
         $curl->setOpt(CURLOPT_SSL_VERIFYPEER, false);
         $curl->setOpt(CURLOPT_HEADER, false);
+        $curl->setOpt(CURLOPT_TIMEOUT, 10);
+        $curl->setOpt(CURLOPT_CONNECTTIMEOUT, 10);
         $curl->setHeader('Content-Type', 'text/json');
 
         $object = new AuthnetJsonRequest($login, $transaction_key, $api_url);
@@ -169,6 +171,8 @@ class AuthnetApiFactory
         $curl->setOpt(CURLOPT_RETURNTRANSFER, true);
         $curl->setOpt(CURLOPT_SSL_VERIFYPEER, false);
         $curl->setOpt(CURLOPT_HEADER, false);
+        $curl->setOpt(CURLOPT_TIMEOUT, 10);
+        $curl->setOpt(CURLOPT_CONNECTTIMEOUT, 10);
         $curl->setHeader('Content-Type', 'application/json');
         $curl->setHeader('Authorization', sprintf('Basic %s', $base64credentials));
 
