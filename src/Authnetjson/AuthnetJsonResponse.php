@@ -26,10 +26,10 @@ use Authnetjson\Exception\AuthnetTransactionResponseCallException;
  * @link      https://github.com/stymiee/authnetjson
  * @see       https://developer.authorize.net/api/reference/
  *
- * @property object  $messages
- * @property string  $directResponse
- * @property string  $validationDirectResponseList
- * @property object  $transactionResponse
+ * @property object $messages
+ * @property string $directResponse
+ * @property string $validationDirectResponseList
+ * @property object $transactionResponse
  *
  * @method null createTransactionRequest(array $array)                                 process a payment
  * @method null sendCustomerTransactionReceiptRequest(array $array)                    get a list of unsettled transactions
@@ -115,7 +115,7 @@ class AuthnetJsonResponse
     /**
      * Creates the response object with the response json returned from the API call
      *
-     * @param  string $responseJson Response from Authorize.Net
+     * @param string $responseJson Response from Authorize.Net
      * @throws AuthnetInvalidJsonException
      */
     public function __construct(string $responseJson)
@@ -128,9 +128,12 @@ class AuthnetJsonResponse
         if ($this->directResponse || $this->validationDirectResponseList || isset($this->response->validationDirectResponse)) {
             $response = $this->directResponse ?: $this->validationDirectResponseList ?: $this->response->validationDirectResponse;
             if (is_array($response)) {
-                $this->transactionInfoArray = array_map(static function ($r) {
-                    return new TransactionResponse($r);
-                }, $response);
+                $this->transactionInfoArray = array_map(
+                    static function ($r) {
+                        return new TransactionResponse($r);
+                    },
+                    $response
+                );
             } else {
                 $this->transactionInfo = new TransactionResponse($response);
                 $this->transactionInfoArray = [$this->transactionInfo];
@@ -145,12 +148,12 @@ class AuthnetJsonResponse
      */
     public function __toString()
     {
-        $output  = '<table id="authnet-response">'."\n";
-        $output .= '<caption>Authorize.Net Response</caption>'."\n";
-        $output .= '<tr><th colspan="2"><b>Response JSON</b></th></tr>'."\n";
-        $output .= '<tr><td colspan="2"><pre>'."\n";
-        $output .= $this->responseJson."\n";
-        $output .= '</pre></td></tr>'."\n";
+        $output = '<table id="authnet-response">' . "\n";
+        $output .= '<caption>Authorize.Net Response</caption>' . "\n";
+        $output .= '<tr><th colspan="2"><b>Response JSON</b></th></tr>' . "\n";
+        $output .= '<tr><td colspan="2"><pre>' . "\n";
+        $output .= $this->responseJson . "\n";
+        $output .= '</pre></td></tr>' . "\n";
         $output .= '</table>';
 
         return $output;
@@ -159,7 +162,7 @@ class AuthnetJsonResponse
     /**
      * Gets a response variable from the API response
      *
-     * @param  string $var unused
+     * @param string $var unused
      * @return string requested variable from the API call response
      */
     public function __get(string $var)
@@ -220,15 +223,15 @@ class AuthnetJsonResponse
     /**
      * Check to see if the ResponseCode matches the expected value
      *
-     * @param  int $status
+     * @param int $status
      * @return bool Check to see if the ResponseCode matches the expected value
      */
     protected function checkTransactionStatus(int $status): bool
     {
         if ($this->transactionInfo instanceof TransactionResponse) {
-            $match = (int) $this->transactionInfo->getTransactionResponseField('ResponseCode') === $status;
+            $match = (int)$this->transactionInfo->getTransactionResponseField('ResponseCode') === $status;
         } else {
-            $match = (int) $this->transactionResponse->responseCode === $status;
+            $match = (int)$this->transactionResponse->responseCode === $status;
         }
         return $match;
     }
@@ -236,7 +239,7 @@ class AuthnetJsonResponse
     /**
      * Gets the transaction response field for AIM and CIM transactions.
      *
-     * @param  mixed $field Name or key of the transaction field to be retrieved
+     * @param mixed $field Name or key of the transaction field to be retrieved
      * @return null|string Transaction field to be retrieved
      * @throws AuthnetTransactionResponseCallException
      */
@@ -299,7 +302,7 @@ class AuthnetJsonResponse
     }
 
     /**
-     * @param  string $type Whether to get the error code or text
+     * @param string $type Whether to get the error code or text
      * @return string
      */
     private function getError(string $type): string

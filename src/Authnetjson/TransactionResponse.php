@@ -29,15 +29,15 @@ class TransactionResponse
      * @var array Transaction response fields to map to values parsed from a transaction response string
      */
     private static $fieldMap = [
-        1 => 'ResponseCode',
-        2 => 'ResponseSubcode',
-        3 => 'ResponseReasonCode',
-        4 => 'ResponseReasonText',
-        5 => 'AuthorizationCode',
-        6 => 'AVSResponse',
-        7 => 'TransactionID',
-        8 => 'InvoiceNumber',
-        9 => 'Description',
+        1  => 'ResponseCode',
+        2  => 'ResponseSubcode',
+        3  => 'ResponseReasonCode',
+        4  => 'ResponseReasonText',
+        5  => 'AuthorizationCode',
+        6  => 'AVSResponse',
+        7  => 'TransactionID',
+        8  => 'InvoiceNumber',
+        9  => 'Description',
         10 => 'Amount',
         11 => 'Method',
         12 => 'TransactionType',
@@ -96,7 +96,7 @@ class TransactionResponse
      * can be accessed via it's numerical location in the array (starting at zero) or using the key for that field
      * as defined by Authorize.Net and mapped in self::$fieldMap.
      *
-     * @param  mixed $field Name or key of the transaction field to be retrieved
+     * @param mixed $field Name or key of the transaction field to be retrieved
      * @return string Transaction field to be retrieved
      */
     public function getTransactionResponseField($field): ?string

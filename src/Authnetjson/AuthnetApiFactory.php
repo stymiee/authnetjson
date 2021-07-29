@@ -57,10 +57,10 @@ class AuthnetApiFactory
      */
     public static function getJsonApiHandler(string $login, string $transaction_key, ?int $endpoint = null): object
     {
-        $login           = trim($login);
+        $login = trim($login);
         $transaction_key = trim($transaction_key);
-        $endpoint        = $endpoint ?? self::USE_CDN_SERVER;
-        $api_url         = static::getWebServiceURL($endpoint);
+        $endpoint = $endpoint ?? self::USE_CDN_SERVER;
+        $api_url = static::getWebServiceURL($endpoint);
 
         if (empty($login) || empty($transaction_key)) {
             throw new AuthnetInvalidCredentialsException('You have not configured your login credentials properly.');
@@ -83,7 +83,7 @@ class AuthnetApiFactory
     /**
      * Gets the API endpoint to be used for a JSON API call.
      *
-     * @param  int $server ID of which server to use
+     * @param int $server ID of which server to use
      * @return string                  The URL endpoint the request is to be sent to
      * @throws AuthnetInvalidServerException
      */
@@ -113,10 +113,10 @@ class AuthnetApiFactory
      */
     public static function getSimHandler(string $login, string $transaction_key, ?int $server = null): object
     {
-        $login           = trim($login);
+        $login = trim($login);
         $transaction_key = trim($transaction_key);
-        $server          = $server ?? self::USE_PRODUCTION_SERVER;
-        $api_url         = static::getSimURL($server);
+        $server = $server ?? self::USE_PRODUCTION_SERVER;
+        $api_url = static::getSimURL($server);
 
         if (empty($login) || empty($transaction_key)) {
             throw new AuthnetInvalidCredentialsException('You have not configured your login credentials properly.');
@@ -128,7 +128,7 @@ class AuthnetApiFactory
     /**
      * Gets the API endpoint to be used for a SIM API call.
      *
-     * @param  int $server ID of which server to use
+     * @param int $server ID of which server to use
      * @return string                  The URL endpoint the request is to be sent to
      * @throws AuthnetInvalidServerException
      */
@@ -156,10 +156,10 @@ class AuthnetApiFactory
      */
     public static function getWebhooksHandler(string $login, string $transaction_key, ?int $server = null): object
     {
-        $login           = trim($login);
+        $login = trim($login);
         $transaction_key = trim($transaction_key);
-        $server          = $server ?? self::USE_PRODUCTION_SERVER;
-        $api_url         = static::getWebhooksURL($server);
+        $server = $server ?? self::USE_PRODUCTION_SERVER;
+        $api_url = static::getWebhooksURL($server);
 
         if (empty($login) || empty($transaction_key)) {
             throw new AuthnetInvalidCredentialsException('You have not configured your login credentials properly.');
@@ -185,7 +185,7 @@ class AuthnetApiFactory
     /**
      * Gets the API endpoint to be used for a SIM API call.
      *
-     * @param  int $server ID of which server to use
+     * @param int $server ID of which server to use
      * @return string                  The URL endpoint the request is to be sent to
      * @throws AuthnetInvalidServerException
      */

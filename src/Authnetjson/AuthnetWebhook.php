@@ -51,17 +51,17 @@ class AuthnetWebhook
     /**
      * Creates the response object with the response json returned from the API call
      *
-     * @param  string $signature Authorize.Net Signature Key
-     * @param  string $payload   Webhook Notification sent by Authorize.Net
-     * @param  array  $headers   HTTP headers sent with Webhook. Optional if PHP is run as an Apache module
+     * @param string $signature Authorize.Net Signature Key
+     * @param string $payload Webhook Notification sent by Authorize.Net
+     * @param array $headers HTTP headers sent with Webhook. Optional if PHP is run as an Apache module
      * @throws AuthnetInvalidCredentialsException
      * @throws AuthnetInvalidJsonException
      */
     public function __construct(string $signature, string $payload, array $headers = [])
     {
-        $this->signature   = $signature;
+        $this->signature = $signature;
         $this->webhookJson = $payload;
-        $this->headers     = $headers;
+        $this->headers = $headers;
         if (empty($this->headers)) {
             $this->headers = $this->getAllHeaders();
         }
@@ -81,16 +81,16 @@ class AuthnetWebhook
      */
     public function __toString()
     {
-        $output  = '<table id="authnet-webhook">'."\n";
-        $output .= '<caption>Authorize.Net Webhook</caption>'."\n";
-        $output .= '<tr><th colspan="2"><b>Response HTTP Headers</b></th></tr>'."\n";
-        $output .= '<tr><td colspan="2"><pre>'."\n";
-        $output .= var_export($this->headers)."\n";
-        $output .= '</pre></td></tr>'."\n";
-        $output .= '<tr><th colspan="2"><b>Response JSON</b></th></tr>'."\n";
-        $output .= '<tr><td colspan="2"><pre>'."\n";
-        $output .= $this->webhookJson."\n";
-        $output .= '</pre></td></tr>'."\n";
+        $output = '<table id="authnet-webhook">' . "\n";
+        $output .= '<caption>Authorize.Net Webhook</caption>' . "\n";
+        $output .= '<tr><th colspan="2"><b>Response HTTP Headers</b></th></tr>' . "\n";
+        $output .= '<tr><td colspan="2"><pre>' . "\n";
+        $output .= var_export($this->headers) . "\n";
+        $output .= '</pre></td></tr>' . "\n";
+        $output .= '<tr><th colspan="2"><b>Response JSON</b></th></tr>' . "\n";
+        $output .= '<tr><td colspan="2"><pre>' . "\n";
+        $output .= $this->webhookJson . "\n";
+        $output .= '</pre></td></tr>' . "\n";
         $output .= '</table>';
 
         return $output;

@@ -40,7 +40,7 @@ class AuthnetWebhooksResponse
     /**
      * Creates the response object with the response json returned from the API call
      *
-     * @param  string $responseJson Response from Authorize.Net
+     * @param string $responseJson Response from Authorize.Net
      * @throws AuthnetInvalidJsonException
      */
     public function __construct(string $responseJson)
@@ -58,12 +58,12 @@ class AuthnetWebhooksResponse
      */
     public function __toString(): string
     {
-        $output  = '<table id="authnet-response">'."\n";
-        $output .= '<caption>Authorize.Net Webhook Response</caption>'."\n";
-        $output .= '<tr><th colspan="2"><b>Webhook Response JSON</b></th></tr>'."\n";
-        $output .= '<tr><td colspan="2"><pre>'."\n";
-        $output .= $this->responseJson."\n";
-        $output .= '</pre></td></tr>'."\n";
+        $output = '<table id="authnet-response">' . "\n";
+        $output .= '<caption>Authorize.Net Webhook Response</caption>' . "\n";
+        $output .= '<tr><th colspan="2"><b>Webhook Response JSON</b></th></tr>' . "\n";
+        $output .= '<tr><td colspan="2"><pre>' . "\n";
+        $output .= $this->responseJson . "\n";
+        $output .= '</pre></td></tr>' . "\n";
         $output .= '</table>';
 
         return $output;

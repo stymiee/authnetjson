@@ -108,15 +108,15 @@ class AuthnetJsonRequest
      * Creates the request object by setting the Authorize.Net credentials and URL of the endpoint to be used
      * for the API call.
      *
-     * @param string $login          Authorize.Net API login ID
+     * @param string $login Authorize.Net API login ID
      * @param string $transactionKey Authorize.Net API Transaction Key
-     * @param string $api_url        URL endpoint for processing a transaction
+     * @param string $api_url URL endpoint for processing a transaction
      */
     public function __construct(string $login, string $transactionKey, string $api_url)
     {
-        $this->login          = $login;
+        $this->login = $login;
         $this->transactionKey = $transactionKey;
-        $this->url            = $api_url;
+        $this->url = $api_url;
     }
 
     /**
@@ -126,17 +126,17 @@ class AuthnetJsonRequest
      */
     public function __toString()
     {
-        $output  = '<table id="authnet-request">'."\n";
-        $output .= '<caption>Authorize.Net Request</caption>'."\n";
-        $output .= '<tr><th colspan="2"><b>Class Parameters</b></th></tr>'."\n";
-        $output .= '<tr><td><b>API Login ID</b></td><td>'.$this->login.'</td></tr>'."\n";
-        $output .= '<tr><td><b>Transaction Key</b></td><td>'.$this->transactionKey.'</td></tr>'."\n";
-        $output .= '<tr><td><b>Authnet Server URL</b></td><td>'.$this->url.'</td></tr>'."\n";
-        $output .= '<tr><th colspan="2"><b>Request JSON</b></th></tr>'."\n";
+        $output = '<table id="authnet-request">' . "\n";
+        $output .= '<caption>Authorize.Net Request</caption>' . "\n";
+        $output .= '<tr><th colspan="2"><b>Class Parameters</b></th></tr>' . "\n";
+        $output .= '<tr><td><b>API Login ID</b></td><td>' . $this->login . '</td></tr>' . "\n";
+        $output .= '<tr><td><b>Transaction Key</b></td><td>' . $this->transactionKey . '</td></tr>' . "\n";
+        $output .= '<tr><td><b>Authnet Server URL</b></td><td>' . $this->url . '</td></tr>' . "\n";
+        $output .= '<tr><th colspan="2"><b>Request JSON</b></th></tr>' . "\n";
         if (!empty($this->requestJson)) {
-            $output .= '<tr><td colspan="2"><pre>'."\n";
-            $output .= $this->requestJson."\n";
-            $output .= '</pre></td></tr>'."\n";
+            $output .= '<tr><td colspan="2"><pre>' . "\n";
+            $output .= $this->requestJson . "\n";
+            $output .= '</pre></td></tr>' . "\n";
         }
         $output .= '</table>';
 
@@ -214,10 +214,10 @@ class AuthnetJsonRequest
             return $this->processor->response;
         }
         $error_message = null;
-        $error_code    = null;
+        $error_code = null;
         if ($this->processor->error_code || $this->processor->error_message) {
             $error_message = $this->processor->error_message;
-            $error_code    = $this->processor->error_code;
+            $error_code = $this->processor->error_code;
         }
         throw new AuthnetCurlException(sprintf('Connection error: %s (%s)', $error_message, $error_code));
     }
