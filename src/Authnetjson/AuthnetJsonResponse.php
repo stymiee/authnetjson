@@ -31,39 +31,39 @@ use Authnetjson\Exception\AuthnetTransactionResponseCallException;
  * @property string $validationDirectResponseList
  * @property object $transactionResponse
  *
- * @method null createTransactionRequest(array $array)                                 process a payment
- * @method null sendCustomerTransactionReceiptRequest(array $array)                    get a list of unsettled transactions
- * @method null ARBCancelSubscriptionRequest(array $array)                             cancel a subscription
- * @method null ARBCreateSubscriptionRequest(array $array)                             create a subscription
- * @method null ARBGetSubscriptionStatusRequest(array $array)                          get a subscription's status
- * @method null ARBUpdateSubscriptionRequest(array $array)                             update a subscription
- * @method null createCustomerPaymentProfileRequest(array $array)                      create a payment profile
- * @method null createCustomerProfileRequest(array $array)                             create a customer profile
- * @method null createCustomerProfileTransactionRequest_authCapture(array $array)      process an Authorization and Capture transaction (Sale)
- * @method null createCustomerProfileTransactionRequest_authOnly(array $array)         process an Authorization Only transaction
- * @method null createCustomerProfileTransactionRequest_captureOnly(array $array)      process a Capture Only transaction
- * @method null createCustomerProfileTransactionRequest_priorAuthCapture(array $array) process a Prior Authorization Capture transaction
- * @method null createCustomerProfileTransactionRequest_refund(array $array)           process a Refund (credit)
- * @method null createCustomerProfileTransactionRequest_void(array $array)             void a transaction
- * @method null createCustomerShippingAddressRequest(array $array)                     create a shipping profile
- * @method null deleteCustomerPaymentProfileRequest(array $array)                      delete a payment profile
- * @method null deleteCustomerProfileRequest(array $array)                             delete a customer profile
- * @method null deleteCustomerShippingAddressRequest(array $array)                     delete a shipping profile
- * @method null getCustomerPaymentProfileRequest(array $array)                         retrieve a payment profile
- * @method null getCustomerProfileIdsRequest(array $array)                             retrieve a list of profile IDs
- * @method null getCustomerProfileRequest(array $array)                                retrieve a customer profile
- * @method null getCustomerShippingAddressRequest(array $array)                        retrieve a shipping address
- * @method null getHostedProfilePageRequest(array $array)                              retrieve a hosted payment page token
- * @method null updateCustomerPaymentProfileRequest(array $array)                      update a customer profile
- * @method null updateCustomerProfileRequest(array $array)                             update a customer profile
- * @method null updateCustomerShippingAddressRequest(array $array)                     update a shipping address
- * @method null updateSplitTenderGroupRequest(array $array)                            update a split tender transaction
- * @method null validateCustomerPaymentProfileRequest(array $array)                    validate a payment profile
- * @method null getBatchStatisticsRequest(array $array)                                get a summary of a settled batch
- * @method null getSettledBatchListRequest(array $array)                               get a list of settled batches
- * @method null getTransactionDetailsRequest(array $array)                             get the details of a transaction
- * @method null getTransactionListRequest(array $array)                                get a list of transaction in a batch
- * @method null getUnsettledTransactionListRequest(array $array)                       get a list of unsettled transactions
+ * @method null createTransactionRequest(array $array)
+ * @method null sendCustomerTransactionReceiptRequest(array $array)
+ * @method null ARBCancelSubscriptionRequest(array $array)
+ * @method null ARBCreateSubscriptionRequest(array $array)
+ * @method null ARBGetSubscriptionStatusRequest(array $array)
+ * @method null ARBUpdateSubscriptionRequest(array $array)
+ * @method null createCustomerPaymentProfileRequest(array $array)
+ * @method null createCustomerProfileRequest(array $array)
+ * @method null createCustomerProfileTransactionRequest_authCapture(array $array)
+ * @method null createCustomerProfileTransactionRequest_authOnly(array $array)
+ * @method null createCustomerProfileTransactionRequest_captureOnly(array $array)
+ * @method null createCustomerProfileTransactionRequest_priorAuthCapture(array $array)
+ * @method null createCustomerProfileTransactionRequest_refund(array $array)
+ * @method null createCustomerProfileTransactionRequest_void(array $array)
+ * @method null createCustomerShippingAddressRequest(array $array)
+ * @method null deleteCustomerPaymentProfileRequest(array $array)
+ * @method null deleteCustomerProfileRequest(array $array)
+ * @method null deleteCustomerShippingAddressRequest(array $array)
+ * @method null getCustomerPaymentProfileRequest(array $array)
+ * @method null getCustomerProfileIdsRequest(array $array)
+ * @method null getCustomerProfileRequest(array $array)
+ * @method null getCustomerShippingAddressRequest(array $array)
+ * @method null getHostedProfilePageRequest(array $array)
+ * @method null updateCustomerPaymentProfileRequest(array $array)
+ * @method null updateCustomerProfileRequest(array $array)
+ * @method null updateCustomerShippingAddressRequest(array $array)
+ * @method null updateSplitTenderGroupRequest(array $array)
+ * @method null validateCustomerPaymentProfileRequest(array $array)
+ * @method null getBatchStatisticsRequest(array $array)
+ * @method null getSettledBatchListRequest(array $array)
+ * @method null getTransactionDetailsRequest(array $array)
+ * @method null getTransactionListRequest(array $array)
+ * @method null getUnsettledTransactionListRequest(array $array)
  */
 class AuthnetJsonResponse
 {
@@ -73,12 +73,12 @@ class AuthnetJsonResponse
     public const STATUS_APPROVED = 1;
 
     /**
-     * @const Indicates the status code of an declined transaction
+     * @const Indicates the status code of a declined transaction
      */
     public const STATUS_DECLINED = 2;
 
     /**
-     * @const Indicates the status code of an transaction which has encountered an error
+     * @const Indicates the status code of a transaction which has encountered an error
      */
     public const STATUS_ERROR = 3;
 
@@ -125,8 +125,12 @@ class AuthnetJsonResponse
             throw new AuthnetInvalidJsonException('Invalid JSON returned by the API');
         }
 
-        if ($this->directResponse || $this->validationDirectResponseList || isset($this->response->validationDirectResponse)) {
-            $response = $this->directResponse ?: $this->validationDirectResponseList ?: $this->response->validationDirectResponse;
+        if ($this->directResponse ||
+            $this->validationDirectResponseList ||
+            isset($this->response->validationDirectResponse)) {
+            $response = $this->directResponse ?:
+                $this->validationDirectResponseList ?:
+                $this->response->validationDirectResponse;
             if (is_array($response)) {
                 $this->transactionInfoArray = array_map(
                     static function ($r) {
@@ -142,7 +146,7 @@ class AuthnetJsonResponse
     }
 
     /**
-     * Outputs the response JSON in a human readable format
+     * Outputs the response JSON in a human-readable format
      *
      * @return string  HTML table containing debugging information
      */
