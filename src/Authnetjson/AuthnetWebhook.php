@@ -85,7 +85,7 @@ class AuthnetWebhook
         $output .= '<caption>Authorize.Net Webhook</caption>' . "\n";
         $output .= '<tr><th colspan="2"><b>Response HTTP Headers</b></th></tr>' . "\n";
         $output .= '<tr><td colspan="2"><pre>' . "\n";
-        $output .= var_export($this->headers) . "\n";
+        $output .= var_export($this->headers, true) . "\n";
         $output .= '</pre></td></tr>' . "\n";
         $output .= '<tr><th colspan="2"><b>Response JSON</b></th></tr>' . "\n";
         $output .= '<tr><td colspan="2"><pre>' . "\n";
