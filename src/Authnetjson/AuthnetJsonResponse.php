@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Authnetjson;
 
+use Authnetjson\Exception\AuthnetCannotSetParamsException;
 use Authnetjson\Exception\AuthnetInvalidJsonException;
 use Authnetjson\Exception\AuthnetTransactionResponseCallException;
 
@@ -167,18 +168,37 @@ class AuthnetJsonResponse
     /**
      * Gets a response variable from the API response
      *
-     * @param string $var unused
+     * @param string $key Name of the response key to be retrieved if it exists
      * @return string requested variable from the API call response
      */
-    public function __get(string $var)
+    public function __get(string $key)
     {
-        return $this->response->{$var} ?? null;
+        return $this->response->{$key} ?? null;
+    }
+
+    /**
+     * @throws AuthnetCannotSetParamsException
+     */
+    public function __set(string $key, $value)
+    {
+        throw new AuthnetCannotSetParamsException(sprintf('You cannot set parameters directly in %s.', __CLASS__));
+    }
+
+    /**
+     * Checks if a value exists in the response JSON object
+     *
+     * @param string $key Name of the response key to check existence of
+     * @return bool
+     */
+    public function __isset(string $key): bool
+    {
+        return isset($this->response->{$key});
     }
 
     /**
      * Checks if the API call is not in an error state
      *
-     * @return bool    Whether the transaction was in an successful state
+     * @return bool    Whether the transaction was in a successful state
      */
     public function isSuccessful(): bool
     {
