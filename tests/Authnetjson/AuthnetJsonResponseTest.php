@@ -24,8 +24,8 @@ use PHPUnit\Framework\TestCase;
 class AuthnetJsonResponseTest extends TestCase
 {
     /**
-     * @covers            \Authnetjson\AuthnetJsonRequest::__set()
-     * @covers            \Authnetjson\Exception\AuthnetCannotSetParamsException::__construct()
+     * @covers \Authnetjson\AuthnetJsonRequest::__set()
+     * @covers \Authnetjson\Exception\AuthnetCannotSetParamsException::__construct()
      */
     public function testExceptionIsRaisedForCannotSetParamsException(): void
     {
@@ -36,8 +36,8 @@ class AuthnetJsonResponseTest extends TestCase
     }
 
     /**
-     * @covers            \Authnetjson\AuthnetJsonResponse::__construct()
-     * @covers            \Authnetjson\Exception\AuthnetInvalidJsonException::__construct()
+     * @covers \Authnetjson\AuthnetJsonResponse::__construct()
+     * @covers \Authnetjson\Exception\AuthnetInvalidJsonException::__construct()
      */
     public function testExceptionIsRaisedForInvalidJsonException(): void
     {
@@ -48,8 +48,8 @@ class AuthnetJsonResponseTest extends TestCase
     }
 
     /**
-     * @covers            \Authnetjson\AuthnetJsonResponse::isSuccessful()
-     * @covers            \Authnetjson\AuthnetJsonResponse::isError()
+     * @covers \Authnetjson\AuthnetJsonResponse::isSuccessful()
+     * @covers \Authnetjson\AuthnetJsonResponse::isError()
      */
     public function testSuccessfulApiCall(): void
     {
@@ -75,8 +75,8 @@ class AuthnetJsonResponseTest extends TestCase
     }
 
     /**
-     * @covers            \Authnetjson\AuthnetJsonResponse::isSuccessful()
-     * @covers            \Authnetjson\AuthnetJsonResponse::isError()
+     * @covers \Authnetjson\AuthnetJsonResponse::isSuccessful()
+     * @covers \Authnetjson\AuthnetJsonResponse::isError()
      */
     public function testFailedApiCall(): void
     {
@@ -102,8 +102,8 @@ class AuthnetJsonResponseTest extends TestCase
     }
 
     /**
-     * @covers            \Authnetjson\AuthnetJsonResponse::getTransactionResponseField()
-     * @covers            \Authnetjson\TransactionResponse::getTransactionResponseField()
+     * @covers \Authnetjson\AuthnetJsonResponse::getTransactionResponseField()
+     * @covers \Authnetjson\TransactionResponse::getTransactionResponseField()
      */
     public function testTransactionResponse(): void
     {
@@ -126,8 +126,8 @@ class AuthnetJsonResponseTest extends TestCase
     }
 
     /**
-     * @covers            \Authnetjson\AuthnetJsonResponse::getTransactionResponseField()
-     * @covers            \Authnetjson\Exception\AuthnetTransactionResponseCallException::__construct()
+     * @covers \Authnetjson\AuthnetJsonResponse::getTransactionResponseField()
+     * @covers \Authnetjson\Exception\AuthnetTransactionResponseCallException::__construct()
      */
     public function testTransactionResponseException(): void
     {
@@ -139,7 +139,7 @@ class AuthnetJsonResponseTest extends TestCase
     }
 
     /**
-     * @covers            \Authnetjson\AuthnetJsonResponse::isApproved()
+     * @covers \Authnetjson\AuthnetJsonResponse::isApproved()
      */
     public function testIsApproved(): void
     {
@@ -165,7 +165,7 @@ class AuthnetJsonResponseTest extends TestCase
 
 
     /**
-     * @covers            \Authnetjson\AuthnetJsonResponse::isDeclined()
+     * @covers \Authnetjson\AuthnetJsonResponse::isDeclined()
      */
     public function testIsDeclined(): void
     {
@@ -190,7 +190,7 @@ class AuthnetJsonResponseTest extends TestCase
     }
 
     /**
-     * @covers            \Authnetjson\AuthnetJsonResponse::isPrePaidCard()
+     * @covers \Authnetjson\AuthnetJsonResponse::isPrePaidCard()
      */
     public function testIsPrePaidCard(): void
     {
@@ -240,7 +240,7 @@ class AuthnetJsonResponseTest extends TestCase
 
 
     /**
-     * @covers            \Authnetjson\AuthnetJsonResponse::__toString()
+     * @covers \Authnetjson\AuthnetJsonResponse::__toString()
      */
     public function testToString(): void
     {
@@ -271,7 +271,7 @@ class AuthnetJsonResponseTest extends TestCase
     }
 
     /**
-     * @covers            \Authnetjson\AuthnetJsonResponse::getRawResponse()
+     * @covers \Authnetjson\AuthnetJsonResponse::getRawResponse()
      */
     public function testGetRawResponse(): void
     {
@@ -298,7 +298,7 @@ class AuthnetJsonResponseTest extends TestCase
 
 
     /**
-     * @covers            \Authnetjson\AuthnetJsonResponse::__get()
+     * @covers \Authnetjson\AuthnetJsonResponse::__get()
      */
     public function testGet(): void
     {
@@ -322,7 +322,54 @@ class AuthnetJsonResponseTest extends TestCase
     }
 
     /**
-     * @covers            \Authnetjson\Exception\AuthnetTransactionResponseCallException::__construct()
+     * @covers \Authnetjson\AuthnetJsonResponse::__set()
+     */
+    public function testSet(): void
+    {
+        $this->expectException(AuthnetCannotSetParamsException::class);
+
+        $responseJson = '{
+           "refId":"2241729",
+           "messages":{
+              "resultCode":"Ok",
+              "message":[
+                 {
+                    "code":"I00001",
+                    "text":"Successful."
+                 }
+              ]
+           }
+        }';
+
+        $response = new AuthnetJsonResponse($responseJson);
+        $response->test = 'test';
+    }
+
+    /**
+     * @covers \Authnetjson\AuthnetJsonResponse::__isset()
+     */
+    public function testIsset(): void
+    {
+        $responseJson = '{
+           "refId":"2241729",
+           "messages":{
+              "resultCode":"Ok",
+              "message":[
+                 {
+                    "code":"I00001",
+                    "text":"Successful."
+                 }
+              ]
+           }
+        }';
+
+        $response = new AuthnetJsonResponse($responseJson);
+        $this->assertTrue(isset($response->refId));
+        $this->assertFalse(isset($response->test));
+    }
+
+    /**
+     * @covers \Authnetjson\Exception\AuthnetTransactionResponseCallException::__construct()
      */
     public function testExceptionIsRaisedForTransactionResponseCall(): void
     {
@@ -346,7 +393,7 @@ class AuthnetJsonResponseTest extends TestCase
     }
 
     /**
-     * @covers            \Authnetjson\AuthnetJsonResponse::checkTransactionStatus()
+     * @covers \Authnetjson\AuthnetJsonResponse::checkTransactionStatus()
      */
     public function testCheckTransactionStatusCim(): void
     {
@@ -373,7 +420,7 @@ class AuthnetJsonResponseTest extends TestCase
     }
 
     /**
-     * @covers            \Authnetjson\AuthnetJsonResponse::checkTransactionStatus()
+     * @covers \Authnetjson\AuthnetJsonResponse::checkTransactionStatus()
      */
     public function testCheckTransactionStatusAim(): void
     {
@@ -424,8 +471,8 @@ class AuthnetJsonResponseTest extends TestCase
     }
 
     /**
-     * @covers            \Authnetjson\AuthnetJsonResponse::getErrorText()
-     * @covers            \Authnetjson\AuthnetJsonResponse::getErrorCode()
+     * @covers \Authnetjson\AuthnetJsonResponse::getErrorText()
+     * @covers \Authnetjson\AuthnetJsonResponse::getErrorCode()
      */
     public function testGetErrorMethods(): void
     {
@@ -449,9 +496,9 @@ class AuthnetJsonResponseTest extends TestCase
     }
 
     /**
-     * @covers            \Authnetjson\AuthnetJsonResponse::getErrorText()
-     * @covers            \Authnetjson\AuthnetJsonResponse::getErrorCode()
-     * @covers            \Authnetjson\AuthnetJsonResponse::getError()
+     * @covers \Authnetjson\AuthnetJsonResponse::getErrorText()
+     * @covers \Authnetjson\AuthnetJsonResponse::getErrorCode()
+     * @covers \Authnetjson\AuthnetJsonResponse::getError()
      */
     public function testGetErrorTextAim(): void
     {
