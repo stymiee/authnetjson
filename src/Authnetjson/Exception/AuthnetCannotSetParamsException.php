@@ -14,7 +14,7 @@ declare(strict_types=1);
 namespace Authnetjson\Exception;
 
 /**
- * Exception that is throw when when client code attempts to set a parameter directly (i.e. using __set())
+ * Exception that is throw when client code attempts to set a parameter directly (i.e. using __set())
  *
  * echo $response->isError()    AuthnetJSON
  *
