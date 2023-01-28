@@ -68,12 +68,12 @@ class AuthnetJsonRequestTest extends TestCase
             'customerProfileId' => '123456789'
         );
 
-        $this->http = $this->getMockBuilder(Curl::class)
+        $http = $this->getMockBuilder(Curl::class)
             ->getMock();
-        $this->http->error = false;
+        $http->error = false;
 
-        $request = AuthnetApiFactory::getJsonApiHandler('asdcfvgbhn', 'asdcfvgbhn', AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
-        $request->setProcessHandler($this->http);
+        $request = AuthnetApiFactory::getJsonApiHandler('a', 'b', AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
+        $request->setProcessHandler($http);
         $request->deleteCustomerProfileRequest($requestJson);
     }
 
