@@ -34,10 +34,10 @@ class AuthnetJsonReportingTest extends TestCase
     }
 
     /**
-     * @covers            \Authnetjson\AuthnetJsonRequest::process()
+     * @covers \Authnetjson\AuthnetJsonRequest::process()
 
-     * @uses              \Authnetjson\AuthnetApiFactory::getJsonApiHandler
-     * @uses              \Authnetjson\AuthnetApiFactory::getWebServiceURL
+     * @uses \Authnetjson\AuthnetApiFactory::getJsonApiHandler
+     * @uses \Authnetjson\AuthnetApiFactory::getWebServiceURL
      */
     public function testGetUnsettledTransactionListRequestSuccess(): void
     {
@@ -152,10 +152,10 @@ class AuthnetJsonReportingTest extends TestCase
     }
 
     /**
-     * @covers            \Authnetjson\AuthnetJsonRequest::process()
+     * @covers \Authnetjson\AuthnetJsonRequest::process()
 
-     * @uses              \Authnetjson\AuthnetApiFactory::getJsonApiHandler
-     * @uses              \Authnetjson\AuthnetApiFactory::getWebServiceURL
+     * @uses \Authnetjson\AuthnetApiFactory::getJsonApiHandler
+     * @uses \Authnetjson\AuthnetApiFactory::getWebServiceURL
      */
     public function testGetTransactionListRequestSuccess(): void
     {
@@ -217,10 +217,10 @@ class AuthnetJsonReportingTest extends TestCase
     }
 
     /**
-     * @covers            \Authnetjson\AuthnetJsonRequest::process()
+     * @covers \Authnetjson\AuthnetJsonRequest::process()
 
-     * @uses              \Authnetjson\AuthnetApiFactory::getJsonApiHandler
-     * @uses              \Authnetjson\AuthnetApiFactory::getWebServiceURL
+     * @uses \Authnetjson\AuthnetApiFactory::getJsonApiHandler
+     * @uses \Authnetjson\AuthnetApiFactory::getWebServiceURL
      */
     public function testGetSettledBatchListRequestSuccess(): void
     {
@@ -392,10 +392,10 @@ class AuthnetJsonReportingTest extends TestCase
     }
 
     /**
-     * @covers            \Authnetjson\AuthnetJsonRequest::process()
+     * @covers \Authnetjson\AuthnetJsonRequest::process()
 
-     * @uses              \Authnetjson\AuthnetApiFactory::getJsonApiHandler
-     * @uses              \Authnetjson\AuthnetApiFactory::getWebServiceURL
+     * @uses \Authnetjson\AuthnetApiFactory::getJsonApiHandler
+     * @uses \Authnetjson\AuthnetApiFactory::getWebServiceURL
      */
     public function testGetSettledBatchListRequestNoRecords(): void
     {
@@ -428,10 +428,10 @@ class AuthnetJsonReportingTest extends TestCase
     }
 
     /**
-     * @covers            \Authnetjson\AuthnetJsonRequest::process()
+     * @covers \Authnetjson\AuthnetJsonRequest::process()
 
-     * @uses              \Authnetjson\AuthnetApiFactory::getJsonApiHandler
-     * @uses              \Authnetjson\AuthnetApiFactory::getWebServiceURL
+     * @uses \Authnetjson\AuthnetApiFactory::getJsonApiHandler
+     * @uses \Authnetjson\AuthnetApiFactory::getWebServiceURL
      */
     public function testGetBatchStatisticsRequestSuccess(): void
     {
@@ -525,10 +525,10 @@ class AuthnetJsonReportingTest extends TestCase
     }
 
     /**
-     * @covers            \Authnetjson\AuthnetJsonRequest::process()
+     * @covers \Authnetjson\AuthnetJsonRequest::process()
 
-     * @uses              \Authnetjson\AuthnetApiFactory::getJsonApiHandler
-     * @uses              \Authnetjson\AuthnetApiFactory::getWebServiceURL
+     * @uses \Authnetjson\AuthnetApiFactory::getJsonApiHandler
+     * @uses \Authnetjson\AuthnetApiFactory::getWebServiceURL
      */
     public function testGetBatchStatisticsRequestNoRecords(): void
     {
@@ -559,10 +559,10 @@ class AuthnetJsonReportingTest extends TestCase
     }
 
     /**
-     * @covers            \Authnetjson\AuthnetJsonRequest::process()
+     * @covers \Authnetjson\AuthnetJsonRequest::process()
 
-     * @uses              \Authnetjson\AuthnetApiFactory::getJsonApiHandler
-     * @uses              \Authnetjson\AuthnetApiFactory::getWebServiceURL
+     * @uses \Authnetjson\AuthnetApiFactory::getJsonApiHandler
+     * @uses \Authnetjson\AuthnetApiFactory::getWebServiceURL
      */
     public function testGetTransactionDetailsRequestSuccess(): void
     {

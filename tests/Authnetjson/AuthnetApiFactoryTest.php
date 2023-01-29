@@ -34,7 +34,7 @@ class AuthnetApiFactoryTest extends TestCase
     }
 
     /**
-     * @covers            \Authnetjson\AuthnetApiFactory::getWebServiceURL
+     * @covers \Authnetjson\AuthnetApiFactory::getWebServiceURL
      */
     public function testGetWebServiceUrlProductionServer(): void
     {
@@ -47,7 +47,7 @@ class AuthnetApiFactoryTest extends TestCase
     }
 
     /**
-     * @covers            \Authnetjson\AuthnetApiFactory::getWebServiceURL
+     * @covers \Authnetjson\AuthnetApiFactory::getWebServiceURL
      */
     public function testGetWebServiceUrlDevelopmentServer(): void
     {
@@ -60,7 +60,7 @@ class AuthnetApiFactoryTest extends TestCase
     }
 
     /**
-     * @covers            \Authnetjson\AuthnetApiFactory::getWebServiceURL
+     * @covers \Authnetjson\AuthnetApiFactory::getWebServiceURL
      */
     public function testGetWebServiceUrlCDNServer(): void
     {
@@ -73,9 +73,9 @@ class AuthnetApiFactoryTest extends TestCase
     }
 
     /**
-     * @covers            \Authnetjson\AuthnetApiFactory::getWebServiceURL
-     * @covers            \Authnetjson\Exception\AuthnetException::__construct()
-     * @covers            \Authnetjson\Exception\AuthnetInvalidServerException::__construct()
+     * @covers \Authnetjson\AuthnetApiFactory::getWebServiceURL
+     * @covers \Authnetjson\Exception\AuthnetException::__construct()
+     * @covers \Authnetjson\Exception\AuthnetInvalidServerException::__construct()
      */
     public function testGetWebServiceUrlBadServer(): void
     {
@@ -88,9 +88,9 @@ class AuthnetApiFactoryTest extends TestCase
     }
 
     /**
-     * @covers            \Authnetjson\AuthnetApiFactory::getJsonApiHandler
-     * @covers            \Authnetjson\Exception\AuthnetInvalidCredentialsException::__construct()
-     * @uses              \Authnetjson\AuthnetJsonRequest
+     * @covers \Authnetjson\AuthnetApiFactory::getJsonApiHandler
+     * @covers \Authnetjson\Exception\AuthnetInvalidCredentialsException::__construct()
+     * @uses \Authnetjson\AuthnetJsonRequest
      */
     public function testExceptionIsRaisedForInvalidCredentialsLogin(): void
     {
@@ -101,9 +101,9 @@ class AuthnetApiFactoryTest extends TestCase
     }
 
     /**
-     * @covers            \Authnetjson\AuthnetApiFactory::getJsonApiHandler
-     * @covers            \Authnetjson\Exception\AuthnetInvalidCredentialsException::__construct()
-     * @uses              \Authnetjson\AuthnetJsonRequest
+     * @covers \Authnetjson\AuthnetApiFactory::getJsonApiHandler
+     * @covers \Authnetjson\Exception\AuthnetInvalidCredentialsException::__construct()
+     * @uses \Authnetjson\AuthnetJsonRequest
      */
     public function testExceptionIsRaisedForInvalidCredentialsTransactionKey(): void
     {
@@ -114,8 +114,8 @@ class AuthnetApiFactoryTest extends TestCase
     }
 
     /**
-     * @covers            \Authnetjson\AuthnetApiFactory::getJsonApiHandler
-     * @covers            \Authnetjson\Exception\AuthnetInvalidServerException::__construct()
+     * @covers \Authnetjson\AuthnetApiFactory::getJsonApiHandler
+     * @covers \Authnetjson\Exception\AuthnetInvalidServerException::__construct()
      */
     public function testExceptionIsRaisedForAuthnetInvalidServer(): void
     {
@@ -125,8 +125,8 @@ class AuthnetApiFactoryTest extends TestCase
     }
 
     /**
-     * @covers            \Authnetjson\AuthnetApiFactory::getJsonApiHandler
-     * @uses              \Authnetjson\AuthnetJsonRequest
+     * @covers \Authnetjson\AuthnetApiFactory::getJsonApiHandler
+     * @uses \Authnetjson\AuthnetJsonRequest
      */
     public function testCurlWrapperProductionResponse(): void
     {
@@ -142,8 +142,8 @@ class AuthnetApiFactoryTest extends TestCase
     }
 
     /**
-     * @covers            \Authnetjson\AuthnetApiFactory::getJsonApiHandler
-     * @uses              \Authnetjson\AuthnetJsonRequest
+     * @covers \Authnetjson\AuthnetApiFactory::getJsonApiHandler
+     * @uses \Authnetjson\AuthnetJsonRequest
      */
     public function testCurlWrapperDevelopmentResponse(): void
     {
@@ -159,7 +159,7 @@ class AuthnetApiFactoryTest extends TestCase
     }
 
     /**
-     * @covers            \Authnetjson\AuthnetApiFactory::getSimHandler
+     * @covers \Authnetjson\AuthnetApiFactory::getSimHandler
      */
     public function testGetSimHandler(): void
     {
@@ -170,8 +170,8 @@ class AuthnetApiFactoryTest extends TestCase
     }
 
     /**
-     * @covers            \Authnetjson\AuthnetApiFactory::getSimHandler
-     * @covers            \Authnetjson\Exception\AuthnetInvalidCredentialsException::__construct()
+     * @covers \Authnetjson\AuthnetApiFactory::getSimHandler
+     * @covers \Authnetjson\Exception\AuthnetInvalidCredentialsException::__construct()
      */
     public function testExceptionIsRaisedForInvalidCredentialsSim(): void
     {
@@ -182,7 +182,7 @@ class AuthnetApiFactoryTest extends TestCase
     }
 
     /**
-     * @covers            \Authnetjson\AuthnetApiFactory::getSimURL
+     * @covers \Authnetjson\AuthnetApiFactory::getSimURL
      */
     public function testGetSimServerTest(): void
     {
@@ -195,7 +195,7 @@ class AuthnetApiFactoryTest extends TestCase
     }
 
     /**
-     * @covers            \Authnetjson\AuthnetApiFactory::getSimURL
+     * @covers \Authnetjson\AuthnetApiFactory::getSimURL
      */
     public function testGetSimServerProduction(): void
     {
@@ -208,8 +208,8 @@ class AuthnetApiFactoryTest extends TestCase
     }
 
     /**
-     * @covers            \Authnetjson\AuthnetApiFactory::getSimURL
-     * @covers            \Authnetjson\Exception\AuthnetInvalidServerException::__construct()
+     * @covers \Authnetjson\AuthnetApiFactory::getSimURL
+     * @covers \Authnetjson\Exception\AuthnetInvalidServerException::__construct()
      */
     public function testExceptionIsRaisedForAuthnetInvalidSimServer(): void
     {
@@ -219,9 +219,9 @@ class AuthnetApiFactoryTest extends TestCase
     }
 
     /**
-     * @covers            \Authnetjson\AuthnetApiFactory::getWebhooksHandler
-     * @covers            \Authnetjson\Exception\AuthnetInvalidCredentialsException::__construct()
-     * @uses              \Authnetjson\AuthnetWebhooksRequest
+     * @covers \Authnetjson\AuthnetApiFactory::getWebhooksHandler
+     * @covers \Authnetjson\Exception\AuthnetInvalidCredentialsException::__construct()
+     * @uses \Authnetjson\AuthnetWebhooksRequest
      */
     public function testExceptionIsRaisedForInvalidCredentialsLoginWebhooks(): void
     {
@@ -232,9 +232,9 @@ class AuthnetApiFactoryTest extends TestCase
     }
 
     /**
-     * @covers            \Authnetjson\AuthnetApiFactory::getWebhooksHandler
-     * @covers            \Authnetjson\Exception\AuthnetInvalidCredentialsException::__construct()
-     * @uses              \Authnetjson\AuthnetWebhooksRequest
+     * @covers \Authnetjson\AuthnetApiFactory::getWebhooksHandler
+     * @covers \Authnetjson\Exception\AuthnetInvalidCredentialsException::__construct()
+     * @uses \Authnetjson\AuthnetWebhooksRequest
      */
     public function testExceptionIsRaisedForInvalidCredentialsTransactionKeyWebhooks(): void
     {
@@ -245,8 +245,8 @@ class AuthnetApiFactoryTest extends TestCase
     }
 
     /**
-     * @covers            \Authnetjson\AuthnetApiFactory::getWebhooksHandler
-     * @covers            \Authnetjson\Exception\AuthnetInvalidServerException::__construct()
+     * @covers \Authnetjson\AuthnetApiFactory::getWebhooksHandler
+     * @covers \Authnetjson\Exception\AuthnetInvalidServerException::__construct()
      */
     public function testExceptionIsRaisedForAuthnetInvalidServerWebhooks(): void
     {
@@ -256,8 +256,8 @@ class AuthnetApiFactoryTest extends TestCase
     }
 
     /**
-     * @covers            \Authnetjson\AuthnetApiFactory::getWebhooksHandler
-     * @uses              \Authnetjson\AuthnetWebhooksRequest
+     * @covers \Authnetjson\AuthnetApiFactory::getWebhooksHandler
+     * @uses \Authnetjson\AuthnetWebhooksRequest
      */
     public function testCurlWrapperProductionResponseWebhooks(): void
     {
@@ -273,8 +273,8 @@ class AuthnetApiFactoryTest extends TestCase
     }
 
     /**
-     * @covers            \Authnetjson\AuthnetApiFactory::getWebhooksHandler
-     * @uses              \Authnetjson\AuthnetWebhooksRequest
+     * @covers \Authnetjson\AuthnetApiFactory::getWebhooksHandler
+     * @uses \Authnetjson\AuthnetWebhooksRequest
      */
     public function testCurlWrapperDevelopmentResponseWebhooks(): void
     {
@@ -290,7 +290,7 @@ class AuthnetApiFactoryTest extends TestCase
     }
 
     /**
-     * @covers            \Authnetjson\AuthnetApiFactory::getWebhooksURL
+     * @covers \Authnetjson\AuthnetApiFactory::getWebhooksURL
      */
     public function testGetWebhooksUrlProductionServer(): void
     {
@@ -303,7 +303,7 @@ class AuthnetApiFactoryTest extends TestCase
     }
 
     /**
-     * @covers            \Authnetjson\AuthnetApiFactory::getWebhooksURL
+     * @covers \Authnetjson\AuthnetApiFactory::getWebhooksURL
      */
     public function testGetWebhooksUrlDevelopmentServer(): void
     {
@@ -316,8 +316,8 @@ class AuthnetApiFactoryTest extends TestCase
     }
 
     /**
-     * @covers            \Authnetjson\AuthnetApiFactory::getWebhooksURL
-     * @covers            \Authnetjson\Exception\AuthnetInvalidServerException::__construct()
+     * @covers \Authnetjson\AuthnetApiFactory::getWebhooksURL
+     * @covers \Authnetjson\Exception\AuthnetInvalidServerException::__construct()
      */
     public function testGetWebhooksUrlBadServer(): void
     {

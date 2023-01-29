@@ -19,7 +19,7 @@ use PHPUnit\Framework\TestCase;
 class AuthnetWebhookTest extends TestCase
 {
     /**
-     * @covers            \Authnetjson\AuthnetWebhook::__construct()
+     * @covers \Authnetjson\AuthnetWebhook::__construct()
      */
     public function testConstructor(): void
     {
@@ -40,8 +40,8 @@ class AuthnetWebhookTest extends TestCase
     }
 
     /**
-     * @covers            \Authnetjson\AuthnetWebhook::__construct()
-     * @covers            \Authnetjson\Exception\AuthnetInvalidCredentialsException::__construct()
+     * @covers \Authnetjson\AuthnetWebhook::__construct()
+     * @covers \Authnetjson\Exception\AuthnetInvalidCredentialsException::__construct()
      */
     public function testExceptionIsRaisedForNoSignature(): void
     {
@@ -50,8 +50,8 @@ class AuthnetWebhookTest extends TestCase
     }
 
     /**
-     * @covers            \Authnetjson\AuthnetWebhook::__construct()
-     * @covers            \Authnetjson\Exception\AuthnetInvalidJsonException::__construct()
+     * @covers \Authnetjson\AuthnetWebhook::__construct()
+     * @covers \Authnetjson\Exception\AuthnetInvalidJsonException::__construct()
      */
     public function testExceptionIsRaisedForCannotSetParamsException(): void
     {
@@ -60,7 +60,7 @@ class AuthnetWebhookTest extends TestCase
     }
 
     /**
-     * @covers            \Authnetjson\AuthnetWebhook::__toString()
+     * @covers \Authnetjson\AuthnetWebhook::__toString()
      */
     public function testToString(): void
     {
@@ -82,7 +82,7 @@ class AuthnetWebhookTest extends TestCase
     }
 
     /**
-     * @covers            \Authnetjson\AuthnetWebhook::__get()
+     * @covers \Authnetjson\AuthnetWebhook::__get()
      */
     public function testGet(): void
     {
@@ -99,7 +99,7 @@ class AuthnetWebhookTest extends TestCase
     }
 
     /**
-     * @covers            \Authnetjson\AuthnetWebhook::isValid()
+     * @covers \Authnetjson\AuthnetWebhook::isValid()
      */
     public function testIsValidCamelCase(): void
     {
@@ -115,7 +115,7 @@ class AuthnetWebhookTest extends TestCase
     }
 
     /**
-     * @covers            \Authnetjson\AuthnetWebhook::isValid()
+     * @covers \Authnetjson\AuthnetWebhook::isValid()
      */
     public function testIsValidUpperCase(): void
     {
@@ -131,7 +131,7 @@ class AuthnetWebhookTest extends TestCase
     }
 
     /**
-     * @covers            \Authnetjson\AuthnetWebhook::isValid()
+     * @covers \Authnetjson\AuthnetWebhook::isValid()
      */
     public function testIsValidFailure(): void
     {
@@ -147,7 +147,7 @@ class AuthnetWebhookTest extends TestCase
     }
 
     /**
-     * @covers            \Authnetjson\AuthnetWebhook::getRequestId()
+     * @covers \Authnetjson\AuthnetWebhook::getRequestId()
      */
     public function testGetRequestId(): void
     {
@@ -164,7 +164,7 @@ class AuthnetWebhookTest extends TestCase
     }
 
     /**
-     * @covers            \Authnetjson\AuthnetWebhook::getAllHeaders()
+     * @covers \Authnetjson\AuthnetWebhook::getAllHeaders()
      */
     public function testGetAllHeaders(): void
     {

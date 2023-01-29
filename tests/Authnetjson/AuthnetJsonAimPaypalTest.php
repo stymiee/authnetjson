@@ -35,10 +35,10 @@ class AuthnetJsonAimPaypalTest extends TestCase
     }
 
     /**
-    * @covers            \Authnetjson\AuthnetJsonRequest::process()
+    * @covers \Authnetjson\AuthnetJsonRequest::process()
     *
-    * @uses              \Authnetjson\AuthnetApiFactory::getJsonApiHandler
-    * @uses              \Authnetjson\AuthnetApiFactory::getWebServiceURL
+    * @uses \Authnetjson\AuthnetApiFactory::getJsonApiHandler
+    * @uses \Authnetjson\AuthnetApiFactory::getWebServiceURL
     */
     public function testCreateTransactionRequestAuthCapture(): void
     {
@@ -106,10 +106,10 @@ class AuthnetJsonAimPaypalTest extends TestCase
     }
 
     /**
-     * @covers            \Authnetjson\AuthnetJsonRequest::process()
+     * @covers \Authnetjson\AuthnetJsonRequest::process()
      *
-     * @uses              \Authnetjson\AuthnetApiFactory::getJsonApiHandler
-     * @uses              \Authnetjson\AuthnetApiFactory::getWebServiceURL
+     * @uses \Authnetjson\AuthnetApiFactory::getJsonApiHandler
+     * @uses \Authnetjson\AuthnetApiFactory::getWebServiceURL
      */
     public function testCreateTransactionRequestAuthCaptureContinue(): void
     {
@@ -170,10 +170,10 @@ class AuthnetJsonAimPaypalTest extends TestCase
     }
 
     /**
-     * @covers            \Authnetjson\AuthnetJsonRequest::process()
+     * @covers \Authnetjson\AuthnetJsonRequest::process()
      *
-     * @uses              \Authnetjson\AuthnetApiFactory::getJsonApiHandler
-     * @uses              \Authnetjson\AuthnetApiFactory::getWebServiceURL
+     * @uses \Authnetjson\AuthnetApiFactory::getJsonApiHandler
+     * @uses \Authnetjson\AuthnetApiFactory::getWebServiceURL
      */
     public function testCreateTransactionRequestAuthOnly(): void
     {
@@ -238,10 +238,10 @@ class AuthnetJsonAimPaypalTest extends TestCase
 
 
     /**
-     * @covers            \Authnetjson\AuthnetJsonRequest::process()
+     * @covers \Authnetjson\AuthnetJsonRequest::process()
      *
-     * @uses              \Authnetjson\AuthnetApiFactory::getJsonApiHandler
-     * @uses              \Authnetjson\AuthnetApiFactory::getWebServiceURL
+     * @uses \Authnetjson\AuthnetApiFactory::getJsonApiHandler
+     * @uses \Authnetjson\AuthnetApiFactory::getWebServiceURL
      */
     public function testCreateTransactionRequestAuthOnlyContinue(): void
     {
@@ -302,10 +302,10 @@ class AuthnetJsonAimPaypalTest extends TestCase
     }
 
     /**
-     * @covers            \Authnetjson\AuthnetJsonRequest::process()
+     * @covers \Authnetjson\AuthnetJsonRequest::process()
      *
-     * @uses              \Authnetjson\AuthnetApiFactory::getJsonApiHandler
-     * @uses              \Authnetjson\AuthnetApiFactory::getWebServiceURL
+     * @uses \Authnetjson\AuthnetApiFactory::getJsonApiHandler
+     * @uses \Authnetjson\AuthnetApiFactory::getWebServiceURL
      */
     public function testCreateTransactionRequestGetDetails(): void
     {
@@ -361,10 +361,10 @@ class AuthnetJsonAimPaypalTest extends TestCase
     }
 
     /**
-     * @covers            \Authnetjson\AuthnetJsonRequest::process()
+     * @covers \Authnetjson\AuthnetJsonRequest::process()
      *
-     * @uses              \Authnetjson\AuthnetApiFactory::getJsonApiHandler
-     * @uses              \Authnetjson\AuthnetApiFactory::getWebServiceURL
+     * @uses \Authnetjson\AuthnetApiFactory::getJsonApiHandler
+     * @uses \Authnetjson\AuthnetApiFactory::getWebServiceURL
      */
     public function testCreateTransactionRequestPriorAuthCapture(): void
     {
@@ -420,10 +420,10 @@ class AuthnetJsonAimPaypalTest extends TestCase
     }
 
     /**
-     * @covers            \Authnetjson\AuthnetJsonRequest::process()
+     * @covers \Authnetjson\AuthnetJsonRequest::process()
      *
-     * @uses              \Authnetjson\AuthnetApiFactory::getJsonApiHandler
-     * @uses              \Authnetjson\AuthnetApiFactory::getWebServiceURL
+     * @uses \Authnetjson\AuthnetApiFactory::getJsonApiHandler
+     * @uses \Authnetjson\AuthnetApiFactory::getWebServiceURL
      */
     public function testCreateTransactionRequestRefund(): void
     {
@@ -474,10 +474,10 @@ class AuthnetJsonAimPaypalTest extends TestCase
     }
 
     /**
-     * @covers            \Authnetjson\AuthnetJsonRequest::process()
+     * @covers \Authnetjson\AuthnetJsonRequest::process()
      *
-     * @uses              \Authnetjson\AuthnetApiFactory::getJsonApiHandler
-     * @uses              \Authnetjson\AuthnetApiFactory::getWebServiceURL
+     * @uses \Authnetjson\AuthnetApiFactory::getJsonApiHandler
+     * @uses \Authnetjson\AuthnetApiFactory::getWebServiceURL
      */
     public function testCreateTransactionRequestVoid(): void
     {
@@ -534,10 +534,10 @@ class AuthnetJsonAimPaypalTest extends TestCase
 
 
     /**
-     * @covers            \Authnetjson\AuthnetJsonRequest::process()
+     * @covers \Authnetjson\AuthnetJsonRequest::process()
 
-     * @uses              \Authnetjson\AuthnetApiFactory::getJsonApiHandler
-     * @uses              \Authnetjson\AuthnetApiFactory::getWebServiceURL
+     * @uses \Authnetjson\AuthnetApiFactory::getJsonApiHandler
+     * @uses \Authnetjson\AuthnetApiFactory::getWebServiceURL
      */
     public function testCreateTransactionRequestAuthCaptureError(): void
     {
@@ -610,10 +610,10 @@ class AuthnetJsonAimPaypalTest extends TestCase
 
 
     /**
-     * @covers            \Authnetjson\AuthnetJsonRequest::process()
+     * @covers \Authnetjson\AuthnetJsonRequest::process()
 
-     * @uses              \Authnetjson\AuthnetApiFactory::getJsonApiHandler
-     * @uses              \Authnetjson\AuthnetApiFactory::getWebServiceURL
+     * @uses \Authnetjson\AuthnetApiFactory::getJsonApiHandler
+     * @uses \Authnetjson\AuthnetApiFactory::getWebServiceURL
      */
     public function testCreateTransactionRequestGetDetailsError(): void
     {
@@ -673,10 +673,10 @@ class AuthnetJsonAimPaypalTest extends TestCase
 
 
     /**
-     * @covers            \Authnetjson\AuthnetJsonRequest::process()
+     * @covers \Authnetjson\AuthnetJsonRequest::process()
 
-     * @uses              \Authnetjson\AuthnetApiFactory::getJsonApiHandler
-     * @uses              \Authnetjson\AuthnetApiFactory::getWebServiceURL
+     * @uses \Authnetjson\AuthnetApiFactory::getJsonApiHandler
+     * @uses \Authnetjson\AuthnetApiFactory::getWebServiceURL
      */
     public function testCreateTransactionRequestRefundError(): void
     {

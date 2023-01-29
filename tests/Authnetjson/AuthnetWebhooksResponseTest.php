@@ -18,8 +18,8 @@ use PHPUnit\Framework\TestCase;
 class AuthnetWebhooksResponseTest extends TestCase
 {
     /**
-     * @covers            \Authnetjson\AuthnetWebhooksResponse::__construct()
-     * @covers            \Authnetjson\Exception\AuthnetInvalidJsonException::__construct()
+     * @covers \Authnetjson\AuthnetWebhooksResponse::__construct()
+     * @covers \Authnetjson\Exception\AuthnetInvalidJsonException::__construct()
      */
     public function testExceptionIsRaisedForInvalidJsonException(): void
     {
@@ -28,7 +28,7 @@ class AuthnetWebhooksResponseTest extends TestCase
     }
 
     /**
-     * @covers            \Authnetjson\AuthnetWebhooksResponse::__construct()
+     * @covers \Authnetjson\AuthnetWebhooksResponse::__construct()
      */
     public function testConstruct(): void
     {
@@ -48,7 +48,7 @@ class AuthnetWebhooksResponseTest extends TestCase
     }
 
     /**
-     * @covers            \Authnetjson\AuthnetWebhooksResponse::__toString()
+     * @covers \Authnetjson\AuthnetWebhooksResponse::__toString()
      */
     public function testToString(): void
     {
@@ -72,7 +72,7 @@ class AuthnetWebhooksResponseTest extends TestCase
     }
 
     /**
-     * @covers            \Authnetjson\AuthnetWebhooksResponse::getEventTypes()
+     * @covers \Authnetjson\AuthnetWebhooksResponse::getEventTypes()
      */
     public function testGetEventTypes(): void
     {
@@ -93,7 +93,7 @@ class AuthnetWebhooksResponseTest extends TestCase
     }
 
     /**
-     * @covers            \Authnetjson\AuthnetWebhooksResponse::getEventTypes()
+     * @covers \Authnetjson\AuthnetWebhooksResponse::getEventTypes()
      */
     public function testGetEventTypesFromWebhooks(): void
     {
@@ -124,7 +124,7 @@ class AuthnetWebhooksResponseTest extends TestCase
     }
 
     /**
-     * @covers            \Authnetjson\AuthnetWebhooksResponse::getWebhooksId()
+     * @covers \Authnetjson\AuthnetWebhooksResponse::getWebhooksId()
      */
     public function testGetWebhooksId(): void
     {
@@ -151,7 +151,7 @@ class AuthnetWebhooksResponseTest extends TestCase
     }
 
     /**
-     * @covers            \Authnetjson\AuthnetWebhooksResponse::getStatus()
+     * @covers \Authnetjson\AuthnetWebhooksResponse::getStatus()
      */
     public function testGetStatus(): void
     {
@@ -178,7 +178,7 @@ class AuthnetWebhooksResponseTest extends TestCase
     }
 
     /**
-     * @covers            \Authnetjson\AuthnetWebhooksResponse::getUrl()
+     * @covers \Authnetjson\AuthnetWebhooksResponse::getUrl()
      */
     public function testGetUrl(): void
     {
@@ -205,7 +205,7 @@ class AuthnetWebhooksResponseTest extends TestCase
     }
 
     /**
-     * @covers            \Authnetjson\AuthnetWebhooksResponse::getWebhooks()
+     * @covers \Authnetjson\AuthnetWebhooksResponse::getWebhooks()
      */
     public function testGetWebhooks(): void
     {
@@ -267,11 +267,11 @@ class AuthnetWebhooksResponseTest extends TestCase
     }
 
     /**
-     * @covers            \Authnetjson\AuthnetWebhooksResponse::getNotificationHistory()
-     * @covers            \Authnetjson\AuthnetWebhooksResponse::getNotificationId()
-     * @covers            \Authnetjson\AuthnetWebhooksResponse::getDeliveryStatus()
-     * @covers            \Authnetjson\AuthnetWebhooksResponse::getEventType()
-     * @covers            \Authnetjson\AuthnetWebhooksResponse::getEventDate()
+     * @covers \Authnetjson\AuthnetWebhooksResponse::getNotificationHistory()
+     * @covers \Authnetjson\AuthnetWebhooksResponse::getNotificationId()
+     * @covers \Authnetjson\AuthnetWebhooksResponse::getDeliveryStatus()
+     * @covers \Authnetjson\AuthnetWebhooksResponse::getEventType()
+     * @covers \Authnetjson\AuthnetWebhooksResponse::getEventDate()
      */
     public function testGetNotificationHistory(): void
     {

@@ -32,7 +32,7 @@ class AuthnetSimTest extends TestCase
     }
 
     /**
-     * @covers            \Authnetjson\AuthnetSim::__construct()
+     * @covers \Authnetjson\AuthnetSim::__construct()
      */
     public function testConstructor(): void
     {
@@ -49,7 +49,7 @@ class AuthnetSimTest extends TestCase
     }
 
     /**
-     * @covers            \Authnetjson\AuthnetSim::getFingerprint()
+     * @covers \Authnetjson\AuthnetSim::getFingerprint()
      */
     public function testGetFingerprint(): void
     {
@@ -79,8 +79,8 @@ class AuthnetSimTest extends TestCase
     }
 
     /**
-     * @covers            \Authnetjson\AuthnetSim::getFingerprint()
-     * @covers            \Authnetjson\Exception\AuthnetInvalidAmountException::__construct()
+     * @covers \Authnetjson\AuthnetSim::getFingerprint()
+     * @covers \Authnetjson\Exception\AuthnetInvalidAmountException::__construct()
      */
     public function testGetFingerprintException(): void
     {
@@ -92,7 +92,7 @@ class AuthnetSimTest extends TestCase
     }
 
     /**
-     * @covers            \Authnetjson\AuthnetSim::getSequence()
+     * @covers \Authnetjson\AuthnetSim::getSequence()
      */
     public function testGetSequence(): void
     {
@@ -107,7 +107,7 @@ class AuthnetSimTest extends TestCase
     }
 
     /**
-     * @covers            \Authnetjson\AuthnetSim::getTimestamp()
+     * @covers \Authnetjson\AuthnetSim::getTimestamp()
      */
     public function testGetTimestamp(): void
     {
@@ -122,7 +122,7 @@ class AuthnetSimTest extends TestCase
     }
 
     /**
-     * @covers            \Authnetjson\AuthnetSim::getLogin()
+     * @covers \Authnetjson\AuthnetSim::getLogin()
      */
     public function testGetLogin(): void
     {
@@ -137,7 +137,7 @@ class AuthnetSimTest extends TestCase
     }
 
     /**
-     * @covers            \Authnetjson\AuthnetSim::getEndpoint()
+     * @covers \Authnetjson\AuthnetSim::getEndpoint()
      */
     public function testGetEndpoint(): void
     {
@@ -152,7 +152,7 @@ class AuthnetSimTest extends TestCase
     }
 
     /**
-     * @covers            \Authnetjson\AuthnetSim::resetParameters()
+     * @covers \Authnetjson\AuthnetSim::resetParameters()
      */
     public function testResetParameters(): void
     {

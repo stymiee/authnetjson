@@ -21,7 +21,7 @@ use Curl\Curl;
 class AuthnetJsonRequestTest extends TestCase
 {
     /**
-     * @covers            \Authnetjson\AuthnetJsonRequest::__construct()
+     * @covers \Authnetjson\AuthnetJsonRequest::__construct()
      */
     public function testConstructor(): void
     {
@@ -42,8 +42,8 @@ class AuthnetJsonRequestTest extends TestCase
 
 
     /**
-     * @covers            \Authnetjson\AuthnetJsonRequest::__set()
-     * @covers            \Authnetjson\Exception\AuthnetCannotSetParamsException::__construct()
+     * @covers \Authnetjson\AuthnetJsonRequest::__set()
+     * @covers \Authnetjson\Exception\AuthnetCannotSetParamsException::__construct()
      */
     public function testExceptionIsRaisedForCannotSetParamsException(): void
     {
@@ -55,10 +55,10 @@ class AuthnetJsonRequestTest extends TestCase
 
 
     /**
-     * @covers            \Authnetjson\AuthnetJsonRequest::process()
-     * @covers            \Authnetjson\Exception\AuthnetCurlException::__construct()
-     * @uses              \Authnetjson\AuthnetApiFactory::getJsonApiHandler
-     * @uses              \Authnetjson\AuthnetApiFactory::getWebServiceURL
+     * @covers \Authnetjson\AuthnetJsonRequest::process()
+     * @covers \Authnetjson\Exception\AuthnetCurlException::__construct()
+     * @uses \Authnetjson\AuthnetApiFactory::getJsonApiHandler
+     * @uses \Authnetjson\AuthnetApiFactory::getWebServiceURL
      */
     public function testExceptionIsRaisedForInvalidJsonException(): void
     {
@@ -79,7 +79,7 @@ class AuthnetJsonRequestTest extends TestCase
 
 
     /**
-     * @covers            \Authnetjson\AuthnetJsonRequest::setProcessHandler()
+     * @covers \Authnetjson\AuthnetJsonRequest::setProcessHandler()
      */
     public function testProcessorIsInstanceOfCurlWrapper(): void
     {
@@ -95,8 +95,8 @@ class AuthnetJsonRequestTest extends TestCase
 
 
     /**
-     * @covers            \Authnetjson\AuthnetJsonRequest::__toString()
-     * @covers            \Authnetjson\AuthnetJsonRequest::__call()
+     * @covers \Authnetjson\AuthnetJsonRequest::__toString()
+     * @covers \Authnetjson\AuthnetJsonRequest::__call()
      */
     public function testToString(): void
     {
@@ -270,7 +270,7 @@ class AuthnetJsonRequestTest extends TestCase
     }
 
     /**
-     * @covers            \Authnetjson\AuthnetJsonRequest::getRawRequest()
+     * @covers \Authnetjson\AuthnetJsonRequest::getRawRequest()
      */
     public function testGetRawRequest(): void
     {

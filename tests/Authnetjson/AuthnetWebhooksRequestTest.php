@@ -37,7 +37,7 @@ class AuthnetWebhooksRequestTest extends TestCase
     }
 
     /**
-     * @covers            \Authnetjson\AuthnetWebhooksRequest::__construct()
+     * @covers \Authnetjson\AuthnetWebhooksRequest::__construct()
      */
     public function testConstructor(): void
     {
@@ -51,7 +51,7 @@ class AuthnetWebhooksRequestTest extends TestCase
     }
 
     /**
-     * @covers            \Authnetjson\AuthnetWebhooksRequest::__toString()
+     * @covers \Authnetjson\AuthnetWebhooksRequest::__toString()
      */
     public function testToString(): void
     {
@@ -73,7 +73,7 @@ class AuthnetWebhooksRequestTest extends TestCase
     }
 
     /**
-     * @covers            \Authnetjson\AuthnetWebhooksRequest::__toString()
+     * @covers \Authnetjson\AuthnetWebhooksRequest::__toString()
      */
     public function testToStringNA(): void
     {
@@ -94,8 +94,8 @@ class AuthnetWebhooksRequestTest extends TestCase
     }
 
     /**
-     * @covers            \Authnetjson\AuthnetWebhooksRequest::getEventTypes()
-     * @covers            \Authnetjson\AuthnetWebhooksRequest::getByUrl()
+     * @covers \Authnetjson\AuthnetWebhooksRequest::getEventTypes()
+     * @covers \Authnetjson\AuthnetWebhooksRequest::getByUrl()
      */
     public function testGetEventTypes(): void
     {
@@ -174,7 +174,7 @@ class AuthnetWebhooksRequestTest extends TestCase
     }
 
     /**
-     * @covers            \Authnetjson\AuthnetWebhooksRequest::createWebhooks()
+     * @covers \Authnetjson\AuthnetWebhooksRequest::createWebhooks()
      */
     public function testCreateWebhooks(): void
     {
@@ -208,7 +208,7 @@ class AuthnetWebhooksRequestTest extends TestCase
     }
 
     /**
-     * @covers            \Authnetjson\AuthnetWebhooksRequest::testWebhook()
+     * @covers \Authnetjson\AuthnetWebhooksRequest::testWebhook()
      */
     public function testTestWebhook(): void
     {
@@ -223,7 +223,7 @@ class AuthnetWebhooksRequestTest extends TestCase
     }
 
     /**
-     * @covers            \Authnetjson\AuthnetWebhooksRequest::deleteWebhook()
+     * @covers \Authnetjson\AuthnetWebhooksRequest::deleteWebhook()
      */
     public function testDeleteWebhook(): void
     {
@@ -238,8 +238,8 @@ class AuthnetWebhooksRequestTest extends TestCase
     }
 
     /**
-     * @covers            \Authnetjson\AuthnetWebhooksRequest::getWebhooks()
-     * @covers            \Authnetjson\AuthnetWebhooksRequest::getByUrl()
+     * @covers \Authnetjson\AuthnetWebhooksRequest::getWebhooks()
+     * @covers \Authnetjson\AuthnetWebhooksRequest::getByUrl()
      */
     public function testGetWebhooks(): void
     {
@@ -299,8 +299,8 @@ class AuthnetWebhooksRequestTest extends TestCase
     }
 
     /**
-     * @covers            \Authnetjson\AuthnetWebhooksRequest::getWebhook()
-     * @covers            \Authnetjson\AuthnetWebhooksRequest::getByUrl()
+     * @covers \Authnetjson\AuthnetWebhooksRequest::getWebhook()
+     * @covers \Authnetjson\AuthnetWebhooksRequest::getByUrl()
      */
     public function testGetWebhook(): void
     {
@@ -330,7 +330,7 @@ class AuthnetWebhooksRequestTest extends TestCase
     }
 
     /**
-     * @covers            \Authnetjson\AuthnetWebhooksRequest::updateWebhook()
+     * @covers \Authnetjson\AuthnetWebhooksRequest::updateWebhook()
      */
     public function testUpdateWebhook(): void
     {
@@ -359,7 +359,7 @@ class AuthnetWebhooksRequestTest extends TestCase
     }
 
     /**
-     * @covers            \Authnetjson\AuthnetWebhooksRequest::getNotificationHistory()
+     * @covers \Authnetjson\AuthnetWebhooksRequest::getNotificationHistory()
      */
     public function testGetNotificationHistory(): void
     {
@@ -393,7 +393,7 @@ class AuthnetWebhooksRequestTest extends TestCase
     }
 
     /**
-     * @covers            \Authnetjson\AuthnetWebhooksRequest::handleResponse()
+     * @covers \Authnetjson\AuthnetWebhooksRequest::handleResponse()
      */
     public function testHandleResponse(): void
     {
@@ -412,8 +412,8 @@ class AuthnetWebhooksRequestTest extends TestCase
     }
 
     /**
-     * @covers            \Authnetjson\AuthnetWebhooksRequest::handleResponse()
-     * @covers            \Authnetjson\Exception\AuthnetCurlException::__construct()
+     * @covers \Authnetjson\AuthnetWebhooksRequest::handleResponse()
+     * @covers \Authnetjson\Exception\AuthnetCurlException::__construct()
      */
     public function testHandleResponseWithErrorMessage(): void
     {
@@ -439,8 +439,8 @@ class AuthnetWebhooksRequestTest extends TestCase
     }
 
     /**
-     * @covers            \Authnetjson\AuthnetWebhooksRequest::handleResponse()
-     * @covers            \Authnetjson\Exception\AuthnetCurlException::__construct()
+     * @covers \Authnetjson\AuthnetWebhooksRequest::handleResponse()
+     * @covers \Authnetjson\Exception\AuthnetCurlException::__construct()
      */
     public function testHandleResponseWithErrorMessageTestMessage(): void
     {
@@ -471,8 +471,8 @@ class AuthnetWebhooksRequestTest extends TestCase
     }
 
     /**
-     * @covers            \Authnetjson\AuthnetWebhooksRequest::handleResponse()
-     * @covers            \Authnetjson\Exception\AuthnetCurlException::__construct()
+     * @covers \Authnetjson\AuthnetWebhooksRequest::handleResponse()
+     * @covers \Authnetjson\Exception\AuthnetCurlException::__construct()
      */
     public function testHandleResponseWithErrorMessageNoMessage(): void
     {
@@ -502,7 +502,7 @@ class AuthnetWebhooksRequestTest extends TestCase
     }
 
     /**
-     * @covers            \Authnetjson\AuthnetWebhooksRequest::setProcessHandler()
+     * @covers \Authnetjson\AuthnetWebhooksRequest::setProcessHandler()
      */
     public function testProcessorIsInstanceOfCurlWrapper(): void
     {
@@ -517,7 +517,7 @@ class AuthnetWebhooksRequestTest extends TestCase
     }
 
     /**
-     * @covers            \Authnetjson\AuthnetWebhooksRequest::getRawRequest()
+     * @covers \Authnetjson\AuthnetWebhooksRequest::getRawRequest()
      */
     public function testGetRawRequest(): void
     {

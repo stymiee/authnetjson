@@ -18,9 +18,9 @@ use PHPUnit\Framework\TestCase;
 class TransactionResponseTest extends TestCase
 {
     /**
-     * @covers            \Authnetjson\TransactionResponse::__construct()
-     * @covers            \Authnetjson\TransactionResponse::getTransactionResponseField()
-     * @covers            \Authnetjson\AuthnetJsonResponse::getTransactionResponseField()
+     * @covers \Authnetjson\TransactionResponse::__construct()
+     * @covers \Authnetjson\TransactionResponse::getTransactionResponseField()
+     * @covers \Authnetjson\AuthnetJsonResponse::getTransactionResponseField()
      */
     public function testTransactionResponse(): void
     {
@@ -116,8 +116,8 @@ class TransactionResponseTest extends TestCase
     }
 
     /**
-    * @covers            \Authnetjson\TransactionResponse::getTransactionResponseField()
-    * @covers            \Authnetjson\AuthnetJsonResponse::__construct()
+    * @covers \Authnetjson\TransactionResponse::getTransactionResponseField()
+    * @covers \Authnetjson\AuthnetJsonResponse::__construct()
     */
     public function testDirectResponse(): void
     {
@@ -181,8 +181,8 @@ class TransactionResponseTest extends TestCase
     }
 
     /**
-     * @covers            \Authnetjson\TransactionResponse::getTransactionResponseField()
-     * @covers            \Authnetjson\AuthnetJsonResponse::__construct()
+     * @covers \Authnetjson\TransactionResponse::getTransactionResponseField()
+     * @covers \Authnetjson\AuthnetJsonResponse::__construct()
      */
     public function testValidationDirectResponse(): void
     {

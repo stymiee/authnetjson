@@ -35,10 +35,10 @@ class AuthnetJsonAimTest extends TestCase
     }
 
     /**
-     * @covers            \Authnetjson\AuthnetJsonRequest::process()
+     * @covers \Authnetjson\AuthnetJsonRequest::process()
 
-     * @uses              \Authnetjson\AuthnetApiFactory::getJsonApiHandler
-     * @uses              \Authnetjson\AuthnetApiFactory::getWebServiceURL
+     * @uses \Authnetjson\AuthnetApiFactory::getJsonApiHandler
+     * @uses \Authnetjson\AuthnetApiFactory::getWebServiceURL
      */
     public function testCreateTransactionRequestAuthCaptureSuccess(): void
     {
@@ -220,10 +220,10 @@ class AuthnetJsonAimTest extends TestCase
     }
 
     /**
-     * @covers            \Authnetjson\AuthnetJsonRequest::process()
+     * @covers \Authnetjson\AuthnetJsonRequest::process()
 
-     * @uses              \Authnetjson\AuthnetApiFactory::getJsonApiHandler
-     * @uses              \Authnetjson\AuthnetApiFactory::getWebServiceURL
+     * @uses \Authnetjson\AuthnetApiFactory::getJsonApiHandler
+     * @uses \Authnetjson\AuthnetApiFactory::getWebServiceURL
      */
     public function testCreateTransactionRequestAuthOnlySuccess(): void
     {
@@ -394,10 +394,10 @@ class AuthnetJsonAimTest extends TestCase
     }
 
     /**
-     * @covers            \Authnetjson\AuthnetJsonRequest::process()
+     * @covers \Authnetjson\AuthnetJsonRequest::process()
 
-     * @uses              \Authnetjson\AuthnetApiFactory::getJsonApiHandler
-     * @uses              \Authnetjson\AuthnetApiFactory::getWebServiceURL
+     * @uses \Authnetjson\AuthnetApiFactory::getJsonApiHandler
+     * @uses \Authnetjson\AuthnetApiFactory::getWebServiceURL
      */
     public function testCreateTransactionRequestAuthOnlyError(): void
     {
@@ -581,10 +581,10 @@ class AuthnetJsonAimTest extends TestCase
 
 
     /**
-     * @covers            \Authnetjson\AuthnetJsonRequest::process()
+     * @covers \Authnetjson\AuthnetJsonRequest::process()
 
-     * @uses              \Authnetjson\AuthnetApiFactory::getJsonApiHandler
-     * @uses              \Authnetjson\AuthnetApiFactory::getWebServiceURL
+     * @uses \Authnetjson\AuthnetApiFactory::getJsonApiHandler
+     * @uses \Authnetjson\AuthnetApiFactory::getWebServiceURL
      */
     public function testCreateTransactionRequestCaptureOnly(): void
     {
@@ -646,10 +646,10 @@ class AuthnetJsonAimTest extends TestCase
     }
 
     /**
-     * @covers            \Authnetjson\AuthnetJsonRequest::process()
+     * @covers \Authnetjson\AuthnetJsonRequest::process()
 
-     * @uses              \Authnetjson\AuthnetApiFactory::getJsonApiHandler
-     * @uses              \Authnetjson\AuthnetApiFactory::getWebServiceURL
+     * @uses \Authnetjson\AuthnetApiFactory::getJsonApiHandler
+     * @uses \Authnetjson\AuthnetApiFactory::getWebServiceURL
      */
     public function testCreateTransactionRequestPriorAuthCapture(): void
     {
@@ -718,10 +718,10 @@ class AuthnetJsonAimTest extends TestCase
     }
 
     /**
-     * @covers            \Authnetjson\AuthnetJsonRequest::process()
+     * @covers \Authnetjson\AuthnetJsonRequest::process()
 
-     * @uses              \Authnetjson\AuthnetApiFactory::getJsonApiHandler
-     * @uses              \Authnetjson\AuthnetApiFactory::getWebServiceURL
+     * @uses \Authnetjson\AuthnetApiFactory::getJsonApiHandler
+     * @uses \Authnetjson\AuthnetApiFactory::getWebServiceURL
      */
     public function testCreateTransactionRequestPriorAuthCaptureError(): void
     {
@@ -791,10 +791,10 @@ class AuthnetJsonAimTest extends TestCase
     }
 
     /**
-     * @covers            \Authnetjson\AuthnetJsonRequest::process()
+     * @covers \Authnetjson\AuthnetJsonRequest::process()
 
-     * @uses              \Authnetjson\AuthnetApiFactory::getJsonApiHandler
-     * @uses              \Authnetjson\AuthnetApiFactory::getWebServiceURL
+     * @uses \Authnetjson\AuthnetApiFactory::getJsonApiHandler
+     * @uses \Authnetjson\AuthnetApiFactory::getWebServiceURL
      */
     public function testCreateTransactionRequestRefund(): void
     {
@@ -872,10 +872,10 @@ class AuthnetJsonAimTest extends TestCase
     }
 
     /**
-     * @covers            \Authnetjson\AuthnetJsonRequest::process()
+     * @covers \Authnetjson\AuthnetJsonRequest::process()
 
-     * @uses              \Authnetjson\AuthnetApiFactory::getJsonApiHandler
-     * @uses              \Authnetjson\AuthnetApiFactory::getWebServiceURL
+     * @uses \Authnetjson\AuthnetApiFactory::getJsonApiHandler
+     * @uses \Authnetjson\AuthnetApiFactory::getWebServiceURL
      */
     public function testCreateTransactionRequestVoid(): void
     {
@@ -946,10 +946,10 @@ class AuthnetJsonAimTest extends TestCase
     }
 
     /**
-     * @covers            \Authnetjson\AuthnetJsonRequest::process()
+     * @covers \Authnetjson\AuthnetJsonRequest::process()
 
-     * @uses              \Authnetjson\AuthnetApiFactory::getJsonApiHandler
-     * @uses              \Authnetjson\AuthnetApiFactory::getWebServiceURL
+     * @uses \Authnetjson\AuthnetApiFactory::getJsonApiHandler
+     * @uses \Authnetjson\AuthnetApiFactory::getWebServiceURL
      */
     public function testCreateTransactionRequestVoidError(): void
     {
@@ -1020,10 +1020,10 @@ class AuthnetJsonAimTest extends TestCase
     }
 
     /**
-     * @covers            \Authnetjson\AuthnetJsonRequest::process()
+     * @covers \Authnetjson\AuthnetJsonRequest::process()
 
-     * @uses              \Authnetjson\AuthnetApiFactory::getJsonApiHandler
-     * @uses              \Authnetjson\AuthnetApiFactory::getWebServiceURL
+     * @uses \Authnetjson\AuthnetApiFactory::getJsonApiHandler
+     * @uses \Authnetjson\AuthnetApiFactory::getWebServiceURL
      */
     public function testSendCustomerTransactionReceiptRequest(): void
     {
@@ -1071,10 +1071,10 @@ class AuthnetJsonAimTest extends TestCase
 
 
     /**
-     * @covers            \Authnetjson\AuthnetJsonRequest::process()
+     * @covers \Authnetjson\AuthnetJsonRequest::process()
 
-     * @uses              \Authnetjson\AuthnetApiFactory::getJsonApiHandler
-     * @uses              \Authnetjson\AuthnetApiFactory::getWebServiceURL
+     * @uses \Authnetjson\AuthnetApiFactory::getJsonApiHandler
+     * @uses \Authnetjson\AuthnetApiFactory::getWebServiceURL
      */
     public function testCreateTransactionRequestVisaCheckout(): void
     {
@@ -1149,10 +1149,10 @@ class AuthnetJsonAimTest extends TestCase
 
 
     /**
-     * @covers            \Authnetjson\AuthnetJsonRequest::process()
+     * @covers \Authnetjson\AuthnetJsonRequest::process()
 
-     * @uses              \Authnetjson\AuthnetApiFactory::getJsonApiHandler
-     * @uses              \Authnetjson\AuthnetApiFactory::getWebServiceURL
+     * @uses \Authnetjson\AuthnetApiFactory::getJsonApiHandler
+     * @uses \Authnetjson\AuthnetApiFactory::getWebServiceURL
      */
     public function testDecryptPaymentDataRequest(): void
     {
@@ -1246,10 +1246,10 @@ class AuthnetJsonAimTest extends TestCase
     }
 
     /**
-     * @covers            \Authnetjson\AuthnetJsonRequest::process()
+     * @covers \Authnetjson\AuthnetJsonRequest::process()
 
-     * @uses              \Authnetjson\AuthnetApiFactory::getJsonApiHandler
-     * @uses              \Authnetjson\AuthnetApiFactory::getWebServiceURL
+     * @uses \Authnetjson\AuthnetApiFactory::getJsonApiHandler
+     * @uses \Authnetjson\AuthnetApiFactory::getWebServiceURL
      */
     public function testDecryptPaymentDataRequestError(): void
     {
