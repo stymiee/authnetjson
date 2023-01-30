@@ -93,7 +93,7 @@ try {
 <html lang="en">
 <head>
     <title>Webhooks :: Update Webhooks</title>
-    <style type="text/css">
+    <style>
         table { border: 1px solid #cccccc; margin: auto; border-collapse: collapse; max-width: 90%; }
         table td { padding: 3px 5px; vertical-align: top; border-top: 1px solid #cccccc; }
         pre { white-space: pre-wrap; }
