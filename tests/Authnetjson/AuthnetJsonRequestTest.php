@@ -28,7 +28,11 @@ class AuthnetJsonRequestTest extends TestCase
         $apiLogin    = 'apiLogin';
         $apiTransKey = 'apiTransKey';
 
-        $request = AuthnetApiFactory::getJsonApiHandler($apiLogin, $apiTransKey, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
+        $request = AuthnetApiFactory::getJsonApiHandler(
+            $apiLogin,
+            $apiTransKey,
+            AuthnetApiFactory::USE_DEVELOPMENT_SERVER
+        );
 
         $reflectionOfRequest = new \ReflectionObject($request);
         $login = $reflectionOfRequest->getProperty('login');
@@ -257,7 +261,11 @@ class AuthnetJsonRequestTest extends TestCase
         $http->error = false;
         $http->response = $responseJson;
 
-        $request = AuthnetApiFactory::getJsonApiHandler($apiLogin, $apiTransKey, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
+        $request = AuthnetApiFactory::getJsonApiHandler(
+            $apiLogin,
+            $apiTransKey,
+            AuthnetApiFactory::USE_DEVELOPMENT_SERVER
+        );
         $request->setProcessHandler($http);
         $request->createTransactionRequest($requestJson);
 
@@ -297,7 +305,11 @@ class AuthnetJsonRequestTest extends TestCase
         $http->error = false;
         $http->response = '{}';
 
-        $request = AuthnetApiFactory::getJsonApiHandler($apiLogin, $apiTransKey, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
+        $request = AuthnetApiFactory::getJsonApiHandler(
+            $apiLogin,
+            $apiTransKey,
+            AuthnetApiFactory::USE_DEVELOPMENT_SERVER
+        );
         $request->setProcessHandler($http);
         $request->deleteCustomerProfileRequest($requestJson);
 
@@ -322,7 +334,11 @@ class AuthnetJsonRequestTest extends TestCase
         $http->error_code    = 10;
         $http->error_message = 'Test Error Message';
 
-        $request = AuthnetApiFactory::getJsonApiHandler($apiLogin, $apiTransKey, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
+        $request = AuthnetApiFactory::getJsonApiHandler(
+            $apiLogin,
+            $apiTransKey,
+            AuthnetApiFactory::USE_DEVELOPMENT_SERVER
+        );
         $request->setProcessHandler($http);
         $request->deleteCustomerProfileRequest([]);
     }
@@ -341,7 +357,11 @@ class AuthnetJsonRequestTest extends TestCase
         $http->error_code    = 10;
         $http->error_message = 'Test Error Message';
 
-        $request = AuthnetApiFactory::getJsonApiHandler($apiLogin, $apiTransKey, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
+        $request = AuthnetApiFactory::getJsonApiHandler(
+            $apiLogin,
+            $apiTransKey,
+            AuthnetApiFactory::USE_DEVELOPMENT_SERVER
+        );
         $request->setProcessHandler($http);
 
         $method = new \ReflectionMethod(AuthnetJsonRequest::class, 'makeRequest');
@@ -369,7 +389,11 @@ class AuthnetJsonRequestTest extends TestCase
             ->getMock();
         $http->error         = false;
 
-        $request = AuthnetApiFactory::getJsonApiHandler($apiLogin, $apiTransKey, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
+        $request = AuthnetApiFactory::getJsonApiHandler(
+            $apiLogin,
+            $apiTransKey,
+            AuthnetApiFactory::USE_DEVELOPMENT_SERVER
+        );
         $request->setProcessHandler($http);
 
         $method = new \ReflectionMethod(AuthnetJsonRequest::class, 'makeRequest');
