@@ -61,7 +61,7 @@ class AuthnetWebhooksRequest
     }
 
     /**
-     * Outputs the account credentials, endpoint URL, and request JSON in a human readable format
+     * Outputs the account credentials, endpoint URL, and request JSON in a human-readable format
      *
      * @return string  HTML table containing debugging information
      */
@@ -123,7 +123,7 @@ class AuthnetWebhooksRequest
     }
 
     /**
-     * Gets all of the available event types
+     * Gets all available event types
      *
      * @return AuthnetWebhooksResponse
      * @throws AuthnetCurlException

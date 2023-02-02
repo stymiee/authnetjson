@@ -93,7 +93,7 @@ class TransactionResponse
 
     /**
      * Gets the requested value out of the response array using the provided key. The location of that value
-     * can be accessed via it's numerical location in the array (starting at zero) or using the key for that field
+     * can be accessed via its numerical location in the array (starting at zero) or using the key for that field
      * as defined by Authorize.Net and mapped in self::$fieldMap.
      *
      * @param mixed $field Name or key of the transaction field to be retrieved

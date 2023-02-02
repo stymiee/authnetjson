@@ -145,7 +145,7 @@ class AuthnetApiFactory
     }
 
     /**
-     * Validates the Authorize.Net credentials and returns a Webhooks Request object to be used to make an Webhook call.
+     * Validates the Authorize.Net credentials and returns a Webhooks Request object to be used to make a Webhook call.
      *
      * @param string $login Authorize.Net API Login ID
      * @param string $transaction_key Authorize.Net API Transaction Key

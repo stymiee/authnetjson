@@ -52,7 +52,7 @@ class AuthnetWebhooksResponse
     }
 
     /**
-     * Outputs the response JSON in a human readable format
+     * Outputs the response JSON in a human-readable format
      *
      * @return string  HTML table containing debugging information
      */
@@ -192,7 +192,7 @@ class AuthnetWebhooksResponse
     }
 
     /**
-     * Gets the event type of a notification
+     * Gets the event type of notification
      *
      * @return string
      */

@@ -75,7 +75,7 @@ class AuthnetWebhook
     }
 
     /**
-     * Outputs the response JSON in a human readable format
+     * Outputs the response JSON in a human-readable format
      *
      * @return string  HTML table containing debugging information
      */
