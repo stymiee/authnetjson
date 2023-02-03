@@ -28,6 +28,7 @@ use Curl\Curl;
  * @link      https://github.com/stymiee/authnetjson
  * @see       https://developer.authorize.net/api/reference/
  *
+ * @method AuthnetJsonResponse authenticateTestRequest()
  * @method AuthnetJsonResponse createTransactionRequest(array $array)
  * @method AuthnetJsonResponse sendCustomerTransactionReceiptRequest(array $array)
  * @method AuthnetJsonResponse ARBCancelSubscriptionRequest(array $array)
@@ -120,7 +121,7 @@ class AuthnetJsonRequest
     }
 
     /**
-     * Outputs the account credentials, endpoint URL, and request JSON in a human readable format
+     * Outputs the account credentials, endpoint URL, and request JSON in a human-readable format
      *
      * @return string  HTML table containing debugging information
      */
@@ -165,7 +166,7 @@ class AuthnetJsonRequest
      * @throws AuthnetInvalidJsonException
      * @throws AuthnetCurlException
      */
-    public function __call(string $api_call, array $args)
+    public function __call(string $api_call, array $args = [])
     {
         $authentication = [
             'merchantAuthentication' => [

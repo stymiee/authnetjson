@@ -32,6 +32,7 @@ use Authnetjson\Exception\AuthnetTransactionResponseCallException;
  * @property string $validationDirectResponseList
  * @property object $transactionResponse
  *
+ * @method null authenticateTestRequest(array $array)
  * @method null createTransactionRequest(array $array)
  * @method null sendCustomerTransactionReceiptRequest(array $array)
  * @method null ARBCancelSubscriptionRequest(array $array)
