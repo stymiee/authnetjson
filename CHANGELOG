@@ -5,6 +5,7 @@ CHANGE LOG
 Added __set() and __isset() magic methods to JSON handling classes. Throws an exception if you try to set values in response objects.
 Fixed minor bug in debugging code for webhooks
 Fixed grammatical errors in comments
+Fixed bug in getting webhook events
 Cleaned up examples a bit more
 
 2020-08-31 - Version 4.1.3

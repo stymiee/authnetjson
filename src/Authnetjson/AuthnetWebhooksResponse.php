@@ -104,7 +104,7 @@ class AuthnetWebhooksResponse
                 $events[] = $event;
             }
         } else {
-            $events = array_column($this->response, 'name');
+            $events = array_column((array) $this->response, 'name');
         }
         return $events;
     }
