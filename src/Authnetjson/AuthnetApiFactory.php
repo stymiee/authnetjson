@@ -23,7 +23,7 @@ use Exception;
  * URL and Processor Class.
  *
  * @author    John Conde <stymiee@gmail.com>
- * @copyright John Conde <stymiee@gmail.com>
+ * @copyright 2015 - 2023 John Conde <stymiee@gmail.com>
  * @license   http://www.apache.org/licenses/LICENSE-2.0.html Apache License, Version 2.0
  *
  * @link https://github.com/stymiee/authnetjson
