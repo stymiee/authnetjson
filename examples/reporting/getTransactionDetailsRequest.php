@@ -96,98 +96,81 @@ SAMPLE RESPONSE
 
 *************************************************************************************************/
 
-    namespace JohnConde\Authnet;
+namespace Authnetjson;
 
-    require('../../config.inc.php');
-    require('../../src/autoload.php');
+use Exception;
 
-    $request  = AuthnetApiFactory::getJsonApiHandler(AUTHNET_LOGIN, AUTHNET_TRANSKEY, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
+require '../../config.inc.php';
+
+try {
+    $request = AuthnetApiFactory::getJsonApiHandler(
+        AUTHNET_LOGIN,
+        AUTHNET_TRANSKEY,
+        AuthnetApiFactory::USE_DEVELOPMENT_SERVER
+    );
     $response = $request->getTransactionDetailsRequest([
-        'transId' => '2162566217'
+        'transId' => '40067511400'
     ]);
+} catch (Exception $e) {
+    echo $e;
+    exit;
+}
 ?>
 
 <!DOCTYPE html>
-<html>
 <html lang="en">
-    <head>
-        <title></title>
-        <style type="text/css">
-            table
-            {
-                border: 1px solid #cccccc;
-                margin: auto;
-                border-collapse: collapse;
-                max-width: 90%;
-            }
-
-            table td
-            {
-                padding: 3px 5px;
-                vertical-align: top;
-                border-top: 1px solid #cccccc;
-            }
-
-            pre
-            {
-            	overflow-x: auto; /* Use horizontal scroller if needed; for Firefox 2, not needed in Firefox 3 */
-            	white-space: pre-wrap; /* css-3 */
-            	white-space: -moz-pre-wrap !important; /* Mozilla, since 1999 */
-            	white-space: -pre-wrap; /* Opera 4-6 */
-            	white-space: -o-pre-wrap; /* Opera 7 */ /*
-            	width: 99%; */
-            	word-wrap: break-word; /* Internet Explorer 5.5+ */
-            }
-
-            table th
-            {
-                background: #e5e5e5;
-                color: #666666;
-            }
-
-            h1, h2
-            {
-                text-align: center;
-            }
-        </style>
-    </head>
-    <body>
-        <h1>
-            Transaction Detail :: Transaction Details
-        </h1>
-        <h2>
-            Results
-        </h2>
-        <table>
-            <tr>
-                <th>Response</th>
-                <td><?php echo $response->messages->resultCode; ?></td>
-            </tr>
-            <tr>
-                <th>Successful?</th>
-                <td><?php echo ($response->isSuccessful()) ? 'yes' : 'no'; ?></td>
-            </tr>
-            <tr>
-                <th>Error?</th>
-                <td><?php echo ($response->isError()) ? 'yes' : 'no'; ?></td>
-            </tr>
-            <tr>
-                <th>Transaction</th>
-                <td>
-                    <b>ID</b>: <?php echo $response->transaction->transId; ?><br>
-                    <b>Type</b>: <?php echo $response->transaction->transactionType; ?><br>
-                    <b>Status</b>: <?php echo $response->transaction->transactionStatus; ?><br>
-                    <b>Authorization Code</b>: <?php echo $response->transaction->authCode; ?><br>
-                    <b>AVS Response</b>: <?php echo $response->transaction->AVSResponse; ?><br>
-                    <b>Batch Id</b>: <?php echo $response->transaction->batch->batchId; ?>
-                </td>
-            </tr>
-        </table>
-        <h2>
-            Raw Input/Output
-        </h2>
-<?php
-    echo $request, $response;
-?>
-    </body>
+<head>
+    <title>Transaction Detail :: Transaction Details</title>
+    <style>
+        table { border: 1px solid #cccccc; margin: auto; border-collapse: collapse; max-width: 90%; }
+        table td { padding: 3px 5px; vertical-align: top; border-top: 1px solid #cccccc; }
+        pre { white-space: pre-wrap; }
+        table th { background: #e5e5e5; color: #666666; }
+        h1, h2 { text-align: center; }
+    </style>
+</head>
+<body>
+    <h1>
+        Transaction Detail :: Transaction Details
+    </h1>
+    <h2>
+        Results
+    </h2>
+    <table>
+        <tr>
+            <th>Response</th>
+            <td><?= $response->messages->resultCode ?></td>
+        </tr>
+        <tr>
+            <th>Successful?</th>
+            <td><?= $response->isSuccessful() ? 'yes' : 'no' ?></td>
+        </tr>
+        <tr>
+            <th>Error?</th>
+            <td><?= $response->isError() ? 'yes' : 'no' ?></td>
+        </tr>
+        <tr>
+            <th>Code</th>
+            <td><?= $response->messages->message[0]->code ?></td>
+        </tr>
+        <tr>
+            <th>Message</th>
+            <td><?= $response->messages->message[0]->text ?></td>
+        </tr>
+        <tr>
+            <th>Transaction</th>
+            <td>
+                <b>ID</b>: <?php echo $response->transaction->transId; ?><br>
+                <b>Type</b>: <?php echo $response->transaction->transactionType; ?><br>
+                <b>Status</b>: <?php echo $response->transaction->transactionStatus; ?><br>
+                <b>Authorization Code</b>: <?php echo $response->transaction->authCode; ?><br>
+                <b>AVS Response</b>: <?php echo $response->transaction->AVSResponse; ?><br>
+            </td>
+        </tr>
+    </table>
+    <h2>
+        Raw Input/Output
+    </h2>
+<?= $request, $response ?>
+</body>
 </html>

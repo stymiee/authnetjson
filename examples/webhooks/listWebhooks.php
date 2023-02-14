@@ -71,56 +71,37 @@ SAMPLE RESPONSE
 
  *************************************************************************************************/
 
-namespace JohnConde\Authnet;
+namespace Authnetjson;
 
-require('../../config.inc.php');
-require('../../src/autoload.php');
+use Exception;
 
-$successful = false;
-$error      = true;
+require '../../config.inc.php';
+
 try {
-    $request    = AuthnetApiFactory::getWebhooksHandler(AUTHNET_LOGIN, AUTHNET_TRANSKEY, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
+    $request = AuthnetApiFactory::getWebhooksHandler(
+        AUTHNET_LOGIN,
+        AUTHNET_TRANSKEY,
+        AuthnetApiFactory::USE_DEVELOPMENT_SERVER
+    );
     $response   = $request->getWebhooks();
     $successful = true;
     $error      = false;
-}
-catch (\Exception $e) {
-    $errorMessage = $e->getMessage();
+} catch (Exception $e) {
+    echo $e;
+    exit;
 }
 
 ?>
 <!DOCTYPE html>
-<html>
 <html lang="en">
 <head>
     <title>Webhooks :: List Webhooks</title>
-    <style type="text/css">
-        table {
-            border: 1px solid #cccccc;
-            margin: auto;
-            border-collapse: collapse;
-            max-width: 90%;
-        }
-
-        table td {
-            padding: 3px 5px;
-            vertical-align: top;
-            border-top: 1px solid #cccccc;
-        }
-
-        pre {
-            white-space: pre-wrap; /* css-3 */
-            word-wrap: break-word; /* Internet Explorer 5.5+ */
-        }
-
-        table th {
-            background: #e5e5e5;
-            color: #666666;
-        }
-
-        h1, h2 {
-            text-align: center;
-        }
+    <style>
+        table { border: 1px solid #cccccc; margin: auto; border-collapse: collapse; max-width: 90%; }
+        table td { padding: 3px 5px; vertical-align: top; border-top: 1px solid #cccccc; }
+        pre { white-space: pre-wrap; }
+        table th { background: #e5e5e5; color: #666666; }
+        h1, h2 { text-align: center; }
     </style>
 </head>
 <body>
@@ -133,11 +114,11 @@ catch (\Exception $e) {
 <table>
     <tr>
         <th>Successful</th>
-        <td><?= ($successful) ? 'Yes' : 'No';?></td>
+        <td><?= ($successful) ? 'Yes' : 'No' ?></td>
     </tr>
     <?php
     if ($successful) {
-        foreach($response->getWebhooks() as $webhook) {
+        foreach ($response->getWebhooks() as $webhook) {
             ?>
             <tr>
                 <td colspan="2">
@@ -156,24 +137,23 @@ catch (\Exception $e) {
             </tr>
             <tr>
                 <th>Webhook ID</th>
-                <td><?= $webhook->getWebhooksId(); ?></td>
+                <td><?= $webhook->getWebhooksId() ?></td>
             </tr>
             <tr>
                 <th>Status</th>
-                <td><?= $webhook->getStatus(); ?></td>
+                <td><?= $webhook->getStatus() ?></td>
             </tr>
             <tr>
                 <th>URL</th>
-                <td><?= $webhook->getUrl(); ?></td>
+                <td><?= $webhook->getUrl() ?></td>
             </tr>
             <?php
         }
-    }
-    elseif ($error) {
+    } elseif ($error) {
         ?>
         <tr>
             <th>Error message</th>
-            <td><?= $errorMessage; ?></td>
+            <td><?= $response->errorMessage ?></td>
         </tr>
         <?php
     }
@@ -182,8 +162,6 @@ catch (\Exception $e) {
 <h2>
     Raw Input/Output
 </h2>
-<?php
-echo $request, $response;
-?>
+<?= $request, $response ?>
 </body>
 </html>

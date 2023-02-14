@@ -62,14 +62,20 @@ SAMPLE RESPONSE
 
  *************************************************************************************************/
 
-    namespace JohnConde\Authnet;
+namespace Authnetjson;
 
-    require('../../config.inc.php');
-    require('../../src/autoload.php');
+use Exception;
 
-    $json = AuthnetApiFactory::getJsonApiHandler(AUTHNET_LOGIN, AUTHNET_TRANSKEY, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
-    $json->createTransactionRequest([
-        'refId' => rand(1000000, 100000000),
+require '../../config.inc.php';
+
+try {
+    $request = AuthnetApiFactory::getJsonApiHandler(
+        AUTHNET_LOGIN,
+        AUTHNET_TRANSKEY,
+        AuthnetApiFactory::USE_DEVELOPMENT_SERVER
+    );
+    $response = $request->createTransactionRequest([
+        'refId' => random_int(1000000, 100000000),
         'transactionRequest' => [
             'transactionType' => 'captureOnlyTransaction',
             'amount' => 5,
@@ -82,81 +88,95 @@ SAMPLE RESPONSE
             'authCode' => '123456'
         ],
     ]);
+} catch (Exception $e) {
+    echo $e;
+    exit;
+}
 ?>
 
 <!DOCTYPE html>
-<html>
 <html lang="en">
 <head>
-    <title></title>
-    <style type="text/css">
-        table
-        {
-            border: 1px solid #cccccc;
-            margin: auto;
-            border-collapse: collapse;
-            max-width: 90%;
-        }
-
-        table td
-        {
-            padding: 3px 5px;
-            vertical-align: top;
-            border-top: 1px solid #cccccc;
-        }
-
-        pre
-        {
-            overflow-x: auto; /* Use horizontal scroller if needed; for Firefox 2, not needed in Firefox 3 */
-            white-space: pre-wrap; /* css-3 */
-            white-space: -moz-pre-wrap !important; /* Mozilla, since 1999 */
-            white-space: -pre-wrap; /* Opera 4-6 */
-            white-space: -o-pre-wrap; /* Opera 7 */ /*
-            	width: 99%; */
-            word-wrap: break-word; /* Internet Explorer 5.5+ */
-        }
-
-        table th
-        {
-            background: #e5e5e5;
-            color: #666666;
-        }
+    <title>Payment :: Capture Only (CAPTURE_ONLY)</title>
+    <style>
+        table { border: 1px solid #cccccc; margin: auto; border-collapse: collapse; max-width: 90%; }
+        table td { padding: 3px 5px; vertical-align: top; border-top: 1px solid #cccccc; }
+        pre { white-space: pre-wrap; }
+        table th { background: #e5e5e5; color: #666666; }
+        h1, h2 { text-align: center; }
     </style>
 </head>
 <body>
-<h1>
-    AIM :: Capture Only
-</h1>
-<h2>
-    Results
-</h2>
-<table>
-    <tr>
-        <th>Response</th>
-        <td><?php echo $response->messages->resultCode; ?></td>
-    </tr>
-    <tr>
-        <th>code</th>
-        <td><?php echo $response->messages->message[0]->code; ?></td>
-    </tr>
-    <tr>
-        <th>Successful?</th>
-        <td><?php echo ($response->isSuccessful()) ? 'yes' : 'no'; ?></td>
-    </tr>
-    <tr>
-        <th>Error?</th>
-        <td><?php echo ($response->isError()) ? 'yes' : 'no'; ?></td>
-    </tr>
-    <tr>
-        <th>transId</th>
-        <td><?php echo $response->transactionResponse->transId; ?></td>
-    </tr>
-</table>
-<h2>
-    Raw Input/Output
-</h2>
-<?php
-echo $request, $response;
-?>
+    <h1>
+        Payment :: Capture Only (CAPTURE_ONLY)
+    </h1>
+    <h2>
+        Results
+    </h2>
+    <table>
+        <tr>
+            <th>Response</th>
+            <td><?= $response->messages->resultCode ?></td>
+        </tr>
+        <tr>
+            <th>Successful?</th>
+            <td><?= $response->isSuccessful() ? 'yes' : 'no' ?></td>
+        </tr>
+        <tr>
+            <th>Error?</th>
+            <td><?= $response->isError() ? 'yes' : 'no' ?></td>
+        </tr>
+        <?php if ($response->isSuccessful()) : ?>
+            <tr>
+                <th>Description</th>
+                <td><?= $response->transactionResponse->messages[0]->description ?></td>
+            </tr>
+            <tr>
+                <th>Authorization Code</th>
+                <td><?= $response->transactionResponse->authCode ?></td>
+            </tr>
+            <tr>
+                <th>Transaction ID</th>
+                <td><?= $response->transactionResponse->transId ?></td>
+            </tr>
+            <tr>
+                <th>AVS Result Code</th>
+                <td><?= $response->transactionResponse->avsResultCode ?></td>
+            </tr>
+            <tr>
+                <th>CVV Result Code</th>
+                <td><?= $response->transactionResponse->cvvResultCode ?></td>
+            </tr>
+            <tr>
+                <th>CAVV Result Code</th>
+                <td><?= $response->transactionResponse->cavvResultCode ?></td>
+            </tr>
+            <tr>
+                <th>Account Number</th>
+                <td><?= $response->transactionResponse->accountNumber ?></td>
+            </tr>
+            <tr>
+                <th>Account Type</th>
+                <td><?= $response->transactionResponse->accountType ?></td>
+            </tr>
+            <tr>
+                <th>refId</th>
+                <td><?= $response->refId ?></td>
+            </tr>
+        <?php elseif ($response->isError()) : ?>
+            <tr>
+                <th>Error Code</th>
+                <td><?= $response->getErrorCode() ?></td>
+            </tr>
+            <tr>
+                <th>Error Message</th>
+                <td><?=  $response->getErrorText() ?></td>
+            </tr>
+        <?php endif; ?>
+    </table>
+    <h2>
+        Raw Input/Output
+    </h2>
+    <?= $request, $response ?>
 </body>
 </html>

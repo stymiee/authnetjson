@@ -76,129 +76,122 @@ SAMPLE RESPONSE
 
 *************************************************************************************************/
 
-    namespace JohnConde\Authnet;
+namespace Authnetjson;
 
-    require('../../config.inc.php');
-    require('../../src/autoload.php');
+use Exception;
 
-    $request  = AuthnetApiFactory::getJsonApiHandler(AUTHNET_LOGIN, AUTHNET_TRANSKEY, AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
+require '../../config.inc.php';
+
+try {
+    $request = AuthnetApiFactory::getJsonApiHandler(
+        AUTHNET_LOGIN,
+        AUTHNET_TRANSKEY,
+        AuthnetApiFactory::USE_DEVELOPMENT_SERVER
+    );
     $response = $request->createTransactionRequest([
-        "transactionRequest" => [
-            "transactionType" => "authCaptureTransaction",
-            "amount" => "80.93",
-            "payment" => [
-                "payPal" => [
-                    "successUrl" => "https://my.server.com/success.html",
-                    "cancelUrl" => "https://my.server.com/cancel.html",
-                    "paypalLc" => "",
-                    "paypalHdrImg" => "",
-                    "paypalPayflowcolor" => "FFFF00"
+        'transactionRequest' => [
+            'transactionType' => 'authCaptureTransaction',
+            'amount' => '80.93',
+            'payment' => [
+                'payPal' => [
+                    'successUrl' => 'https://my.server.com/success.html',
+                    'cancelUrl' => 'https://my.server.com/cancel.html',
+                    'paypalLc' => '',
+                    'paypalHdrImg' => '',
+                    'paypalPayflowcolor' => 'FFFF00'
                 ]
             ],
-            "lineItems" => [
-                "lineItem" => [
-                    "itemId" => "item1",
-                    "name" => "golf balls",
-                    "quantity" => "1",
-                    "unitPrice" => "18.95"
+            'lineItems' => [
+                'lineItem' => [
+                    'itemId' => 'item1',
+                    'name' => 'golf balls',
+                    'quantity' => '1',
+                    'unitPrice' => '18.95'
                 ]
             ]
         ]
     ]);
+} catch (Exception $e) {
+    echo $e;
+    exit;
+}
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <title>AIM :: Paypal :: Authorize and Capture</title>
-        <style type="text/css">
-            table
-            {
-                border: 1px solid #cccccc;
-                margin: auto;
-                border-collapse: collapse;
-                max-width: 90%;
-            }
-
-            table td
-            {
-                padding: 3px 5px;
-                vertical-align: top;
-                border-top: 1px solid #cccccc;
-            }
-
-            pre
-            {
-            	overflow-x: auto; /* Use horizontal scroller if needed; for Firefox 2, not needed in Firefox 3 */
-            	white-space: pre-wrap; /* css-3 */
-            	white-space: -moz-pre-wrap !important; /* Mozilla, since 1999 */
-            	white-space: -pre-wrap; /* Opera 4-6 */
-            	white-space: -o-pre-wrap; /* Opera 7 */ /*
-            	width: 99%; */
-            	word-wrap: break-word; /* Internet Explorer 5.5+ */
-            }
-
-            table th
-            {
-                background: #e5e5e5;
-                color: #666666;
-            }
-
-            h1, h2
-            {
-                text-align: center;
-            }
-        </style>
-    </head>
-    <body>
-        <h1>
-            AIM :: Authorize and Capture
-        </h1>
-        <h2>
-            Results
-        </h2>
-        <table>
-            <tr>
-                <th>Response</th>
-                <td><?php echo $response->messages->resultCode; ?></td>
-            </tr>
-            <tr>
-                <th>Successful?</th>
-                <td><?php echo ($response->isSuccessful()) ? 'yes' : 'no'; ?></td>
-            </tr>
-            <tr>
-                <th>Error?</th>
-                <td><?php echo ($response->isError()) ? 'yes' : 'no'; ?></td>
-            </tr>
-            <?php if ($response->isSuccessful()) : ?>
-            <tr>
-                <th>Description</th>
-                <td><?php echo $response->transactionResponse->messages[0]->description; ?></td>
-            </tr>
-            <tr>
-                <th>authCode</th>
-                <td><?php echo $response->transactionResponse->authCode; ?></td>
-            </tr>
-            <tr>
-                <th>transId</th>
-                <td><?php echo $response->transactionResponse->transId; ?></td>
-            </tr>
-            <?php elseif ($response->isError()) : ?>
-            <tr>
-                <th>Error Code</th>
-                <td><?php echo $response->getErrorCode(); ?></td>
-            </tr>
-            <tr>
-                <th>Error Message</th>
-                <td><?php echo  $response->getErrorText(); ?></td>
-            </tr>
-            <?php endif; ?>
-        </table>
-        <h2>
-            Raw Input/Output
-        </h2>
-<?php
-    echo $request, $response;
-?>
-    </body>
+<head>
+    <title>Payment :: Paypal :: Authorize and Capture</title>
+    <style>
+        table { border: 1px solid #cccccc; margin: auto; border-collapse: collapse; max-width: 90%; }
+        table td { padding: 3px 5px; vertical-align: top; border-top: 1px solid #cccccc; }
+        pre { white-space: pre-wrap; }
+        table th { background: #e5e5e5; color: #666666; }
+        h1, h2 { text-align: center; }
+    </style>
+</head>
+<body>
+    <h1>
+        Payment :: Authorize and Capture
+    </h1>
+    <h2>
+        Results
+    </h2>
+    <table>
+        <tr>
+            <th>Response</th>
+            <td><?= $response->messages->resultCode ?></td>
+        </tr>
+        <tr>
+            <th>Successful?</th>
+            <td><?= $response->isSuccessful() ? 'yes' : 'no' ?></td>
+        </tr>
+        <tr>
+            <th>Error?</th>
+            <td><?= $response->isError() ? 'yes' : 'no' ?></td>
+        </tr>
+        <?php if ($response->isSuccessful()) : ?>
+        <tr>
+            <th>Description</th>
+            <td><?= $response->transactionResponse->messages[0]->description ?></td>
+        </tr>
+        <tr>
+            <th>Authorization Code</th>
+            <td><?= $response->transactionResponse->authCode ?></td>
+        </tr>
+        <tr>
+            <th>Transaction ID</th>
+            <td><?= $response->transactionResponse->transId ?></td>
+        </tr>
+        <tr>
+            <th>Reference Transaction ID</th>
+            <td><?= $response->transactionResponse->refTransID ?></td>
+        </tr>
+        <tr>
+            <th>Transaction Hash</th>
+            <td><?= $response->transactionResponse->transHash ?></td>
+        </tr>
+        <tr>
+            <th>Is Test Request?</th>
+            <td><?= $response->transactionResponse->testRequest ? 'yes' : 'no' ?></td>
+        </tr>
+        <tr>
+            <th>Account Type</th>
+            <td><?= $response->transactionResponse->accountType ?></td>
+        </tr>
+        <?php elseif ($response->isError()) : ?>
+        <tr>
+            <th>Error Code</th>
+            <td><?= $response->getErrorCode() ?></td>
+        </tr>
+        <tr>
+            <th>Error Message</th>
+            <td><?= $response->getErrorText() ?></td>
+        </tr>
+        <?php endif; ?>
+    </table>
+    <h2>
+        Raw Input/Output
+    </h2>
+<?= $request, $response ?>
+</body>
 </html>
