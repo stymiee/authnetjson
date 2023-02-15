@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Authnetjson\tests;
+namespace JohnConde\Authnet\tests;
 
-use Authnetjson\AuthnetApiFactory;
-use Authnetjson\Exception\AuthnetInvalidAmountException;
+use JohnConde\Authnet\AuthnetApiFactory;
+use JohnConde\Authnet\Exception\AuthnetInvalidAmountException;
 use PHPUnit\Framework\TestCase;
 use ReflectionObject;
 
@@ -23,7 +23,7 @@ class AuthnetSimTest extends TestCase
     private $signature;
     private $server;
 
-    protected function setUp(): void
+    protected function setUp()
     {
         $this->login          = 'test';
         $this->transactionKey = 'test';
@@ -32,9 +32,9 @@ class AuthnetSimTest extends TestCase
     }
 
     /**
-     * @covers \Authnetjson\AuthnetSim::__construct()
+     * @covers \JohnConde\Authnet\AuthnetSim::__construct()
      */
-    public function testConstructor(): void
+    public function testConstructor()
     {
         $request = AuthnetApiFactory::getSimHandler($this->login, $this->signature, $this->server);
 
@@ -49,9 +49,9 @@ class AuthnetSimTest extends TestCase
     }
 
     /**
-     * @covers \Authnetjson\AuthnetSim::getFingerprint()
+     * @covers \JohnConde\Authnet\AuthnetSim::getFingerprint()
      */
-    public function testGetFingerprint(): void
+    public function testGetFingerprint()
     {
         $amount    = 9.01;
 
@@ -79,10 +79,10 @@ class AuthnetSimTest extends TestCase
     }
 
     /**
-     * @covers \Authnetjson\AuthnetSim::getFingerprint()
-     * @covers \Authnetjson\Exception\AuthnetInvalidAmountException::__construct()
+     * @covers \JohnConde\Authnet\AuthnetSim::getFingerprint()
+     * @covers \JohnConde\Authnet\Exception\AuthnetInvalidAmountException::__construct()
      */
-    public function testGetFingerprintException(): void
+    public function testGetFingerprintException()
     {
         $this->expectException(AuthnetInvalidAmountException::class);
 
@@ -92,9 +92,9 @@ class AuthnetSimTest extends TestCase
     }
 
     /**
-     * @covers \Authnetjson\AuthnetSim::getSequence()
+     * @covers \JohnConde\Authnet\AuthnetSim::getSequence()
      */
-    public function testGetSequence(): void
+    public function testGetSequence()
     {
         $sim = AuthnetApiFactory::getSimHandler($this->login, $this->transactionKey, $this->server);
         $sequence = $sim->getSequence();
@@ -107,9 +107,9 @@ class AuthnetSimTest extends TestCase
     }
 
     /**
-     * @covers \Authnetjson\AuthnetSim::getTimestamp()
+     * @covers \JohnConde\Authnet\AuthnetSim::getTimestamp()
      */
-    public function testGetTimestamp(): void
+    public function testGetTimestamp()
     {
         $sim = AuthnetApiFactory::getSimHandler($this->login, $this->transactionKey, $this->server);
         $timestamp = $sim->getTimestamp();
@@ -122,9 +122,9 @@ class AuthnetSimTest extends TestCase
     }
 
     /**
-     * @covers \Authnetjson\AuthnetSim::getLogin()
+     * @covers \JohnConde\Authnet\AuthnetSim::getLogin()
      */
-    public function testGetLogin(): void
+    public function testGetLogin()
     {
         $sim   = AuthnetApiFactory::getSimHandler($this->login, $this->transactionKey, $this->server);
         $login = $sim->getLogin();
@@ -137,9 +137,9 @@ class AuthnetSimTest extends TestCase
     }
 
     /**
-     * @covers \Authnetjson\AuthnetSim::getEndpoint()
+     * @covers \JohnConde\Authnet\AuthnetSim::getEndpoint()
      */
-    public function testGetEndpoint(): void
+    public function testGetEndpoint()
     {
         $sim = AuthnetApiFactory::getSimHandler($this->login, $this->transactionKey, $this->server);
         $url = $sim->getEndpoint();
@@ -152,9 +152,9 @@ class AuthnetSimTest extends TestCase
     }
 
     /**
-     * @covers \Authnetjson\AuthnetSim::resetParameters()
+     * @covers \JohnConde\Authnet\AuthnetSim::resetParameters()
      */
-    public function testResetParameters(): void
+    public function testResetParameters()
     {
         $sim = AuthnetApiFactory::getSimHandler($this->login, $this->transactionKey, $this->server);
 

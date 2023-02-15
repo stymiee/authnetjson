@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 /**
  * This file is part of the AuthnetJSON package.
  *
@@ -11,7 +9,7 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Authnetjson;
+namespace JohnConde\Authnet;
 
 /**
  * Adapter for the Authorize.Net JSON API
@@ -86,7 +84,7 @@ class TransactionResponse
      *
      * @param string $response Comma delimited transaction response string
      */
-    public function __construct(string $response)
+    public function __construct($response)
     {
         $this->responseArray = array_merge([null], explode(',', $response));
     }
@@ -99,11 +97,11 @@ class TransactionResponse
      * @param mixed $field Name or key of the transaction field to be retrieved
      * @return string Transaction field to be retrieved
      */
-    public function getTransactionResponseField($field): ?string
+    public function getTransactionResponseField($field)
     {
         $value = null;
         if (is_int($field)) {
-            $value = $this->responseArray[$field] ?? $value;
+            $value = isset($this->responseArray[$field]) ? $this->responseArray[$field] : $value;
         } elseif ($key = array_search($field, self::$fieldMap, true)) {
             $value = $this->responseArray[$key];
         }

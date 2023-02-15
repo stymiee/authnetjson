@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 /**
  * This file is part of the AuthnetJSON package.
  *
@@ -11,7 +9,7 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Authnetjson;
+namespace JohnConde\Authnet;
 
 /**
  * Contains constant values.
@@ -28,20 +26,20 @@ class AuthnetAcceptJs
     /**
      * @var string URL for Accept hosted form in the production environment
      */
-    public const PRODUCTION_HOSTED_PAYMENT_URL = 'https://accept.authorize.net/payment/payment';
+    const PRODUCTION_HOSTED_PAYMENT_URL = 'https://accept.authorize.net/payment/payment';
 
     /**
      * @var string URL for Accept hosted form in the sandbox environment
      */
-    public const SANDBOX_HOSTED_PAYMENT_URL = 'https://test.authorize.net/payment/payment';
+    const SANDBOX_HOSTED_PAYMENT_URL = 'https://test.authorize.net/payment/payment';
 
     /**
      * @var string URL for Accept hosted form in the production environment
      */
-    public const PRODUCTION_HOSTED_CIM_URL = 'https://accept.authorize.net/profile/manage';
+    const PRODUCTION_HOSTED_CIM_URL = 'https://accept.authorize.net/profile/manage';
 
     /**
      * @var string URL for Accept hosted form in the sandbox environment
      */
-    public const SANDBOX_HOSTED_CIM_URL = 'https://test.authorize.net/profile/manage';
+    const SANDBOX_HOSTED_CIM_URL = 'https://test.authorize.net/profile/manage';
 }

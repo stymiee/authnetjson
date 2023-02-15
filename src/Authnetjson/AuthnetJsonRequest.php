@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 /**
  * This file is part of the AuthnetJSON package.
  *
@@ -11,11 +9,11 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Authnetjson;
+namespace JohnConde\Authnet;
 
-use Authnetjson\Exception\AuthnetCannotSetParamsException;
-use Authnetjson\Exception\AuthnetCurlException;
-use Authnetjson\Exception\AuthnetInvalidJsonException;
+use JohnConde\Authnet\Exception\AuthnetCannotSetParamsException;
+use JohnConde\Authnet\Exception\AuthnetCurlException;
+use JohnConde\Authnet\Exception\AuthnetInvalidJsonException;
 use Curl\Curl;
 
 /**
@@ -73,7 +71,7 @@ class AuthnetJsonRequest
     /**
      * @var int     Maximum number of retires making HTTP request before failure
      */
-    private const MAX_RETRIES = 3;
+    const MAX_RETRIES = 3;
 
     /**
      * @var string  Authorize.Net API login ID
@@ -113,7 +111,7 @@ class AuthnetJsonRequest
      * @param string $transactionKey Authorize.Net API Transaction Key
      * @param string $api_url URL endpoint for processing a transaction
      */
-    public function __construct(string $login, string $transactionKey, string $api_url)
+    public function __construct($login, $transactionKey, $api_url)
     {
         $this->login = $login;
         $this->transactionKey = $transactionKey;
@@ -151,7 +149,7 @@ class AuthnetJsonRequest
      * @param mixed $value unused
      * @throws AuthnetCannotSetParamsException
      */
-    public function __set(string $name, $value)
+    public function __set($name, $value)
     {
         throw new AuthnetCannotSetParamsException(sprintf('You cannot set parameters directly in %s.', __CLASS__));
     }
@@ -166,7 +164,7 @@ class AuthnetJsonRequest
      * @throws AuthnetInvalidJsonException
      * @throws AuthnetCurlException
      */
-    public function __call(string $api_call, array $args = [])
+    public function __call($api_call, $args = [])
     {
         $authentication = [
             'merchantAuthentication' => [
@@ -190,7 +188,7 @@ class AuthnetJsonRequest
     /**
      * Makes POST request with retry logic.
      */
-    private function makeRequest(): void
+    private function makeRequest()
     {
         $this->retries = 0;
         while ($this->retries < self::MAX_RETRIES) {
@@ -208,7 +206,7 @@ class AuthnetJsonRequest
      * @return string  JSON string containing API response
      * @throws AuthnetCurlException
      */
-    private function process(): string
+    private function process()
     {
         $this->makeRequest();
         if (!$this->processor->error && isset($this->processor->response)) {
@@ -228,7 +226,7 @@ class AuthnetJsonRequest
      *
      * @param Curl $processor
      */
-    public function setProcessHandler(Curl $processor): void
+    public function setProcessHandler(Curl $processor)
     {
         $this->processor = $processor;
     }
@@ -238,7 +236,7 @@ class AuthnetJsonRequest
      *
      * @return string transaction request sent to Authorize.Net in JSON format
      */
-    public function getRawRequest(): string
+    public function getRawRequest()
     {
         return $this->requestJson;
     }

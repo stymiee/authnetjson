@@ -37,7 +37,7 @@ HTTP 500 response for connection error
 
 *************************************************************************************************/
 
-namespace Authnetjson;
+namespace JohnConde\Authnet;
 
 use Exception;
 

@@ -118,7 +118,7 @@ SAMPLE RESPONSE
 
 *************************************************************************************************/
 
-namespace Authnetjson;
+namespace JohnConde\Authnet;
 
 use Exception;
 use Symfony\Component\Config\Definition\Builder\EnumNodeDefinition;

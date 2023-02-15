@@ -10,6 +10,6 @@
     defined('AUTHNET_TRANSKEY')  || define('AUTHNET_TRANSKEY', '');
     defined('AUTHNET_SIGNATURE') || define('AUTHNET_SIGNATURE', '');
 
-    if (version_compare(PHP_VERSION, '7.2.0') < 0) {
-        throw new \RuntimeException('AuthnetJson requires PHP 7.2 or greater');
+    if (version_compare(PHP_VERSION, '5.6.0') < 0) {
+        throw new \RuntimeException('AuthnetJson requires PHP 5.6 or greater');
     }

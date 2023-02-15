@@ -171,7 +171,7 @@ SAMPLE RESPONSE
 
 *************************************************************************************************/
 
-namespace Authnetjson;
+namespace JohnConde\Authnet;
 
 use Exception;
 
@@ -185,7 +185,7 @@ try {
     );
     $response = $request->createTransactionRequest(
         [
-            'refId' => random_int(1000000, 100000000),
+            'refId' => mt_rand(1000000, 100000000),
             'transactionRequest' => [
                 'transactionType' => 'authCaptureTransaction',
                 'amount' => 5,

@@ -9,19 +9,19 @@
  * file that was distributed with this source code.
  */
 
-namespace Authnetjson\tests;
+namespace JohnConde\Authnet\tests;
 
-use Authnetjson\AuthnetWebhook;
-use Authnetjson\Exception\AuthnetInvalidCredentialsException;
-use Authnetjson\Exception\AuthnetInvalidJsonException;
+use JohnConde\Authnet\AuthnetWebhook;
+use JohnConde\Authnet\Exception\AuthnetInvalidCredentialsException;
+use JohnConde\Authnet\Exception\AuthnetInvalidJsonException;
 use PHPUnit\Framework\TestCase;
 
 class AuthnetWebhookTest extends TestCase
 {
     /**
-     * @covers \Authnetjson\AuthnetWebhook::__construct()
+     * @covers \JohnConde\Authnet\AuthnetWebhook::__construct()
      */
-    public function testConstructor(): void
+    public function testConstructor()
     {
         $signatureKey = '52CB4A002C634B84E397DC8A218E1A160BA7CAB7CBE4C05B35E9CBB05E14FE4A2385812E980CCF97D177F17863CE214D1BE6CE8E1E894487AACF3609C1A5FE17';
         $webhookJson = '{"notificationId":"182cbbff-cab2-4080-931d-80e5d818f23a","eventType":"net.authorize.payment.authcapture.created","eventDate":"2017-08-18T20:40:52.7722007Z","webhookId":"849eb87e-078a-4169-a34b-c0bded5019a8","payload":{"responseCode":0,"authCode":"Z3PV5H","avsResponse":"Y","authAmount":0.0,"entityName":"transaction","id":"40005915599"}}';
@@ -40,29 +40,29 @@ class AuthnetWebhookTest extends TestCase
     }
 
     /**
-     * @covers \Authnetjson\AuthnetWebhook::__construct()
-     * @covers \Authnetjson\Exception\AuthnetInvalidCredentialsException::__construct()
+     * @covers \JohnConde\Authnet\AuthnetWebhook::__construct()
+     * @covers \JohnConde\Authnet\Exception\AuthnetInvalidCredentialsException::__construct()
      */
-    public function testExceptionIsRaisedForNoSignature(): void
+    public function testExceptionIsRaisedForNoSignature()
     {
         $this->expectException(AuthnetInvalidCredentialsException::class);
         new AuthnetWebhook('', 'Not JSON', []);
     }
 
     /**
-     * @covers \Authnetjson\AuthnetWebhook::__construct()
-     * @covers \Authnetjson\Exception\AuthnetInvalidJsonException::__construct()
+     * @covers \JohnConde\Authnet\AuthnetWebhook::__construct()
+     * @covers \JohnConde\Authnet\Exception\AuthnetInvalidJsonException::__construct()
      */
-    public function testExceptionIsRaisedForCannotSetParamsException(): void
+    public function testExceptionIsRaisedForCannotSetParamsException()
     {
         $this->expectException(AuthnetInvalidJsonException::class);
         new AuthnetWebhook('a', 'Not JSON', []);
     }
 
     /**
-     * @covers \Authnetjson\AuthnetWebhook::__toString()
+     * @covers \JohnConde\Authnet\AuthnetWebhook::__toString()
      */
-    public function testToString(): void
+    public function testToString()
     {
         $signatureKey = '52CB4A002C634B84E397DC8A218E1A160BA7CAB7CBE4C05B35E9CBB05E14FE4A2385812E980CCF97D177F17863CE214D1BE6CE8E1E894487AACF3609C1A5FE17';
         $webhookJson = '{"notificationId":"182cbbff-cab2-4080-931d-80e5d818f23a","eventType":"net.authorize.payment.authcapture.created","eventDate":"2017-08-18T20:40:52.7722007Z","webhookId":"849eb87e-078a-4169-a34b-c0bded5019a8","payload":{"responseCode":0,"authCode":"Z3PV5H","avsResponse":"Y","authAmount":0.0,"entityName":"transaction","id":"40005915599"}}';
@@ -82,9 +82,9 @@ class AuthnetWebhookTest extends TestCase
     }
 
     /**
-     * @covers \Authnetjson\AuthnetWebhook::__get()
+     * @covers \JohnConde\Authnet\AuthnetWebhook::__get()
      */
-    public function testGet(): void
+    public function testGet()
     {
         $signatureKey = '52CB4A002C634B84E397DC8A218E1A160BA7CAB7CBE4C05B35E9CBB05E14FE4A2385812E980CCF97D177F17863CE214D1BE6CE8E1E894487AACF3609C1A5FE17';
         $webhookJson = '{"notificationId":"182cbbff-cab2-4080-931d-80e5d818f23a","eventType":"net.authorize.payment.authcapture.created","eventDate":"2017-08-18T20:40:52.7722007Z","webhookId":"849eb87e-078a-4169-a34b-c0bded5019a8","payload":{"responseCode":0,"authCode":"Z3PV5H","avsResponse":"Y","authAmount":0.0,"entityName":"transaction","id":"40005915599"}}';
@@ -99,9 +99,9 @@ class AuthnetWebhookTest extends TestCase
     }
 
     /**
-     * @covers \Authnetjson\AuthnetWebhook::isValid()
+     * @covers \JohnConde\Authnet\AuthnetWebhook::isValid()
      */
-    public function testIsValidCamelCase(): void
+    public function testIsValidCamelCase()
     {
         $signatureKey = '52CB4A002C634B84E397DC8A218E1A160BA7CAB7CBE4C05B35E9CBB05E14FE4A2385812E980CCF97D177F17863CE214D1BE6CE8E1E894487AACF3609C1A5FE17';
         $webhookJson = '{"notificationId":"182cbbff-cab2-4080-931d-80e5d818f23a","eventType":"net.authorize.payment.authcapture.created","eventDate":"2017-08-18T20:40:52.7722007Z","webhookId":"849eb87e-078a-4169-a34b-c0bded5019a8","payload":{"responseCode":0,"authCode":"Z3PV5H","avsResponse":"Y","authAmount":0.0,"entityName":"transaction","id":"40005915599"}}';
@@ -115,9 +115,9 @@ class AuthnetWebhookTest extends TestCase
     }
 
     /**
-     * @covers \Authnetjson\AuthnetWebhook::isValid()
+     * @covers \JohnConde\Authnet\AuthnetWebhook::isValid()
      */
-    public function testIsValidUpperCase(): void
+    public function testIsValidUpperCase()
     {
         $signatureKey = '52CB4A002C634B84E397DC8A218E1A160BA7CAB7CBE4C05B35E9CBB05E14FE4A2385812E980CCF97D177F17863CE214D1BE6CE8E1E894487AACF3609C1A5FE17';
         $webhookJson = '{"notificationId":"182cbbff-cab2-4080-931d-80e5d818f23a","eventType":"net.authorize.payment.authcapture.created","eventDate":"2017-08-18T20:40:52.7722007Z","webhookId":"849eb87e-078a-4169-a34b-c0bded5019a8","payload":{"responseCode":0,"authCode":"Z3PV5H","avsResponse":"Y","authAmount":0.0,"entityName":"transaction","id":"40005915599"}}';
@@ -131,9 +131,9 @@ class AuthnetWebhookTest extends TestCase
     }
 
     /**
-     * @covers \Authnetjson\AuthnetWebhook::isValid()
+     * @covers \JohnConde\Authnet\AuthnetWebhook::isValid()
      */
-    public function testIsValidFailure(): void
+    public function testIsValidFailure()
     {
         $signatureKey = '52CB4A002C634B84E397DC8A218E1A160BA7CAB7CBE4C05B35E9CBB05E14FE4A2385812E980CCF97D177F17863CE214D1BE6CE8E1E894487AACF3609C1A5FE17';
         $webhookJson = '{"notificationId":"182cbbff-cab2-4080-931d-80e5d818f23a","eventType":"net.authorize.payment.authcapture.created","eventDate":"2017-08-18T20:40:52.7722007Z","webhookId":"849eb87e-078a-4169-a34b-c0bded5019a8","payload":{"responseCode":0,"authCode":"Z3PV5H","avsResponse":"Y","authAmount":0.0,"entityName":"transaction","id":"40005915599"}}';
@@ -147,9 +147,9 @@ class AuthnetWebhookTest extends TestCase
     }
 
     /**
-     * @covers \Authnetjson\AuthnetWebhook::getRequestId()
+     * @covers \JohnConde\Authnet\AuthnetWebhook::getRequestId()
      */
-    public function testGetRequestId(): void
+    public function testGetRequestId()
     {
         $signatureKey = '52CB4A002C634B84E397DC8A218E1A160BA7CAB7CBE4C05B35E9CBB05E14FE4A2385812E980CCF97D177F17863CE214D1BE6CE8E1E894487AACF3609C1A5FE17';
         $webhookJson = '{"notificationId":"182cbbff-cab2-4080-931d-80e5d818f23a","eventType":"net.authorize.payment.authcapture.created","eventDate":"2017-08-18T20:40:52.7722007Z","webhookId":"849eb87e-078a-4169-a34b-c0bded5019a8","payload":{"responseCode":0,"authCode":"Z3PV5H","avsResponse":"Y","authAmount":0.0,"entityName":"transaction","id":"40005915599"}}';
@@ -164,9 +164,9 @@ class AuthnetWebhookTest extends TestCase
     }
 
     /**
-     * @covers \Authnetjson\AuthnetWebhook::getAllHeaders()
+     * @covers \JohnConde\Authnet\AuthnetWebhook::getAllHeaders()
      */
-    public function testGetAllHeaders(): void
+    public function testGetAllHeaders()
     {
         $_SERVER += [
             'HTTP_TEST' => 'test'

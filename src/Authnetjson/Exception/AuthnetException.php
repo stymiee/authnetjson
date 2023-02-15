@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 /**
  * This file is part of the AuthnetJSON package.
  *
@@ -11,10 +9,9 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Authnetjson\Exception;
+namespace JohnConde\Authnet\Exception;
 
 use Exception;
-use Throwable;
 
 /**
  * Generic Exception that may be thrown whenever an unexpect error occurs using the AuthnetJson class
@@ -26,7 +23,7 @@ use Throwable;
  */
 class AuthnetException extends Exception
 {
-    public function __construct(string $message = '', int $code = 0, Throwable $previous = null)
+    public function __construct($message = '', $code = 0, $previous = null)
     {
         parent::__construct($message, $code, $previous);
     }

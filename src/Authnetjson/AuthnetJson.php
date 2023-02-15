@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 /**
  * This file is part of the AuthnetJSON package.
  *
@@ -11,7 +9,7 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Authnetjson;
+namespace JohnConde\Authnet;
 
 /**
  * Contains constant values.
@@ -28,5 +26,5 @@ class AuthnetJson
     /**
      * @var int Subscription of endless length.
      */
-    public const BOUNDLESS_OCCURRENCES = 9999;
+    const BOUNDLESS_OCCURRENCES = 9999;
 }

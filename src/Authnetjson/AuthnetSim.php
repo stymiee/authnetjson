@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 /**
  * This file is part of the AuthnetJSON package.
  *
@@ -11,9 +9,9 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Authnetjson;
+namespace JohnConde\Authnet;
 
-use Authnetjson\Exception\AuthnetInvalidAmountException;
+use JohnConde\Authnet\Exception\AuthnetInvalidAmountException;
 use Exception;
 
 /**
@@ -60,7 +58,7 @@ class AuthnetSim
      * @param string $api_url URL endpoint for processing a transaction
      * @throws Exception
      */
-    public function __construct(string $login, string $signature, string $api_url)
+    public function __construct($login, $signature, $api_url)
     {
         $this->login = $login;
         $this->signature = $signature;
@@ -75,7 +73,7 @@ class AuthnetSim
      * @return string           Hash of five different unique transaction parameters
      * @throws AuthnetInvalidAmountException
      */
-    public function getFingerprint(float $amount): string
+    public function getFingerprint($amount)
     {
         if (!filter_var($amount, FILTER_VALIDATE_FLOAT, FILTER_FLAG_ALLOW_THOUSAND)) {
             throw new AuthnetInvalidAmountException('You must enter a valid amount greater than zero.');
@@ -101,7 +99,7 @@ class AuthnetSim
      *
      * @return int Current sequence
      */
-    public function getSequence(): int
+    public function getSequence()
     {
         return $this->sequence;
     }
@@ -111,7 +109,7 @@ class AuthnetSim
      *
      * @return int Current timestamp
      */
-    public function getTimestamp(): int
+    public function getTimestamp()
     {
         return $this->timestamp;
     }
@@ -121,7 +119,7 @@ class AuthnetSim
      *
      * @return string           API login ID
      */
-    public function getLogin(): string
+    public function getLogin()
     {
         return $this->login;
     }
@@ -131,7 +129,7 @@ class AuthnetSim
      *
      * @return string           url endpoint
      */
-    public function getEndpoint(): string
+    public function getEndpoint()
     {
         return $this->url;
     }
@@ -141,9 +139,9 @@ class AuthnetSim
      *
      * @throws Exception
      */
-    public function resetParameters(): void
+    public function resetParameters()
     {
-        $this->sequence = random_int(1, 1000);
+        $this->sequence = mt_rand(1, 1000);
         $this->timestamp = time();
     }
 }

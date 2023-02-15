@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 /**
  * This file is part of the AuthnetJSON package.
  *
@@ -11,11 +9,11 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Authnetjson;
+namespace JohnConde\Authnet;
 
-use Authnetjson\Exception\AuthnetCannotSetParamsException;
-use Authnetjson\Exception\AuthnetInvalidJsonException;
-use Authnetjson\Exception\AuthnetTransactionResponseCallException;
+use JohnConde\Authnet\Exception\AuthnetCannotSetParamsException;
+use JohnConde\Authnet\Exception\AuthnetInvalidJsonException;
+use JohnConde\Authnet\Exception\AuthnetTransactionResponseCallException;
 
 /**
  * Adapter for the Authorize.Net JSON API
@@ -72,27 +70,27 @@ class AuthnetJsonResponse
     /**
      * @const Indicates the status code of an approved transaction
      */
-    public const STATUS_APPROVED = 1;
+    const STATUS_APPROVED = 1;
 
     /**
      * @const Indicates the status code of a declined transaction
      */
-    public const STATUS_DECLINED = 2;
+    const STATUS_DECLINED = 2;
 
     /**
      * @const Indicates the status code of a transaction which has encountered an error
      */
-    public const STATUS_ERROR = 3;
+    const STATUS_ERROR = 3;
 
     /**
      * @const Indicates the status code of a transaction held for review
      */
-    public const STATUS_HELD = 4;
+    const STATUS_HELD = 4;
 
     /**
      * @const Indicates the status code of a transaction held for review
      */
-    public const STATUS_PAYPAL_NEED_CONSENT = 5;
+    const STATUS_PAYPAL_NEED_CONSENT = 5;
 
     /**
      * @var object  SimpleXML object representing the API response
@@ -120,7 +118,7 @@ class AuthnetJsonResponse
      * @param string $responseJson Response from Authorize.Net
      * @throws AuthnetInvalidJsonException
      */
-    public function __construct(string $responseJson)
+    public function __construct($responseJson)
     {
         $this->responseJson = preg_replace('/[\x00-\x1F\x80-\xFF]/', '', $responseJson);
         if (($this->response = json_decode($this->responseJson, false)) === null) {
@@ -172,15 +170,15 @@ class AuthnetJsonResponse
      * @param string $key Name of the response key to be retrieved if it exists
      * @return string requested variable from the API call response
      */
-    public function __get(string $key)
+    public function __get($key)
     {
-        return $this->response->{$key} ?? null;
+        return isset($this->response->{$key}) ? $this->response->{$key} : null;
     }
 
     /**
      * @throws AuthnetCannotSetParamsException
      */
-    public function __set(string $key, $value)
+    public function __set($key, $value)
     {
         throw new AuthnetCannotSetParamsException(sprintf('You cannot set parameters directly in %s.', __CLASS__));
     }
@@ -191,7 +189,7 @@ class AuthnetJsonResponse
      * @param string $key Name of the response key to check existence of
      * @return bool
      */
-    public function __isset(string $key): bool
+    public function __isset($key)
     {
         return isset($this->response->{$key});
     }
@@ -201,7 +199,7 @@ class AuthnetJsonResponse
      *
      * @return bool    Whether the transaction was in a successful state
      */
-    public function isSuccessful(): bool
+    public function isSuccessful()
     {
         return strtolower($this->messages->resultCode) === 'ok';
     }
@@ -211,7 +209,7 @@ class AuthnetJsonResponse
      *
      * @return bool    Whether the transaction was in an error state
      */
-    public function isError(): bool
+    public function isError()
     {
         return strtolower($this->messages->resultCode) === 'error';
     }
@@ -221,7 +219,7 @@ class AuthnetJsonResponse
      *
      * @return bool     true if the transaction is approved
      */
-    public function isApproved(): bool
+    public function isApproved()
     {
         return $this->isSuccessful() && $this->checkTransactionStatus(self::STATUS_APPROVED);
     }
@@ -231,7 +229,7 @@ class AuthnetJsonResponse
      *
      * @return bool     true if the transaction was completed using a prepaid card
      */
-    public function isPrePaidCard(): bool
+    public function isPrePaidCard()
     {
         return isset($this->transactionResponse->prePaidCard);
     }
@@ -241,7 +239,7 @@ class AuthnetJsonResponse
      *
      * @return bool     true if the transaction is declined
      */
-    public function isDeclined(): bool
+    public function isDeclined()
     {
         return $this->isSuccessful() && $this->checkTransactionStatus(self::STATUS_DECLINED);
     }
@@ -252,7 +250,7 @@ class AuthnetJsonResponse
      * @param int $status
      * @return bool Check to see if the ResponseCode matches the expected value
      */
-    protected function checkTransactionStatus(int $status): bool
+    protected function checkTransactionStatus(int $status)
     {
         if ($this->transactionInfo instanceof TransactionResponse) {
             $match = (int)$this->transactionInfo->getTransactionResponseField('ResponseCode') === $status;
@@ -269,7 +267,7 @@ class AuthnetJsonResponse
      * @return null|string Transaction field to be retrieved
      * @throws AuthnetTransactionResponseCallException
      */
-    public function getTransactionResponseField($field): ?string
+    public function getTransactionResponseField($field)
     {
         if ($this->transactionInfo instanceof TransactionResponse) {
             return $this->transactionInfo->getTransactionResponseField($field);
@@ -282,7 +280,7 @@ class AuthnetJsonResponse
      *
      * @return array
      */
-    public function getTransactionResponses(): array
+    public function getTransactionResponses()
     {
         return $this->transactionInfoArray;
     }
@@ -292,7 +290,7 @@ class AuthnetJsonResponse
      *
      * @return string transaction response from Authorize.Net in JSON format
      */
-    public function getRawResponse(): string
+    public function getRawResponse()
     {
         return $this->responseJson;
     }
@@ -302,7 +300,7 @@ class AuthnetJsonResponse
      *
      * @return string Error response from Authorize.Net
      */
-    public function getErrorMessage(): string
+    public function getErrorMessage()
     {
         return $this->getErrorText();
     }
@@ -312,7 +310,7 @@ class AuthnetJsonResponse
      *
      * @return string Error response from Authorize.Net
      */
-    public function getErrorText(): string
+    public function getErrorText()
     {
         return $this->getError('text');
     }
@@ -322,7 +320,7 @@ class AuthnetJsonResponse
      *
      * @return string Error response from Authorize.Net
      */
-    public function getErrorCode(): string
+    public function getErrorCode()
     {
         return $this->getError('code');
     }
@@ -331,7 +329,7 @@ class AuthnetJsonResponse
      * @param string $type Whether to get the error code or text
      * @return string
      */
-    private function getError(string $type): string
+    private function getError(string $type)
     {
         $msg = '';
         if ($this->isError()) {

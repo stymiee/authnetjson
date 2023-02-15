@@ -1,7 +1,5 @@
 <?php
 
-declare(strict_types=1);
-
 /**
  * This file is part of the AuthnetJSON package.
  *
@@ -11,10 +9,10 @@ declare(strict_types=1);
  * file that was distributed with this source code.
  */
 
-namespace Authnetjson;
+namespace JohnConde\Authnet;
 
-use Authnetjson\Exception\AuthnetInvalidCredentialsException;
-use Authnetjson\Exception\AuthnetInvalidJsonException;
+use JohnConde\Authnet\Exception\AuthnetInvalidCredentialsException;
+use JohnConde\Authnet\Exception\AuthnetInvalidJsonException;
 
 /**
  * Handles a Webhook notification from the Authorize.Net Webhooks API
@@ -57,7 +55,7 @@ class AuthnetWebhook
      * @throws AuthnetInvalidCredentialsException
      * @throws AuthnetInvalidJsonException
      */
-    public function __construct(string $signature, string $payload, array $headers = [])
+    public function __construct($signature, $payload, $headers = [])
     {
         $this->signature = $signature;
         $this->webhookJson = $payload;
@@ -102,7 +100,7 @@ class AuthnetWebhook
      * @param string $var
      * @return string          requested variable from the API call response
      */
-    public function __get(string $var)
+    public function __get($var)
     {
         return $this->webhook->{$var};
     }
@@ -112,7 +110,7 @@ class AuthnetWebhook
      *
      * @return bool
      */
-    public function isValid(): bool
+    public function isValid()
     {
         $hashedBody = strtoupper(hash_hmac('sha512', $this->webhookJson, $this->signature));
         return (isset($this->headers['X-ANET-SIGNATURE']) &&
@@ -124,9 +122,9 @@ class AuthnetWebhook
      *
      * @return string|null
      */
-    public function getRequestId(): ?string
+    public function getRequestId()
     {
-        return $this->headers['X-REQUEST-ID'] ?? null;
+        return isset($this->headers['X-REQUEST-ID']) ? $this->headers['X-REQUEST-ID'] : null;
     }
 
     /**
@@ -134,7 +132,7 @@ class AuthnetWebhook
      *
      * @return array
      */
-    protected function getAllHeaders(): array
+    protected function getAllHeaders()
     {
         if (function_exists('apache_request_headers')) {
             $headers = apache_request_headers();

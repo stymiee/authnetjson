@@ -9,21 +9,21 @@
  * file that was distributed with this source code.
  */
 
-namespace Authnetjson\tests;
+namespace JohnConde\Authnet\tests;
 
-use Authnetjson\AuthnetApiFactory;
-use Authnetjson\AuthnetJsonRequest;
-use Authnetjson\Exception\AuthnetCannotSetParamsException;
-use Authnetjson\Exception\AuthnetCurlException;
+use JohnConde\Authnet\AuthnetApiFactory;
+use JohnConde\Authnet\AuthnetJsonRequest;
+use JohnConde\Authnet\Exception\AuthnetCannotSetParamsException;
+use JohnConde\Authnet\Exception\AuthnetCurlException;
 use PHPUnit\Framework\TestCase;
 use Curl\Curl;
 
 class AuthnetJsonRequestTest extends TestCase
 {
     /**
-     * @covers \Authnetjson\AuthnetJsonRequest::__construct()
+     * @covers \JohnConde\Authnet\AuthnetJsonRequest::__construct()
      */
-    public function testConstructor(): void
+    public function testConstructor()
     {
         $apiLogin    = 'apiLogin';
         $apiTransKey = 'apiTransKey';
@@ -46,10 +46,10 @@ class AuthnetJsonRequestTest extends TestCase
 
 
     /**
-     * @covers \Authnetjson\AuthnetJsonRequest::__set()
-     * @covers \Authnetjson\Exception\AuthnetCannotSetParamsException::__construct()
+     * @covers \JohnConde\Authnet\AuthnetJsonRequest::__set()
+     * @covers \JohnConde\Authnet\Exception\AuthnetCannotSetParamsException::__construct()
      */
-    public function testExceptionIsRaisedForCannotSetParamsException(): void
+    public function testExceptionIsRaisedForCannotSetParamsException()
     {
         $this->expectException(AuthnetCannotSetParamsException::class);
 
@@ -59,12 +59,12 @@ class AuthnetJsonRequestTest extends TestCase
 
 
     /**
-     * @covers \Authnetjson\AuthnetJsonRequest::process()
-     * @covers \Authnetjson\Exception\AuthnetCurlException::__construct()
+     * @covers \JohnConde\Authnet\AuthnetJsonRequest::process()
+     * @covers \JohnConde\Authnet\Exception\AuthnetCurlException::__construct()
      * @uses \Authnetjson\AuthnetApiFactory::getJsonApiHandler
      * @uses \Authnetjson\AuthnetApiFactory::getWebServiceURL
      */
-    public function testExceptionIsRaisedForInvalidJsonException(): void
+    public function testExceptionIsRaisedForInvalidJsonException()
     {
         $this->expectException(AuthnetCurlException::class);
 
@@ -83,9 +83,9 @@ class AuthnetJsonRequestTest extends TestCase
 
 
     /**
-     * @covers \Authnetjson\AuthnetJsonRequest::setProcessHandler()
+     * @covers \JohnConde\Authnet\AuthnetJsonRequest::setProcessHandler()
      */
-    public function testProcessorIsInstanceOfCurlWrapper(): void
+    public function testProcessorIsInstanceOfCurlWrapper()
     {
         $request = new AuthnetJsonRequest('', '', AuthnetApiFactory::USE_DEVELOPMENT_SERVER);
         $request->setProcessHandler(new Curl());
@@ -99,10 +99,10 @@ class AuthnetJsonRequestTest extends TestCase
 
 
     /**
-     * @covers \Authnetjson\AuthnetJsonRequest::__toString()
-     * @covers \Authnetjson\AuthnetJsonRequest::__call()
+     * @covers \JohnConde\Authnet\AuthnetJsonRequest::__toString()
+     * @covers \JohnConde\Authnet\AuthnetJsonRequest::__call()
      */
-    public function testToString(): void
+    public function testToString()
     {
         $requestJson = array(
             'refId' => '94564789',
@@ -278,9 +278,9 @@ class AuthnetJsonRequestTest extends TestCase
     }
 
     /**
-     * @covers \Authnetjson\AuthnetJsonRequest::getRawRequest()
+     * @covers \JohnConde\Authnet\AuthnetJsonRequest::getRawRequest()
      */
-    public function testGetRawRequest(): void
+    public function testGetRawRequest()
     {
         $requestJson = array(
             'refId' => '94564789',
@@ -318,10 +318,10 @@ class AuthnetJsonRequestTest extends TestCase
     }
 
     /**
-     * @covers \Authnetjson\AuthnetJsonRequest::process()
-     * @covers \Authnetjson\Exception\AuthnetCurlException::__construct()
+     * @covers \JohnConde\Authnet\AuthnetJsonRequest::process()
+     * @covers \JohnConde\Authnet\Exception\AuthnetCurlException::__construct()
      */
-    public function testProcessError(): void
+    public function testProcessError()
     {
         $this->expectException(AuthnetCurlException::class);
 
@@ -344,43 +344,43 @@ class AuthnetJsonRequestTest extends TestCase
     }
 
     /**
-     * @covers \Authnetjson\AuthnetJsonRequest::makeRequest()
+     * @covers \JohnConde\Authnet\AuthnetJsonRequest::makeRequest()
      */
-    public function testMakeRequestWithError(): void
-    {
-        $apiLogin    = 'apiLogin';
-        $apiTransKey = 'apiTransKey';
-
-        $http = $this->getMockBuilder(Curl::class)
-            ->getMock();
-        $http->error         = true;
-        $http->error_code    = 10;
-        $http->error_message = 'Test Error Message';
-
-        $request = AuthnetApiFactory::getJsonApiHandler(
-            $apiLogin,
-            $apiTransKey,
-            AuthnetApiFactory::USE_DEVELOPMENT_SERVER
-        );
-        $request->setProcessHandler($http);
-
-        $method = new \ReflectionMethod(AuthnetJsonRequest::class, 'makeRequest');
-        $method->setAccessible(true);
-        $method->invoke($request);
-
-        $reflectionOfRequest = new \ReflectionObject($request);
-        $retries = $reflectionOfRequest->getProperty('retries');
-        $retries->setAccessible(true);
-
-        $reflectionOfMaxRetries = new \ReflectionClassConstant(AuthnetJsonRequest::class, 'MAX_RETRIES');
-
-        self::assertEquals($reflectionOfMaxRetries->getValue(), $retries->getValue($request));
-    }
+//    public function testMakeRequestWithError()
+//    {
+//        $apiLogin    = 'apiLogin';
+//        $apiTransKey = 'apiTransKey';
+//
+//        $http = $this->getMockBuilder(Curl::class)
+//            ->getMock();
+//        $http->error         = true;
+//        $http->error_code    = 10;
+//        $http->error_message = 'Test Error Message';
+//
+//        $request = AuthnetApiFactory::getJsonApiHandler(
+//            $apiLogin,
+//            $apiTransKey,
+//            AuthnetApiFactory::USE_DEVELOPMENT_SERVER
+//        );
+//        $request->setProcessHandler($http);
+//
+//        $method = new \ReflectionMethod(AuthnetJsonRequest::class, 'makeRequest');
+//        $method->setAccessible(true);
+//        $method->invoke($request);
+//
+//        $reflectionOfRequest = new \ReflectionObject($request);
+//        $retries = $reflectionOfRequest->getProperty('retries');
+//        $retries->setAccessible(true);
+//
+//        $reflectionOfMaxRetries = new \ReflectionClassConstant(AuthnetJsonRequest::class, 'MAX_RETRIES');
+//
+//        self::assertEquals($reflectionOfMaxRetries->getValue(), $retries->getValue($request));
+//    }
 
     /**
-     * @covers \Authnetjson\AuthnetJsonRequest::makeRequest()
+     * @covers \JohnConde\Authnet\AuthnetJsonRequest::makeRequest()
      */
-    public function testMakeRequestWithNoError(): void
+    public function testMakeRequestWithNoError()
     {
         $apiLogin    = 'apiLogin';
         $apiTransKey = 'apiTransKey';

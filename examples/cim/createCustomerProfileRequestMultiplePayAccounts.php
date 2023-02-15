@@ -104,7 +104,7 @@ SAMPLE RESPONSE
 
  *************************************************************************************************/
 
-namespace Authnetjson;
+namespace JohnConde\Authnet;
 
 use Exception;
 

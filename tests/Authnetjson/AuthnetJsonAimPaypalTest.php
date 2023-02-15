@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Authnetjson\tests;
+namespace JohnConde\Authnet\tests;
 
-use Authnetjson\AuthnetApiFactory;
-use Authnetjson\AuthnetJsonResponse;
+use JohnConde\Authnet\AuthnetApiFactory;
+use JohnConde\Authnet\AuthnetJsonResponse;
 use PHPUnit\Framework\TestCase;
 use Curl\Curl;
 
@@ -23,7 +23,7 @@ class AuthnetJsonAimPaypalTest extends TestCase
     private $server;
     private $http;
 
-    protected function setUp(): void
+    protected function setUp()
     {
         $this->login          = 'test';
         $this->transactionKey = 'test';
@@ -35,12 +35,12 @@ class AuthnetJsonAimPaypalTest extends TestCase
     }
 
     /**
-    * @covers \Authnetjson\AuthnetJsonRequest::process()
+    * @covers \JohnConde\Authnet\AuthnetJsonRequest::process()
     *
     * @uses \Authnetjson\AuthnetApiFactory::getJsonApiHandler
     * @uses \Authnetjson\AuthnetApiFactory::getWebServiceURL
     */
-    public function testCreateTransactionRequestAuthCapture(): void
+    public function testCreateTransactionRequestAuthCapture()
     {
         $requestJson = array(
             "transactionRequest" => array(
@@ -106,12 +106,12 @@ class AuthnetJsonAimPaypalTest extends TestCase
     }
 
     /**
-     * @covers \Authnetjson\AuthnetJsonRequest::process()
+     * @covers \JohnConde\Authnet\AuthnetJsonRequest::process()
      *
      * @uses \Authnetjson\AuthnetApiFactory::getJsonApiHandler
      * @uses \Authnetjson\AuthnetApiFactory::getWebServiceURL
      */
-    public function testCreateTransactionRequestAuthCaptureContinue(): void
+    public function testCreateTransactionRequestAuthCaptureContinue()
     {
         $requestJson = array(
             "transactionRequest" => array(
@@ -170,12 +170,12 @@ class AuthnetJsonAimPaypalTest extends TestCase
     }
 
     /**
-     * @covers \Authnetjson\AuthnetJsonRequest::process()
+     * @covers \JohnConde\Authnet\AuthnetJsonRequest::process()
      *
      * @uses \Authnetjson\AuthnetApiFactory::getJsonApiHandler
      * @uses \Authnetjson\AuthnetApiFactory::getWebServiceURL
      */
-    public function testCreateTransactionRequestAuthOnly(): void
+    public function testCreateTransactionRequestAuthOnly()
     {
         $requestJson = array(
             "transactionRequest" => array(
@@ -238,12 +238,12 @@ class AuthnetJsonAimPaypalTest extends TestCase
 
 
     /**
-     * @covers \Authnetjson\AuthnetJsonRequest::process()
+     * @covers \JohnConde\Authnet\AuthnetJsonRequest::process()
      *
      * @uses \Authnetjson\AuthnetApiFactory::getJsonApiHandler
      * @uses \Authnetjson\AuthnetApiFactory::getWebServiceURL
      */
-    public function testCreateTransactionRequestAuthOnlyContinue(): void
+    public function testCreateTransactionRequestAuthOnlyContinue()
     {
         $requestJson = array(
             "transactionRequest" => array(
@@ -302,12 +302,12 @@ class AuthnetJsonAimPaypalTest extends TestCase
     }
 
     /**
-     * @covers \Authnetjson\AuthnetJsonRequest::process()
+     * @covers \JohnConde\Authnet\AuthnetJsonRequest::process()
      *
      * @uses \Authnetjson\AuthnetApiFactory::getJsonApiHandler
      * @uses \Authnetjson\AuthnetApiFactory::getWebServiceURL
      */
-    public function testCreateTransactionRequestGetDetails(): void
+    public function testCreateTransactionRequestGetDetails()
     {
         $requestJson = array(
             "transactionRequest" => array(
@@ -361,12 +361,12 @@ class AuthnetJsonAimPaypalTest extends TestCase
     }
 
     /**
-     * @covers \Authnetjson\AuthnetJsonRequest::process()
+     * @covers \JohnConde\Authnet\AuthnetJsonRequest::process()
      *
      * @uses \Authnetjson\AuthnetApiFactory::getJsonApiHandler
      * @uses \Authnetjson\AuthnetApiFactory::getWebServiceURL
      */
-    public function testCreateTransactionRequestPriorAuthCapture(): void
+    public function testCreateTransactionRequestPriorAuthCapture()
     {
         $requestJson = array(
             "transactionRequest" => array(
@@ -420,12 +420,12 @@ class AuthnetJsonAimPaypalTest extends TestCase
     }
 
     /**
-     * @covers \Authnetjson\AuthnetJsonRequest::process()
+     * @covers \JohnConde\Authnet\AuthnetJsonRequest::process()
      *
      * @uses \Authnetjson\AuthnetApiFactory::getJsonApiHandler
      * @uses \Authnetjson\AuthnetApiFactory::getWebServiceURL
      */
-    public function testCreateTransactionRequestRefund(): void
+    public function testCreateTransactionRequestRefund()
     {
         $requestJson = array(
             "transactionRequest" => array(
@@ -474,12 +474,12 @@ class AuthnetJsonAimPaypalTest extends TestCase
     }
 
     /**
-     * @covers \Authnetjson\AuthnetJsonRequest::process()
+     * @covers \JohnConde\Authnet\AuthnetJsonRequest::process()
      *
      * @uses \Authnetjson\AuthnetApiFactory::getJsonApiHandler
      * @uses \Authnetjson\AuthnetApiFactory::getWebServiceURL
      */
-    public function testCreateTransactionRequestVoid(): void
+    public function testCreateTransactionRequestVoid()
     {
         $requestJson = array(
             "transactionRequest" => array(
@@ -534,12 +534,12 @@ class AuthnetJsonAimPaypalTest extends TestCase
 
 
     /**
-     * @covers \Authnetjson\AuthnetJsonRequest::process()
+     * @covers \JohnConde\Authnet\AuthnetJsonRequest::process()
 
      * @uses \Authnetjson\AuthnetApiFactory::getJsonApiHandler
      * @uses \Authnetjson\AuthnetApiFactory::getWebServiceURL
      */
-    public function testCreateTransactionRequestAuthCaptureError(): void
+    public function testCreateTransactionRequestAuthCaptureError()
     {
         $requestJson = array(
             "transactionRequest" => array(
@@ -610,12 +610,12 @@ class AuthnetJsonAimPaypalTest extends TestCase
 
 
     /**
-     * @covers \Authnetjson\AuthnetJsonRequest::process()
+     * @covers \JohnConde\Authnet\AuthnetJsonRequest::process()
 
      * @uses \Authnetjson\AuthnetApiFactory::getJsonApiHandler
      * @uses \Authnetjson\AuthnetApiFactory::getWebServiceURL
      */
-    public function testCreateTransactionRequestGetDetailsError(): void
+    public function testCreateTransactionRequestGetDetailsError()
     {
         $requestJson = array(
             "transactionRequest" => array(
@@ -673,12 +673,12 @@ class AuthnetJsonAimPaypalTest extends TestCase
 
 
     /**
-     * @covers \Authnetjson\AuthnetJsonRequest::process()
+     * @covers \JohnConde\Authnet\AuthnetJsonRequest::process()
 
      * @uses \Authnetjson\AuthnetApiFactory::getJsonApiHandler
      * @uses \Authnetjson\AuthnetApiFactory::getWebServiceURL
      */
-    public function testCreateTransactionRequestRefundError(): void
+    public function testCreateTransactionRequestRefundError()
     {
         $requestJson = array(
             "transactionRequest" => array(

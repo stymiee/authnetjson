@@ -9,28 +9,28 @@
  * file that was distributed with this source code.
  */
 
-namespace Authnetjson\tests;
+namespace JohnConde\Authnet\tests;
 
-use Authnetjson\AuthnetWebhooksResponse;
-use Authnetjson\Exception\AuthnetInvalidJsonException;
+use JohnConde\Authnet\AuthnetWebhooksResponse;
+use JohnConde\Authnet\Exception\AuthnetInvalidJsonException;
 use PHPUnit\Framework\TestCase;
 
 class AuthnetWebhooksResponseTest extends TestCase
 {
     /**
-     * @covers \Authnetjson\AuthnetWebhooksResponse::__construct()
-     * @covers \Authnetjson\Exception\AuthnetInvalidJsonException::__construct()
+     * @covers \JohnConde\Authnet\AuthnetWebhooksResponse::__construct()
+     * @covers \JohnConde\Authnet\Exception\AuthnetInvalidJsonException::__construct()
      */
-    public function testExceptionIsRaisedForInvalidJsonException(): void
+    public function testExceptionIsRaisedForInvalidJsonException()
     {
         $this->expectException(AuthnetInvalidJsonException::class);
         new AuthnetWebhooksResponse('');
     }
 
     /**
-     * @covers \Authnetjson\AuthnetWebhooksResponse::__construct()
+     * @covers \JohnConde\Authnet\AuthnetWebhooksResponse::__construct()
      */
-    public function testConstruct(): void
+    public function testConstruct()
     {
         $responseJson = '{
             "url": "http://example.com",
@@ -48,9 +48,9 @@ class AuthnetWebhooksResponseTest extends TestCase
     }
 
     /**
-     * @covers \Authnetjson\AuthnetWebhooksResponse::__toString()
+     * @covers \JohnConde\Authnet\AuthnetWebhooksResponse::__toString()
      */
-    public function testToString(): void
+    public function testToString()
     {
         $responseJson = '{
             "url": "http://example.com",
@@ -72,9 +72,9 @@ class AuthnetWebhooksResponseTest extends TestCase
     }
 
     /**
-     * @covers \Authnetjson\AuthnetWebhooksResponse::getEventTypes()
+     * @covers \JohnConde\Authnet\AuthnetWebhooksResponse::getEventTypes()
      */
-    public function testGetEventTypes(): void
+    public function testGetEventTypes()
     {
         $responseJson = '[{
             "name": "net.authorize.payment.authcapture.created"
@@ -93,9 +93,9 @@ class AuthnetWebhooksResponseTest extends TestCase
     }
 
     /**
-     * @covers \Authnetjson\AuthnetWebhooksResponse::getEventTypes()
+     * @covers \JohnConde\Authnet\AuthnetWebhooksResponse::getEventTypes()
      */
-    public function testGetEventTypesFromWebhooks(): void
+    public function testGetEventTypesFromWebhooks()
     {
         $responseJson = '{
             "_links": {
@@ -124,9 +124,9 @@ class AuthnetWebhooksResponseTest extends TestCase
     }
 
     /**
-     * @covers \Authnetjson\AuthnetWebhooksResponse::getWebhooksId()
+     * @covers \JohnConde\Authnet\AuthnetWebhooksResponse::getWebhooksId()
      */
-    public function testGetWebhooksId(): void
+    public function testGetWebhooksId()
     {
         $responseJson = '{
             "_links": {
@@ -151,9 +151,9 @@ class AuthnetWebhooksResponseTest extends TestCase
     }
 
     /**
-     * @covers \Authnetjson\AuthnetWebhooksResponse::getStatus()
+     * @covers \JohnConde\Authnet\AuthnetWebhooksResponse::getStatus()
      */
-    public function testGetStatus(): void
+    public function testGetStatus()
     {
         $responseJson = '{
             "_links": {
@@ -178,9 +178,9 @@ class AuthnetWebhooksResponseTest extends TestCase
     }
 
     /**
-     * @covers \Authnetjson\AuthnetWebhooksResponse::getUrl()
+     * @covers \JohnConde\Authnet\AuthnetWebhooksResponse::getUrl()
      */
-    public function testGetUrl(): void
+    public function testGetUrl()
     {
         $responseJson = '{
             "_links": {
@@ -205,9 +205,9 @@ class AuthnetWebhooksResponseTest extends TestCase
     }
 
     /**
-     * @covers \Authnetjson\AuthnetWebhooksResponse::getWebhooks()
+     * @covers \JohnConde\Authnet\AuthnetWebhooksResponse::getWebhooks()
      */
-    public function testGetWebhooks(): void
+    public function testGetWebhooks()
     {
         $responseJson = '[{
             "_links": {
@@ -267,13 +267,13 @@ class AuthnetWebhooksResponseTest extends TestCase
     }
 
     /**
-     * @covers \Authnetjson\AuthnetWebhooksResponse::getNotificationHistory()
-     * @covers \Authnetjson\AuthnetWebhooksResponse::getNotificationId()
-     * @covers \Authnetjson\AuthnetWebhooksResponse::getDeliveryStatus()
-     * @covers \Authnetjson\AuthnetWebhooksResponse::getEventType()
-     * @covers \Authnetjson\AuthnetWebhooksResponse::getEventDate()
+     * @covers \JohnConde\Authnet\AuthnetWebhooksResponse::getNotificationHistory()
+     * @covers \JohnConde\Authnet\AuthnetWebhooksResponse::getNotificationId()
+     * @covers \JohnConde\Authnet\AuthnetWebhooksResponse::getDeliveryStatus()
+     * @covers \JohnConde\Authnet\AuthnetWebhooksResponse::getEventType()
+     * @covers \JohnConde\Authnet\AuthnetWebhooksResponse::getEventDate()
      */
-    public function testGetNotificationHistory(): void
+    public function testGetNotificationHistory()
     {
         $responseJson = '{
             "_links": {

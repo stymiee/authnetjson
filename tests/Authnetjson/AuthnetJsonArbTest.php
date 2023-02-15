@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Authnetjson\tests;
+namespace JohnConde\Authnet\tests;
 
-use Authnetjson\AuthnetApiFactory;
+use JohnConde\Authnet\AuthnetApiFactory;
 use PHPUnit\Framework\TestCase;
 use Curl\Curl;
 
@@ -22,7 +22,7 @@ class AuthnetJsonArbTest extends TestCase
     private $server;
     private $http;
 
-    protected function setUp(): void
+    protected function setUp()
     {
         $this->login          = 'test';
         $this->transactionKey = 'test';
@@ -34,12 +34,12 @@ class AuthnetJsonArbTest extends TestCase
     }
 
     /**
-     * @covers \Authnetjson\AuthnetJsonRequest::process()
+     * @covers \JohnConde\Authnet\AuthnetJsonRequest::process()
 
      * @uses \Authnetjson\AuthnetApiFactory::getJsonApiHandler
      * @uses \Authnetjson\AuthnetApiFactory::getWebServiceURL
      */
-    public function testARBCreateSubscriptionRequestSuccess(): void
+    public function testARBCreateSubscriptionRequestSuccess()
     {
         $requestJson = array(
             'refId' => 'Sample',
@@ -96,12 +96,12 @@ class AuthnetJsonArbTest extends TestCase
     }
 
     /**
-     * @covers \Authnetjson\AuthnetJsonRequest::process()
+     * @covers \JohnConde\Authnet\AuthnetJsonRequest::process()
 
      * @uses \Authnetjson\AuthnetApiFactory::getJsonApiHandler
      * @uses \Authnetjson\AuthnetApiFactory::getWebServiceURL
      */
-    public function testARBCreateSubscriptionRequestDuplicateRequestError(): void
+    public function testARBCreateSubscriptionRequestDuplicateRequestError()
     {
         $requestJson = array(
             'refId' => 'Sample',
@@ -157,12 +157,12 @@ class AuthnetJsonArbTest extends TestCase
     }
 
     /**
-     * @covers \Authnetjson\AuthnetJsonRequest::process()
+     * @covers \JohnConde\Authnet\AuthnetJsonRequest::process()
 
      * @uses \Authnetjson\AuthnetApiFactory::getJsonApiHandler
      * @uses \Authnetjson\AuthnetApiFactory::getWebServiceURL
      */
-    public function testARBCreateSubscriptionRequestInvalidStartDateError(): void
+    public function testARBCreateSubscriptionRequestInvalidStartDateError()
     {
         $requestJson = array(
             'refId' => 'Sample',
@@ -217,12 +217,12 @@ class AuthnetJsonArbTest extends TestCase
     }
 
     /**
-     * @covers \Authnetjson\AuthnetJsonRequest::process()
+     * @covers \JohnConde\Authnet\AuthnetJsonRequest::process()
 
      * @uses \Authnetjson\AuthnetApiFactory::getJsonApiHandler
      * @uses \Authnetjson\AuthnetApiFactory::getWebServiceURL
      */
-    public function testARBGetSubscriptionStatusRequestActive(): void
+    public function testARBGetSubscriptionStatusRequestActive()
     {
         $requestJson = array(
             'refId' => 'Sample',
@@ -261,12 +261,12 @@ class AuthnetJsonArbTest extends TestCase
     }
 
     /**
-     * @covers \Authnetjson\AuthnetJsonRequest::process()
+     * @covers \JohnConde\Authnet\AuthnetJsonRequest::process()
 
      * @uses \Authnetjson\AuthnetApiFactory::getJsonApiHandler
      * @uses \Authnetjson\AuthnetApiFactory::getWebServiceURL
      */
-    public function testARBGetSubscriptionStatusRequestCancelled(): void
+    public function testARBGetSubscriptionStatusRequestCancelled()
     {
         $requestJson = array(
             'refId' => 'Sample',
@@ -305,12 +305,12 @@ class AuthnetJsonArbTest extends TestCase
     }
 
     /**
-     * @covers \Authnetjson\AuthnetJsonRequest::process()
+     * @covers \JohnConde\Authnet\AuthnetJsonRequest::process()
 
      * @uses \Authnetjson\AuthnetApiFactory::getJsonApiHandler
      * @uses \Authnetjson\AuthnetApiFactory::getWebServiceURL
      */
-    public function testARBCancelSubscriptionRequestSuccess(): void
+    public function testARBCancelSubscriptionRequestSuccess()
     {
         $requestJson = array(
             'refId' => 'Sample',
@@ -342,12 +342,12 @@ class AuthnetJsonArbTest extends TestCase
     }
 
     /**
-     * @covers \Authnetjson\AuthnetJsonRequest::process()
+     * @covers \JohnConde\Authnet\AuthnetJsonRequest::process()
 
      * @uses \Authnetjson\AuthnetApiFactory::getJsonApiHandler
      * @uses \Authnetjson\AuthnetApiFactory::getWebServiceURL
      */
-    public function testARBCancelSubscriptionRequestAlreadyCancelled(): void
+    public function testARBCancelSubscriptionRequestAlreadyCancelled()
     {
         $requestJson = array(
             'refId' => 'Sample',
@@ -379,12 +379,12 @@ class AuthnetJsonArbTest extends TestCase
     }
 
     /**
-     * @covers \Authnetjson\AuthnetJsonRequest::process()
+     * @covers \JohnConde\Authnet\AuthnetJsonRequest::process()
 
      * @uses \Authnetjson\AuthnetApiFactory::getJsonApiHandler
      * @uses \Authnetjson\AuthnetApiFactory::getWebServiceURL
      */
-    public function testARBUpdateSubscriptionRequestSuccess(): void
+    public function testARBUpdateSubscriptionRequestSuccess()
     {
         $requestJson = array(
             'refId' => 'Sample',
@@ -424,12 +424,12 @@ class AuthnetJsonArbTest extends TestCase
     }
 
     /**
-     * @covers \Authnetjson\AuthnetJsonRequest::process()
+     * @covers \JohnConde\Authnet\AuthnetJsonRequest::process()
 
      * @uses \Authnetjson\AuthnetApiFactory::getJsonApiHandler
      * @uses \Authnetjson\AuthnetApiFactory::getWebServiceURL
      */
-    public function testARBUpdateSubscriptionRequestError(): void
+    public function testARBUpdateSubscriptionRequestError()
     {
         $requestJson = array(
             'refId' => 'Sample',
