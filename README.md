@@ -1,9 +1,5 @@
 [![Latest Stable Version](https://poser.pugx.org/stymiee/authnetjson/v/stable.svg)](https://packagist.org/packages/stymiee/authnetjson)
 [![Total Downloads](https://poser.pugx.org/stymiee/authnetjson/downloads)](https://packagist.org/packages/stymiee/authnetjson)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/stymiee/authnetjson/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/stymiee/authnetjson/?branch=php72)
-[![Build Status](https://scrutinizer-ci.com/g/stymiee/authnetjson/badges/build.png?b=master)](https://scrutinizer-ci.com/g/stymiee/authnetjson/build-status/php72)
-[![Code Coverage](https://scrutinizer-ci.com/g/stymiee/authnetjson/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/stymiee/authnetjson/?branch=php72)
-[![Maintainability](https://api.codeclimate.com/v1/badges/5847da924af47933e25f/maintainability)](https://codeclimate.com/github/stymiee/authnetjson/maintainability)
 [![License](https://poser.pugx.org/stymiee/authnetjson/license)](https://packagist.org/packages/stymiee/authnetjson)
 # AuthnetJSON
 
@@ -11,13 +7,14 @@ Library that abstracts [Authorize.Net](http://www.authorize.net/)'s [JSON APIs](
 
 ## Requirements
 
-- PHP 7.2+ (Support for PHP 7.2.0 - 8.*)
+- PHP 5.6+ (Support for PHP 5.6.0 - 8.*)
 - cURL PHP Extension
 - JSON PHP Extension
 - An Authorize.Net account
 
-Support for PHP versions less than 7.2 has been removed from the master branch. There is a [PHP 5.6 compatible branch](https://github.com/stymiee/authnetjson/tree/php56) 
-available for development and releases for 5.6 may continue to be made as long as it is feasible to do so.
+This version of the AuthnetJSON package is provided AS IS. No support is promised although requests will be reviewed. It
+is recommended to upgrade to a supported version of PHP and use the latest version of this package to ensure the highest
+performance as well as getting the latest fixes and features.
 
 ## Installation
 
@@ -28,7 +25,7 @@ Here is a minimal example of a `composer.json` file that just defines a dependen
 
     {
         "require": {
-            "stymiee/authnetjson": "~4.1"
+            "stymiee/authnetjson": "~3.2"
         }
     }
 

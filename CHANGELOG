@@ -1,61 +1,32 @@
 CHANGE LOG
 
-2023-02-14 - Version 4.2.0 ❤
+2023-02-17 - Version 3.2.0
 --------------------------------------------
 Added __set() and __isset() magic methods to JSON handling classes. Throws an exception if you try to set values in response objects.
-Fixed minor bug in debugging code for webhooks
-Fixed grammatical errors in comments
-Fixed bug in getting webhook events
-Cleaned up examples a bit more
-
-2020-08-31 - Version 4.1.3
---------------------------------------------
-Fixed namespacing issues and unit tests
-
-2020-08-28 - Version 4.1.2
---------------------------------------------
-Fixed: Added ability to get results from multiple payment results as may be possible when creating multiple payment profiles
-Fixed potential bug where getting a transaction response would fail and cause transactions appear to not be approved.
-Updated namespacing to be PSR-0/4 compliant
-Improved example to show how more data is accessed
-Cleaned up unit tests a bit
-Minor code clean up
-
-2020-06-21 - Version 4.1.1
---------------------------------------------
-Fixed HTTP headers being incorrect and causing isValid() to incorrectly fail
-Added examples for ARBGetSubscriptionListRequest, ARBGetSubscriptionRequest, ARBCreateSubscriptionRequest (from Profile)
-Removed unnecessary proxy code in Exception classes
-
-2020-05-29 - Version 4.1.0
---------------------------------------------
-Added support for Accept.js and Accept Hosted APIs
-Added SECURITY.md to project
-Cleaned up the examples even more
-Minor code clean up
-
-2020-05-08 - Version 4.0.0
---------------------------------------------
-Changed name of Akamai endpoint to be more generic and accurate (CDN); includes tests
-Minor fixes for examples
-Changed config.inc.php to throw RuntimeException
-Master branch will now support PHP 7.2+. PHP 5.6+ has been moved to its own branch.
-
-2020-03-08 - Version 4.0.0-beta
---------------------------------------------
-Bumped minimum supported version of PHP to 7.2
-If trying to retrieve non-existent response value, NULL is returned in AuthnetJsonResponse::__get()
 Added AuthnetJson::BOUNDLESS_OCCURRENCES to indicate an endless subscription
 Added support for prepaid cards
 Added constructor to Authnet exceptions
+Added support for Accept.js and Accept Hosted APIs
+Added SECURITY.md to project
+Added phpunit to require-dev
+Added CONTRIBUTING.md
+Added examples for ARBGetSubscriptionListRequest, ARBGetSubscriptionRequest, ARBCreateSubscriptionRequest (from Profile)
+Fixed minor bug in debugging code for webhooks
+Fixed grammatical errors in comments
+Fixed bug in getting webhook events
+Fixed: Added ability to get results from multiple payment results as may be possible when creating multiple payment profiles
+Fixed potential bug where getting a transaction response would fail and cause transactions appear to not be approved.
+Improved example to show how more data is accessed
+Fixed HTTP headers being incorrect and causing isValid() to incorrectly fail
+Removed unnecessary proxy code in Exception classes
+Cleaned up the examples
+Changed name of Akamai endpoint to be more generic and accurate (CDN); includes tests
+Changed config.inc.php to throw RuntimeException
+If trying to retrieve non-existent response value, NULL is returned in AuthnetJsonResponse::__get()
 Removed unused AuthnetInvalidParameterException class
 Updated unit tests for phpunit 8
 Removed unneeded require of config file in unit tests
-Added phpunit to require-dev
-Added CONTRIBUTING.md
 Shiny badges for the README
-Cleaned up HTML and CSS in examples
-Minor formatting changes
 
 2019-06-03 - Version 3.1.9
 --------------------------------------------
