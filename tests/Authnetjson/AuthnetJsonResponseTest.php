@@ -264,10 +264,10 @@ class AuthnetJsonResponseTest extends TestCase
         echo $response;
         $string = ob_get_clean();
 
-        self::assertStringContainsString('validationDirectResponse":"2,2,205,This transaction has been declined,902R0T,Y,2230582306,INV000001,description of transaction,10.95,CC,auth_capture,12345,John,Smith,Company Name,123 Main Street,Townsville,NJ,12345,United States,800-555-1234,800-555-1235,user@example.com,John,Smith,Other Company Name,123 Main Street,Townsville,NJ,12345,United States,1.00,2.00,3.00,FALSE,PONUM000001,D3B20D6194B0E86C03A18987300E781C,P,2,,,,,,,,,,,XXXX1111,Visa,,,,,,,,,,,,,,,,,29366174', $string);
-        self::assertStringContainsString('28821903', $string);
-        self::assertStringContainsString('I00001', $string);
-        self::assertStringContainsString('Successful', $string);
+        self::assertTrue(stripos($string, 'validationDirectResponse":"2,2,205,This transaction has been declined,902R0T,Y,2230582306,INV000001,description of transaction,10.95,CC,auth_capture,12345,John,Smith,Company Name,123 Main Street,Townsville,NJ,12345,United States,800-555-1234,800-555-1235,user@example.com,John,Smith,Other Company Name,123 Main Street,Townsville,NJ,12345,United States,1.00,2.00,3.00,FALSE,PONUM000001,D3B20D6194B0E86C03A18987300E781C,P,2,,,,,,,,,,,XXXX1111,Visa,,,,,,,,,,,,,,,,,29366174') !== false);
+        self::assertTrue(stripos($string, '28821903') !== false);
+        self::assertTrue(stripos($string, 'I00001') !== false);
+        self::assertTrue(stripos($string, 'Successful') !== false);
     }
 
     /**
@@ -638,7 +638,7 @@ class AuthnetJsonResponseTest extends TestCase
         $response = $request->createCustomerProfileRequest($requestJson);
 
         $transactionResponses = $response->getTransactionResponses();
-        self::assertIsArray($transactionResponses);
+        self::assertTrue(is_array($transactionResponses));
         self::assertInstanceOf(TransactionResponse::class, $transactionResponses[0]);
     }
 }

@@ -66,9 +66,9 @@ class AuthnetWebhooksResponseTest extends TestCase
         echo $response;
         $string = ob_get_clean();
 
-        self::assertStringContainsString('example.com', $string);
-        self::assertStringContainsString('net.authorize.payment.authorization.created', $string);
-        self::assertStringContainsString('active', $string);
+        self::assertTrue(stripos($string, 'example.com') !== false);
+        self::assertTrue(stripos($string, 'net.authorize.payment.authorization.created') !== false);
+        self::assertTrue(stripos($string, 'active') !== false);
     }
 
     /**

@@ -37,8 +37,8 @@ class AuthnetJsonAimPaypalTest extends TestCase
     /**
     * @covers \JohnConde\Authnet\AuthnetJsonRequest::process()
     *
-    * @uses \Authnetjson\AuthnetApiFactory::getJsonApiHandler
-    * @uses \Authnetjson\AuthnetApiFactory::getWebServiceURL
+    * @uses \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
+    * @uses \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
     */
     public function testCreateTransactionRequestAuthCapture()
     {
@@ -108,8 +108,8 @@ class AuthnetJsonAimPaypalTest extends TestCase
     /**
      * @covers \JohnConde\Authnet\AuthnetJsonRequest::process()
      *
-     * @uses \Authnetjson\AuthnetApiFactory::getJsonApiHandler
-     * @uses \Authnetjson\AuthnetApiFactory::getWebServiceURL
+     * @uses \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
+     * @uses \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
      */
     public function testCreateTransactionRequestAuthCaptureContinue()
     {
@@ -172,8 +172,8 @@ class AuthnetJsonAimPaypalTest extends TestCase
     /**
      * @covers \JohnConde\Authnet\AuthnetJsonRequest::process()
      *
-     * @uses \Authnetjson\AuthnetApiFactory::getJsonApiHandler
-     * @uses \Authnetjson\AuthnetApiFactory::getWebServiceURL
+     * @uses \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
+     * @uses \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
      */
     public function testCreateTransactionRequestAuthOnly()
     {
@@ -240,8 +240,8 @@ class AuthnetJsonAimPaypalTest extends TestCase
     /**
      * @covers \JohnConde\Authnet\AuthnetJsonRequest::process()
      *
-     * @uses \Authnetjson\AuthnetApiFactory::getJsonApiHandler
-     * @uses \Authnetjson\AuthnetApiFactory::getWebServiceURL
+     * @uses \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
+     * @uses \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
      */
     public function testCreateTransactionRequestAuthOnlyContinue()
     {
@@ -304,8 +304,8 @@ class AuthnetJsonAimPaypalTest extends TestCase
     /**
      * @covers \JohnConde\Authnet\AuthnetJsonRequest::process()
      *
-     * @uses \Authnetjson\AuthnetApiFactory::getJsonApiHandler
-     * @uses \Authnetjson\AuthnetApiFactory::getWebServiceURL
+     * @uses \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
+     * @uses \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
      */
     public function testCreateTransactionRequestGetDetails()
     {
@@ -363,8 +363,8 @@ class AuthnetJsonAimPaypalTest extends TestCase
     /**
      * @covers \JohnConde\Authnet\AuthnetJsonRequest::process()
      *
-     * @uses \Authnetjson\AuthnetApiFactory::getJsonApiHandler
-     * @uses \Authnetjson\AuthnetApiFactory::getWebServiceURL
+     * @uses \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
+     * @uses \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
      */
     public function testCreateTransactionRequestPriorAuthCapture()
     {
@@ -422,8 +422,8 @@ class AuthnetJsonAimPaypalTest extends TestCase
     /**
      * @covers \JohnConde\Authnet\AuthnetJsonRequest::process()
      *
-     * @uses \Authnetjson\AuthnetApiFactory::getJsonApiHandler
-     * @uses \Authnetjson\AuthnetApiFactory::getWebServiceURL
+     * @uses \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
+     * @uses \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
      */
     public function testCreateTransactionRequestRefund()
     {
@@ -476,8 +476,8 @@ class AuthnetJsonAimPaypalTest extends TestCase
     /**
      * @covers \JohnConde\Authnet\AuthnetJsonRequest::process()
      *
-     * @uses \Authnetjson\AuthnetApiFactory::getJsonApiHandler
-     * @uses \Authnetjson\AuthnetApiFactory::getWebServiceURL
+     * @uses \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
+     * @uses \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
      */
     public function testCreateTransactionRequestVoid()
     {
@@ -536,8 +536,8 @@ class AuthnetJsonAimPaypalTest extends TestCase
     /**
      * @covers \JohnConde\Authnet\AuthnetJsonRequest::process()
 
-     * @uses \Authnetjson\AuthnetApiFactory::getJsonApiHandler
-     * @uses \Authnetjson\AuthnetApiFactory::getWebServiceURL
+     * @uses \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
+     * @uses \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
      */
     public function testCreateTransactionRequestAuthCaptureError()
     {
@@ -612,8 +612,8 @@ class AuthnetJsonAimPaypalTest extends TestCase
     /**
      * @covers \JohnConde\Authnet\AuthnetJsonRequest::process()
 
-     * @uses \Authnetjson\AuthnetApiFactory::getJsonApiHandler
-     * @uses \Authnetjson\AuthnetApiFactory::getWebServiceURL
+     * @uses \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
+     * @uses \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
      */
     public function testCreateTransactionRequestGetDetailsError()
     {
@@ -675,8 +675,8 @@ class AuthnetJsonAimPaypalTest extends TestCase
     /**
      * @covers \JohnConde\Authnet\AuthnetJsonRequest::process()
 
-     * @uses \Authnetjson\AuthnetApiFactory::getJsonApiHandler
-     * @uses \Authnetjson\AuthnetApiFactory::getWebServiceURL
+     * @uses \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
+     * @uses \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
      */
     public function testCreateTransactionRequestRefundError()
     {

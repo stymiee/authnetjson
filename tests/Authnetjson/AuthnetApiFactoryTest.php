@@ -90,7 +90,7 @@ class AuthnetApiFactoryTest extends TestCase
     /**
      * @covers \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
      * @covers \JohnConde\Authnet\Exception\AuthnetInvalidCredentialsException::__construct()
-     * @uses \Authnetjson\AuthnetJsonRequest
+     * @uses \JohnConde\Authnet\AuthnetJsonRequest
      */
     public function testExceptionIsRaisedForInvalidCredentialsLogin()
     {
@@ -103,7 +103,7 @@ class AuthnetApiFactoryTest extends TestCase
     /**
      * @covers \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
      * @covers \JohnConde\Authnet\Exception\AuthnetInvalidCredentialsException::__construct()
-     * @uses \Authnetjson\AuthnetJsonRequest
+     * @uses \JohnConde\Authnet\AuthnetJsonRequest
      */
     public function testExceptionIsRaisedForInvalidCredentialsTransactionKey()
     {
@@ -126,7 +126,7 @@ class AuthnetApiFactoryTest extends TestCase
 
     /**
      * @covers \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
-     * @uses \Authnetjson\AuthnetJsonRequest
+     * @uses \JohnConde\Authnet\AuthnetJsonRequest
      */
     public function testCurlWrapperProductionResponse()
     {
@@ -143,7 +143,7 @@ class AuthnetApiFactoryTest extends TestCase
 
     /**
      * @covers \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
-     * @uses \Authnetjson\AuthnetJsonRequest
+     * @uses \JohnConde\Authnet\AuthnetJsonRequest
      */
     public function testCurlWrapperDevelopmentResponse()
     {
@@ -221,7 +221,7 @@ class AuthnetApiFactoryTest extends TestCase
     /**
      * @covers \JohnConde\Authnet\AuthnetApiFactory::getWebhooksHandler
      * @covers \JohnConde\Authnet\Exception\AuthnetInvalidCredentialsException::__construct()
-     * @uses \Authnetjson\AuthnetWebhooksRequest
+     * @uses \JohnConde\Authnet\AuthnetWebhooksRequest
      */
     public function testExceptionIsRaisedForInvalidCredentialsLoginWebhooks()
     {
@@ -234,7 +234,7 @@ class AuthnetApiFactoryTest extends TestCase
     /**
      * @covers \JohnConde\Authnet\AuthnetApiFactory::getWebhooksHandler
      * @covers \JohnConde\Authnet\Exception\AuthnetInvalidCredentialsException::__construct()
-     * @uses \Authnetjson\AuthnetWebhooksRequest
+     * @uses \JohnConde\Authnet\AuthnetWebhooksRequest
      */
     public function testExceptionIsRaisedForInvalidCredentialsTransactionKeyWebhooks()
     {
@@ -257,7 +257,7 @@ class AuthnetApiFactoryTest extends TestCase
 
     /**
      * @covers \JohnConde\Authnet\AuthnetApiFactory::getWebhooksHandler
-     * @uses \Authnetjson\AuthnetWebhooksRequest
+     * @uses \JohnConde\Authnet\AuthnetWebhooksRequest
      */
     public function testCurlWrapperProductionResponseWebhooks()
     {
@@ -274,7 +274,7 @@ class AuthnetApiFactoryTest extends TestCase
 
     /**
      * @covers \JohnConde\Authnet\AuthnetApiFactory::getWebhooksHandler
-     * @uses \Authnetjson\AuthnetWebhooksRequest
+     * @uses \JohnConde\Authnet\AuthnetWebhooksRequest
      */
     public function testCurlWrapperDevelopmentResponseWebhooks()
     {

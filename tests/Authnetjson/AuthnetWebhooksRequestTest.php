@@ -68,8 +68,13 @@ class AuthnetWebhooksRequestTest extends TestCase
         echo $request;
         $string = ob_get_clean();
 
-        self::assertStringContainsString('https://apitest.authorize.net/rest/v1/webhooks/871a6a11-b654-45af-b97d-da72a490d0fd', $string);
-        self::assertStringContainsString('{"url":"http:\/\/www.example.com\/webhook","eventTypes":["net.authorize.customer.subscription.expiring"],"status":"inactive"}', $string);
+        self::assertTrue(
+            stripos(
+                $string,
+                'https://apitest.authorize.net/rest/v1/webhooks/871a6a11-b654-45af-b97d-da72a490d0fd'
+            ) !== false
+        );
+        self::assertTrue(stripos($string, '{"url":"http:\/\/www.example.com\/webhook","eventTypes":["net.authorize.customer.subscription.expiring"],"status":"inactive"}') !== false);
     }
 
     /**
@@ -90,7 +95,7 @@ class AuthnetWebhooksRequestTest extends TestCase
         echo $request;
         $string = ob_get_clean();
 
-        self::assertStringContainsString('N/A', $string);
+        self::assertTrue(stripos($string, 'N/A') !== false);
     }
 
     /**

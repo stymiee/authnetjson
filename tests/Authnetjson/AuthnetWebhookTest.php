@@ -77,8 +77,8 @@ class AuthnetWebhookTest extends TestCase
         echo $webhook;
         $string = ob_get_clean();
 
-        self::assertStringContainsString('{"notificationId":"182cbbff-cab2-4080-931d-80e5d818f23a",', $string);
-        self::assertStringContainsString('ae3b39b1-c58e-4a78-859b-1b4e6c62c5b7', $string);
+        self::assertTrue(stripos($string, '{"notificationId":"182cbbff-cab2-4080-931d-80e5d818f23a",') !== false);
+        self::assertTrue(stripos($string, 'ae3b39b1-c58e-4a78-859b-1b4e6c62c5b7') !== false);
     }
 
     /**

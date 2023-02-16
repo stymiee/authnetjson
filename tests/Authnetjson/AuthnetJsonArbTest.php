@@ -36,8 +36,8 @@ class AuthnetJsonArbTest extends TestCase
     /**
      * @covers \JohnConde\Authnet\AuthnetJsonRequest::process()
 
-     * @uses \Authnetjson\AuthnetApiFactory::getJsonApiHandler
-     * @uses \Authnetjson\AuthnetApiFactory::getWebServiceURL
+     * @uses \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
+     * @uses \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
      */
     public function testARBCreateSubscriptionRequestSuccess()
     {
@@ -98,8 +98,8 @@ class AuthnetJsonArbTest extends TestCase
     /**
      * @covers \JohnConde\Authnet\AuthnetJsonRequest::process()
 
-     * @uses \Authnetjson\AuthnetApiFactory::getJsonApiHandler
-     * @uses \Authnetjson\AuthnetApiFactory::getWebServiceURL
+     * @uses \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
+     * @uses \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
      */
     public function testARBCreateSubscriptionRequestDuplicateRequestError()
     {
@@ -159,8 +159,8 @@ class AuthnetJsonArbTest extends TestCase
     /**
      * @covers \JohnConde\Authnet\AuthnetJsonRequest::process()
 
-     * @uses \Authnetjson\AuthnetApiFactory::getJsonApiHandler
-     * @uses \Authnetjson\AuthnetApiFactory::getWebServiceURL
+     * @uses \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
+     * @uses \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
      */
     public function testARBCreateSubscriptionRequestInvalidStartDateError()
     {
@@ -219,8 +219,8 @@ class AuthnetJsonArbTest extends TestCase
     /**
      * @covers \JohnConde\Authnet\AuthnetJsonRequest::process()
 
-     * @uses \Authnetjson\AuthnetApiFactory::getJsonApiHandler
-     * @uses \Authnetjson\AuthnetApiFactory::getWebServiceURL
+     * @uses \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
+     * @uses \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
      */
     public function testARBGetSubscriptionStatusRequestActive()
     {
@@ -263,8 +263,8 @@ class AuthnetJsonArbTest extends TestCase
     /**
      * @covers \JohnConde\Authnet\AuthnetJsonRequest::process()
 
-     * @uses \Authnetjson\AuthnetApiFactory::getJsonApiHandler
-     * @uses \Authnetjson\AuthnetApiFactory::getWebServiceURL
+     * @uses \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
+     * @uses \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
      */
     public function testARBGetSubscriptionStatusRequestCancelled()
     {
@@ -307,8 +307,8 @@ class AuthnetJsonArbTest extends TestCase
     /**
      * @covers \JohnConde\Authnet\AuthnetJsonRequest::process()
 
-     * @uses \Authnetjson\AuthnetApiFactory::getJsonApiHandler
-     * @uses \Authnetjson\AuthnetApiFactory::getWebServiceURL
+     * @uses \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
+     * @uses \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
      */
     public function testARBCancelSubscriptionRequestSuccess()
     {
@@ -344,8 +344,8 @@ class AuthnetJsonArbTest extends TestCase
     /**
      * @covers \JohnConde\Authnet\AuthnetJsonRequest::process()
 
-     * @uses \Authnetjson\AuthnetApiFactory::getJsonApiHandler
-     * @uses \Authnetjson\AuthnetApiFactory::getWebServiceURL
+     * @uses \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
+     * @uses \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
      */
     public function testARBCancelSubscriptionRequestAlreadyCancelled()
     {
@@ -381,8 +381,8 @@ class AuthnetJsonArbTest extends TestCase
     /**
      * @covers \JohnConde\Authnet\AuthnetJsonRequest::process()
 
-     * @uses \Authnetjson\AuthnetApiFactory::getJsonApiHandler
-     * @uses \Authnetjson\AuthnetApiFactory::getWebServiceURL
+     * @uses \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
+     * @uses \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
      */
     public function testARBUpdateSubscriptionRequestSuccess()
     {
@@ -426,8 +426,8 @@ class AuthnetJsonArbTest extends TestCase
     /**
      * @covers \JohnConde\Authnet\AuthnetJsonRequest::process()
 
-     * @uses \Authnetjson\AuthnetApiFactory::getJsonApiHandler
-     * @uses \Authnetjson\AuthnetApiFactory::getWebServiceURL
+     * @uses \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
+     * @uses \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
      */
     public function testARBUpdateSubscriptionRequestError()
     {

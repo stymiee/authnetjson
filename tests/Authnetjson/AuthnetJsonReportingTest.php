@@ -36,8 +36,8 @@ class AuthnetJsonReportingTest extends TestCase
     /**
      * @covers \JohnConde\Authnet\AuthnetJsonRequest::process()
 
-     * @uses \Authnetjson\AuthnetApiFactory::getJsonApiHandler
-     * @uses \Authnetjson\AuthnetApiFactory::getWebServiceURL
+     * @uses \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
+     * @uses \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
      */
     public function testGetUnsettledTransactionListRequestSuccess()
     {
@@ -109,7 +109,7 @@ class AuthnetJsonReportingTest extends TestCase
         self::assertEquals('Ok', $response->messages->resultCode);
         self::assertEquals('I00001', $response->messages->message[0]->code);
         self::assertEquals('Successful.', $response->messages->message[0]->text);
-        self::assertIsArray($response->transactions);
+        self::assertTrue(is_array($response->transactions));
         self::assertEquals('2228546203', $response->transactions[0]->transId);
         self::assertEquals('2015-02-16T03:34:43Z', $response->transactions[0]->submitTimeUTC);
         self::assertEquals('2015-02-15T20:34:43', $response->transactions[0]->submitTimeLocal);
@@ -154,8 +154,8 @@ class AuthnetJsonReportingTest extends TestCase
     /**
      * @covers \JohnConde\Authnet\AuthnetJsonRequest::process()
 
-     * @uses \Authnetjson\AuthnetApiFactory::getJsonApiHandler
-     * @uses \Authnetjson\AuthnetApiFactory::getWebServiceURL
+     * @uses \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
+     * @uses \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
      */
     public function testGetTransactionListRequestSuccess()
     {
@@ -200,7 +200,7 @@ class AuthnetJsonReportingTest extends TestCase
         self::assertEquals('Ok', $response->messages->resultCode);
         self::assertEquals('I00001', $response->messages->message[0]->code);
         self::assertEquals('Successful.', $response->messages->message[0]->text);
-        self::assertIsArray($response->transactions);
+        self::assertTrue(is_array($response->transactions));
         self::assertEquals('2162566217', $response->transactions[0]->transId);
         self::assertEquals('2011-09-01T16:30:49Z', $response->transactions[0]->submitTimeUTC);
         self::assertEquals('2011-09-01T10:30:49', $response->transactions[0]->submitTimeLocal);
@@ -219,8 +219,8 @@ class AuthnetJsonReportingTest extends TestCase
     /**
      * @covers \JohnConde\Authnet\AuthnetJsonRequest::process()
 
-     * @uses \Authnetjson\AuthnetApiFactory::getJsonApiHandler
-     * @uses \Authnetjson\AuthnetApiFactory::getWebServiceURL
+     * @uses \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
+     * @uses \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
      */
     public function testGetSettledBatchListRequestSuccess()
     {
@@ -370,7 +370,7 @@ class AuthnetJsonReportingTest extends TestCase
         self::assertEquals('Ok', $response->messages->resultCode);
         self::assertEquals('I00001', $response->messages->message[0]->code);
         self::assertEquals('Successful.', $response->messages->message[0]->text);
-        self::assertIsArray($response->batchList);
+        self::assertTrue(is_array($response->batchList));
         self::assertEquals('3990061', $response->batchList[0]->batchId);
         self::assertEquals('2015-01-02T08:40:29Z', $response->batchList[0]->settlementTimeUTC);
         self::assertTrue($response->batchList[0]->settlementTimeUTCSpecified);
@@ -394,8 +394,8 @@ class AuthnetJsonReportingTest extends TestCase
     /**
      * @covers \JohnConde\Authnet\AuthnetJsonRequest::process()
 
-     * @uses \Authnetjson\AuthnetApiFactory::getJsonApiHandler
-     * @uses \Authnetjson\AuthnetApiFactory::getWebServiceURL
+     * @uses \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
+     * @uses \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
      */
     public function testGetSettledBatchListRequestNoRecords()
     {
@@ -430,8 +430,8 @@ class AuthnetJsonReportingTest extends TestCase
     /**
      * @covers \JohnConde\Authnet\AuthnetJsonRequest::process()
 
-     * @uses \Authnetjson\AuthnetApiFactory::getJsonApiHandler
-     * @uses \Authnetjson\AuthnetApiFactory::getWebServiceURL
+     * @uses \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
+     * @uses \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
      */
     public function testGetBatchStatisticsRequestSuccess()
     {
@@ -500,7 +500,7 @@ class AuthnetJsonReportingTest extends TestCase
         self::assertTrue($response->batch->settlementTimeLocalSpecified);
         self::assertEquals('settledSuccessfully', $response->batch->settlementState);
         self::assertEquals('creditCard', $response->batch->paymentMethod);
-        self::assertIsArray($response->batch->statistics);
+        self::assertTrue(is_array($response->batch->statistics));
         self::assertEquals('MasterCard', $response->batch->statistics[0]->accountType);
         self::assertEquals(1018.88, $response->batch->statistics[0]->chargeAmount);
         self::assertEquals(1, $response->batch->statistics[0]->chargeCount);
@@ -527,8 +527,8 @@ class AuthnetJsonReportingTest extends TestCase
     /**
      * @covers \JohnConde\Authnet\AuthnetJsonRequest::process()
 
-     * @uses \Authnetjson\AuthnetApiFactory::getJsonApiHandler
-     * @uses \Authnetjson\AuthnetApiFactory::getWebServiceURL
+     * @uses \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
+     * @uses \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
      */
     public function testGetBatchStatisticsRequestNoRecords()
     {
@@ -561,8 +561,8 @@ class AuthnetJsonReportingTest extends TestCase
     /**
      * @covers \JohnConde\Authnet\AuthnetJsonRequest::process()
 
-     * @uses \Authnetjson\AuthnetApiFactory::getJsonApiHandler
-     * @uses \Authnetjson\AuthnetApiFactory::getWebServiceURL
+     * @uses \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
+     * @uses \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
      */
     public function testGetTransactionDetailsRequestSuccess()
     {

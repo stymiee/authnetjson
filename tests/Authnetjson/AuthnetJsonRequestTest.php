@@ -61,8 +61,8 @@ class AuthnetJsonRequestTest extends TestCase
     /**
      * @covers \JohnConde\Authnet\AuthnetJsonRequest::process()
      * @covers \JohnConde\Authnet\Exception\AuthnetCurlException::__construct()
-     * @uses \Authnetjson\AuthnetApiFactory::getJsonApiHandler
-     * @uses \Authnetjson\AuthnetApiFactory::getWebServiceURL
+     * @uses \JohnConde\Authnet\AuthnetApiFactory::getJsonApiHandler
+     * @uses \JohnConde\Authnet\AuthnetApiFactory::getWebServiceURL
      */
     public function testExceptionIsRaisedForInvalidJsonException()
     {
@@ -273,8 +273,8 @@ class AuthnetJsonRequestTest extends TestCase
         echo $request;
         $string = ob_get_clean();
 
-        self::assertStringContainsString($apiLogin, $string);
-        self::assertStringContainsString($apiTransKey, $string);
+        self::assertTrue(stripos($string, $apiLogin) !== false);
+        self::assertTrue(stripos($string, $apiTransKey) !== false);
     }
 
     /**
