@@ -92,7 +92,7 @@ class AuthnetWebhooksRequest
      * @throws AuthnetInvalidJsonException
      * @throws AuthnetCurlException
      */
-    public function createWebhooks(array $webhooks, $webhookUrl, $status = 'active')
+    public function createWebhooks($webhooks, $webhookUrl, $status = 'active')
     {
         $this->endpoint = 'webhooks';
         $this->url = sprintf('%s%s', $this->url, $this->endpoint);
@@ -269,7 +269,7 @@ class AuthnetWebhooksRequest
      *
      * @codeCoverageIgnore
      */
-    private function get($url, array $params = [])
+    private function get($url, $params = [])
     {
         $this->processor->get($url, $params);
         return $this->handleResponse();

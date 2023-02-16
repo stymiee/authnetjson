@@ -250,7 +250,7 @@ class AuthnetJsonResponse
      * @param int $status
      * @return bool Check to see if the ResponseCode matches the expected value
      */
-    protected function checkTransactionStatus(int $status)
+    protected function checkTransactionStatus($status)
     {
         if ($this->transactionInfo instanceof TransactionResponse) {
             $match = (int)$this->transactionInfo->getTransactionResponseField('ResponseCode') === $status;
@@ -329,7 +329,7 @@ class AuthnetJsonResponse
      * @param string $type Whether to get the error code or text
      * @return string
      */
-    private function getError(string $type)
+    private function getError($type)
     {
         $msg = '';
         if ($this->isError()) {
