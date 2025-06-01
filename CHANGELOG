@@ -1,203 +1,290 @@
-CHANGE LOG
+# Changelog
 
-2023-02-14 - Version 4.2.0 ❤
---------------------------------------------
-Added __set() and __isset() magic methods to JSON handling classes. Throws an exception if you try to set values in response objects.
-Fixed minor bug in debugging code for webhooks
-Fixed grammatical errors in comments
-Fixed bug in getting webhook events
-Cleaned up examples a bit more
+All notable changes to this project will be documented in this file.
 
-2020-08-31 - Version 4.1.3
---------------------------------------------
-Fixed namespacing issues and unit tests
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-2020-08-28 - Version 4.1.2
---------------------------------------------
-Fixed: Added ability to get results from multiple payment results as may be possible when creating multiple payment profiles
-Fixed potential bug where getting a transaction response would fail and cause transactions appear to not be approved.
-Updated namespacing to be PSR-0/4 compliant
-Improved example to show how more data is accessed
-Cleaned up unit tests a bit
-Minor code clean up
+## [Unreleased]
 
-2020-06-21 - Version 4.1.1
---------------------------------------------
-Fixed HTTP headers being incorrect and causing isValid() to incorrectly fail
-Added examples for ARBGetSubscriptionListRequest, ARBGetSubscriptionRequest, ARBCreateSubscriptionRequest (from Profile)
-Removed unnecessary proxy code in Exception classes
+### Changed
+- Reformatted CHANGELOG to follow Keep a Changelog 1.1.0 format
+  - Added proper header with links to Keep a Changelog and Semantic Versioning
+  - Added [Unreleased] section for future changes
+  - Organized changes into clear sections (Added, Changed, Fixed, etc.)
+  - Improved formatting and consistency of entries
+  - Added proper punctuation and made descriptions more concise
+  - Grouped related changes together
+  - Maintained chronological order from newest to oldest
+- Updated `.editorconfig` to be more explicit for certain file types, including PSR-12 for PHP.
 
-2020-05-29 - Version 4.1.0
---------------------------------------------
-Added support for Accept.js and Accept Hosted APIs
-Added SECURITY.md to project
-Cleaned up the examples even more
-Minor code clean up
+## [4.2.0] - 2023-02-14
 
-2020-05-08 - Version 4.0.0
---------------------------------------------
-Changed name of Akamai endpoint to be more generic and accurate (CDN); includes tests
-Minor fixes for examples
-Changed config.inc.php to throw RuntimeException
-Master branch will now support PHP 7.2+. PHP 5.6+ has been moved to its own branch.
+### Added
+- __set() and __isset() magic methods to JSON handling classes. Throws an exception if you try to set values in response objects.
 
-2020-03-08 - Version 4.0.0-beta
---------------------------------------------
-Bumped minimum supported version of PHP to 7.2
-If trying to retrieve non-existent response value, NULL is returned in AuthnetJsonResponse::__get()
-Added AuthnetJson::BOUNDLESS_OCCURRENCES to indicate an endless subscription
-Added support for prepaid cards
-Added constructor to Authnet exceptions
-Removed unused AuthnetInvalidParameterException class
-Updated unit tests for phpunit 8
-Removed unneeded require of config file in unit tests
-Added phpunit to require-dev
-Added CONTRIBUTING.md
-Shiny badges for the README
-Cleaned up HTML and CSS in examples
-Minor formatting changes
+### Fixed
+- Minor bug in debugging code for webhooks.
+- Grammatical errors in comments.
+- Bug in getting webhook events.
 
-2019-06-03 - Version 3.1.9
---------------------------------------------
-Returned better error message when creating Webhook
-Removed unnecessary suppression operators by checking if a variable is set in the __get() magic method
+### Changed
+- Cleaned up examples a bit more.
 
-2019-01-26 - Version 3.1.8
---------------------------------------------
-Removed not actually missing return statement to AuthnetWebhooksRequest::delete
-Reduced complexity of AuthnetApiFactory::getWebServiceURL()
-Reduced complexity of AuthnetWebhooksResponse::getEventTypes()
-Reduced complexity of AuthnetWebhook::getAllHeaders()
+## [4.1.3] - 2020-08-31
 
-2019-01-22 - Version 3.1.7
---------------------------------------------
-Fixed incorrect and/or incomplete docblock comments
-Added missing return statement to AuthnetWebhooksRequest::delete
-Added ext-curl and ext-json to composer.json as dependencies
-Minor formatting changes
+### Fixed
+- Namespacing issues and unit tests.
 
-2019-01-21 - Version 3.1.6
---------------------------------------------
-Changed SIM algorithm to SHA512
-Added FILTER_FLAG_ALLOW_THOUSAND when validating amount for SIM fingerprint
-Added the requirements section to README.md
-Added notice about AuthnetJSON 4.0 PHP compatibility level changing.
-Used sprintf() for string formatting with variables
-Minor formatting changes
+## [4.1.2] - 2020-08-28
 
-2019-01-02 - Version 3.1.5
---------------------------------------------
-Updated all usage of array() to []
-Added examples/cim/createCustomerProfileRequestMultiplePayAccounts.php to demonstrate adding multiple payment accounts
-Added HELP.md file
-Updated unit tests for PHPUnit 7
-Added unit test for AuthnetWebhook::getAllHeaders()
-Updated AuthnetWebhook::__constructor() to use AuthnetWebhook::getAllHeaders() instead of going straight to apache_get_headers()
-Converted tabs to spaces!
+### Added
+- Ability to get results from multiple payment results as may be possible when creating multiple payment profiles.
 
-2018-01-21 - Version 3.1.4
---------------------------------------------
-Really fixed case sensitivity issue with HTTP header in Webhook
-Updated expiration dates in AIM examples
+### Fixed
+- Potential bug where getting a transaction response would fail and cause transactions appear to not be approved.
 
-2017-09-06 - Version 3.1.3
---------------------------------------------
-Fixed case sensitivity issue with HTTP header in Webhook
+### Changed
+- Updated namespacing to be PSR-0/4 compliant.
+- Improved example to show how more data is accessed.
+- Cleaned up unit tests a bit.
+- Minor code clean up.
 
-2017-09-06 - Version 3.1.2
---------------------------------------------
-Made third parameter of AuthnetWebhook::__construct() optional
+## [4.1.1] - 2020-06-21
 
-2017-08-30 - Version 3.1.1
---------------------------------------------
-Made providing headers when handling a webhook optional if apache_request_headers()/getallheaders() is available
-Throws an exception when no signature is provided
+### Added
+- Examples for ARBGetSubscriptionListRequest, ARBGetSubscriptionRequest, ARBCreateSubscriptionRequest (from Profile).
 
-2017-08-28 - Version 3.1.0
---------------------------------------------
-Added signature verification when receiving a webhook
-Show N/A when there is no request JSON when printing out response objects
-Got unit test coverage back to 100%
+### Fixed
+- HTTP headers being incorrect and causing isValid() to incorrectly fail.
 
-2017-04-18 - Version 3.0.0
---------------------------------------------
-Added support for webhooks
-Switched to use \Curl\Curl for all Curl requests
-Updated examples to use recent dates
-Cleaned up and improved some unit tests
-Converted some errant tabs to spaces
-Removed BETA notice from README
+### Removed
+- Unnecessary proxy code in Exception classes.
 
-2016-06-08 - Version 2.5.1
---------------------------------------------
-Uses the Akamai endpoint by default
+## [4.1.0] - 2020-05-29
 
-2015-09-11 - Version 2.5.0
---------------------------------------------
-Exceptions extend AuthnetJson exception to allow for better error handling in client code
-Added AuthnetJsonResponse::getRawRequest to get raw JSON request sent to Authorize.Net
-Added AuthnetJsonResponse::getRawResponse to get raw JSON response returned from Authorize.Net
-Added getError(), getErrorCode(), and getErrorMessage() for easier error handling and logging
-Added support for the SIM API
+### Added
+- Support for Accept.js and Accept Hosted APIs.
+- SECURITY.md to project.
 
-2015-08-26 - Version 2.4.5
---------------------------------------------
-Added examples for PayPal Express
+### Changed
+- Cleaned up the examples even more.
+- Minor code clean up.
 
-2015-08-25 - Version 2.4.4
---------------------------------------------
-Added examples for Verified by Visa
+## [4.0.0] - 2020-05-08
 
-2015-08-21 - Version 2.4.3
---------------------------------------------
-Updated docblock comments and added phpdoc.xml to allow for better and easier to generate documentation
+### Changed
+- Changed name of Akamai endpoint to be more generic and accurate (CDN); includes tests.
+- Minor fixes for examples.
+- Changed config.inc.php to throw RuntimeException.
+- Master branch will now support PHP 7.2+. PHP 5.6+ has been moved to its own branch.
 
-2015-08-16 - Version 2.4.2
---------------------------------------------
-Completed unit test for UpdateSplitTenderGroup API call
+## [4.0.0-beta] - 2020-03-08
 
-2015-08-09 - Version 2.4.1
---------------------------------------------
-Fixed potential bug in AuthnetJsonResponse::Fixed potential bug in checkTransactionStatus()
-Got unit test coverage back to 100%
+### Added
+- AuthnetJson::BOUNDLESS_OCCURRENCES to indicate an endless subscription.
+- Support for prepaid cards.
+- Constructor to Authnet exceptions.
+- CONTRIBUTING.md.
+- Shiny badges for the README.
 
-2015-08-09 - Version 2.4.0
---------------------------------------------
-Added support for the new Akamai endpoint
+### Changed
+- Bumped minimum supported version of PHP to 7.2.
+- If trying to retrieve non-existent response value, NULL is returned in AuthnetJsonResponse::__get().
+- Updated unit tests for phpunit 8.
+- Removed unneeded require of config file in unit tests.
+- Added phpunit to require-dev.
+- Cleaned up HTML and CSS in examples.
+- Minor formatting changes.
 
-2015-07-15 - Version 2.3.0
---------------------------------------------
-Updated AuthnetJsonResponse::isApproved and AuthnetJsonResponse::isDeclined to work with AIM transactions
-Got unit test coverage to 100%
+### Removed
+- Unused AuthnetInvalidParameterException class.
 
-2015-05-29 - Version 2.2.0
---------------------------------------------
-Added AuthnetJsonResponse::isApproved and AuthnetJsonResponse::isDeclined to easily get status of CIM transactions
+## [3.1.9] - 2019-06-03
 
-2015-05-09 - Version 2.1.1
---------------------------------------------
-Fixed fatal error caused by removing __set() parameters
+### Changed
+- Returned better error message when creating Webhook.
+- Removed unnecessary suppression operators by checking if a variable is set in the __get() magic method.
 
-2015-05-06 - Version 2.1.0
---------------------------------------------
-Transaction data returned in some CIM API calls can now be accessed easily
+## [3.1.8] - 2019-01-26
 
-2015-04-29 - Version 2.0.0
---------------------------------------------
-Requests now return response objects
+### Changed
+- Removed not actually missing return statement to AuthnetWebhooksRequest::delete.
+- Reduced complexity of AuthnetApiFactory::getWebServiceURL().
+- Reduced complexity of AuthnetWebhooksResponse::getEventTypes().
+- Reduced complexity of AuthnetWebhook::getAllHeaders().
 
-2015-04-18 - Version 1.0.2
---------------------------------------------
-Fixed bug where AuthnetInvalidJsonException would not be thrown when invalid JSON was returned
+## [3.1.7] - 2019-01-22
 
-2015-03-30 - Version 1.0.1
---------------------------------------------
-Fixed bug where setting the third parameter AuthnetApiFactory::getJsonApiHandler to NULL would default to production endpoint
-Throws AuthnetInvalidJsonException if response JSON is not valid
-Finished adding examples
-Added more unit tests
-Added more docbloc comments
+### Added
+- Missing return statement to AuthnetWebhooksRequest::delete.
+- ext-curl and ext-json to composer.json as dependencies.
 
-2015-03-21 - Version 1.0.0
---------------------------------------------
-Initial Release
+### Fixed
+- Incorrect and/or incomplete docblock comments.
+
+### Changed
+- Minor formatting changes.
+
+## [3.1.6] - 2019-01-21
+
+### Added
+- FILTER_FLAG_ALLOW_THOUSAND when validating amount for SIM fingerprint.
+- Requirements section to README.md.
+- Notice about AuthnetJSON 4.0 PHP compatibility level changing.
+
+### Changed
+- Changed SIM algorithm to SHA512.
+- Used sprintf() for string formatting with variables.
+- Minor formatting changes.
+
+## [3.1.5] - 2019-01-02
+
+### Added
+- Examples/cim/createCustomerProfileRequestMultiplePayAccounts.php to demonstrate adding multiple payment accounts.
+- HELP.md file.
+- Unit test for AuthnetWebhook::getAllHeaders().
+
+### Changed
+- Updated all usage of array() to [].
+- Updated unit tests for PHPUnit 7.
+- Updated AuthnetWebhook::__constructor() to use AuthnetWebhook::getAllHeaders() instead of going straight to apache_get_headers().
+- Converted tabs to spaces!
+
+## [3.1.4] - 2018-01-21
+
+### Fixed
+- Really fixed case sensitivity issue with HTTP header in Webhook.
+
+### Changed
+- Updated expiration dates in AIM examples.
+
+## [3.1.3] - 2017-09-06
+
+### Fixed
+- Case sensitivity issue with HTTP header in Webhook.
+
+## [3.1.2] - 2017-09-06
+
+### Changed
+- Made third parameter of AuthnetWebhook::__construct() optional.
+
+## [3.1.1] - 2017-08-30
+
+### Added
+- Made providing headers when handling a webhook optional if apache_request_headers()/getallheaders() is available.
+
+### Changed
+- Throws an exception when no signature is provided.
+
+## [3.1.0] - 2017-08-28
+
+### Added
+- Signature verification when receiving a webhook.
+
+### Changed
+- Show N/A when there is no request JSON when printing out response objects.
+- Got unit test coverage back to 100%.
+
+## [3.0.0] - 2017-04-18
+
+### Added
+- Support for webhooks.
+
+### Changed
+- Switched to use \Curl\Curl for all Curl requests.
+- Updated examples to use recent dates.
+- Cleaned up and improved some unit tests.
+- Converted some errant tabs to spaces.
+- Removed BETA notice from README.
+
+## [2.5.1] - 2016-06-08
+
+### Changed
+- Uses the Akamai endpoint by default.
+
+## [2.5.0] - 2015-09-11
+
+### Added
+- AuthnetJsonResponse::getRawRequest to get raw JSON request sent to Authorize.Net.
+- AuthnetJsonResponse::getRawResponse to get raw JSON response returned from Authorize.Net.
+- getError(), getErrorCode(), and getErrorMessage() for easier error handling and logging.
+- Support for the SIM API.
+
+### Changed
+- Exceptions extend AuthnetJson exception to allow for better error handling in client code.
+
+## [2.4.5] - 2015-08-26
+
+### Added
+- Examples for PayPal Express.
+
+## [2.4.4] - 2015-08-25
+
+### Added
+- Examples for Verified by Visa.
+
+## [2.4.3] - 2015-08-21
+
+### Changed
+- Updated docblock comments and added phpdoc.xml to allow for better and easier to generate documentation.
+
+## [2.4.2] - 2015-08-16
+
+### Added
+- Completed unit test for UpdateSplitTenderGroup API call.
+
+## [2.4.1] - 2015-08-09
+
+### Fixed
+- Potential bug in AuthnetJsonResponse::checkTransactionStatus().
+- Got unit test coverage back to 100%.
+
+## [2.4.0] - 2015-08-09
+
+### Added
+- Support for the new Akamai endpoint.
+
+## [2.3.0] - 2015-07-15
+
+### Changed
+- Updated AuthnetJsonResponse::isApproved and AuthnetJsonResponse::isDeclined to work with AIM transactions.
+- Got unit test coverage to 100%.
+
+## [2.2.0] - 2015-05-29
+
+### Added
+- AuthnetJsonResponse::isApproved and AuthnetJsonResponse::isDeclined to easily get status of CIM transactions.
+
+## [2.1.1] - 2015-05-09
+
+### Fixed
+- Fatal error caused by removing __set() parameters.
+
+## [2.1.0] - 2015-05-06
+
+### Added
+- Transaction data returned in some CIM API calls can now be accessed easily.
+
+## [2.0.0] - 2015-04-29
+
+### Changed
+- Requests now return response objects.
+
+## [1.0.2] - 2015-04-18
+
+### Fixed
+- Bug where AuthnetInvalidJsonException would not be thrown when invalid JSON was returned.
+
+## [1.0.1] - 2015-03-30
+
+### Added
+- More unit tests.
+- More docbloc comments.
+
+### Fixed
+- Bug where setting the third parameter AuthnetApiFactory::getJsonApiHandler to NULL would default to production endpoint.
+- Throws AuthnetInvalidJsonException if response JSON is not valid.
+
+### Changed
+- Finished adding examples.
