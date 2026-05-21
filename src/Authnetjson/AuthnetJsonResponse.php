@@ -247,6 +247,16 @@ class AuthnetJsonResponse
     }
 
     /**
+     * Checks if a transaction was held
+     *
+     * @return bool     true if the transaction is held
+     */
+    public function isHeld(): bool
+    {
+        return $this->isSuccessful() && $this->checkTransactionStatus(self::STATUS_HELD);
+    }
+
+    /**
      * Check to see if the ResponseCode matches the expected value
      *
      * @param int $status

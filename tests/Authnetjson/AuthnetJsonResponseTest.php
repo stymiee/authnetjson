@@ -190,6 +190,31 @@ class AuthnetJsonResponseTest extends TestCase
     }
 
     /**
+     * @covers \Authnetjson\AuthnetJsonResponse::isHeld()
+     */
+    public function testIsHeld(): void
+    {
+        $responseJson = '{
+           "customerPaymentProfileId":"28821903",
+           "validationDirectResponse":"4,2,205,This transaction is held for review,902R0T,Y,2230582306,INV000001,description of transaction,10.95,CC,auth_capture,12345,John,Smith,Company Name,123 Main Street,Townsville,NJ,12345,United States,800-555-1234,800-555-1235,user@example.com,John,Smith,Other Company Name,123 Main Street,Townsville,NJ,12345,United States,1.00,2.00,3.00,FALSE,PONUM000001,D3B20D6194B0E86C03A18987300E781C,P,2,,,,,,,,,,,XXXX1111,Visa,,,,,,,,,,,,,,,,,29366174",
+           "messages":{
+              "resultCode":"Ok",
+              "message":[
+                 {
+                    "code":"I00001",
+                    "text":"Successful."
+                 }
+              ]
+           }
+        }';
+
+        $response = new AuthnetJsonResponse($responseJson);
+
+        self::assertEquals(AuthnetJsonResponse::STATUS_HELD, $response->getTransactionResponseField('ResponseCode'));
+        self::assertTrue($response->isHeld());
+    }
+
+    /**
      * @covers \Authnetjson\AuthnetJsonResponse::isPrePaidCard()
      */
     public function testIsPrePaidCard(): void

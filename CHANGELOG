@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- `isHeld()` method to AuthnetJsonResponse to easily get the status of held transactions.
+
 ### Changed
 - Reformatted CHANGELOG to follow Keep a Changelog 1.1.0 format
   - Added proper header with links to Keep a Changelog and Semantic Versioning
