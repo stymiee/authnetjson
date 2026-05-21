@@ -215,6 +215,56 @@ class AuthnetJsonResponseTest extends TestCase
     }
 
     /**
+     * @covers \Authnetjson\AuthnetJsonResponse::isTransactionError()
+     */
+    public function testIsTransactionError(): void
+    {
+        $responseJson = '{
+           "customerPaymentProfileId":"28821903",
+           "validationDirectResponse":"3,2,205,This transaction has an error,902R0T,Y,2230582306,INV000001,description of transaction,10.95,CC,auth_capture,12345,John,Smith,Company Name,123 Main Street,Townsville,NJ,12345,United States,800-555-1234,800-555-1235,user@example.com,John,Smith,Other Company Name,123 Main Street,Townsville,NJ,12345,United States,1.00,2.00,3.00,FALSE,PONUM000001,D3B20D6194B0E86C03A18987300E781C,P,2,,,,,,,,,,,XXXX1111,Visa,,,,,,,,,,,,,,,,,29366174",
+           "messages":{
+              "resultCode":"Ok",
+              "message":[
+                 {
+                    "code":"I00001",
+                    "text":"Successful."
+                 }
+              ]
+           }
+        }';
+
+        $response = new AuthnetJsonResponse($responseJson);
+
+        self::assertEquals(AuthnetJsonResponse::STATUS_ERROR, $response->getTransactionResponseField('ResponseCode'));
+        self::assertTrue($response->isTransactionError());
+    }
+
+    /**
+     * @covers \Authnetjson\AuthnetJsonResponse::isPayPalNeedConsent()
+     */
+    public function testIsPayPalNeedConsent(): void
+    {
+        $responseJson = '{
+           "customerPaymentProfileId":"28821903",
+           "validationDirectResponse":"5,2,205,PayPal requires consent,902R0T,Y,2230582306,INV000001,description of transaction,10.95,CC,auth_capture,12345,John,Smith,Company Name,123 Main Street,Townsville,NJ,12345,United States,800-555-1234,800-555-1235,user@example.com,John,Smith,Other Company Name,123 Main Street,Townsville,NJ,12345,United States,1.00,2.00,3.00,FALSE,PONUM000001,D3B20D6194B0E86C03A18987300E781C,P,2,,,,,,,,,,,XXXX1111,Visa,,,,,,,,,,,,,,,,,29366174",
+           "messages":{
+              "resultCode":"Ok",
+              "message":[
+                 {
+                    "code":"I00001",
+                    "text":"Successful."
+                 }
+              ]
+           }
+        }';
+
+        $response = new AuthnetJsonResponse($responseJson);
+
+        self::assertEquals(AuthnetJsonResponse::STATUS_PAYPAL_NEED_CONSENT, $response->getTransactionResponseField('ResponseCode'));
+        self::assertTrue($response->isPayPalNeedConsent());
+    }
+
+    /**
      * @covers \Authnetjson\AuthnetJsonResponse::isPrePaidCard()
      */
     public function testIsPrePaidCard(): void

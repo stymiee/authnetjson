@@ -257,6 +257,26 @@ class AuthnetJsonResponse
     }
 
     /**
+     * Checks if a transaction encountered an error
+     *
+     * @return bool     true if the transaction is in an error state
+     */
+    public function isTransactionError(): bool
+    {
+        return $this->isSuccessful() && $this->checkTransactionStatus(self::STATUS_ERROR);
+    }
+
+    /**
+     * Checks if a PayPal transaction requires consent
+     *
+     * @return bool     true if the PayPal transaction requires consent
+     */
+    public function isPayPalNeedConsent(): bool
+    {
+        return $this->isSuccessful() && $this->checkTransactionStatus(self::STATUS_PAYPAL_NEED_CONSENT);
+    }
+
+    /**
      * Check to see if the ResponseCode matches the expected value
      *
      * @param int $status
